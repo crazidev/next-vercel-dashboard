@@ -1,4 +1,20 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/layout.tsx": "${dirname(1)}/${dirname} - Layout",
+    "**/app/**/page.tsx": "${dirname(1)}/${dirname} - Page",
+    "**/app/**/route.ts": "${dirname(1)}/${dirname} - Route",
+    "**/app/**/_components/**/*.tsx": "${filename} - ${dirname(2)}/${dirname(1)} - Component",
+    "**/components/**/*.tsx": "${filename} - Component",
+    "**/data-layer/**/*.ts": "${filename} - Data Layer",
+    "**/entities/**/*.ts": "${filename} - Entity",
+    "**/hooks/**/*.ts": "${filename} - Hook",
+    "**/lib/**/*.ts": "${filename} - Library",
+    "**/utils/**/*.ts": "${filename} - Utility",
+    "**/*_action*.ts": "${dirname(0)}/${filename} - Action",
+    "**/*_fetch*.ts": "${dirname(0)}/${filename} - Fetch",
+    "**/env/**/*.ts": "${filename} - Environment"
+  }
 }

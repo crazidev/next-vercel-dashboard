@@ -2,8 +2,8 @@ import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
   dialect: 'postgresql',
-  out: './server/database/drizzle',
-  schema: './server/database/drizzle/',
+  out: './database/drizzle',
+  schema: './database/drizzle/',
   dbCredentials: {
     host: '127.0.0.1',
     port: 5432,
@@ -18,8 +18,8 @@ export default defineConfig({
 
 // export default defineConfig({
 //   dialect: 'mysql',
-//   out: './server/database/drizzle',
-//   schema: './server/database/drizzle/schema.ts',
+//   out: './database/drizzle',
+//   schema: './database/drizzle/schema.ts',
 //   dbCredentials: {
 //     host: '127.0.0.1',
 //     port: 3306,

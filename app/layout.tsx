@@ -23,9 +23,9 @@ export default function RootLayout({
      className={inter_tight.variable}
      >
       <body className="">
-        <Theme>
+        <Theme appearance="dark" grayColor={'sand'} accentColor={'purple'} panelBackground="translucent">
           {children}
-          <ThemePanel />
+          {/* <ThemePanel /> */}
         </Theme>
       </body>
     </html>

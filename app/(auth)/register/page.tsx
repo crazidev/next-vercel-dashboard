@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Flex,
   Button,
@@ -8,6 +10,7 @@ import {
   TextField,
   Link,
   RadioCards,
+  Callout,
 } from "@radix-ui/themes";
 import Image from "next/image";
 import { AuthContainerLogo } from "@/components/auth-container-logo";
@@ -19,67 +22,122 @@ import {
   MdRemoveRedEye,
 } from "react-icons/md";
 import { CTextField } from "@/components/text-field";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterScheme } from "server/scheme/register_scheme";
+import { register_action } from "server/actions/auth/register_action";
+import { TbInfoCircle } from "react-icons/tb";
 
 export default function RegisterPage() {
-  return (
-    <Box className="m-auto sm:my-auto my-[30px] max-w-[400px] w-full md:w-[350px]">
-      <Card variant={"surface"} className="py-4">
-        <Flex gap="" direction={"column"} justify={"center"}>
-          <Flex direction={"column"} align={"center"} justify={"center"}>
-            <AuthContainerLogo />
-            <Box height={"20px"} />
-            <Text weight={"bold"}>Create a new account</Text>
-            <Text color={"gray"} size={"1"}>
-              Enter your details to register.
-            </Text>
-          </Flex>
-          <Box height={"20px"} />
-          <CTextField
-            label="Fullname"
-            placeholder="EX: John Doe"
-            leftIcon={<MdPerson />}
-          />
-          <Box height={"10px"} />
-          <CTextField
-            label="Email"
-            placeholder="Enter your email"
-            leftIcon={<MdOutlineMailLock />}
-          />
-          <Box height={"10px"} />
-          <CTextField
-            label="Phone Number"
-            placeholder="+1 000 000 000"
-            leftIcon={<MdPhone />}
-          />
-          <Box height={"20px"} />
-          <Box>
-            <RadioCards.Root
-              size="1"
-              defaultValue="1"
-              columns={{ initial: "2", sm: "2" }}
-            >
-              <RadioCards.Item value="1" className="h-[35px]">
-                <Text weight="bold">Male</Text>
-              </RadioCards.Item>
-              <RadioCards.Item value="2" className="h-[35px]">
-                <Text weight="bold">Female</Text>
-              </RadioCards.Item>
-            </RadioCards.Root>
-          </Box>
-          <Box height={"10px"} />
-          <CTextField
-            label="Password"
-            placeholder="Enter your password"
-            leftIcon={<MdLock />}
-            rightIcon={<MdRemoveRedEye />}
-          />
+  const {
+    register,
+    handleSubmit,
+    setError,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    // resolver: zodResolver(RegisterScheme),
+  });
 
-          <Box height={"20px"} />
-          <Button size="3" variant="solid">
-            Sign Up
-          </Button>
-        </Flex>
-      </Card>
-    </Box>
+  const submit = async (data: any) => {
+    var res = await register_action(data);
+    console.log(res);
+
+    if (res.errors !== undefined)
+      Object.entries(res?.errors as any).forEach(([key, value]) => {
+        setError(key as any, { type: "validate", message: value as any });
+      });
+  };
+
+  return (
+    <form onSubmit={handleSubmit(submit)}>
+      <Box className="m-auto sm:my-auto my-[30px] max-w-[400px] w-full md:w-[350px]">
+        <Card variant={"surface"} className="py-4">
+          <Flex gap="" direction={"column"} justify={"center"}>
+            <Flex direction={"column"} align={"center"} justify={"center"}>
+              <AuthContainerLogo />
+              <Box height={"20px"} />
+              <Text weight={"bold"}>Create a new account</Text>
+              <Text color={"gray"} size={"1"}>
+                Enter your details to register.
+              </Text>
+            </Flex>
+            
+            {errors.root && (
+              <Callout.Root variant="surface" color="red" mt={'5'} size={'1'}>
+                <Callout.Icon>
+                  <TbInfoCircle />
+                </Callout.Icon>
+                <Callout.Text>{errors.root.message}</Callout.Text>
+              </Callout.Root>
+            )}
+
+            <Box height={"10px"} />
+            <CTextField
+              label="Fullname"
+              placeholder="EX: John Doe"
+              leftIcon={<MdPerson />}
+              register={register("fullname")}
+              error={errors?.fullname?.message}
+            />
+            <Box height={"10px"} />
+            <CTextField
+              label="Email"
+              placeholder="Enter your email"
+              leftIcon={<MdOutlineMailLock />}
+              register={register("email")}
+              error={errors?.email?.message}
+            />
+            <Box height={"10px"} />
+            <CTextField
+              label="Phone Number"
+              placeholder="+1 000 000 000"
+              leftIcon={<MdPhone />}
+              register={register("phone")}
+              error={errors?.phone?.message}
+            />
+            <Box height={"20px"} />
+            <Box>
+              <RadioCards.Root
+                size="1"
+                defaultValue="male"
+                columns={{ initial: "2", sm: "2" }}
+                {...register("gender")}
+                onChange={(e) => {
+                  setValue("gender", (e.target as any).value);
+                }}
+              >
+                <RadioCards.Item value="male" className="h-[35px]">
+                  <Text weight="bold">Male</Text>
+                </RadioCards.Item>
+                <RadioCards.Item value="female" className="h-[35px]">
+                  <Text weight="bold">Female</Text>
+                </RadioCards.Item>
+              </RadioCards.Root>
+            </Box>
+            <Box height={"10px"} />
+            <CTextField
+              label="Password"
+              placeholder="Enter your password"
+              leftIcon={<MdLock />}
+              rightIcon={<MdRemoveRedEye />}
+              register={register("password")}
+              error={errors?.password?.message}
+            />
+
+            <Box height={"20px"} />
+            <Button
+              size="3"
+              variant="solid"
+              type={"submit"}
+              loading={isSubmitting}
+            >
+              Sign Up
+            </Button>
+          </Flex>
+        </Card>
+      </Box>
+    </form>
   );
 }
