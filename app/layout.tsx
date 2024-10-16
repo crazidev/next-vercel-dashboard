@@ -1,12 +1,12 @@
 import { Theme, ThemePanel } from "@radix-ui/themes";
 import "./globals.css";
-// import { Inter_Tight } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 
-// const inter_tight = Inter_Tight({
-// 	subsets: ["latin"],
-// 	display: "swap",
-// 	variable: "--font-inter-tight",
-// });
+const inter_tight = Inter_Tight({
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-inter-tight",
+});
 
 export const metadata = {
   title: "Next.js App Router + NextAuth + Tailwind CSS",
@@ -20,12 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en"
-    //  className={inter_tight.variable}
+     className={inter_tight.variable}
      >
       <body className="">
         <Theme>
           {children}
-          {/* <ThemePanel /> */}
+          <ThemePanel />
         </Theme>
       </body>
     </html>
