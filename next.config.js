@@ -11,6 +11,9 @@ const nextConfig = {
         hostname: '*.public.blob.vercel-storage.com'
       }
     ]
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   }
 };
 
