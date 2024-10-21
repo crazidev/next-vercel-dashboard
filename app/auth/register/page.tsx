@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import { AuthContainerLogo } from "@/components/auth-container-logo";
 import {
+  MdLocationPin,
   MdLock,
   MdOutlineMailLock,
   MdPerson,
@@ -27,9 +28,12 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterScheme } from "server/scheme/register_scheme";
 import { register_action } from "server/actions/auth/register_action";
-import { TbInfoCircle } from "react-icons/tb";
+import { TbCalendar, TbInfoCircle } from "react-icons/tb";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
+  var router = useRouter();
   const {
     register,
     handleSubmit,
@@ -42,12 +46,20 @@ export default function RegisterPage() {
 
   const submit = async (data: any) => {
     var res = await register_action(data);
-    console.log(res);
 
-    if (res.errors !== undefined)
-      Object.entries(res?.errors as any).forEach(([key, value]) => {
-        setError(key as any, { type: "validate", message: value as any });
+    if (res.success) {
+      toast.success(res.message);
+      localStorage.setItem('user', JSON.stringify(res.user));
+      localStorage.setItem('token', JSON.stringify(res.token));
+      router.push('verification', {
+        
       });
+    } else {
+      if (res.errors !== undefined)
+        Object.entries(res?.errors as any).forEach(([key, value]) => {
+          setError(key as any, { type: "validate", message: value as any });
+        });
+    }
   };
 
   return (
@@ -63,9 +75,9 @@ export default function RegisterPage() {
                 Enter your details to register.
               </Text>
             </Flex>
-            
+
             {errors.root && (
-              <Callout.Root variant="surface" color="red" mt={'5'} size={'1'}>
+              <Callout.Root variant="surface" color="red" mt={"5"} size={"1"}>
                 <Callout.Icon>
                   <TbInfoCircle />
                 </Callout.Icon>
@@ -74,13 +86,22 @@ export default function RegisterPage() {
             )}
 
             <Box height={"10px"} />
-            <CTextField
-              label="Fullname"
-              placeholder="EX: John Doe"
-              leftIcon={<MdPerson />}
-              register={register("fullname")}
-              error={errors?.fullname?.message}
-            />
+            <Flex gapX={"3"}>
+              <CTextField
+                label="First name"
+                placeholder="Fist name"
+                leftIcon={<MdPerson />}
+                register={register("first_name")}
+                error={errors?.first_name?.message}
+              />
+              <CTextField
+                label="Last name"
+                placeholder="Last name"
+                leftIcon={<MdPerson />}
+                register={register("last_name")}
+                error={errors?.last_name?.message}
+              />
+            </Flex>
             <Box height={"10px"} />
             <CTextField
               label="Email"
@@ -96,6 +117,15 @@ export default function RegisterPage() {
               leftIcon={<MdPhone />}
               register={register("phone")}
               error={errors?.phone?.message}
+            />
+            <Box height={"10px"} />
+            <CTextField
+              label="Date of birth"
+              placeholder="15/03/1980"
+              leftIcon={<TbCalendar />}
+              type={"date"}
+              register={register("dob")}
+              error={errors?.dob?.message}
             />
             <Box height={"20px"} />
             <Box>

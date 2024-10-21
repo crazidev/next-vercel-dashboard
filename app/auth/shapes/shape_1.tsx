@@ -29,7 +29,7 @@ export function Shape1({ className }: { className: any }): JSX.Element {
           width="100%"
           height="100%"
           transform="translate(50 50)"
-          stroke-width="0"
+          strokeWidth="0"
           // style="transition: 0.3s;"
           stroke="url(#sw-gradient)"
         ></path>{" "}

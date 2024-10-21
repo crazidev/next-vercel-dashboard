@@ -1,22 +1,35 @@
 import "server-only";
+import { Sequelize } from "sequelize";
+import { initModels } from "./models/init-models";
+import pg from 'pg';
+import mysql from 'mysql2';
 
-import { drizzle } from "drizzle-orm/node-postgres";
-import { and, eq, sql } from "drizzle-orm";
-import mysql from "mysql2";
+let sequelizeInstance: Sequelize | null = null;
 
-import * as dbSchema from "./drizzle/schema";
-import { connected } from "process";
+const getSequelizeInstance = async () => {
+  if (!sequelizeInstance) {
+    const sequelize = new Sequelize({
+      host: "localhost",
+      port: 3306,
+      username: "root",
+      database: "hybank-new",
+      password: "",
+      dialect: "mysql",
+      dialectModule: mysql,
+    });
 
-import { Pool } from "pg";
+    initModels(sequelize);
 
-const pool = new Pool({
-  host: "localhost",
-  port: 5432,
-  user: 'postgres',
-  database: 'postgres',
-  password: '4663789',
-  ssl: false
-});
+   await sequelize
+      .authenticate()
+      .then(() => {
+        console.log("Connection has been established successfully.");
+      })
+      .catch((error) => {
+        console.error("Unable to connect to the database:", error);
+      });
+  }
+  return sequelizeInstance;
+};
 
-export const db = drizzle(pool, { schema: dbSchema });
-
+export default getSequelizeInstance;

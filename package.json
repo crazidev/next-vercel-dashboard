@@ -4,11 +4,12 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sequelize-auto": "sequelize-auto -h localhost -d hybank-new -x '' -u root -l ts -e mysql --sv v6 --noAlias true -o server/database/models"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.4.2",
     "@hookform/resolvers": "^3.9.0",
+    "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/themes": "^3.1.4",
     "@types/node": "20.14.10",
     "@types/react": "18.3.3",
@@ -17,14 +18,12 @@
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "drizzle-kit": "^0.26.1",
-    "drizzle-orm": "^0.35.0",
-    "drizzle-zod": "^0.5.1",
     "formik": "^2.4.6",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.11.0",
+    "mysql2": "^3.11.3",
     "next": "15.0.0-canary.75",
-    "pg": "^8.12.0",
+    "pg": "^8.13.0",
+    "pg-hstore": "^2.3.4",
     "postcss": "^8.4.39",
     "prop-types": "^15.8.1",
     "react": "19.0.0-rc.0",
@@ -32,7 +31,9 @@
     "react-hook-form": "^7.53.0",
     "react-icons": "^5.3.0",
     "react-native-vector-icons": "^10.2.0",
+    "sequelize": "^6.37.4",
     "server-only": "^0.0.1",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.4",
     "typescript": "5.5.3",
@@ -41,7 +42,11 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/pg": "^8.11.10",
+    "@types/sequelize-auto": "../sequelize-auto",
     "postcss-import": "^16.1.0",
-    "radix-themes-tw": "^0.2.3"
+    "radix-themes-tw": "^0.2.3",
+    "sequelize-auto": "../sequelize-auto",
+    "sequelize-cli": "^6.6.2"
   }
 }

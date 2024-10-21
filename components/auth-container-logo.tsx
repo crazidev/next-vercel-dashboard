@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo } from "app/(auth)/shapes/logo";
+import { Logo } from "app/auth/shapes/logo";
 import React from "react";
 import { TbUserShield } from "react-icons/tb";
 

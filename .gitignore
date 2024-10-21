@@ -14,6 +14,8 @@
 
 # production
 /build
+/models/*
+/test/models
 
 # misc
 .DS_Store
