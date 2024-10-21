@@ -43,10 +43,9 @@
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.6",
     "@types/pg": "^8.11.10",
-    "@types/sequelize-auto": "../sequelize-auto",
+    
     "postcss-import": "^16.1.0",
     "radix-themes-tw": "^0.2.3",
-    "sequelize-auto": "../sequelize-auto",
     "sequelize-cli": "^6.6.2"
   }
 }
