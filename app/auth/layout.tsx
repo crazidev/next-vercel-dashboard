@@ -23,7 +23,7 @@ export default function AuthLayout({
           justify={"between"}
           direction={"row"}
         >
-          <Suspense fallback={'Loading ..'}>
+          <Suspense fallback={"Loading .."}>
             <HeaderLink />
           </Suspense>
 
@@ -36,7 +36,7 @@ export default function AuthLayout({
             width={"300px"}
             className="m-auto sm:my-auto my-[30px]"
           >
-            {children}
+            <Suspense fallback={"Loading .."}>{children}</Suspense>
           </Box>
         </div>
 
