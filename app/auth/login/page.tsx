@@ -5,22 +5,15 @@ import {
   Button,
   Text,
   Card,
-  Avatar,
   Box,
-  TextField,
   Link,
   Callout,
 } from "@radix-ui/themes";
-import Image from "next/image";
 import { AuthContainerLogo } from "@/components/auth-container-logo";
 import { MdLock, MdOutlineMailLock, MdRemoveRedEye } from "react-icons/md";
 import { CTextField } from "@/components/text-field";
-import { FormEvent, useState } from "react";
 import { login } from "server/actions/auth/login";
 import { useForm } from "react-hook-form";
-import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginActionScheme } from "server/scheme/login_scheme";
 import { TbInfoCircle } from "react-icons/tb";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -42,7 +35,7 @@ export default function LoginPage() {
 
     if (res.success) {
       toast.success(res.message);
-      localStorage.setItem("user", JSON.stringify(res.user));
+      localStorage.setItem("user_id", JSON.stringify(res.user.id));
       localStorage.setItem("token", JSON.stringify(res.token));
 
       if (res.user.idDocStatus === null || res.user.ssnStatus === null) {

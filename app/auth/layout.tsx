@@ -32,11 +32,11 @@ export default function AuthLayout({
 
         <div className="flex grow justify-center items-center">
           <Box
-            maxWidth="300px"
+            maxWidth="500px"
             width={"300px"}
             className="m-auto sm:my-auto my-[30px]"
           >
-            <Suspense fallback={"Loading .."}>{children}</Suspense>
+            <Suspense>{children}</Suspense>
           </Box>
         </div>
 

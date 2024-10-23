@@ -1,4 +1,3 @@
-
 import { AuthContainerLogo } from "@/components/auth-container-logo";
 import { Badge, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
 import { CTextField } from "@/components/text-field";
@@ -7,8 +6,14 @@ import { MdLocationCity, MdLocationPin } from "react-icons/md";
 import { CountrySelectComponent } from "../components/country_select_button";
 import { MyDialog } from "@/components/my_dialog";
 import { VerificationComponent } from "./verification_component";
+import { authUser } from "server/actions/authUser";
+import { getUser, revalidateUserTag } from "server/fetch/select_user";
+import { triggerEsc } from "@/lib/trigger_esc";
 
-export default function VerificationPage() {
+export default async function VerificationPage() {
+  var user_id = authUser().user_id;
+  var user = await getUser(user_id);
+
   return (
     <>
       <Card variant={"surface"} className="py-4">
@@ -32,21 +37,28 @@ export default function VerificationPage() {
 
         <VerificationComponent
           props={{
+            // refresh: async () => {
+            //   "use server";
+             
+            // },
             list: [
               {
                 title: "Address",
                 type: "address",
-                status: "not_uploaded",
+                content: `${user?.address}, ${user?.state}, ${user?.country}`,
+                status: user?.address != null ? "verified" : "not_uploaded",
               },
               {
                 title: "SSN Verification",
                 type: "ssn",
-                status: "not_uploaded",
+                content: user?.ssn,
+                status: user?.ssnStatus ?? "not_uploaded",
               },
               {
                 title: "ID Card",
                 type: "id_card",
-                status: "not_uploaded",
+                content: user?.idDoc,
+                status: user?.idDocStatus ?? "not_uploaded",
               },
             ],
           }}
@@ -55,4 +67,3 @@ export default function VerificationPage() {
     </>
   );
 }
-

@@ -1,35 +1,56 @@
 "use client";
 
-import { Button, Dialog, Flex, TextField, Text } from "@radix-ui/themes";
+import { Button, Dialog, Flex, IconButton, Text } from "@radix-ui/themes";
+import React, { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
+
 interface MyDialogProp {
   title: string;
   description: string;
   children?: any;
-  maxWidth?: string | "400";
+  maxWidth?: string;
   trigger: any;
+  closeDialogProp?: (d: () => void) => void; // Add closeDialog as a prop
 }
 
-export function MyDialog({ props }: { props: MyDialogProp }) {
-  return (
-    <Dialog.Root>
-      <Dialog.Trigger>{props.trigger}</Dialog.Trigger>
+export function MyDialog({
+  title,
+  description,
+  children,
+  maxWidth,
+  trigger,
+  closeDialogProp,
+}: MyDialogProp) {
+  const [isOpen, setIsOpen] = useState(false);
 
-      <Dialog.Content maxWidth={props?.maxWidth}>
+  const closeDialog = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    if (closeDialogProp) {
+      closeDialogProp(closeDialog);
+    }
+  }, [closeDialogProp]);
+
+  return (
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog.Trigger>{trigger}</Dialog.Trigger>
+
+      <Dialog.Content maxWidth={maxWidth ?? "350px"}>
         <Flex justify={"between"}>
-        <Dialog.Title>{props.title}</Dialog.Title>
-        <Dialog.Close>
-            <Flex gap='1'>
-            <MdClose /><Text size='1' color="red">Close</Text>
-            </Flex>
-        </Dialog.Close>
+          <Dialog.Title>{title}</Dialog.Title>
+          <IconButton color="red" onClick={() => setIsOpen(false)}>
+            <MdClose />
+          </IconButton>
         </Flex>
+
         <Dialog.Description size="2" mb="4">
-          {props.description}
+          {description}
         </Dialog.Description>
 
         <Flex direction="column" gap="3">
-          {props.children}
+          {children}
         </Flex>
       </Dialog.Content>
     </Dialog.Root>

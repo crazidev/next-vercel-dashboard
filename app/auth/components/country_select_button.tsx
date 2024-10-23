@@ -20,7 +20,7 @@ export function CountrySelectComponent({
         <Select.Content position="popper">
           <Select.Group>
             {countries.map((country) => (
-              <Select.Item value={country.name}>{country.name}</Select.Item>
+              <Select.Item key={country.code} value={country.name}>{country.name}</Select.Item>
             ))}
           </Select.Group>
         </Select.Content>

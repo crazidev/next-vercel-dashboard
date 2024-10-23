@@ -9,18 +9,20 @@ export interface InputProps extends TextField.RootProps {
   rightIcon?: any;
   label?: any;
   error?: any;
+  type?: any,
+  accept?: any
   register?: UseFormRegisterReturn<any>,
 }
 
 export const CTextField = React.forwardRef<HTMLElement, InputProps>(
-  ({ leftIcon, label, rightIcon, error, register, ...props }, ref) => {
+  ({ leftIcon, label, rightIcon, error, type, accept, register, ...props }, ref) => {
     return (
       <Flex direction={"column"} gap={"1"}>
         <label>
           <Text size={"1"} weight={"medium"} ml={"1"}>
             {label}
           </Text>
-          <TextField.Root className="h-[37px]" size={"2"} {...props} {...register}>
+          <TextField.Root accept={accept} type={type} className="h-[37px]" size={"2"} {...props} {...register}>
             {leftIcon && (
               <TextField.Slot side={"left"}>{leftIcon}</TextField.Slot>
             )}

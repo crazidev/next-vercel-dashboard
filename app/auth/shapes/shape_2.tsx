@@ -19,8 +19,8 @@ export function Shape2({ className }: { className: any }): JSX.Element {
         ></path>
         <defs>
           <linearGradient id="SvgjsLinearGradient1004">
-            <stop stop-color="var(--accent-2)" offset="0"></stop>
-            <stop stop-color="var(--gray-2)" offset="1"></stop>
+            <stop stopColor="var(--accent-2)" offset="0"></stop>
+            <stop stopColor="var(--gray-2)" offset="1"></stop>
           </linearGradient>
         </defs>
       </svg>

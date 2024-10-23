@@ -1,4 +1,3 @@
-import "server-only";
 import { Sequelize } from "sequelize";
 import { initModels } from "./models/init-models";
 import pg from 'pg';

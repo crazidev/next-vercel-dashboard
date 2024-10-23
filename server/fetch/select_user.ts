@@ -1,17 +1,30 @@
-import { eq } from "drizzle-orm";
-import { db } from "server/database/db";
-import { users } from "server/database/drizzle/schema";
+"use server";
 
-export type SelectUsers = typeof users.$inferSelect;
+import { revalidateTag, unstable_cache } from "next/cache";
+import getSequelizeInstance from "server/database/db";
+import { Users } from "server/database/models/users";
 
-export async function getUser({ email }: { email: any }): Promise<{
-  user?: SelectUsers;
-}> {
-  var res = await db.select().from(users).where(
-    eq(users.email, email)
+export const getUser = async (id: number | string): Promise<Users | null> => {
+  var user = unstable_cache(
+    async (id) => {
+      await getSequelizeInstance();
+      var data = await Users.findByPk(id, {
+        attributes: {
+          exclude: ["password"],
+        },
+      });
+      console.log(`USER:`, data?.toJSON());
+      return data;
+    },
+    [id?.toString()],
+    {
+      tags: ["user"],
+    }
   );
 
-  return {
-    user: res.at(0),
-  };
+  return await user(id);
+};
+
+export async function revalidateUserTag() {
+  revalidateTag("user");
 }
