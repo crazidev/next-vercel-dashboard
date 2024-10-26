@@ -6,7 +6,6 @@ import getSequelizeInstance from "server/database/db";
 import yup, { yupValidator } from "@/lib/yup";
 import { zodValidator } from "@/lib/zod";
 import { loginActionScheme } from "server/scheme/login_scheme";
-import { User } from "server/database/models/user";
 import { Users } from "server/database/models/users";
 import { getUser, revalidateUserTag } from "server/fetch/select_user";
 

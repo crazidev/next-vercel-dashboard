@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Flex,
-  Button,
-  Text,
-  Card,
-  Box,
-  Link,
-  Callout,
-} from "@radix-ui/themes";
+import { Flex, Button, Text, Card, Box, Link, Callout } from "@radix-ui/themes";
 import { AuthContainerLogo } from "@/components/auth-container-logo";
 import { MdLock, MdOutlineMailLock, MdRemoveRedEye } from "react-icons/md";
 import { CTextField } from "@/components/text-field";
@@ -40,6 +32,8 @@ export default function LoginPage() {
 
       if (res.user.idDocStatus === null || res.user.ssnStatus === null) {
         router.push("/auth/verification");
+      } else {
+        router.push("/dashboard");
       }
     } else {
       if (res.errors !== undefined)
@@ -95,7 +89,7 @@ export default function LoginPage() {
             <Flex justify={"end"}>
               <Link
                 size={"2"}
-                href="/reset-password"
+                href="/auth/reset-password"
                 weight={"medium"}
                 underline={"always"}
               >

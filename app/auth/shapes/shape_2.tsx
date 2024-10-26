@@ -1,6 +1,10 @@
-'use client';
+"use client";
+
+import { useState, useEffect } from "react";
 
 export function Shape2({ className }: { className: any }): JSX.Element {
+  const [isDark, setDark] = useState(false);
+
   return (
     <>
       <svg
@@ -19,8 +23,14 @@ export function Shape2({ className }: { className: any }): JSX.Element {
         ></path>
         <defs>
           <linearGradient id="SvgjsLinearGradient1004">
-            <stop stopColor="var(--accent-2)" offset="0"></stop>
-            <stop stopColor="var(--gray-2)" offset="1"></stop>
+            <stop
+              stopColor={isDark ? "var(--accent-2)" : "var(--accent-4)"}
+              offset="0"
+            ></stop>
+            <stop
+              stopColor={isDark ? "var(--gray-2)" : "var(--gray-3)"}
+              offset="1"
+            ></stop>
           </linearGradient>
         </defs>
       </svg>

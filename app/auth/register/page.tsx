@@ -121,7 +121,7 @@ export default function RegisterPage() {
             <Box height={"10px"} />
             <CTextField
               label="Date of birth"
-              placeholder="15/03/1980"
+              placeholder="01/01/1990"
               leftIcon={<TbCalendar />}
               type={"date"}
               register={register("dob")}

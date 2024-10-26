@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: ["class"],
+  darkMode: ['class'],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -11,6 +11,9 @@ export default {
   prefix: "",
   theme: {
     extend: {
+      transitionProperty: {
+        width: "width",
+      },
       colors: {
         background: "var(--accent-1)",
         "background-subtle": "var(--accent-2)",
@@ -33,5 +36,5 @@ export default {
   },
 
   presets: [require("radix-themes-tw")],
-  plugins: [require("postcss-import")],
+  plugins: [require("postcss-import"), require('tailwindcss-animate')],
 } satisfies Config;

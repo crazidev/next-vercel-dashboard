@@ -88,3 +88,39 @@ export async function submitIdCard(formData: any) {
     };
   }
 }
+
+
+export async function submitSSN(formData: any) {
+  try {
+    await getSequelizeInstance();
+    var user_id = authUser().user_id;
+
+    if (user_id) {
+      await Users.update(
+        {
+          ssn: formData.ssn_number,
+          ssnStatus: "uploaded",
+        },
+        {
+          where: {
+            id: user_id,
+          },
+        }
+      );
+      return {
+        success: true,
+        message: "SSN updated Successful",
+      };
+    } else {
+      throw { message: "User does not exist" };
+    }
+  } catch (error: any) {
+    console.error(error);
+    return {
+      errors: {
+        root: error?.message ?? "Internal server error",
+      },
+    };
+  }
+}
+

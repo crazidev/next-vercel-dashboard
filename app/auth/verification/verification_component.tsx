@@ -9,23 +9,31 @@ import {
   Text,
   IconButton,
   Select,
+  Link,
+  Callout,
 } from "@radix-ui/themes";
 import { CountrySelectComponent } from "../components/country_select_button";
 import { CTextField } from "@/components/text-field";
 import {
   MdEdit,
   MdEditDocument,
+  MdInfo,
   MdLocationCity,
   MdLocationPin,
 } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import yup from "@/lib/yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { submitAddress, submitIdCard } from "server/actions/auth/verification";
+import {
+  submitAddress,
+  submitIdCard,
+  submitSSN,
+} from "server/actions/auth/verification";
 import { triggerEsc } from "@/lib/trigger_esc";
 import { toast } from "sonner";
 import { getUser, revalidateUserTag } from "server/fetch/select_user";
 import { useState } from "react";
+import { TbInfoCircle } from "react-icons/tb";
 
 export async function VerificationComponent({
   props,
@@ -40,9 +48,15 @@ export async function VerificationComponent({
     resolver: yupResolver(idCardScheme),
   });
 
+  const ssnValidator = useForm({
+    resolver: yupResolver(ssnScheme),
+  });
+
   var formState2 = idValidator.formState;
 
   let myFunction = function () {};
+  let myFunction2 = function () {};
+  let myFunction3 = function () {};
 
   return (
     <>
@@ -84,6 +98,8 @@ export async function VerificationComponent({
                 }
                 closeDialogProp={(closeDialog) => {
                   myFunction = closeDialog;
+                  myFunction2 = closeDialog;
+                  myFunction3 = closeDialog;
                 }}
                 children={
                   <>
@@ -172,6 +188,7 @@ export async function VerificationComponent({
                             onValueChange={(value) =>
                               idValidator.setValue("id_type", value)
                             }
+                            value={d.content.type ?? ""}
                           >
                             <Select.Trigger
                               className="h-[37px]"
@@ -201,17 +218,80 @@ export async function VerificationComponent({
                             </Text>
                           )}
 
+                          <Card>
+                            <CTextField
+                              label="Front side of ID Card"
+                              placeholder=""
+                              accept=".png, .jpeg, .jpg"
+                              type={"file"}
+                              register={idValidator.register("id_front")}
+                              error={
+                                idValidator.formState.errors?.id_front?.message
+                              }
+                            />
+                            {d.content.link && (
+                              <img
+                                className="pt-2 h-[100px]"
+                                src={d.content.link}
+                              />
+                            )}
+                          </Card>
+
+                          <Flex justify={"center"}>
+                            <Button
+                              mt="4"
+                              className="min-w-[200] max-w-[300px]"
+                              size={"2"}
+                              type="submit"
+                              loading={idValidator.formState.isSubmitting}
+                            >
+                              Submit
+                            </Button>
+                          </Flex>
+                        </Flex>
+                      </form>
+                    )}
+                    {d.type === "ssn" && (
+                      <form
+                        onSubmit={ssnValidator.handleSubmit(async (data) => {
+                          var d = await submitSSN(data);
+                          if (d.success) {
+                            triggerEsc();
+                            toast.success(d.message);
+                            revalidateUserTag();
+                            props.refresh?.();
+                          } else {
+                            toast.error(d.errors?.root);
+                          }
+                        })}
+                      >
+                        <Flex direction={"column"} gap={"2"}>
+                          <Callout.Root
+                            variant="surface"
+                            color="green"
+                            mb={"2"}
+                            size={"1"}
+                          >
+                            <Callout.Icon>
+                              <MdInfo />
+                            </Callout.Icon>
+                            <Callout.Text size={"1"}>
+                              If you do not have a Social Security Number (SSN),
+                              we advice you to visit{" "}
+                              <Link color="blue">abroadssn.us</Link> to enroll.
+                            </Callout.Text>
+                          </Callout.Root>
+
                           <CTextField
-                            label="ID Front"
-                            placeholder=""
-                            accept=".png, .jpeg, .jpg"
-                            type={"file"}
-                            register={idValidator.register("id_front")}
+                            label="Social Security Number"
+                            placeholder="Social Security Number"
+                            type={"text"}
+                            defaultValue={d.content ?? ""}
+                            register={ssnValidator.register("ssn_number")}
                             error={
-                              idValidator.formState.errors?.id_front?.message
+                              ssnValidator.formState.errors?.ssn_number?.message
                             }
                           />
-
                           <Flex justify={"center"}>
                             <Button
                               mt="4"
@@ -232,9 +312,16 @@ export async function VerificationComponent({
             </Flex>
 
             {d.content && (
-              <Text size={"1"} className="text-[10px] text-gray-500">
-                {d.content}
-              </Text>
+              <div>
+                {d.type === "address" && (
+                  <Text
+                    size={"1"}
+                    className="text-[10px] line-clamp-1 text-gray-500"
+                  >
+                    {d.content}
+                  </Text>
+                )}
+              </div>
             )}
           </Flex>
         </Card>
@@ -246,7 +333,7 @@ export async function VerificationComponent({
 interface VerificationComponentProp {
   list: {
     title: string;
-    content?: string;
+    content?: any;
     type: "ssn" | "id_card" | "address";
     status: "not_uploaded" | "uploaded" | "verified";
     desc?: string;

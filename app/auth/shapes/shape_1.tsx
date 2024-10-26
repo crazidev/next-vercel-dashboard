@@ -1,6 +1,10 @@
-'use client';
+"use client";
+
+import { useState, useEffect } from "react";
 
 export function Shape1({ className }: { className: any }): JSX.Element {
+  const [isDark, setDark] = useState(false);
+
   return (
     <>
       <svg
@@ -17,10 +21,14 @@ export function Shape1({ className }: { className: any }): JSX.Element {
             {" "}
             <stop
               id="stop1"
-              stopColor="var(--accent-2)"
+              stopColor={isDark ? "var(--accent-2)" : "var(--accent-4)"}
               offset="0%"
             ></stop>{" "}
-            <stop id="stop2" stopColor="var(--gray-3)" offset="100%"></stop>{" "}
+            <stop
+              id="stop2"
+              stopColor={isDark ? "var(--gray-3)" : "var(--gray-4)"}
+              offset="100%"
+            ></stop>{" "}
           </linearGradient>{" "}
         </defs>{" "}
         <path

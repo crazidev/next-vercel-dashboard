@@ -37,7 +37,7 @@ export default function LoginPage() {
       className="m-auto sm:my-auto my-[30px]"
     >
       <Card variant={"surface"} className="py-4">
-        <Link size={"1"} href="/login" className="flex flex-row gap-1 items-center">
+        <Link size={"1"} href="/auth/login" className="flex flex-row gap-1 items-center">
           <MdChevronLeft /> Login
         </Link>
         <Flex gap="" direction={"column"} justify={"center"}>

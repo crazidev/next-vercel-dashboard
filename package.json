@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev --turbo ",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -47,6 +47,7 @@
     "@types/pg": "^8.11.10",
     "postcss-import": "^16.1.0",
     "radix-themes-tw": "^0.2.3",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

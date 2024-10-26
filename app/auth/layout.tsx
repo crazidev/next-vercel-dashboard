@@ -7,6 +7,8 @@ import { Logo } from "./shapes/logo";
 import { UserContainer } from "./components/user_container";
 import { HeaderLink } from "./components/header_link";
 import { Suspense } from "react";
+import { AuthFooter } from "./footer";
+import { MobileSideBarButton } from "app/dashboard/components/mobile_nav_button";
 
 export default function AuthLayout({
   children,
@@ -15,7 +17,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className="max-w-[100vw] max-h-[100vh]">
-      <Shape1 className={" right-[-100px] bottom-0 w-[300px] fixed"} />
+      <Shape1 className={"right-[-100px] bottom-0 w-[300px] fixed"} />
       <Shape2 className={"fixed left-[-80px] top-[-50px] h-[100vh] w-[50v] "} />
       <div className="h-screen flex flex-col px-[20px] md:px-[30px] pb-[20px] pt-[30px] md:pt-[40px] container mx-auto">
         <Flex
@@ -26,7 +28,7 @@ export default function AuthLayout({
           <Suspense fallback={"Loading .."}>
             <HeaderLink />
           </Suspense>
-
+         
           <UserContainer />
         </Flex>
 
@@ -40,29 +42,7 @@ export default function AuthLayout({
           </Box>
         </div>
 
-        <Flex
-          className="flex-none z-10"
-          justify={"between"}
-          direction={"row"}
-          align={"start"}
-        >
-          <Flex gap={"1"} align={"baseline"}>
-            <Text weight={"medium"} size={"2"} color={"gray"}>
-              2024 Copyright Dashboard
-            </Text>
-          </Flex>
-          <Select.Root defaultValue="en">
-            <Select.Trigger />
-            <Select.Content>
-              <Select.Group>
-                <Select.Label>Language</Select.Label>
-                <Select.Item value="en">English</Select.Item>
-                <Select.Item value="sp">Spanish</Select.Item>
-                <Select.Item value="ea">German</Select.Item>
-              </Select.Group>
-            </Select.Content>
-          </Select.Root>
-        </Flex>
+        <AuthFooter />
       </div>
     </div>
   );
