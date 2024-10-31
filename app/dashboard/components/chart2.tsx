@@ -43,7 +43,7 @@ export function MyLineChart() {
   return (
     <ChartContainer
       config={chartConfig}
-      className="aspect-[4/1] absolute left-0 ml-[-10px] bottom-0 h-[60px] w-[80%]"
+      className="aspect-[4/1] absolute left-0 ml-[-10px] bottom-0 h-[60px] w-[50%]"
     >
       <LineChart
         accessibilityLayer

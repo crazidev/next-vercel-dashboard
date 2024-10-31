@@ -8,6 +8,9 @@ function hexadecimal(color: string) {
 	};
   }
 
+var cardBg = '';
+var cardBgTransparent = hexadecimal(cardBg)(100);
+
 export default {
   darkMode: ["class"],
   content: [
