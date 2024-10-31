@@ -15,20 +15,18 @@ export function MobileSideBarButton() {
 
   return (
     <>
-      {!isTablet && (
+      {(isMobile && !isTablet && !expandSidebar )&& (
         <Flex
           gap={"2"}
           mt={"1"}
           align={"center"}
           onClick={() => setExpand!(!expandSidebar)}
         >
-          <IconButton variant="outline">
-            {expandSidebar ? (
-              <TbLayoutSidebarLeftCollapse size={20} />
-            ) : (
-              <TbLayoutSidebarLeftExpand size={20} />
-            )}
-          </IconButton>
+          {expandSidebar ? (
+            <TbLayoutSidebarLeftCollapse size={20} />
+          ) : (
+            <TbLayoutSidebarLeftExpand size={20} />
+          )}
         </Flex>
       )}
     </>

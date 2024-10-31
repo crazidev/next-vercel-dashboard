@@ -10,12 +10,17 @@ import {
   MdCardGiftcard,
   MdChevronLeft,
   MdChevronRight,
+  MdDashboardCustomize,
   MdHomeMini,
   MdOutlineWallet,
   MdSettings,
 } from "react-icons/md";
 import {
+  TbChartLine,
+  TbChevronLeft,
+  TbChevronRight,
   TbCreditCard,
+  TbDashboard,
   TbHome2,
   TbHomeCheck,
   TbLayoutSidebarLeftCollapse,
@@ -24,17 +29,21 @@ import {
   TbLinkPlus,
 } from "react-icons/tb";
 import { DashboardContext } from "../providers";
+import { usePathname } from "next/navigation";
+import { MyCard } from "@/components/my_card";
+import { hexToRgb } from "@/lib/utils";
 
 export function SideBarComponent({ children }: { children: React.ReactNode }) {
   const { isMobile, expandSidebar, isTablet, setExpand, setTheme } =
     useContext(DashboardContext);
   const expand = expandSidebar;
+  var pathname = usePathname();
 
   var navlist = [
     {
       link: "/dashboard",
       name: "Dashboard",
-      icon: <TbHomeCheck />,
+      icon: <TbDashboard />,
       isDefault: true,
     },
     {
@@ -52,7 +61,7 @@ export function SideBarComponent({ children }: { children: React.ReactNode }) {
     {
       link: "/dashboard/transactions",
       name: "Transactions",
-      icon: <TbLink />,
+      icon: <TbChartLine />,
       isDefault: true,
     },
     {
@@ -63,6 +72,7 @@ export function SideBarComponent({ children }: { children: React.ReactNode }) {
     },
   ];
 
+  var bgColor = hexToRgb("#3498db");
   return (
     <div className="flex flex-col w-[100%]">
       <aside
@@ -70,8 +80,10 @@ export function SideBarComponent({ children }: { children: React.ReactNode }) {
           isMobile && !expand ? "z-0" : "z-10 "
         } p-2`}
       >
-        <Card
-          className={`transition-all duration-[300] ease-in-out h-full to-[var(--red-1)] from-transparent 
+        <Box
+          className={`${
+            isMobile || expand ? "bg-black/30 backdrop-blur-md" : ""
+          } border-[2px] border-[var(--accent-3)] rounded-xl border-opacity-90 p-[15px] transition-all duration-300 ease-in-out h-full to-[var(--red-1)] from-transparent 
             ${isMobile ? (expand ? "translate-x-0" : "-translate-x-full") : ""}
             ${expand ? "w-[250px]" : "w-[100%]"}`}
           style={{
@@ -80,7 +92,12 @@ export function SideBarComponent({ children }: { children: React.ReactNode }) {
           }}
         >
           {(expand || isMobile) && (
-            <Flex align={"center"} justify={"between"} gap={"3"}>
+            <Flex
+              className="before:inset-0 before:absolute before:bg-[var(--accent-2)] before:opacity-20 before:-z-10"
+              align={"center"}
+              justify={"between"}
+              gap={"3"}
+            >
               <Flex align={"center"} gap={"3"}>
                 <Logo className="w-[30px] h-[30px] fill-primary-500" />
                 <Flex direction={"column"} align={"start"} justify={"center"}>
@@ -106,7 +123,12 @@ export function SideBarComponent({ children }: { children: React.ReactNode }) {
             </Flex>
           )}
           {!expand && (
-            <Flex direction={"column"} align={"center"} justify={"between"}>
+            <Flex
+              className="after:inset-0 after:absolute  before:inset-0 before:absolute before:bg-[var(--accent-2)] before:opacity-30 before:-z-10 after:-z-20 after:backdrop-blur-none before:content-[''] before:rounded-2xl after:rounded-2xl"
+              direction={"column"}
+              align={"center"}
+              justify={"between"}
+            >
               <Flex align={"center"} gap={"3"}>
                 <Logo className="w-[40px] h-[40px] fill-primary-500" />
               </Flex>
@@ -115,25 +137,36 @@ export function SideBarComponent({ children }: { children: React.ReactNode }) {
                 <IconButton
                   onClick={() => setExpand!(!expand)}
                   radius="full"
-                  variant="ghost"
+                  variant='surface'
                   className=""
                 >
-                  {expand ? (
-                    <TbLayoutSidebarLeftCollapse />
+                  {!expand ? (
+                    <TbChevronRight />
                   ) : (
-                    <TbLayoutSidebarLeftExpand />
+                    <TbChevronLeft />
                   )}
                 </IconButton>
               )} */}
             </Flex>
           )}
-          <Box height={"50px"} />
-          {/* <Text align={expand ? "left" : "center"} color="gray" size={"1"}>
-          MAIN
-        </Text> */}
-          {navlist.map((nav) => (
-            <Tooltip key={nav.link} content={nav.name}>
-              <div className="mt-[10px] hover:animate-pulse  flex flex-row align-middle px-3 py-2 bg-[var(--gray-3)] box-content border-0 border-b-2 border-transparent hover:border-[var(--accent-7)] rounded-lg">
+
+          {expand ? (
+            <Box height={"40px"} />
+          ) : (
+            <div className="h-[2px] w-[20px] bg-gray-400/50 rounded-sm mx-auto mb-4"></div>
+          )}
+
+          {navlist.map(function (nav) {
+            var isActive = pathname.startsWith(nav.link);
+            // console.log(pathname, nav.link, isActive);
+            return (
+              // <Tooltip key={nav.link} content={nav.name}>
+              <div
+                key={nav.link}
+                className={`mt-[10px]  flex flex-row align-middle px-3 py-3 bg-[var(--accent-2)] box-content border-0 border-b-2 ${
+                  isActive ? "border-[var(--accent-8)]" : "border-transparent"
+                } hover:border-[var(--accent-7)] rounded-full`}
+              >
                 <Flex align={"center"} gap={"3"}>
                   <span className="rounded-full text-primary-600">
                     {nav.icon}
@@ -145,14 +178,15 @@ export function SideBarComponent({ children }: { children: React.ReactNode }) {
                   )}
                 </Flex>
               </div>
-            </Tooltip>
-          ))}
-        </Card>
+              // </Tooltip>
+            );
+          })}
+        </Box>
       </aside>
       <div
-        className="flex flex-grow mr-2"
+        className="flex flex-grow mr-2 pt-5"
         style={{
-          marginLeft: isMobile ? "10px" : expand ? "270px" : "85px",
+          marginLeft: isMobile ? "10px" : expand ? "300px" : "100px",
         }}
       >
         {children}

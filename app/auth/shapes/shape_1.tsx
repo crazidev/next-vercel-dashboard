@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 export function Shape1({ className }: { className: any }): JSX.Element {
-  const [isDark, setDark] = useState(false);
+  const [isDark, setDark] = useState(true);
 
   return (
     <>

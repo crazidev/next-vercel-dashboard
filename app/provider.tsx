@@ -4,6 +4,18 @@ import { Theme, ThemePanel } from "@radix-ui/themes";
 import { useContext, useEffect, useState } from "react";
 import { Toaster } from "sonner";
 import DashboardProvider, { DashboardContext } from "./dashboard/providers";
+// import { Inter_Tight } from "next/font/google";
+
+// const inter_tight = Inter_Tight({
+//   subsets: ["latin"],
+//   display: "swap",
+//   variable: "--font-inter-tight",
+// });
+
+export const metadata = {
+  title: "Next.js App Router + NextAuth + Tailwind CSS",
+  description: "",
+};
 
 export default function AppProvider({
   children,
@@ -12,15 +24,18 @@ export default function AppProvider({
 }) {
   // var { dark } = useContext(DashboardContext);
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      // FclassName={`${inter_tight}`}
+    >
       <body>
         <DashboardProvider>
           <DashboardContext.Consumer>
             {(context) => (
               <Theme
                 appearance={context.dark ? "dark" : "light"}
-                grayColor={"sand"}
-                accentColor={"purple"}
+                grayColor={'auto'}
+                accentColor={"green"}
                 panelBackground="translucent"
               >
                 <Toaster
@@ -31,10 +46,10 @@ export default function AppProvider({
                   toastOptions={{
                     style: {},
                   }}
-                />
-                {children}    
+                />{" "}
+                {/* <ThemePanel /> */}
+                {children}
               </Theme>
-              
             )}
           </DashboardContext.Consumer>
         </DashboardProvider>

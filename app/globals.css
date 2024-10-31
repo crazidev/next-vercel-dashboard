@@ -11,21 +11,77 @@
 } */
 
 .radix-themes {
-	--default-font-family: var(--font-inter-tight);
+  --default-font-family: var(--font-inter-tight);
 }
 
 /* Chrome, Safari, Edge, Opera */
-input[type='search']::-webkit-search-cancel-button {
+input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
 }
 
 /* Firefox */
-input[type='search']::-moz-search-cancel-button {
+input[type="search"]::-moz-search-cancel-button {
   display: none;
 }
 
 /* Microsoft Edge */
-input[type='search']::-ms-clear {
+input[type="search"]::-ms-clear {
   display: none;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 99%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 45%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 346.8 77.2% 49.8%;
+    --chart-1: 347 77% 50%;
+    --chart-2: 352 83% 91%;
+    --chart-3: 350 80% 72%;
+    --chart-4: 351 83% 82%;
+    --chart-5: 349 77% 62%;
+  }
+
+  .dark {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 99%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 45%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 346.8 77.2% 49.8%;
+    --chart-1: 347 77% 50%;
+    --chart-2: 352 83% 91%;
+    --chart-3: 350 80% 72%;
+    --chart-4: 351 83% 82%;
+    --chart-5: 349 77% 62%;
+  }
 }
