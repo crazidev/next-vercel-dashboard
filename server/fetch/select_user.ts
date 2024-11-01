@@ -16,7 +16,7 @@ export const getUser = async (id: number | string): Promise<Users | null> => {
       console.log(`USER:`, data?.toJSON());
       return data;
     },
-    [id?.toString()],
+    [],
     {
       tags: ["user"],
     }

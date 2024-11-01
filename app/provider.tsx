@@ -18,42 +18,37 @@ export const metadata = {
 };
 
 export default function AppProvider({
+  theme,
   children,
 }: {
   children: React.ReactNode;
+  theme?: any;
 }) {
   // var { dark } = useContext(DashboardContext);
   return (
-    <html
-      lang="en"
-      // FclassName={`${inter_tight}`}
-    >
-      <body>
-        <DashboardProvider>
-          <DashboardContext.Consumer>
-            {(context) => (
-              <Theme
-                appearance={context.dark ? "dark" : "light"}
-                grayColor={'auto'}
-                accentColor={"green"}
-                panelBackground="translucent"
-              >
-                <Toaster
-                  theme={context.dark ? "dark" : "light"}
-                  expand={false}
-                  richColors
-                  position={"top-left"}
-                  toastOptions={{
-                    style: {},
-                  }}
-                />{" "}
-                {/* <ThemePanel /> */}
-                {children}
-              </Theme>
-            )}
-          </DashboardContext.Consumer>
-        </DashboardProvider>
-      </body>
-    </html>
+    <DashboardProvider>
+      <DashboardContext.Consumer>
+        {(context) => (
+          <Theme
+            // appearance={context.dark ? "dark" : "light"}
+            grayColor={"auto"}
+            accentColor={"green"}
+            panelBackground="translucent"
+          >
+            <Toaster
+              theme={context.dark ? "dark" : "light"}
+              expand={false}
+              richColors
+              position={"top-left"}
+              toastOptions={{
+                style: {},
+              }}
+            />{" "}
+            {/* <ThemePanel /> */}
+            {children}
+          </Theme>
+        )}
+      </DashboardContext.Consumer>
+    </DashboardProvider>
   );
 }

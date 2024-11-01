@@ -6,7 +6,7 @@ import getSequelizeInstance from "server/database/db";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-const JWT_SECRET = process.env.JWT_SECRET || '';
+const JWT_SECRET = process.env.JWT_SECRET || "";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
 
 export async function register_action(formData: any) {
@@ -19,7 +19,6 @@ export async function register_action(formData: any) {
         errors: validatedFields.errors,
       };
     }
-
 
     var user = await Users.findOne({
       where: {
@@ -45,8 +44,6 @@ export async function register_action(formData: any) {
       phone: validatedFields.data!.phone,
     });
 
-
-    
     if (result != null) {
       var newUser = result.toJSON();
 
@@ -58,8 +55,12 @@ export async function register_action(formData: any) {
         }
       );
 
-      cookies().set("token", token);
-      cookies().set("user_id", newUser!.id.toString());
+      cookies().set("token", token, {
+        maxAge: 60 * 60 * 24 * 7,
+      });
+      cookies().set("user_id", newUser!.id.toString(), {
+        maxAge: 60 * 60 * 24 * 7,
+      });
 
       return {
         success: true,
@@ -69,13 +70,12 @@ export async function register_action(formData: any) {
         token: token,
       };
     } else {
-        return {
-          errors: {
-            root: "Registration failed. Please try again later.",
-          },
-        };
+      return {
+        errors: {
+          root: "Registration failed. Please try again later.",
+        },
+      };
     }
-
   } catch (error: any) {
     console.error(error);
     return {

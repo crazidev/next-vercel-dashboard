@@ -1,22 +1,13 @@
 import { Box, BoxProps } from "@radix-ui/themes";
+import React from "react";
 
-export function MyCard({
-  children,
-  className,
-  style,
-  radius = "20px",
-}: {
-  children: React.ReactNode;
-  style: any;
-  radius?: string;
-  className?: string;
-}) {
+export const MyCard = React.forwardRef<HTMLElement, any>(({ className, radius, children, ...props }, ref) => {
   return (
     <div
-      className={`p-[15px] backdrop-blur-2xl w-full h-full ${className} after:absolute after:content-[''] after:inset-0 after:bg-[var(--accent-3)] dark:after:bg-[var(--accent-2)] after:opacity-90 dark:after:opacity-90 after:-z-10 after:rounded-[${radius}] !rounded-[${radius}]`}
-      style={style}
+      className={`p-[15px] w-full h-full z-10 backdrop-blur-sm bg-card-background ${className} !rounded-[${radius}]`}
+      {...props}
     >
       {children}
     </div>
   );
-}
+});

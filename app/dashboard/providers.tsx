@@ -4,6 +4,7 @@ import { SideBarComponent } from "./components/sidebar";
 import { NavBar } from "./components/my-navbar";
 import { createContext, useEffect, useState } from "react";
 import { calculateResponsive } from "@/lib/calculate-responsive";
+import Cookies from "js-cookie";
 
 export const DashboardContext = createContext<DashboardContextProp>({
   dark: true,
@@ -56,6 +57,18 @@ export default function DashboardProvider({
       if (state.isMobile && state.setExpand) {
         setState({ ...state, expandSidebar: true });
       }
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      mediaQuery.addEventListener("change", (event) => {
+        if (event.matches) {
+          setState({ ...state, dark: true });
+        } else {
+          setState({ ...state, dark: false });
+        }
+
+        Cookies.set("theme", event.matches ? "dark" : "light", {
+          expires: 30,
+        });
+      });
     }, [window]);
   }
 
@@ -67,7 +80,9 @@ export default function DashboardProvider({
   };
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark");
+    document.documentElement.classList.remove("light");
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add(state.dark ? "dark" : "light");
   }, [state.dark]);
 
   return (

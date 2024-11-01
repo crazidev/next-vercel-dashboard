@@ -43,7 +43,7 @@ export function MyLineChart() {
   return (
     <ChartContainer
       config={chartConfig}
-      className="aspect-[4/1] absolute left-0 ml-[-10px] bottom-0 h-[60px] w-[50%]"
+      className="aspect-[4/1] absolute left-0 ml-[-35px] bottom-0 h-[60px]"
     >
       <LineChart
         accessibilityLayer
@@ -54,7 +54,7 @@ export function MyLineChart() {
         }}
       >
         
-        <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+        {/* <ChartTooltip cursor={false} content={<ChartTooltipContent />} /> */}
         <Line
           dataKey="desktop"
           type="monotone"

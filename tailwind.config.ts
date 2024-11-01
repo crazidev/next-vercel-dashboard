@@ -8,9 +8,6 @@ function hexadecimal(color: string) {
 	};
   }
 
-var cardBg = '';
-var cardBgTransparent = hexadecimal(cardBg)(100);
-
 export default {
   darkMode: ["class"],
   content: [
@@ -39,7 +36,7 @@ export default {
           "800": "var(--accent-12)",
         },
         card: {
-          background: cardBgTransparent,
+          background: 'var(--accent-a2)',
         },
       },
       animation: {
@@ -52,3 +49,5 @@ export default {
   presets: [require("radix-themes-tw")],
   plugins: [require("postcss-import"), require("tailwindcss-animate")],
 } satisfies Config;
+
+console.log

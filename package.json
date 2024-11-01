@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo ",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -30,10 +30,12 @@
     "cloudinary": "^2.5.1",
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.454.0",
     "mysql2": "^3.11.3",
     "next": "15.0.0-canary.75",
+    "next-client-cookies": "^2.0.0",
     "nodemailer": "^6.9.15",
     "pg": "^8.13.0",
     "pg-hstore": "^2.3.4",
@@ -56,12 +58,13 @@
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
-    "pnpm": {
-      "overrides": {
-        "react-is": "^19.0.0-rc-69d4b800-20241021"
-      }
-    },
+  "pnpm": {
+    "overrides": {
+      "react-is": "^19.0.0-rc-69d4b800-20241021"
+    }
+  },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/nodemailer": "^6.4.16",
     "@types/pg": "^8.11.10",

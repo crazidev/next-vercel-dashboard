@@ -15,7 +15,7 @@ export interface InputProps extends TextField.RootProps {
 }
 
 export const CTextField = React.forwardRef<HTMLElement, InputProps>(
-  ({ leftIcon, label, rightIcon, error, type, accept, register, ...props }, ref) => {
+  ({ leftIcon, label, rightIcon, error, type, accept, register, ...props }) => {
     return (
       <Flex direction={"column"} gap={"1"}>
         <label>
