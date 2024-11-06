@@ -35,7 +35,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function Component() {
+export function MyBarChart() {
   return (
     <ChartContainer className="h-[200px]" config={chartConfig}>
       <BarChart accessibilityLayer data={chartData}>

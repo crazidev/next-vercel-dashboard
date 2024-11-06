@@ -1,9 +1,9 @@
 "use client";
 
 import { Flex, Button, Text, Card, Box, Link, Callout } from "@radix-ui/themes";
-import { AuthContainerLogo } from "@/components/auth-container-logo";
+import { AuthContainerLogo } from "@/components/AuthContainerLogo";
 import { MdLock, MdOutlineMailLock, MdRemoveRedEye } from "react-icons/md";
-import { CTextField } from "@/components/text-field";
+import { CTextField } from "@/components/CTextField";
 import { login } from "server/actions/auth/login";
 import { useForm } from "react-hook-form";
 import { TbInfoCircle } from "react-icons/tb";

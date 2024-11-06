@@ -11,7 +11,7 @@ import {
   Link,
 } from "@radix-ui/themes";
 import Image from "next/image";
-import { AuthContainerLogo } from "@/components/auth-container-logo";
+import { AuthContainerLogo } from "@/components/AuthContainerLogo";
 import {
   MdBackHand,
   MdChevronLeft,
@@ -22,7 +22,7 @@ import {
   MdOutlineMailLock,
   MdRemoveRedEye,
 } from "react-icons/md";
-import { CTextField } from "@/components/text-field";
+import { CTextField } from "@/components/CTextField";
 import { useState } from "react";
 
 export default function LoginPage() {

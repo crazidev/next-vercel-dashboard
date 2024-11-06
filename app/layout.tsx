@@ -1,10 +1,7 @@
-import { Theme, ThemePanel } from "@radix-ui/themes";
 import "./globals.css";
-import { Toaster } from "sonner";
 import AppProvider from "./provider";
-import { cookies, headers } from "next/headers";
-import { CookiesProvider } from "next-client-cookies/server";
-import { getCookies } from "next-client-cookies/server";
+import { cookies } from "next/headers";
+
 
 export default async function RootLayout({
   children,
@@ -12,12 +9,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   var theme = cookies().get("theme")?.value;
+
   return (
-    <html className={`${theme ?? 'dark'}`}>
+    <html className={`${theme ?? "dark"}`}>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+      </head>
       <body>
-      {/* <CookiesProvider> */}
-        <AppProvider>{children}</AppProvider>;
-      {/* </CookiesProvider> */}
+        {/* <CookiesProvider> */}
+        <AppProvider>{children}</AppProvider>{/* </CookiesProvider> */}
       </body>
     </html>
   );

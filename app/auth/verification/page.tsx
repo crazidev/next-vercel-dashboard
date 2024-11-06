@@ -1,4 +1,4 @@
-import { AuthContainerLogo } from "@/components/auth-container-logo";
+import { AuthContainerLogo } from "@/components/AuthContainerLogo";
 import {
   Badge,
   Box,
@@ -8,11 +8,11 @@ import {
   Flex,
   Text,
 } from "@radix-ui/themes";
-import { CTextField } from "@/components/text-field";
+import { CTextField } from "@/components/CTextField";
 import { register } from "module";
 import { MdLocationCity, MdLocationPin } from "react-icons/md";
 import { CountrySelectComponent } from "../components/country_select_button";
-import { MyDialog } from "@/components/my_dialog";
+import { MyDialog } from "@/components/MyDialog";
 import { VerificationComponent } from "./verification_component";
 import { authUser } from "server/actions/authUser";
 import { getUser, revalidateUserTag } from "server/fetch/select_user";

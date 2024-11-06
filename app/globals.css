@@ -47,3 +47,7 @@ input[type="search"]::-ms-clear {
     --chart-5: 349 77% 62%;
   }
 }
+
+.tradingview-widget-copyright {
+  display: none !important;
+}

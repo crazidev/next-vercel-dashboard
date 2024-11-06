@@ -9,7 +9,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: '*.public.blob.vercel-storage.com'
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 's3-symbol-logo.tradingview.com',
+        pathname: '/*', // allows all paths on the domain
+      },
     ]
   },
   typescript: {

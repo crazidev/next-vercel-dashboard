@@ -13,7 +13,7 @@ import {
   Callout,
 } from "@radix-ui/themes";
 import Image from "next/image";
-import { AuthContainerLogo } from "@/components/auth-container-logo";
+import { AuthContainerLogo } from "@/components/AuthContainerLogo";
 import {
   MdLocationPin,
   MdLock,
@@ -22,7 +22,7 @@ import {
   MdPhone,
   MdRemoveRedEye,
 } from "react-icons/md";
-import { CTextField } from "@/components/text-field";
+import { CTextField } from "@/components/CTextField";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";

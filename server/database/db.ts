@@ -15,6 +15,7 @@ const getSequelizeInstance = async () => {
       password: "",
       dialect: "mysql",
       dialectModule: mysql,
+      logging: false,
     });
 
     initModels(sequelize);
@@ -22,10 +23,10 @@ const getSequelizeInstance = async () => {
    await sequelize
       .authenticate()
       .then(() => {
-        console.log("Connection has been established successfully.");
+        // console.log("Connection has been established successfully.");
       })
       .catch((error) => {
-        console.error("Unable to connect to the database:", error);
+        console.error("Unable to connect to the database");
       });
   }
   return sequelizeInstance;

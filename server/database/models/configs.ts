@@ -1,22 +1,14 @@
 import * as Sequelize from 'sequelize';
-import {
-   CreationOptional,
-   DataTypes,
-   InferCreationAttributes, 
-   InferAttributes,
-   Model
-} from 'sequelize';
-
+import { DataTypes, Model, Optional } from 'sequelize';
 
 export class Configs extends Model<
-      InferAttributes<Configs>,
-      InferCreationAttributes<Configs>
+ Sequelize.InferAttributes<Configs>,
+ Sequelize.InferCreationAttributes<Configs>
 > {
-    declare id: CreationOptional<number>;
-    declare supportEmail?: string;
-    declare createdAt?: Date;
-    declare updatedAt?: Date;
-
+   declare id: number;
+   declare supportEmail?: string;
+   declare createdAt?: Date;
+   declare updatedAt?: Date;
 
    static initModel(sequelize: Sequelize.Sequelize): typeof Configs {
       return Configs.init({
@@ -26,21 +18,24 @@ export class Configs extends Model<
          allowNull: false,
          primaryKey: true
       },
+
       supportEmail: {
          type: DataTypes.STRING(255),
          allowNull: true,
          field: 'support_email'
       },
+
       createdAt: {
          type: DataTypes.DATE,
          allowNull: true,
          field: 'created_at'
       },
+
       updatedAt: {
          type: DataTypes.DATE,
          allowNull: true,
          field: 'updated_at'
-      }
+      },
    }, {
       sequelize,
       tableName: 'configs',
@@ -59,4 +54,5 @@ export class Configs extends Model<
       ]
    });
    }
+
 }

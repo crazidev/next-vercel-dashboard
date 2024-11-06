@@ -1,6 +1,6 @@
 "use client";
 
-import { MyDialog } from "@/components/my_dialog";
+import { MyDialog } from "@/components/MyDialog";
 import {
   Card,
   Flex,
@@ -13,7 +13,7 @@ import {
   Callout,
 } from "@radix-ui/themes";
 import { CountrySelectComponent } from "../components/country_select_button";
-import { CTextField } from "@/components/text-field";
+import { CTextField } from "@/components/CTextField";
 import {
   MdEdit,
   MdEditDocument,

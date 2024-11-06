@@ -1,9 +1,9 @@
 import { Box, Button, Card, Flex, Text } from "@radix-ui/themes";
 import { UserContainer } from "app/auth/components/user_container";
-import { MobileSideBarButton } from "./mobile_nav_button";
 import { Logo } from "app/auth/shapes/logo";
 import { MdOutlineWallet, MdSettings } from "react-icons/md";
 import { TbDashboard, TbCreditCard, TbChartLine } from "react-icons/tb";
+import { MobileSideBarButton } from "./MobileSideBarButton";
 
 export const navlist = [
   {

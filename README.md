@@ -35,3 +35,5 @@ pnpm dev
 ```
 
 You should now be able to access the application at http://localhost:3000.
+
+node C:\Users\crazi\Development\node-projects\sequelize-auto\bin\sequelize-auto -h localhost -d hybank-new -x '' -u root -l ts -e mysql --sv v6 --noAlias true -o server/database/models --cf p 

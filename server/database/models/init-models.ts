@@ -55,14 +55,14 @@ export function initModels(sequelize: Sequelize) {
    Wallets.hasMany(WalletBalances, { as: "walletBalances", foreignKey: "walletId"});
 
    return {
-      Banks,
-      Configs,
-      Livechats,
-      Transactions,
-      Users,
-      VerificationTokens,
-      Versions,
-      WalletBalances,
-      Wallets,
+      Banks: Banks,
+      Configs: Configs,
+      Livechats: Livechats,
+      Transactions: Transactions,
+      Users: Users,
+      VerificationTokens: VerificationTokens,
+      Versions: Versions,
+      WalletBalances: WalletBalances,
+      Wallets: Wallets,
    };
 }

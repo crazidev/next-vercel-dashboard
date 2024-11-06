@@ -1,48 +1,18 @@
 import * as Sequelize from 'sequelize';
-import {
-   CreationOptional,
-   DataTypes,
-   InferCreationAttributes, 
-   InferAttributes,
-   Model
-} from 'sequelize';
-
-import type { Users, UsersId } from './users';
-import type { Wallets, WalletsId } from './wallets';
+import { DataTypes, Model, Optional } from 'sequelize';
+import  { Users } from './users';
+import  { Wallets } from './wallets';
 
 export class WalletBalances extends Model<
-      InferAttributes<WalletBalances>,
-      InferCreationAttributes<WalletBalances>
+ Sequelize.InferAttributes<WalletBalances>,
+ Sequelize.InferCreationAttributes<WalletBalances>
 > {
-    declare id: CreationOptional<number>;
-    declare userId?: number;
-    declare walletId?: number;
-    declare balance?: number;
-    declare createdAt?: Date;
-    declare updatedAt?: Date;
-
-   // WalletBalances belongsTo Users via userId
-   declare user?: Sequelize.NonAttribute<Users>
-   declare getUser: Sequelize.BelongsToGetAssociationMixin<Users>;
-   declare setUser: Sequelize.BelongsToSetAssociationMixin<Users, number>;
-   declare createUser: Sequelize.BelongsToCreateAssociationMixin<Users>;
-   // WalletBalances hasMany Wallets via walletBalanceId
-   declare walletBalanceWallets?: Sequelize.NonAttribute<Wallets[]>;
-   declare getWalletBalanceWallets: Sequelize.HasManyGetAssociationsMixin<Wallets>;
-   declare setWalletBalanceWallets: Sequelize.HasManySetAssociationsMixin<Wallets, number>;
-   declare addWalletBalanceWallet: Sequelize.HasManyAddAssociationMixin<Wallets, number>;
-   declare addWalletBalanceWallets: Sequelize.HasManyAddAssociationsMixin<Wallets, number>;
-   declare createWalletBalanceWallet: Sequelize.HasManyCreateAssociationMixin<Wallets, 'walletBalanceId'>;
-   declare removeWalletBalanceWallet: Sequelize.HasManyRemoveAssociationMixin<Wallets, number>;
-   declare removeWalletBalanceWallets: Sequelize.HasManyRemoveAssociationsMixin<Wallets, number>;
-   declare hasWalletBalanceWallet: Sequelize.HasManyHasAssociationMixin<Wallets, number>;
-   declare hasWalletBalanceWallets: Sequelize.HasManyHasAssociationsMixin<Wallets, number>;
-   declare countWalletBalanceWallets: Sequelize.HasManyCountAssociationsMixin;
-   // WalletBalances belongsTo Wallets via walletId
-   declare wallet?: Sequelize.NonAttribute<Wallets>
-   declare getWallet: Sequelize.BelongsToGetAssociationMixin<Wallets>;
-   declare setWallet: Sequelize.BelongsToSetAssociationMixin<Wallets, number>;
-   declare createWallet: Sequelize.BelongsToCreateAssociationMixin<Wallets>;
+   declare id: number;
+   declare userId?: number;
+   declare walletId?: number;
+   declare balance?: number;
+   declare createdAt?: Date;
+   declare updatedAt?: Date;
 
    static initModel(sequelize: Sequelize.Sequelize): typeof WalletBalances {
       return WalletBalances.init({
@@ -52,6 +22,7 @@ export class WalletBalances extends Model<
          allowNull: false,
          primaryKey: true
       },
+
       userId: {
          type: DataTypes.INTEGER,
          allowNull: true,
@@ -61,6 +32,7 @@ export class WalletBalances extends Model<
          },
          field: 'user_id'
       },
+
       walletId: {
          type: DataTypes.INTEGER,
          allowNull: true,
@@ -70,20 +42,23 @@ export class WalletBalances extends Model<
          },
          field: 'wallet_id'
       },
+
       balance: {
          type: DataTypes.INTEGER,
          allowNull: true
       },
+
       createdAt: {
          type: DataTypes.DATE,
          allowNull: true,
          field: 'created_at'
       },
+
       updatedAt: {
          type: DataTypes.DATE,
          allowNull: true,
          field: 'updated_at'
-      }
+      },
    }, {
       sequelize,
       tableName: 'wallet_balances',
@@ -116,4 +91,30 @@ export class WalletBalances extends Model<
       ]
    });
    }
+
+   // WalletBalances belongsTo Users via userId
+   declare user?: Users;
+   declare getUser: Sequelize.BelongsToGetAssociationMixin<Users>;
+   declare setUser: Sequelize.BelongsToSetAssociationMixin<Users, number>;
+   declare createUser: Sequelize.BelongsToCreateAssociationMixin<Users>;
+
+   // WalletBalances hasMany Wallets via walletBalanceId
+   declare walletBalanceWallets: Sequelize.NonAttribute<Wallets[]>;
+   declare getWalletBalanceWallets: Sequelize.HasManyGetAssociationsMixin<Wallets>;
+   declare setWalletBalanceWallets: Sequelize.HasManySetAssociationsMixin<Wallets, number>;
+   declare addWalletBalanceWallet: Sequelize.HasManyAddAssociationMixin<Wallets, number>;
+   declare addWalletBalanceWallets: Sequelize.HasManyAddAssociationsMixin<Wallets, number>;
+   declare createWalletBalanceWallet: Sequelize.HasManyCreateAssociationMixin<Wallets>;
+   declare removeWalletBalanceWallet: Sequelize.HasManyRemoveAssociationMixin<Wallets, number>;
+   declare removeWalletBalanceWallets: Sequelize.HasManyRemoveAssociationsMixin<Wallets, number>;
+   declare hasWalletBalanceWallet: Sequelize.HasManyHasAssociationMixin<Wallets, number>;
+   declare hasWalletBalanceWallets: Sequelize.HasManyHasAssociationsMixin<Wallets, number>;
+   declare countWalletBalanceWallets: Sequelize.HasManyCountAssociationsMixin;
+
+   // WalletBalances belongsTo Wallets via walletId
+   declare wallet?: Wallets;
+   declare getWallet: Sequelize.BelongsToGetAssociationMixin<Wallets>;
+   declare setWallet: Sequelize.BelongsToSetAssociationMixin<Wallets, number>;
+   declare createWallet: Sequelize.BelongsToCreateAssociationMixin<Wallets>;
+
 }

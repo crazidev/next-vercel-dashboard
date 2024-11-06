@@ -1,21 +1,13 @@
 import * as Sequelize from 'sequelize';
-import {
-   CreationOptional,
-   DataTypes,
-   InferCreationAttributes, 
-   InferAttributes,
-   Model
-} from 'sequelize';
-
+import { DataTypes, Model, Optional } from 'sequelize';
 
 export class Versions extends Model<
-      InferAttributes<Versions>,
-      InferCreationAttributes<Versions>
+ Sequelize.InferAttributes<Versions>,
+ Sequelize.InferCreationAttributes<Versions>
 > {
-    declare id: CreationOptional<number>;
-    declare version?: string;
-    declare status?: 'active' | 'inactive';
-
+   declare id: number;
+   declare version?: string;
+   declare status?: 'active' | 'inactive';
 
    static initModel(sequelize: Sequelize.Sequelize): typeof Versions {
       return Versions.init({
@@ -25,15 +17,17 @@ export class Versions extends Model<
          allowNull: false,
          primaryKey: true
       },
+
       version: {
          type: DataTypes.TEXT,
          allowNull: true
       },
+
       status: {
          type: DataTypes.ENUM('active','inactive'),
          allowNull: true,
          defaultValue: "active"
-      }
+      },
    }, {
       sequelize,
       tableName: 'versions',
@@ -60,4 +54,5 @@ export class Versions extends Model<
       ]
    });
    }
+
 }
