@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
-import { Logo } from "app/auth/shapes/logo";
+import { Logo } from "app/auth/components/shapes/logo";
 import { useContext, useEffect, useState } from "react";
 import { MdOutlineWallet, MdSettings } from "react-icons/md";
 import {
@@ -57,7 +57,7 @@ export function SideBarComponent({
 }) {
   const { isMobile, expandSidebar, isTablet, setExpand, setTheme } =
     useContext(DashboardContext);
-  const expand = expandSidebar;
+  const expand = !isTablet && !isMobile;
   var pathname = usePathname();
   const [isReady, setIsReady] = useState(false);
 
@@ -164,7 +164,7 @@ export function SideBarComponent({
                     className={`
                       mt-[10px] flex flex-row 
                       align-middle px-3 py-3 
-                      bg-[var(--accent-a2)] 
+                      dark:bg-card-background bg-[var(--accent-a3)]
                       box-content
                       border-r-2 
                       ${isActive

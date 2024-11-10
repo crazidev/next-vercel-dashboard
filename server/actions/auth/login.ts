@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import getSequelizeInstance from "server/database/db";
 
-import yup, { yupValidator } from "@/lib/yup";
-import { zodValidator } from "@/lib/zod";
+import yup, { yupValidator } from "server/extra/yup";
+import { zodValidator } from "server/extra/zod";
 import { loginActionScheme } from "server/scheme/login_scheme";
 import { Users } from "server/database/models/users";
 import { getUser, revalidateUserTag } from "server/fetch/select_user";
@@ -16,7 +16,6 @@ export async function login(formData: any) {
   try {
     await getSequelizeInstance();
     var validatedFields = yupValidator(loginActionScheme, formData);
-
     if (!validatedFields.isSuccess) {
       return {
         errors: validatedFields.errors,
@@ -47,22 +46,7 @@ export async function login(formData: any) {
       };
     } else {
       // Generate JWT
-      const token = jwt.sign(
-        { userId: user.id, email: user.email },
-        JWT_SECRET,
-        {
-          expiresIn: JWT_EXPIRES_IN,
-        }
-      );
-
-      cookies().set("token", token, {
-        maxAge: 60 * 60 * 24 * 7,
-      });
-      cookies().set("user_id", user.id.toString(), {
-        maxAge: 60 * 60 * 24 * 7,
-      });
-      revalidateUserTag();
-      await getUser(user.id);
+      const token = await generateJWToken(user);
 
       return {
         success: true,
@@ -80,3 +64,25 @@ export async function login(formData: any) {
     };
   }
 }
+
+/// This function will generate jwt token and also revalidateUserTag
+export async function generateJWToken(user: Users) {
+  const token = jwt.sign(
+    { userId: user.id, email: user.email },
+    JWT_SECRET,
+    {
+      expiresIn: JWT_EXPIRES_IN,
+    }
+  );
+
+  cookies().set("token", token, {
+    maxAge: 60 * 60 * 24 * 7,
+  });
+  cookies().set("user_id", user.id.toString(), {
+    maxAge: 60 * 60 * 24 * 7,
+  });
+  revalidateUserTag();
+  await getUser(user.id);
+  return token;
+}
+

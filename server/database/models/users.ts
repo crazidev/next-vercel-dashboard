@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 import  { Livechats } from './livechats';
 import  { Transactions } from './transactions';
 import  { VerificationTokens } from './verification_tokens';
@@ -9,7 +9,7 @@ export class Users extends Model<
  Sequelize.InferAttributes<Users>,
  Sequelize.InferCreationAttributes<Users>
 > {
-   declare id: number;
+   declare id: CreationOptional<number>;
    declare firstName: string;
    declare lastName: string;
    declare email?: string;

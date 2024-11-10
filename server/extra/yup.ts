@@ -4,9 +4,33 @@ import * as yup from "yup";
 // Export the yup instance
 export default yup;
 
-// Function to validate the data and infer the type from the schema
+/**
+ * This function validates the given data against the provided Yup schema.
+ *
+ * Usage:
+ * ```typescript
+ * const schema = yup.object({
+ *   name: yup.string().required(),
+ *   age: yup.number().required().positive().integer(),
+ * });
+ *
+ * const data = { name: "John Doe", age: 30 };
+ * const result = yupValidator(schema, data);
+ *
+ * if (result.isSuccess) {
+ *   console.log("Validation succeeded:", result.data);
+ * } else {
+ *   console.log("Validation failed:", result.errors);
+ * }
+ * ```
+ *
+ * @param schema The Yup schema to validate against
+ * @param data The data to validate
+ * @param props Optional options to pass to the Yup validator
+ * @returns An object with the status of the validation, the validated data, and the errors if any
+ */
 export function yupValidator<T extends yup.ObjectSchema<any>>(
-  schema: T, // schema type is passed to infer the return type
+  schema: T, // Yup schema to infer the return type
   data: any,
   props?: {
     stripUnknown?: boolean;
@@ -40,8 +64,6 @@ export function yupValidator<T extends yup.ObjectSchema<any>>(
       acc[value.path!] = value.errors[0].toString().split(",").at(0);
       return acc;
     }, {} as { [key: string]: any });
-
-   
 
     return {
       isSuccess: false,

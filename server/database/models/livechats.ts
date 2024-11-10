@@ -1,12 +1,12 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 import  { Users } from './users';
 
 export class Livechats extends Model<
  Sequelize.InferAttributes<Livechats>,
  Sequelize.InferCreationAttributes<Livechats>
 > {
-   declare id: number;
+   declare id: CreationOptional<number>;
    declare userId?: number;
    declare fromAdmin?: number;
    declare message: string;

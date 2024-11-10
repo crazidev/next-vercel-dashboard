@@ -8,7 +8,7 @@ import { login } from "server/actions/auth/login";
 import { useForm } from "react-hook-form";
 import { TbInfoCircle } from "react-icons/tb";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 export default function LoginPage() {
   const {
@@ -31,9 +31,9 @@ export default function LoginPage() {
       localStorage.setItem("token", JSON.stringify(res.token));
 
       if (res.user.idDocStatus === null || res.user.ssnStatus === null) {
-        router.push("/auth/verification");
+        // router.push("/auth/verification");
       } else {
-        router.push("/dashboard");
+        // router.push("/dashboard");
       }
     } else {
       if (res.errors !== undefined)
@@ -47,7 +47,7 @@ export default function LoginPage() {
     <Box
       maxWidth="300px"
       width={"300px"}
-      className="m-auto sm:my-auto my-[30px]"
+      className="m-auto my-[30px] sm:my-auto"
     >
       <Card variant={"surface"} className="py-4">
         <form onSubmit={handleSubmit(submit)}>

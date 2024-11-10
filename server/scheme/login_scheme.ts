@@ -1,8 +1,6 @@
-import yup from "@/lib/yup";
-import z from "zod";
-
+import yup from "server/extra/yup";
 
 export const loginActionScheme = yup.object({
-    email: yup.string().email().required(),
-    password: yup.string().required()
-  });
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});

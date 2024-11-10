@@ -1,11 +1,11 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 
 export class Configs extends Model<
  Sequelize.InferAttributes<Configs>,
  Sequelize.InferCreationAttributes<Configs>
 > {
-   declare id: number;
+   declare id: CreationOptional<number>;
    declare supportEmail?: string;
    declare createdAt?: Date;
    declare updatedAt?: Date;

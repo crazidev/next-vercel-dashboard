@@ -1,12 +1,12 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 import  { Users } from './users';
 
 export class VerificationTokens extends Model<
  Sequelize.InferAttributes<VerificationTokens>,
  Sequelize.InferCreationAttributes<VerificationTokens>
 > {
-   declare id: number;
+   declare id: CreationOptional<number>;
    declare userId?: number;
    declare token?: string;
    declare expiresAt?: Date;

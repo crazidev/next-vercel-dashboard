@@ -1,5 +1,4 @@
-import yup from "@/lib/yup";
-import z from "zod";
+import yup from "server/extra/yup";
 
 export const RegisterScheme = yup.object({
   first_name: yup.string().required(),

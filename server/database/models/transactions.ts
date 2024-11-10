@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 import  { Banks } from './banks';
 import  { Users } from './users';
 import  { Wallets } from './wallets';
@@ -16,7 +16,7 @@ export class Transactions extends Model<
    declare userId?: number;
    declare walletId?: number;
    declare walletNetwork?: string;
-   declare id: number;
+   declare id: CreationOptional<number>;
    declare beneficiaryId?: number;
    declare beneficiaryName?: string;
    declare createdAt?: Date;

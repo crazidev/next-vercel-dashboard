@@ -1,10 +1,5 @@
 import jwt from "jsonwebtoken";
-import {
-  getRedirectError,
-  RedirectType,
-} from "next/dist/client/components/redirect";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export function authUser(re_direct?: boolean) {

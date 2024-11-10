@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 import  { Transactions } from './transactions';
 import  { WalletBalances } from './wallet_balances';
 
@@ -7,7 +7,7 @@ export class Wallets extends Model<
  Sequelize.InferAttributes<Wallets>,
  Sequelize.InferCreationAttributes<Wallets>
 > {
-   declare id: number;
+   declare id: CreationOptional<number>;
    declare name?: string;
    declare shortName?: string;
    declare walletAddress?: string;

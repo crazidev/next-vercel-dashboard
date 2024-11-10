@@ -12,7 +12,7 @@ import {
   Link,
   Callout,
 } from "@radix-ui/themes";
-import { CountrySelectComponent } from "../components/country_select_button";
+import { CountrySelectComponent } from "../components/CountrySelectComponent";
 import { CTextField } from "@/components/CTextField";
 import {
   MdEdit,
@@ -22,7 +22,7 @@ import {
   MdLocationPin,
 } from "react-icons/md";
 import { useForm } from "react-hook-form";
-import yup from "@/lib/yup";
+import yup from "server/extra/yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   submitAddress,
@@ -68,7 +68,7 @@ export async function VerificationComponent({
                 <Text weight={"bold"} size={"1"}>
                   {d.title}
                 </Text>
-                <Text size={"1"} className=" capitalize ">
+                <Text size={"1"} className="capitalize">
                   Status:{" "}
                   <Badge
                     color={
@@ -211,7 +211,7 @@ export async function VerificationComponent({
                           {formState2.errors.id_type?.message && (
                             <Text
                               ml={"2"}
-                              className="text-[11px] font-normal italic normal-case"
+                              className="font-normal text-[11px] italic normal-case"
                               color="red"
                             >
                               {formState2.errors.id_type?.message}
@@ -316,7 +316,7 @@ export async function VerificationComponent({
                 {d.type === "address" && (
                   <Text
                     size={"1"}
-                    className="text-[10px] line-clamp-1 text-gray-500"
+                    className="line-clamp-1 text-[10px] text-gray-500"
                   >
                     {d.content}
                   </Text>

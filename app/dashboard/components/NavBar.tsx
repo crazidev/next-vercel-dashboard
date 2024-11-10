@@ -1,6 +1,6 @@
 import { Box, Button, Card, Flex, Text } from "@radix-ui/themes";
-import { UserContainer } from "app/auth/components/user_container";
-import { Logo } from "app/auth/shapes/logo";
+import { UserContainer } from "app/auth/components/UserContainer";
+import { Logo } from "app/auth/components/shapes/logo";
 import { MdOutlineWallet, MdSettings } from "react-icons/md";
 import { TbDashboard, TbCreditCard, TbChartLine } from "react-icons/tb";
 import { MobileSideBarButton } from "./MobileSideBarButton";
@@ -41,7 +41,7 @@ export const navlist = [
 export function NavBar({ title, description }: any) {
   return (
     <div>
-      <div className="py-2 rounded-2xl flex w-[100%] justify-between">
+      <div className="flex justify-between py-2 rounded-2xl w-[100%]">
         <div className="flex flex-col py-1">
           <Text size={"5"} weight={"bold"}>
             {title}

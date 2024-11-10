@@ -63,7 +63,7 @@ export const TransactionList = async ({
           {list.map((item) => (
             <tr
               key={item.id}
-              className="mb-3 flex h-[65px] cursor-pointer items-center bg-card-background py-2 backdrop-blur-sm transition-colors duration-300 hover:bg-[var(--accent-3)] md:table-row"
+              className="mb-3 border-b-2 border-primary-200 flex h-[65px] cursor-pointer items-center dark:bg-card-background bg-[var(--accent-a3)] py-2 backdrop-blur-sm transition-colors duration-300 hover:bg-[var(--accent-3)] md:table-row"
             >
               {/* Status Icon */}
               <td className="w-[50px]">

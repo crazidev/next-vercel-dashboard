@@ -5,7 +5,7 @@ import getSequelizeInstance from "server/database/db";
 import { authUser } from "../authUser";
 import { redirect, RedirectType } from "next/navigation";
 import { Users } from "server/database/models/users";
-import { uploadFileToCloudinary } from "../extra/upload_cloudinary";
+import { uploadFileToCloudinary } from "../../extra/upload_cloudinary";
 
 export async function submitAddress(formData: any) {
   try {

@@ -1,5 +1,5 @@
 "use server";
-import { yupValidator } from "@/lib/yup";
+import { yupValidator } from "server/extra/yup";
 import { RegisterScheme } from "server/scheme/register_scheme";
 import { Users } from "server/database/models/init-models";
 import getSequelizeInstance from "server/database/db";

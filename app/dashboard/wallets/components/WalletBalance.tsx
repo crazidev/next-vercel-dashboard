@@ -9,15 +9,14 @@ import {
   Separator,
   Text,
 } from "@radix-ui/themes";
-import { Logo } from "app/auth/shapes/logo";
-import { MyBarChart } from "app/dashboard/components/MyBarChart";
-import { Clipboard } from "lucide-react";
+import { Logo } from "app/auth/components/shapes/logo";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { TbClipboard, TbEyeCancel, TbSwitchVertical } from "react-icons/tb";
+import { TbSwitchVertical } from "react-icons/tb";
 import { Users } from "server/database/models/users";
 import { WalletBalances } from "server/database/models/wallet_balances";
 import { MiniChart } from "react-ts-tradingview-widgets";
+import { MdExpandMore } from "react-icons/md";
 
 export function WalletBalance({
   wallet_list,
@@ -32,9 +31,10 @@ export function WalletBalance({
   var selectedWallet = wallet_list?.filter((e) => e.id == wallet_id)?.at(0);
 
   return (
-    <div className="relative md:w-[40%]">
+    <div className="relative md:w-[40%] h-fit">
       <MyCard>
         <div className="relative flex items-center justify-between">
+          {/* Wallet Title & Logo */}
           <Flex gap={"4"}>
             {selectedWallet === undefined ? (
               <Logo className={"h-[30px] w-[30px] fill-primary-700"} />
@@ -50,6 +50,7 @@ export function WalletBalance({
             {selectedWallet?.wallet?.name ?? "Main Account"}
           </Flex>
 
+          {/* Wallet Select */}
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
               <div className="flex justify-center gap-1 text-[12px] text-gray-500">
@@ -93,7 +94,10 @@ export function WalletBalance({
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </div>
-        <div className="h-[40px]" />
+
+        <div className="h-[30px]" />
+
+        {/* Balance */}
         <Flex gap="4" justify={"between"}>
           <div>
             <Text trim={"end"} as={"div"} className="font-mono text-[20px]">
@@ -130,8 +134,10 @@ export function WalletBalance({
             </div>
           </Flex>
         </Flex>
-        <div className="h-[50px]" />
 
+        <div className="h-[30px]" />
+
+        {/* Main Account Details */}
         {wallet_id === undefined && (
           <DataList.Root orientation="horizontal" size="1">
             <DataList.Item>
@@ -155,6 +161,7 @@ export function WalletBalance({
           </DataList.Root>
         )}
 
+        {/* Wallet Details */}
         {selectedWallet !== undefined &&
           selectedWallet.wallet?.type === "crypto" && (
             <DataList.Root orientation="horizontal" size="1">
@@ -180,23 +187,21 @@ export function WalletBalance({
             </DataList.Root>
           )}
 
-        <div className="h-[30px]" />
+        {/* Wallet Chart */}
         {selectedWallet && (
-          <div className="">
-            <MiniChart
-              symbol={selectedWallet?.wallet?.shortName}
-              colorTheme="dark"
-              isTransparent
-              height={80}
-              width="100%"
-              chartOnly
-            ></MiniChart>
-          </div>
+          <>
+            <div className="h-[30px]" />
+            <div className="">
+              <MiniChart
+                symbol={selectedWallet?.wallet?.shortName}
+                colorTheme="dark"
+                isTransparent
+                height={80}
+                width="100%"
+                chartOnly
+              ></MiniChart>
+            </div></>
         )}
-
-        {/* <div className="mx-auto w-full">
-          <MyBarChart />
-        </div> */}
         <Text />
       </MyCard>
     </div>

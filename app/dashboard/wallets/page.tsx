@@ -7,7 +7,7 @@ import { getUserWallets } from "server/fetch/fetch_wallets";
 import { getUser } from "server/fetch/select_user";
 import Image from "next/image";
 import { MdExpand, MdExpandMore } from "react-icons/md";
-import { Logo } from "app/auth/shapes/logo";
+import { Logo } from "app/auth/components/shapes/logo";
 import { TransactionList } from "../components/TransactionList";
 import { ChevronRight } from "lucide-react";
 import { Suspense } from "react";
@@ -33,7 +33,7 @@ const WalletPage = async ({
           description="Monitor your specific wallet activities."
         />
         <Box height={"20px"} />
-        <div className="flex md:flex-row flex-col gap-5">
+        <div className="flex md:flex-row flex-col gap-10 lg:gap-5">
           <WalletBalance
             wallet_id={wallet_id}
             user={user}
@@ -44,10 +44,6 @@ const WalletPage = async ({
               <Text className="font-extrabold" size={"3"}>
                 Transaction History
               </Text>
-              <Flex gap={"2"} className="mt-5 text-primary-400">
-                <TbHandClick />
-                <Text size={"1"}>Scroll right for more</Text>
-              </Flex>
             </Flex>
 
             <Suspense fallback={<RotateSpinnerComponent />}>

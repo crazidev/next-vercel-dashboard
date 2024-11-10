@@ -2,6 +2,7 @@ const SequelizeAuto = require("sequelize-auto");
 const path = require("path");
 const output = path.join(__dirname, "./server/database/models");
 
+/** @type {import('sequelize-auto').AutoOptions} */
 const options = {
   directory: output,
   caseFile: "l",
@@ -12,13 +13,14 @@ const options = {
   singularize: false,
   spaces: true,
   indentation: 3,
+  generateMigration: true,
   additional: {
     timestamps: false,
     createdAt: false,
   },
 };
 
-
+/** @type {import('./config').Config} */
 const config = {
   dbname: "hybank-new",
   user: "root",

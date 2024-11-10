@@ -1,26 +1,26 @@
 import { Sequelize } from "sequelize";
 import { initModels } from "./models/init-models";
-import pg from 'pg';
-import mysql from 'mysql2';
+// import pg from "pg";
+import mysql from "mysql2";
 
 let sequelizeInstance: Sequelize | null = null;
 
 const getSequelizeInstance = async () => {
   if (!sequelizeInstance) {
-    const sequelize = new Sequelize({
-      host: "localhost",
-      port: 3306,
-      username: "root",
-      database: "hybank-new",
-      password: "",
-      dialect: "mysql",
+    const sequelize = new Sequelize(process.env.DATABASE_URL ?? "", {
+      host: process.env.DATABASE_HOST,
+      port: parseInt(process.env.DATABASE_PORT ?? "3306"),
+      username: process.env.DATABASE_USER ?? "root",
+      database: process.env.DATABASE_NAME,
+      password: process.env.DATABASE_PASS ?? "",
+      dialect: process.env.DATABASE_DIALECT ?? ("mysql" as any),
       dialectModule: mysql,
       logging: false,
     });
 
     initModels(sequelize);
 
-   await sequelize
+    await sequelize
       .authenticate()
       .then(() => {
         // console.log("Connection has been established successfully.");

@@ -1,11 +1,11 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 
 export class Versions extends Model<
  Sequelize.InferAttributes<Versions>,
  Sequelize.InferCreationAttributes<Versions>
 > {
-   declare id: number;
+   declare id: CreationOptional<number>;
    declare version?: string;
    declare status?: 'active' | 'inactive';
 

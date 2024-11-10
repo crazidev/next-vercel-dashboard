@@ -1,6 +1,6 @@
 import { MyCard } from "@/components/MyCard";
 import { Badge, Flex, ScrollArea, Text } from "@radix-ui/themes";
-import { Logo } from "app/auth/shapes/logo";
+import { Logo } from "app/auth/components/shapes/logo";
 import { TbEye, TbChartArcs } from "react-icons/tb";
 import { MyLineChart } from "./MyLineChart";
 import { getUserWallets } from "server/fetch/fetch_wallets";

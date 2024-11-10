@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize';
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 import  { Transactions } from './transactions';
 
 export class Banks extends Model<
@@ -8,7 +8,7 @@ export class Banks extends Model<
 > {
    declare bankName?: string;
    declare bankCode?: string;
-   declare id: number;
+   declare id: CreationOptional<number>;
    declare createdAt?: Date;
    declare updatedAt?: Date;
 
