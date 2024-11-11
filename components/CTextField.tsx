@@ -22,7 +22,7 @@ export const CTextField = React.forwardRef<HTMLElement, InputProps>(
           <Text size={"1"} weight={"medium"} ml={"1"}>
             {label}
           </Text>
-          <TextField.Root accept={accept} type={type} className="h-[37px]" size={"2"} {...props} {...register}>
+          <TextField.Root accept={(accept as any)} type={type} className="h-[37px]" size={"2"} {...props} {...register}>
             {leftIcon && (
               <TextField.Slot side={"left"}>{leftIcon}</TextField.Slot>
             )}
@@ -33,7 +33,7 @@ export const CTextField = React.forwardRef<HTMLElement, InputProps>(
           {error && (
             <Text
               ml={"2"}
-              className="text-[11px] font-normal italic normal-case"
+              className="text-[11px] font-normal normal-case italic"
               color="red"
             >
               {error}

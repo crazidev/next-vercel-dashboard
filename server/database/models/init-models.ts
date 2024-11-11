@@ -34,7 +34,7 @@ export function initModels(sequelize: Sequelize) {
    Transactions.belongsTo(Banks, { as: "bank", foreignKey: "bankId"});
    Banks.hasMany(Transactions, { as: "transactions", foreignKey: "bankId"});
    Wallets.belongsTo(Transactions, { as: "transactionsTransaction", foreignKey: "transactionsId"});
-   Transactions.hasMany(Wallets, { as: "transactionsWallets", foreignKey: "transactionsId"});
+   Transactions.hasOne(Wallets, { as: "wallets", foreignKey: "id"});
    Livechats.belongsTo(Users, { as: "user", foreignKey: "userId"});
    Users.hasMany(Livechats, { as: "livechats", foreignKey: "userId"});
    Livechats.belongsTo(Users, { as: "usersUser", foreignKey: "usersId"});

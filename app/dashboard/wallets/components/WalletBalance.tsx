@@ -4,95 +4,51 @@ import { MyCard } from "@/components/MyCard";
 import { cFmt } from "@/lib/currency-formatter";
 import {
   DataList,
-  DropdownMenu,
   Flex,
   Separator,
   Text,
 } from "@radix-ui/themes";
 import { Logo } from "app/auth/components/shapes/logo";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { TbSwitchVertical } from "react-icons/tb";
+import { useSearchParams } from "next/navigation";
 import { Users } from "server/database/models/users";
 import { WalletBalances } from "server/database/models/wallet_balances";
 import { MiniChart } from "react-ts-tradingview-widgets";
-import { MdExpandMore } from "react-icons/md";
+import { WalletListDropDown } from "./WalletListDropDown";
 
 export function WalletBalance({
   wallet_list,
-  wallet_id,
   user,
+  wallet,
 }: {
   wallet_list?: WalletBalances[];
-  wallet_id?: any;
   user: Users | null;
+  wallet: any
 }) {
-  var router = useRouter();
-  var selectedWallet = wallet_list?.filter((e) => e.id == wallet_id)?.at(0);
+
+  var _walletBalance = wallet_list?.filter((e) => e.wallet?.shortName == wallet)?.at(0);
 
   return (
-    <div className="relative md:w-[40%] h-fit">
+    <div className="relative h-fit md:w-[40%]">
       <MyCard>
         <div className="relative flex items-center justify-between">
           {/* Wallet Title & Logo */}
           <Flex gap={"4"}>
-            {selectedWallet === undefined ? (
+            {_walletBalance === undefined ? (
               <Logo className={"h-[30px] w-[30px] fill-primary-700"} />
             ) : (
               <Image
                 className="my-auto rounded-full"
-                src={selectedWallet?.wallet?.icon ?? ""}
+                src={_walletBalance?.wallet?.icon ?? ""}
                 width={30}
                 height={30}
                 alt={"logo"}
               />
             )}
-            {selectedWallet?.wallet?.name ?? "Main Account"}
+            {_walletBalance?.wallet?.name ?? "Main Account"}
           </Flex>
-
-          {/* Wallet Select */}
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
-              <div className="flex justify-center gap-1 text-[12px] text-gray-500">
-                <div>Switch</div> <TbSwitchVertical size={16} />
-              </div>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content size={"2"} align="start">
-              <DropdownMenu.CheckboxItem
-                checked={wallet_id === undefined}
-                shortcut=""
-                onCheckedChange={(value) => {
-                  router.replace(`?`);
-                }}
-                className="flex items-center gap-3"
-              >
-                <Logo className={"h-[20px] w-[20px] fill-primary-700"} /> Main
-                Account
-              </DropdownMenu.CheckboxItem>
-
-              {wallet_list &&
-                wallet_list.map((wallet) => (
-                  <DropdownMenu.CheckboxItem
-                    key={wallet.id}
-                    checked={wallet_id == wallet.id}
-                    shortcut=""
-                    onCheckedChange={(value) => {
-                      router.replace(`?wallet_id=${wallet.id}`);
-                    }}
-                    className="flex items-center gap-3"
-                  >
-                    <Image
-                      className="my-auto rounded-full"
-                      src={wallet.wallet?.icon ?? ""}
-                      width={20}
-                      height={20}
-                      alt={"logo"}
-                    />
-                    <Text>{wallet.wallet?.name}</Text>
-                  </DropdownMenu.CheckboxItem>
-                ))}
-            </DropdownMenu.Content>
-          </DropdownMenu.Root>
+          <WalletListDropDown wallet={wallet} wallet_list={wallet_list}
+          />
         </div>
 
         <div className="h-[30px]" />
@@ -102,7 +58,7 @@ export function WalletBalance({
           <div>
             <Text trim={"end"} as={"div"} className="font-mono text-[20px]">
               {cFmt({
-                amount: selectedWallet?.balance ?? user?.accountBalance,
+                amount: _walletBalance?.balance ?? user?.accountBalance,
               })}
             </Text>
             <Text size={"1"} color={"gray"} className="">
@@ -138,7 +94,7 @@ export function WalletBalance({
         <div className="h-[30px]" />
 
         {/* Main Account Details */}
-        {wallet_id === undefined && (
+        {(wallet == undefined || wallet == 'main') && (
           <DataList.Root orientation="horizontal" size="1">
             <DataList.Item>
               <DataList.Label color="gray">Account Holder</DataList.Label>
@@ -162,38 +118,38 @@ export function WalletBalance({
         )}
 
         {/* Wallet Details */}
-        {selectedWallet !== undefined &&
-          selectedWallet.wallet?.type === "crypto" && (
+        {_walletBalance !== undefined &&
+          _walletBalance.wallet?.type === "crypto" && (
             <DataList.Root orientation="horizontal" size="1">
               <DataList.Item>
                 <DataList.Label color="gray">Wallet Name</DataList.Label>
                 <DataList.Value className="capitalize">
-                  {selectedWallet.wallet?.name} (
-                  {selectedWallet.wallet?.shortName})
+                  {_walletBalance.wallet?.name} (
+                  {_walletBalance.wallet?.shortName})
                 </DataList.Value>
               </DataList.Item>
               <DataList.Item>
                 <DataList.Label color="gray">Network</DataList.Label>
                 <DataList.Value>
-                  {selectedWallet.wallet?.network}
+                  {_walletBalance.wallet?.network}
                 </DataList.Value>
               </DataList.Item>
               <DataList.Item>
                 <DataList.Label color="gray">Wallet Address</DataList.Label>
                 <DataList.Value>
-                  {selectedWallet.wallet?.walletAddress}
+                  {_walletBalance.wallet?.walletAddress}
                 </DataList.Value>
               </DataList.Item>
             </DataList.Root>
           )}
 
         {/* Wallet Chart */}
-        {selectedWallet && (
+        {_walletBalance && (
           <>
             <div className="h-[30px]" />
             <div className="">
               <MiniChart
-                symbol={selectedWallet?.wallet?.shortName}
+                symbol={_walletBalance?.wallet?.shortName}
                 colorTheme="dark"
                 isTransparent
                 height={80}

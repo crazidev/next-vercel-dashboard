@@ -6,30 +6,30 @@ import { Wallets } from "server/database/models/wallets";
 export const getUserWallets = async (
   id: number | string
 ): Promise<WalletBalances[]> => {
-  //   var fetch = unstable_cache(
-  //     async (id) => {
-  await getSequelizeInstance();
-  var _wallets = await WalletBalances.findAll({
-    where: {
-      // userId: id,
+  var fetch = unstable_cache(
+    async (id) => {
+      await getSequelizeInstance();
+      var _wallets = await WalletBalances.findAll({
+        where: {
+          // userId: id,
+        },
+        include: [
+          {
+            model: Wallets,
+            as: "wallet",
+          },
+        ],
+      });
+
+      return _wallets;
     },
-    include: [
-      {
-        model: Wallets,
-        as: "wallet",
-      },
-    ],
-  });
+    [],
+    {
+      tags: ["user_wallets"],
+    }
+  );
 
-  return _wallets;
-  //     },
-  //     [],
-  //     {
-  //       tags: ["user_wallets"],
-  //     }
-  //   );
-
-  //   return await fetch(user_id);
+  return (await fetch(id)).map((e)=> e);
 };
 
 export async function revalidateUserWallet() {

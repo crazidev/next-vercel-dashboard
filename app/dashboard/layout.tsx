@@ -11,12 +11,12 @@ export default function DashboardLayout({
 }) {
   return (
     <div>
-      <Shape1 className={"left-[-100px] bottom-0 w-[300px] fixed -z-10 "} />
+      <Shape1 className={"fixed bottom-0 left-[-100px] -z-10 w-[300px]"} />
 
       <div className="flex flex-row">
         <SideBarComponent>
           {/* <Container> */}
-            <div className="flex flex-col flex-grow w-[100%]">{children}</div>
+            <div className="flex w-[100%] flex-grow flex-col">{children}</div>
           {/* </Container> */}
         </SideBarComponent>
       </div>

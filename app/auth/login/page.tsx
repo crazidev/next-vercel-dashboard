@@ -8,7 +8,7 @@ import { login } from "server/actions/auth/login";
 import { useForm } from "react-hook-form";
 import { TbInfoCircle } from "react-icons/tb";
 import { toast } from "sonner";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const {
@@ -19,7 +19,6 @@ export default function LoginPage() {
   } = useForm({
     // resolver: zodResolver(loginActionScheme),
   });
-
   var router = useRouter();
 
   const submit = async (data: any) => {
@@ -31,9 +30,9 @@ export default function LoginPage() {
       localStorage.setItem("token", JSON.stringify(res.token));
 
       if (res.user.idDocStatus === null || res.user.ssnStatus === null) {
-        // router.push("/auth/verification");
+        router.push("/auth/verification");
       } else {
-        // router.push("/dashboard");
+        router.push("/dashboard");
       }
     } else {
       if (res.errors !== undefined)

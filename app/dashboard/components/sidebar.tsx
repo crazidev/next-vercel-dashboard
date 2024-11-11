@@ -164,15 +164,16 @@ export function SideBarComponent({
                     className={`
                       mt-[10px] flex flex-row 
                       align-middle px-3 py-3 
-                      dark:bg-card-background bg-[var(--accent-a3)]
+                      dark:bg-card-background-dark bg-card-background-light
                       box-content
-                      border-r-2 
+                      border-b-2
+                      transition-all duration-100 ease-in
                       ${isActive
                         ? "border-[var(--accent-8)] text-primary-600"
                         : "border-transparent"
                       } 
                     hover:border-[var(--accent-7)] 
-                    rounded-full`}
+                    `}
                     href={nav.link}
                   >
                     <Flex align={"center"} gap={"3"}>
@@ -194,7 +195,7 @@ export function SideBarComponent({
         </div>
       )}
       {isMobile && (
-        <div className="fixed left-0 right-0 top-0 z-20 flex items-center justify-between bg-card-background py-1 pl-3 pr-2 backdrop-blur-md">
+        <div className="bg-card-background fixed left-0 right-0 top-0 z-20 flex items-center justify-between py-1 pl-3 pr-2 backdrop-blur-md">
           <Logo className="h-[30px] w-[30px] fill-primary-500" />
           <div className="flex flex-row gap-1">
             {navlist.map(function (nav, index) {

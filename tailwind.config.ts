@@ -1,12 +1,14 @@
 import type { Config } from "tailwindcss";
 
 function hexadecimal(color: string) {
-	return (percentage: number): string => {
-	  const decimal = `0${Math.round(255 * (percentage / 100)).toString(16)}`.slice(-2).toUpperCase();
-	 console.log(color.substring(2) + decimal);
-	  return decimal;
-	};
-  }
+  return (percentage: number): string => {
+    const decimal = `0${Math.round(255 * (percentage / 100)).toString(16)}`
+      .slice(-2)
+      .toUpperCase();
+    console.log(color.substring(2) + decimal);
+    return decimal;
+  };
+}
 
 export default {
   darkMode: ["class"],
@@ -36,7 +38,14 @@ export default {
           "800": "var(--accent-12)",
         },
         card: {
-          background: 'var(--accent-a2)',
+          background: {
+            light: "var(--gray-a3)",
+            dark: "var(--gray-a2)",
+          },
+          border: {
+            light: "var(--gray-a4)",
+            dark: "var(--gray-a3)",
+          },
         },
       },
       animation: {
@@ -50,4 +59,4 @@ export default {
   plugins: [require("postcss-import"), require("tailwindcss-animate")],
 } satisfies Config;
 
-console.log
+console.log;

@@ -35,14 +35,13 @@ export const BalanceList = async () => {
               <MyCard
              
                 radius="10px"
-                className="relative flex w-[150px] flex-1 flex-col justify-between transition-all duration-100 ease-in"
+                className="relative flex w-[150px] min-w-[130px] flex-1 flex-col justify-between p-[10px] transition-all duration-100 ease-in dark:hover:border-[var(--accent-7)]"
               >
                 <Flex>
-                  <Image
-                    className="mb-3 rounded-full"
+                  <img
+                    className="mb-3 w-[30px] rounded-full"
                     src={wallet.wallet?.icon ?? ""}
-                    width={30}
-                    height={30}
+            
                     alt={"logo"}
                   />
                 </Flex>
@@ -51,7 +50,7 @@ export const BalanceList = async () => {
                     <Text className="font-mono text-[20px]">
                       {cFmt({ amount: wallet.balance })}
                     </Text>
-                    <Text color="gray" className="text-[12px] font-thin">
+                    <Text trim={'start'}  color="gray" className="text-[12px] font-thin">
                       {wallet.wallet?.name}
                     </Text>
                   </Flex>

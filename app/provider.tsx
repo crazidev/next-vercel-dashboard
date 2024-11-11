@@ -33,7 +33,7 @@ export default function AppProvider({
           <Theme
             // appearance={context.dark ? "dark" : "light"}
             grayColor={"auto"}
-            accentColor={'green'}
+            accentColor={'plum'}
             panelBackground="translucent"
           >
             <Toaster
