@@ -22,14 +22,12 @@ import { RotateSpinnerComponent } from "./components/RotateSpinner";
 
 export default async function HomePage({}: {}) {
   return (
-    <div className="flex w-[100%] flex-grow flex-row gap-5">
-      <div className="flex w-[100%] flex-[9] flex-grow flex-col">
+    <div className="flex flex-row flex-grow gap-5">
+      <div className="flex flex-col flex-grow flex-[9] w-[100%]">
         <NavBar title="Overall portfolio" description="Your payments Updates" />
-
-        <Box height={"20px"} />
         <BalanceList />
         <Flex gap={`3`} direction={"column"} className="my-10">
-          <Text className="text-start font-extrabold" size={"3"}>
+          <Text className="font-extrabold text-start" size={"3"}>
             Quick Actions:
           </Text>
           <Flex gap={"2"} className="flex-wrap">
@@ -44,10 +42,10 @@ export default async function HomePage({}: {}) {
             </Button>
           </Flex>
         </Flex>
-        <Flex className="flex flex-col gap-5 md:flex-row">
+        <Flex className="flex md:flex-row flex-col gap-5">
           <Flex direction={"column"} gap={"5"}>
             <Card variant="ghost" className="">
-              <Text className="text-end font-extrabold" size={"3"}>
+              <Text className="font-extrabold text-end" size={"3"}>
                 Weekly Stats
               </Text>
               <div className="mt-[10px] min-w-full">

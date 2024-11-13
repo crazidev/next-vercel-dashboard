@@ -2,9 +2,9 @@ import Cookies from "js-cookie";
 
 export function calculateResponsive() {
   let isTablet =
-    window.screen.availWidth <= 768 && window.screen.availWidth > 425;
-  let isMobile = window.screen.availWidth <= 425;
-
+    document.body.clientWidth <= 768 && document.body.clientWidth > 425;
+  let isMobile = document.body.clientWidth <= 425;
+  
   return {
     isMobile: isMobile,
     isTablet: isTablet,

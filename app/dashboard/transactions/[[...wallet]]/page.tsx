@@ -13,36 +13,35 @@ import { redirect, RedirectType } from "next/navigation";
 import { Suspense } from "react";
 import { MdExpandMore } from "react-icons/md";
 import { WalletListDropDown } from "app/dashboard/wallets/components/WalletListDropDown";
+import { SearchInput } from "app/dashboard/components/SearchInput";
 
 export default async function TransactionPage({
+  searchParams,
   params,
 }: {
-  params: Promise<{ wallet: string }>
+  params: Promise<{ wallet?: string }>,
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+
 }) {
   var user_id = authUser().user_id;
-  var user = await getUser(user_id ?? -1);
-  var walletList = await getUserWallets(user_id ?? -1);
-  const { wallet = undefined } = await params;
-  console.log(wallet);
+  var user = await getUser(user_id);
+  var walletList = await getUserWallets(user_id);
+
+  const { wallet } = await params;
+  const { q } = await searchParams;
+
   var _walletBalance = walletList?.filter((e) => e.wallet?.shortName == wallet)?.at(0);
 
   return (
-    <div className="flex w-[100%] flex-grow flex-row gap-5">
-      <div className="flex w-[100%] flex-[9] flex-grow flex-col">
+    <div className="flex flex-row flex-grow gap-5 w-[100%]">
+      <div className="flex flex-col flex-grow flex-[9] w-[100%]">
         <NavBar title="Transactions" description="Your transactions history" />
-
-        <Box height={"20px"} />
-        <Flex className="flex-col items-end justify-between gap-5 md:flex-row md:gap-10">
+        <Flex className="md:flex-row flex-col justify-between items-end gap-5 md:gap-10">
           <div className="w-full md:w-[40%]">
-            <CTextField
-              label=""
-              placeholder="Search transaction"
-              leftIcon={<Search size={15} className="mx-2" />}
-              className="h-[40px] rounded-full shadow-none md:h-[45px]"
-            // rightIcon={<MdRemoveRedEye />}
-            // error={errors?.password?.message}
-            // register={register("password")}
-            />
+            <SearchInput placeholder={"Search Transaction"} onSubmit={async (e) => {
+              'use server';
+              redirect(e.path + (e.value ? '?q=' + e.value : ""), RedirectType.push);
+            }} />
           </div>
           <Flex align={'center'} justify={'end'} gap={'4'}>
 
@@ -63,59 +62,6 @@ export default async function TransactionPage({
               </div>
             } />
 
-            {/* <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
-       
-
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content size={"2"} align="start">
-        <DropdownMenu.CheckboxItem
-          checked={wallet === undefined}
-          onCheckedChange={async (value) => {
-            // 'use server';
-            redirect('/dashboard/transactions', RedirectType.replace);
-          }}
-          className="flex items-center gap-3"
-        >
-          All
-        </DropdownMenu.CheckboxItem>
-        <DropdownMenu.CheckboxItem
-          checked={wallet == 'main'}
-          onCheckedChange={async (value) => {
-            // 'use server';
-            redirect('/dashboard/transactions?wallet=main', RedirectType.replace);
-          }}
-          className="flex items-center gap-3"
-        >
-          <Logo className={"h-[20px] w-[20px] fill-primary-700"} /> Main
-          Account
-        </DropdownMenu.CheckboxItem>
-
-        {wallet_list &&
-          wallet_list.map((wallet) => (
-            <DropdownMenu.CheckboxItem
-              key={wallet.wallet?.shortName}
-              checked={(wallet as any) == wallet.wallet?.shortName}
-              shortcut=""
-              onCheckedChange={async (value) => {
-                // 'use server';
-                // onCheckChange(wallet);
-                redirect('/dashboard/transactions?wallet=' + wallet.wallet!.shortName, RedirectType.replace);
-              }}
-              className="flex items-center gap-3"
-            >
-              <Image
-                className="my-auto rounded-full"
-                src={wallet.wallet?.icon ?? ""}
-                width={20}
-                height={20}
-                alt={"logo"} />
-              <Text>{wallet.wallet?.name}</Text>
-            </DropdownMenu.CheckboxItem>
-          ))}
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>; */}
-
 
             <Select.Root size={'2'} defaultValue="DESC">
               <Select.Trigger />
@@ -133,7 +79,7 @@ export default async function TransactionPage({
         </Flex>
         <Box height={"50px"} />
         <Suspense fallback={<Spinner />}>
-          <TransactionList wallet={wallet} />
+          <TransactionList search={q} wallet={wallet} />
         </Suspense>
       </div>
     </div>

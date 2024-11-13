@@ -6,15 +6,19 @@ import {
   Text,
   Badge,
   Flex,
+  Heading,
 } from "@radix-ui/themes";
 import { Timer } from "lucide-react";
 import { MdPendingActions } from "react-icons/md";
 import {
+  TbChartLine,
   TbCheck,
   TbChevronsDown,
   TbChevronsUp,
   TbInfoCircle,
+  TbMoodEmpty,
   TbSandbox,
+  TbSearch,
 } from "react-icons/tb";
 import { InferAttributes, Op, WhereOptions } from "sequelize";
 import { authUser } from "server/actions/authUser";
@@ -30,25 +34,41 @@ export const TransactionList = async ({
   type,
   offset,
   limit,
+  search,
+  useTableLayout
 }: {
   wallet?: any;
   user_id?: number;
   type?: 'full' | 'compact',
   offset?: number | 1,
-  limit?: number | 15
+  limit?: number | 15,
+  search?: any,
+  useTableLayout?: boolean
+
 }) => {
   var user = authUser();
   await getSequelizeInstance();
 
   var where: WhereOptions<InferAttributes<Transactions, { omit: never; }>> = {};
 
+  // console.log(wallet_shortname);
 
-  if (wallet_shortname == undefined || wallet_shortname == 'main') {
-    where.walletId =(null as any);
-  } else {
+  if (wallet_shortname == 'main') {
+    where.walletId = (null as any);
+  } else if (wallet_shortname !== undefined) {
     where = {
       [Op.not]: {
         walletId: (null as any)
+      }
+    }
+  }
+  if (search) {
+    where = {
+      [Op.and]: {
+        ...where,
+        narration: {
+          [Op.like]: `%${search}%`
+        },
       }
     }
   }
@@ -58,6 +78,7 @@ export const TransactionList = async ({
       where: where,
       limit: limit,
       offset: offset,
+      order: [['createdAt', 'DESC']],
       include: [
         {
           model: Users,
@@ -77,16 +98,28 @@ export const TransactionList = async ({
     }, 0 * 1000);
   });
 
+
   return (
     <ScrollArea className="">
-      <table className="w-[100%] max-w-[100%] table-fixed border-separate border-spacing-y-[10px] overflow-x-scroll lg:table-auto">
+      {list.length == 0 && <div className="flex flex-col justify-center items-center mx-auto mt-[50px] w-full text-center">
+        {!search ? <>
+          <TbChartLine size={50} className="text-primary-600" />
+          <Heading size={"2"}>Oops! No Transaction yet</Heading>
+          <Text color="gray" size={'1'}>Come back later after you've made a transactions.</Text></> : <>
+          <TbSearch size={50} className="text-primary-600" />
+          <Heading size={"2"}>No search result</Heading>
+          <Text color="gray" size={'1'}>
+            {/* TODO: No search description */}
+          </Text></>}
+      </div>}
+      <table className={`${useTableLayout ? 'lg:table-auto' : 'table-fixed'}  border-separate border-spacing-y-[10px] w-[100%] max-w-[100%] overflow-x-scroll lg:table-auto`}>
         <tbody>
           {list.map((item) => {
             // console.log(item.toJSON()); 
             return (
               <tr
                 key={item.id}
-                className="mb-3 flex h-[65px] cursor-pointer items-center border-b-2 border-card-background-light bg-card-background-light py-2 backdrop-blur-sm transition-colors duration-300 hover:bg-[var(--accent-3)] dark:border-card-background-dark dark:bg-card-background-dark md:table-row"
+                className="flex items-center border-card-background-light dark:border-card-background-dark bg-card-background-light hover:bg-[var(--accent-3)] dark:bg-card-background-dark backdrop-blur-sm mb-3 py-2 border-b-2 h-[65px] transition-colors duration-300 cursor-pointer md:table-row"
               >
                 {/* Status Icon */}
                 <td className="w-[50px]">
@@ -105,9 +138,9 @@ export const TransactionList = async ({
                 </td>
 
                 {/* Narration */}
-                <td className="flex-1 overflow-hidden text-nowrap">
+                <td className="flex-1 text-nowrap overflow-hidden">
                   <Text
-                    className="truncate text-ellipsis pr-[20px]"
+                    className="pr-[20px] text-ellipsis truncate"
                     as="div"
                     size="2"
                   >
@@ -148,7 +181,7 @@ export const TransactionList = async ({
                 </td>
 
                 {/* Amount */}
-                <td className="whitespace-nowrap text-right">
+                <td className="text-right whitespace-nowrap">
                   <Flex direction="column" className="mx-2">
                     <Text
                       size="2"

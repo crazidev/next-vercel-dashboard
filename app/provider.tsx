@@ -4,6 +4,9 @@ import { Theme, ThemePanel } from "@radix-ui/themes";
 import { useContext, useEffect, useState } from "react";
 import { Toaster } from "sonner";
 import DashboardProvider, { DashboardContext } from "./dashboard/providers";
+import OneSignal from 'react-onesignal';
+import { InitOneSignal } from "@/lib/onesignal";
+
 // import { jellyTriangle } from 'ldrs';
 // import { Inter_Tight } from "next/font/google";
 
@@ -25,13 +28,20 @@ export default function AppProvider({
   children: React.ReactNode;
   theme?: any;
 }) {
-  // var { dark } = useContext(DashboardContext);
+  var { dark } = useContext(DashboardContext);
+  useEffect(() => {
+    // Ensure this code runs only on the client side
+    if (typeof window !== 'undefined') {
+      InitOneSignal({ appId: '' });
+    }
+  }, []);
+
   return (
     <DashboardProvider>
       <DashboardContext.Consumer>
         {(context) => (
           <Theme
-            // appearance={context.dark ? "dark" : "light"}
+            appearance={context.dark ? "dark" : "light"}
             grayColor={"auto"}
             accentColor={'plum'}
             panelBackground="translucent"

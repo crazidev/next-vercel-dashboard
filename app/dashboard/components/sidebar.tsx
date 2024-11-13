@@ -20,31 +20,26 @@ export const navlist = [
     link: "/dashboard",
     name: "Dashboard",
     icon: <TbDashboard />,
-    isDefault: true,
   },
   {
     link: "/dashboard/wallets",
     name: "Wallets",
     icon: <MdOutlineWallet />,
-    isDefault: true,
   },
   {
     link: "/dashboard/cards",
     name: "Cards",
     icon: <TbCreditCard />,
-    isDefault: true,
   },
   {
     link: "/dashboard/transactions",
     name: "Transactions",
     icon: <TbChartLine />,
-    isDefault: true,
   },
   {
     link: "/dashboard/settings",
     name: "Settings",
-    icon: <MdSettings className="hover:animate-spin" />,
-    isDefault: true,
+    icon: <MdSettings className="" />,
   },
 ];
 
@@ -61,6 +56,8 @@ export function SideBarComponent({
   var pathname = usePathname();
   const [isReady, setIsReady] = useState(false);
 
+  console.log
+
   useEffect(() => {
     if (document.readyState === "complete") {
       setIsReady(true);
@@ -68,12 +65,12 @@ export function SideBarComponent({
   }, [pathname]);
 
   return (
-    <div className="flex w-[100%] flex-col">
+    <div className={`flex w-[100%] ${isMobile ? 'flex-col': "flex-row"}`}>
       {isReady && (
         <div className="">
           <aside
-            className={`h-[100%] top-0 fixed ${isMobile && !expand ? "z-0" : "z-40"
-              } p-2`}
+            className={`${isMobile && "h-0"} ${isTablet && "h-fit"} top-0 ${isMobile && !expand ? "z-0" : "z-40"
+              } lg:pl-1 py-2 pl-3 pr-0 w-fit sticky`}
           >
             <Box
               className={`${isMobile || expand
@@ -89,13 +86,13 @@ export function SideBarComponent({
             >
               {(expand || isMobile) && (
                 <Flex
-                  // className="before:absolute before:inset-0 before:-z-10 before:bg-[var(--accent-2)] before:opacity-20"
+                  // className="before:-z-10 before:absolute before:inset-0 before:bg-[var(--accent-2)] before:opacity-20"
                   align={"center"}
                   justify={"between"}
                   gap={"3"}
                 >
                   <Flex align={"center"} gap={"3"}>
-                    <Logo className="h-[30px] w-[30px] fill-primary-500" />
+                    <Logo className="w-[30px] h-[30px] fill-primary-500" />
                     <Flex
                       direction={"column"}
                       align={"start"}
@@ -124,13 +121,13 @@ export function SideBarComponent({
               )}
               {!expand && (
                 <Flex
-                  className="before:absolute before:inset-0 before:-z-10 before:rounded-2xl before:bg-[var(--accent-2)] before:opacity-30 before:content-[''] after:absolute after:inset-0 after:-z-20 after:rounded-2xl after:backdrop-blur-none"
+                  className="before:-z-10 after:-z-20 before:absolute after:absolute before:inset-0 after:inset-0 before:content-[''] before:bg-[var(--accent-2)] before:opacity-30 after:backdrop-blur-none before:rounded-2xl after:rounded-2xl"
                   direction={"column"}
                   align={"center"}
                   justify={"between"}
                 >
                   <Flex align={"center"} gap={"3"}>
-                    <Logo className="h-[40px] w-[40px] fill-primary-500" />
+                    <Logo className="w-[40px] h-[40px] fill-primary-500" />
                   </Flex>
                   <Box height={"39px"} />
                   {/* {!isTablet && !expand && (
@@ -153,10 +150,13 @@ export function SideBarComponent({
                 <Box height={"40px"} />
 
               ) : (
-                <div className="mx-auto mb-4 h-[2px] w-[20px] rounded-sm bg-gray-400/50"></div>
+                <div className="bg-gray-400/50 mx-auto mb-4 rounded-sm w-[20px] h-[2px]"></div>
               )}
               {navlist.map(function (nav) {
-                var isActive = pathname == nav.link;
+                var isActive = pathname.startsWith(nav.link) && (nav.link != '/dashboard');
+                if(nav.link == "/dashboard"){
+                  isActive = pathname == '/dashboard';
+                }
                 return (
                   // <Tooltip key={nav.link} content={nav.name}>
                   <Link
@@ -195,11 +195,15 @@ export function SideBarComponent({
         </div>
       )}
       {isMobile && (
-        <div className="bg-card-background fixed left-0 right-0 top-0 z-20 flex items-center justify-between py-1 pl-3 pr-2 backdrop-blur-md">
-          <Logo className="h-[30px] w-[30px] fill-primary-500" />
+        <div className="top-0 right-0 left-0 z-20 fixed flex justify-between items-center bg-card-background backdrop-blur-md py-1 pr-2 pl-3">
+          <Logo className="w-[30px] h-[30px] fill-primary-500" />
           <div className="flex flex-row gap-1">
             {navlist.map(function (nav, index) {
-              var isActive = pathname == nav.link;
+              var isActive = pathname.startsWith(nav.link) && (nav.link != '/dashboard');
+              if(nav.link == "/dashboard"){
+                isActive = pathname == '/dashboard';
+              }
+              
               return (
                 <Link
                   key={nav.link}
@@ -215,10 +219,10 @@ export function SideBarComponent({
         </div>
       )}
       <div
-        className="mr-2 flex flex-grow pt-5"
+        className="flex pt-3 w-[100%] overflow-hidden container"
         style={{
-          marginLeft:
-            isMobile || !isReady ? "10px" : expand ? "300px" : "100px",
+          margin:
+            isMobile || !isReady ? "10px" : expand ? "10px" : "10px",
           marginTop: isMobile ? "50px" : "0px",
         }}
       >

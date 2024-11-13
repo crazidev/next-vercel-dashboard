@@ -9,7 +9,7 @@ export function authUser(re_direct?: boolean) {
       var user = jwt.verify(token!, JWT_SECRET) as any;
       return {
         isAuth: true,
-        user_id: user.userId,
+        user_id: user.userId ?? -1,
       };
     } else {
       throw {

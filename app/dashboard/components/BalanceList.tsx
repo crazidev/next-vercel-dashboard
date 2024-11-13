@@ -21,25 +21,25 @@ export const BalanceList = async () => {
     <>
       <MainBalanceCard
         user={user}
-        className="relative mb-3 flex flex-[6] md:hidden"
+        className="relative flex flex-[6] md:hidden mb-3"
       />
       <ScrollArea>
-        <Flex className="flex flex-col gap-3 sm:flex-row" gap={"2"}>
+        <Flex className="flex sm:flex-row flex-col gap-3" gap={"2"}>
           <MainBalanceCard
             user={user}
-            className="relative hidden flex-[6] md:flex md:max-w-[350px]"
+            className="relative md:flex flex-[6] hidden md:max-w-[350px]"
           />
-          <div className="flex flex-grow flex-row gap-3">
+          <div className="flex flex-row flex-grow gap-3">
             {walletList.map((wallet, index) => (
              <Link    key={wallet.id} href={`/dashboard/wallets?wallet_id=${wallet.wallet?.id}`}>
               <MyCard
              
                 radius="10px"
-                className="relative flex w-[150px] min-w-[130px] flex-1 flex-col justify-between p-[10px] transition-all duration-100 ease-in dark:hover:border-[var(--accent-7)]"
+                className="relative flex flex-col flex-1 justify-between dark:hover:border-[var(--accent-7)] p-[10px] w-[150px] min-w-[130px] transition-all duration-100 ease-in"
               >
                 <Flex>
                   <img
-                    className="mb-3 w-[30px] rounded-full"
+                    className="mb-3 rounded-full w-[30px]"
                     src={wallet.wallet?.icon ?? ""}
             
                     alt={"logo"}
@@ -50,12 +50,12 @@ export const BalanceList = async () => {
                     <Text className="font-mono text-[20px]">
                       {cFmt({ amount: wallet.balance })}
                     </Text>
-                    <Text trim={'start'}  color="gray" className="text-[12px] font-thin">
+                    <Text trim={'start'}  color="gray" className="font-thin text-[12px]">
                       {wallet.wallet?.name}
                     </Text>
                   </Flex>
                   {/* <Image
-                  className="rounded-full sm:hidden"
+                  className="sm:hidden rounded-full"
                   src={wallet.wallet?.icon}
                   width={25}
                   height={25}
@@ -76,9 +76,9 @@ const MainBalanceCard = React.forwardRef<HTMLElement, any>(
   ({ user, ...props }, ref) => {
     return (
       <MyCard radius="10px" {...props}>
-        <Flex className="flex h-full flex-row items-end justify-start">
+        <Flex className="flex flex-row justify-start items-end h-full">
           <MyLineChart />
-          <Flex className="flex h-full flex-col justify-between">
+          <Flex className="flex flex-col justify-between h-full">
             <Flex justify={"start"} align={"center"} gap={"2"}>
               <Text className="text-[12px]">Main Account</Text>{" "}
               <Flex justify={"end"} gap={"3"}>
@@ -101,13 +101,13 @@ const MainBalanceCard = React.forwardRef<HTMLElement, any>(
             </Badge> */}
               </Flex>
             </Flex>
-            <Flex direction={"column"} className="mb-[20px] mt-[20px] gap-2">
+            <Flex direction={"column"} className="gap-2 mt-[20px] mb-[20px]">
               <Flex className="z-[5] items-center gap-2">
                 {/* <TbEye color="gray" className="text-primary-400" /> */}
                 <Text
                   size={"6"}
                   weight={"bold"}
-                  className="text-[var(--accent-a9)]/10 font-mono"
+                  className="font-mono text-[var(--accent-a9)]/10"
                 >
                   {cFmt({ amount: user?.accountBalance })}
                 </Text>

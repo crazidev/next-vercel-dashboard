@@ -29,9 +29,9 @@ export function WalletBalance({
   var _walletBalance = wallet_list?.filter((e) => e.wallet?.shortName == wallet)?.at(0);
 
   return (
-    <div className="relative h-fit md:w-[40%]">
+    <div className="relative top-[20px] lg:sticky mb-2 lg:w-[40%] h-fit">
       <MyCard>
-        <div className="relative flex items-center justify-between">
+        <div className="relative flex justify-between items-center">
           {/* Wallet Title & Logo */}
           <Flex gap={"4"}>
             {_walletBalance === undefined ? (

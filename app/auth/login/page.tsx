@@ -1,14 +1,16 @@
 "use client";
 
-import { Flex, Button, Text, Card, Box, Link, Callout } from "@radix-ui/themes";
+import { Flex, Button, Text, Card, Box, Link, Callout, IconButton } from "@radix-ui/themes";
 import { AuthContainerLogo } from "@/components/AuthContainerLogo";
 import { MdLock, MdOutlineMailLock, MdRemoveRedEye } from "react-icons/md";
 import { CTextField } from "@/components/CTextField";
 import { login } from "server/actions/auth/login";
 import { useForm } from "react-hook-form";
-import { TbInfoCircle } from "react-icons/tb";
+import { TbEye, TbEyeCancel, TbInfoCircle } from "react-icons/tb";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { LucideEye, LucideEyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const {
@@ -42,6 +44,8 @@ export default function LoginPage() {
     }
   };
 
+  const [showPass, setShowPass] = useState(false);
+
   return (
     <Box
       maxWidth="300px"
@@ -71,6 +75,7 @@ export default function LoginPage() {
             <CTextField
               label="Email"
               placeholder="Enter your email"
+              autoComplete="email"
               leftIcon={<MdOutlineMailLock />}
               error={errors?.email?.message}
               register={register("email")}
@@ -80,7 +85,13 @@ export default function LoginPage() {
               label="Password"
               placeholder="Enter your password"
               leftIcon={<MdLock />}
-              rightIcon={<MdRemoveRedEye />}
+              autoComplete="current-password"
+              type={showPass ? 'text' : 'password'}
+              rightIcon={<IconButton type="button" variant="ghost" size={'1'} onClick={() => {
+                setShowPass(!showPass)
+              }}>
+                {showPass ? <LucideEyeOff size={15} /> : <LucideEye size={15}/>}
+              </IconButton>}
               error={errors?.password?.message}
               register={register("password")}
             />

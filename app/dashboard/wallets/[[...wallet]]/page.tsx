@@ -26,14 +26,14 @@ const WalletPage = async ({
 
   const { wallet = undefined } = await params;
   return (
-    <div className="flex w-[100%] flex-grow flex-row gap-5">
-      <div className="flex w-[100%] flex-[9] flex-grow flex-col">
+    <div className="flex flex-row flex-grow w-[100%]">
+      <div className="flex flex-col flex-grow w-[100%]">
         <NavBar
           title="Wallets"
           description="Monitor your specific wallet activities."
         />
-        <Box height={"20px"} />
-        <div className="flex flex-col gap-10 md:flex-row lg:gap-5">
+        
+        <div className="flex lg:flex-row flex-col gap-5">
 
           <Suspense fallback={<RotateSpinnerComponent />}>
             <WalletBalance
@@ -42,16 +42,17 @@ const WalletPage = async ({
               wallet_list={walletList}
             />
           </Suspense>
-          
-          <Card className="flex flex-col md:w-[70%]" variant="ghost">
-            <Flex justify={"between"} direction={"column"} className="gap-1">
+
+           
+          <Card className="m-0 w-full" variant="ghost">
+            <Flex justify={"between"} direction={"column"} className="gap-1 mb-5">
               <Text className="font-extrabold" size={"3"}>
                 Transaction History
               </Text>
             </Flex>
 
             <Suspense fallback={<RotateSpinnerComponent />}>
-              <TransactionList wallet={wallet}/>
+              <TransactionList wallet={wallet} useTableLayout/>
             </Suspense>
 
             <Flex justify={"end"} align={"center"} className="my-3">
@@ -62,6 +63,7 @@ const WalletPage = async ({
               </Link>
             </Flex>
           </Card>
+         
         </div>
       </div>
     </div>

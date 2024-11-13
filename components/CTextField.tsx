@@ -19,10 +19,10 @@ export const CTextField = React.forwardRef<HTMLElement, InputProps>(
     return (
       <Flex direction={"column"} gap={"1"}>
         <label>
-          <Text size={"1"} weight={"medium"} ml={"1"}>
+          {label && <Text size={"1"} weight={"medium"} ml={"1"}>
             {label}
-          </Text>
-          <TextField.Root accept={(accept as any)} type={type} className="h-[37px]" size={"2"} {...props} {...register}>
+          </Text>}
+          <TextField.Root accept={(accept as any)} type={type} size={"2"} {...props} className={`h-[37px] text-[16px] ${props.className}`} {...register}>
             {leftIcon && (
               <TextField.Slot side={"left"}>{leftIcon}</TextField.Slot>
             )}
@@ -33,7 +33,7 @@ export const CTextField = React.forwardRef<HTMLElement, InputProps>(
           {error && (
             <Text
               ml={"2"}
-              className="text-[11px] font-normal normal-case italic"
+              className="font-normal text-[11px] italic normal-case"
               color="red"
             >
               {error}
