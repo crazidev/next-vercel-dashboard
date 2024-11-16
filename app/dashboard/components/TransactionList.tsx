@@ -1,4 +1,4 @@
-import { cFmt } from "@/lib/currency-formatter";
+import { cFmt } from "@/lib/cFmt";
 import {
   ScrollArea,
   Avatar,
@@ -21,12 +21,12 @@ import {
   TbSearch,
 } from "react-icons/tb";
 import { InferAttributes, Op, WhereOptions } from "sequelize";
-import { authUser } from "server/actions/authUser";
-import getSequelizeInstance from "server/database/db";
-import { Transactions } from "server/database/models/transactions";
-import { Users } from "server/database/models/users";
-import { WalletBalances } from "server/database/models/wallet_balances";
-import { Wallets } from "server/database/models/wallets";
+import { authUser } from "@/actions/authUser";
+import getSequelizeInstance from "@/database/db";
+import { Transactions } from "@/database/models/transactions";
+import { Users } from "@/database/models/users";
+import { WalletBalances } from "@/database/models/wallet_balances";
+import { Wallets } from "@/database/models/wallets";
 
 export const TransactionList = async ({
   wallet: wallet_shortname,

@@ -4,13 +4,13 @@ import { Flex, Button, Text, Card, Box, Link, Callout, IconButton } from "@radix
 import { AuthContainerLogo } from "@/components/AuthContainerLogo";
 import { MdLock, MdOutlineMailLock, MdRemoveRedEye } from "react-icons/md";
 import { CTextField } from "@/components/CTextField";
-import { login } from "server/actions/auth/login";
 import { useForm } from "react-hook-form";
 import { TbEye, TbEyeCancel, TbInfoCircle } from "react-icons/tb";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { LucideEye, LucideEyeOff } from "lucide-react";
+import { PasswordToggler } from "../components/PasswordToggler";
+import { login } from "@/actions/auth/login";
 
 export default function LoginPage() {
   const {
@@ -86,12 +86,7 @@ export default function LoginPage() {
               placeholder="Enter your password"
               leftIcon={<MdLock />}
               autoComplete="current-password"
-              type={showPass ? 'text' : 'password'}
-              rightIcon={<IconButton type="button" variant="ghost" size={'1'} onClick={() => {
-                setShowPass(!showPass)
-              }}>
-                {showPass ? <LucideEyeOff size={15} /> : <LucideEye size={15}/>}
-              </IconButton>}
+              rightIcon={<PasswordToggler visible={showPass} onChange={() => setShowPass(!showPass)} />}
               error={errors?.password?.message}
               register={register("password")}
             />

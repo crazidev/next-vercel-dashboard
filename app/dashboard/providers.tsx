@@ -3,7 +3,7 @@
 import { SideBarComponent } from "./components/SideBar";
 import { NavBar } from "./components/NavBar";
 import { createContext, useEffect, useState } from "react";
-import { calculateResponsive } from "@/lib/calculate-responsive";
+import { calculateResponsive } from "@/lib/calculateResponsive";
 import Cookies from "js-cookie";
 
 export const DashboardContext = createContext<DashboardContextProp>({
@@ -65,6 +65,7 @@ export default function DashboardProvider({
           setState({ ...state, dark: false });
         }
 
+        Cookies.remove('theme');
         Cookies.set("theme", event.matches ? "dark" : "light", {
           expires: 30,
         });
@@ -73,6 +74,10 @@ export default function DashboardProvider({
   }
 
   const setTheme = (theme: "dark" | "light") => {
+    Cookies.remove('theme');
+    Cookies.set("theme",  theme == "dark" ? "dark" : "light", {
+      expires: 30,
+    });
     setState({ ...state, dark: theme == "dark" });
   };
   const setExpand = (value: boolean) => {

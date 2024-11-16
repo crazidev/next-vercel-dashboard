@@ -25,15 +25,13 @@ import {
 } from "react-icons/md";
 import { CTextField } from "@/components/CTextField";
 import { useActionState, useEffect, useState } from "react";
-import { reset_password_action } from "server/actions/auth/reset_password";
+import { reset_password_action } from "@/actions/auth/reset_password";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import yup from "server/extra/yup";
+import yup from "@/server/extra/yup";
 import { TbInfoCircle } from "react-icons/tb";
-import { login } from "server/actions/auth/login";
-import router from "next/router";
 
 export default function LoginPage() {
   var router = useRouter();
@@ -109,7 +107,7 @@ export default function LoginPage() {
           if (resetProgress !== 'reset') {
             setResetProgress('reset');
           } else {
-            useRouter().push('/auth/login');
+            router.push('/auth/login');
           }
         }} className="flex flex-row items-center gap-1 cursor-pointer">
           <MdChevronLeft /> {resetProgress === 'reset' ? 'Login' : 'Reset'}

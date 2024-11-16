@@ -1,13 +1,12 @@
 "use server";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-import getSequelizeInstance from "server/database/db";
+import getSequelizeInstance from "@/database/db";
 
-import yup, { yupValidator } from "server/extra/yup";
-import { zodValidator } from "server/extra/zod";
-import { loginActionScheme } from "server/scheme/login_scheme";
-import { Users } from "server/database/models/users";
-import { getUser, revalidateUserTag } from "server/fetch/select_user";
+import { yupValidator } from "@/server/extra/yup";
+import { loginActionScheme } from "@/server/scheme/login_scheme";
+import { Users } from "@/database/models/users";
+import { fetchUser, revalidateUserTag } from "@/fetch/fetch_user";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
@@ -82,7 +81,7 @@ export async function generateJWToken(user: Users) {
     maxAge: 60 * 60 * 24 * 7,
   });
   revalidateUserTag();
-  await getUser(user.id);
+  await fetchUser(user.id);
   return token;
 }
 

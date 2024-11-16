@@ -7,7 +7,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { TbSwitchVertical } from "react-icons/tb";
-import { WalletBalances } from "server/database/models/wallet_balances";
+import { WalletBalances } from "@/database/models/wallet_balances";
 
 export const WalletListDropDown = (
 

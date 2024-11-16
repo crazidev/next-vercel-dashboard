@@ -1,21 +1,17 @@
 import { MyCard } from "@/components/MyCard";
 import { Badge, Flex, ScrollArea, Text } from "@radix-ui/themes";
-import { Logo } from "app/auth/components/shapes/logo";
-import { TbEye, TbChartArcs } from "react-icons/tb";
 import { MyLineChart } from "./MyLineChart";
-import { getUserWallets } from "server/fetch/fetch_wallets";
-import { getUser } from "server/fetch/select_user";
-import { cookies } from "next/headers";
-import { authUser } from "server/actions/authUser";
-import Image from "next/image";
-import { cFmt } from "@/lib/currency-formatter";
+import { fetchUserWallets } from "@/fetch/fetch_wallets";
+import { fetchUser } from "@/fetch/fetch_user";
+import { authUser } from "@/actions/authUser";
+import { cFmt } from "@/lib/cFmt";
 import React from "react";
 import Link from "next/link";
 
 export const BalanceList = async () => {
   var user_id = authUser().user_id;
-  var user = await getUser(user_id ?? -1);
-  var walletList = await getUserWallets(user_id ?? -1);
+  var user = await fetchUser(user_id ?? -1);
+  var walletList = await fetchUserWallets(user_id ?? -1);
 
   return (
     <>
@@ -27,43 +23,44 @@ export const BalanceList = async () => {
         <Flex className="flex sm:flex-row flex-col gap-3" gap={"2"}>
           <MainBalanceCard
             user={user}
-            className="relative md:flex flex-[6] hidden md:max-w-[350px]"
+            className="relative min-h-[100px] md:flex flex-[6] hidden md:max-w-[350px]"
           />
           <div className="flex flex-row flex-grow gap-3">
-            {walletList.map((wallet, index) => (
-             <Link    key={wallet.id} href={`/dashboard/wallets?wallet_id=${wallet.wallet?.id}`}>
-              <MyCard
-             
-                radius="10px"
-                className="relative flex flex-col flex-1 justify-between dark:hover:border-[var(--accent-7)] p-[10px] w-[150px] min-w-[130px] transition-all duration-100 ease-in"
-              >
-                <Flex>
-                  <img
-                    className="mb-3 rounded-full w-[30px]"
-                    src={wallet.wallet?.icon ?? ""}
             
-                    alt={"logo"}
-                  />
-                </Flex>
-                <Flex gap={"2"} justify={"between"} align={"center"}>
-                  <Flex direction={"column"} className="">
-                    <Text className="font-mono text-[20px]">
-                      {cFmt({ amount: wallet.balance })}
-                    </Text>
-                    <Text trim={'start'}  color="gray" className="font-thin text-[12px]">
-                      {wallet.wallet?.name}
-                    </Text>
+            {walletList.map((wallet, index) => (
+              <Link key={wallet.id} href={`/dashboard/wallets?wallet_id=${wallet.wallet?.id}`}>
+                <MyCard
+
+                  radius="10px"
+                  className="relative min-h-[100px] flex flex-col flex-1 justify-between dark:hover:border-[var(--accent-7)] p-[10px] w-[150px] min-w-[130px] transition-all duration-100 ease-in"
+                >
+                  <Flex>
+                    <img
+                      className="mb-3 rounded-full w-[30px]"
+                      src={wallet.wallet?.icon ?? ""}
+
+                      alt={""}
+                    />
                   </Flex>
-                  {/* <Image
+                  <Flex gap={"2"} justify={"between"} align={"center"}>
+                    <Flex direction={"column"} className="">
+                      <Text className="font-mono text-[20px]">
+                        {cFmt({ amount: wallet.balance })}
+                      </Text>
+                      <Text trim={'start'} color="gray" className="font-thin text-[12px]">
+                        {wallet.wallet?.name}
+                      </Text>
+                    </Flex>
+                    {/* <Image
                   className="sm:hidden rounded-full"
                   src={wallet.wallet?.icon}
                   width={25}
                   height={25}
                   alt={"logo"}
                 /> */}
-                </Flex>
-              </MyCard>
-             </Link>
+                  </Flex>
+                </MyCard>
+              </Link>
             ))}
           </div>
         </Flex>
@@ -90,7 +87,9 @@ const MainBalanceCard = React.forwardRef<HTMLElement, any>(
                   {user?.status}
                 </Badge>
                 <Badge className="text-[10px]" color="blue" radius="large">
-                  Personal Account
+                 {user?.accountLevel == "tier1" && "Savings Account"}
+                 {user?.accountLevel == "tier2" && "Business Account"}
+                 {user?.accountLevel == "tier3" && "Enterprise Account"}
                 </Badge>
                 {/* <Badge
               className="text-[10px] capitalize"

@@ -1,10 +1,10 @@
 "use server";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-import getSequelizeInstance from "server/database/db";
+import getSequelizeInstance from "@/database/db";
 import { authUser } from "../authUser";
 import { redirect, RedirectType } from "next/navigation";
-import { Users } from "server/database/models/users";
+import { Users } from "@/database/models/users";
 import { uploadFileToCloudinary } from "../../extra/upload_cloudinary";
 
 export async function submitAddress(formData: any) {

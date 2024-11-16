@@ -1,9 +1,9 @@
 import { unstable_cache, revalidateTag } from "next/cache";
-import getSequelizeInstance from "server/database/db";
-import { WalletBalances } from "server/database/models/wallet_balances";
-import { Wallets } from "server/database/models/wallets";
+import getSequelizeInstance from "@/database/db";
+import { WalletBalances } from "@/database/models/wallet_balances";
+import { Wallets } from "@/database/models/wallets";
 
-export const getUserWallets = async (
+export const fetchUserWallets = async (
   id: number | string
 ): Promise<WalletBalances[]> => {
   var fetch = unstable_cache(

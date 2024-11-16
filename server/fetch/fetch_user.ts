@@ -1,10 +1,11 @@
 "use server";
 
 import { revalidateTag, unstable_cache } from "next/cache";
-import getSequelizeInstance from "server/database/db";
-import { Users } from "server/database/models/users";
+import { InferAttributes } from "sequelize";
+import getSequelizeInstance from "@/database/db";
+import { Users } from "@/database/models/users";
 
-export const getUser = async (id: number | string): Promise<Users | null> => {
+export const fetchUser = async (id: number | string): Promise<InferAttributes<Users> | null> => {
   var user = unstable_cache(
     async (id) => {
       await getSequelizeInstance();
@@ -13,8 +14,8 @@ export const getUser = async (id: number | string): Promise<Users | null> => {
           exclude: ["password"],
         },
       });
-      console.log(`USER:`, data?.toJSON());
-      return data;
+      // console.log(`USER:`, data?.toJSON());
+      return data?.toJSON();
     },
     [],
     {

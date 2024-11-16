@@ -5,7 +5,10 @@ import { useContext, useEffect, useState } from "react";
 import { Toaster } from "sonner";
 import DashboardProvider, { DashboardContext } from "./dashboard/providers";
 import OneSignal from 'react-onesignal';
-import { InitOneSignal } from "@/lib/onesignal";
+import { InitOneSignal } from "@/lib/InitOneSignal";
+import { initializeApp } from "firebase/app";
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 // import { jellyTriangle } from 'ldrs';
 // import { Inter_Tight } from "next/font/google";
@@ -28,7 +31,8 @@ export default function AppProvider({
   children: React.ReactNode;
   theme?: any;
 }) {
-  var { dark } = useContext(DashboardContext);
+  const app = initializeApp({});
+  
   useEffect(() => {
     // Ensure this code runs only on the client side
     if (typeof window !== 'undefined') {

@@ -18,6 +18,7 @@ import { BalanceList } from "./components/BalanceList";
 import { TransactionList } from "app/dashboard/components/TransactionList";
 import { Suspense } from "react";
 import { RotateSpinnerComponent } from "./components/RotateSpinner";
+import { AlertComponent } from "./components/AlertComponent";
 
 
 export default async function HomePage({}: {}) {
@@ -25,7 +26,9 @@ export default async function HomePage({}: {}) {
     <div className="flex flex-row flex-grow gap-5">
       <div className="flex flex-col flex-grow flex-[9] w-[100%]">
         <NavBar title="Overall portfolio" description="Your payments Updates" />
+        <AlertComponent/>
         <BalanceList />
+        
         <Flex gap={`3`} direction={"column"} className="my-10">
           <Text className="font-extrabold text-start" size={"3"}>
             Quick Actions:

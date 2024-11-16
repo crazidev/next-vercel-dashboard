@@ -14,14 +14,14 @@ import { MdLocationCity, MdLocationPin } from "react-icons/md";
 import { CountrySelectComponent } from "../components/CountrySelectComponent";
 import { MyDialog } from "@/components/MyDialog";
 import { VerificationComponent } from "./VerificationComponent";
-import { authUser } from "server/actions/authUser";
-import { getUser, revalidateUserTag } from "server/fetch/select_user";
-import { triggerEsc } from "@/lib/trigger_esc";
+import { authUser } from "@/actions/authUser";
+import { fetchUser, revalidateUserTag } from "@/fetch/fetch_user";
+import { triggerEsc } from "@/lib/triggerEsc";
 import { TbInfoCircle } from "react-icons/tb";
 
 export default async function VerificationPage() {
   var user_id = authUser().user_id;
-  var user = await getUser(user_id);
+  var user = await fetchUser(user_id);
 
   return (
     <>

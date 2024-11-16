@@ -26,11 +26,11 @@ import { CTextField } from "@/components/CTextField";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterScheme } from "server/scheme/register_scheme";
-import { register_action } from "server/actions/auth/register_action";
+import { register_action } from "@/actions/auth/register_action";
 import { TbCalendar, TbInfoCircle } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { PasswordValidator } from "../components/PasswordValidator";
 
 export default function RegisterPage() {
   var router = useRouter();
@@ -39,10 +39,14 @@ export default function RegisterPage() {
     handleSubmit,
     setError,
     setValue,
-    formState: { errors, isSubmitting },
+    watch,
+    formState: { errors, isSubmitting, },
   } = useForm({
     // resolver: zodResolver(RegisterScheme),
   });
+
+  const formValues = watch();
+
 
   const submit = async (data: any) => {
     var res = await register_action(data);
@@ -155,6 +159,7 @@ export default function RegisterPage() {
               register={register("password")}
               error={errors?.password?.message}
             />
+            <PasswordValidator password={formValues.password} isTouched={true} />
 
             <Box height={"20px"} />
             <Button

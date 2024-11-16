@@ -1,33 +1,101 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext", "webworker"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    "paths": {
-      "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"],
-      "@/actions/*": ["actions/*"]
-    },
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@app/*": ["app/*"],
+      "@/lib/*": ["lib/*"],
+      "@/components/*": ["components/*"],
+      "@public/*": ["public/*"],
+
+      // SERVER
+      "@/fetch/*": ["server/fetch/*"],
+      "@/actions/*": ["server/actions/*"],
+      "@/database/*": ["server/database/*"],
+      "@/server/*": ["server/*"],
+    },
+    "types": ["@serwist/next/typings"],
+    "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "sequelize-auto.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "sequelize-auto.js",
+    "app/sw.ts"
+  ],
+  "plugins": [
+    {
+      "name": "next"
+    }
+  ],
   "exclude": ["node_modules"]
 }
+// {
+//   "compilerOptions": {
+//     "target": "es2017",
+//     "allowJs": true,
+//     "skipLibCheck": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "noEmit": true,
+//     "esModuleInterop": true,
+//     "module": "NodeNext",
+//     "moduleResolution": "nodenext",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "experimentalDecorators": true,
+//     "emitDecoratorMetadata": true,
+//     "jsx": "preserve",
+//     "incremental": true,
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/components/*": ["components/*"],
+//       "@/lib/*": ["lib/*"],
+//       "@/actions/*": ["actions/*"],
+//       "~/": ["public/*"]
+//     },
+//     "plugins": [
+//       {
+//         "name": "next"
+//       }
+//     ],
+//     "types": [
+//       // This allows Serwist to type `window.serwist`.
+//       "@serwist/next/typings"
+//     ],
+//     "lib": [
+//       "dom",
+//       "dom.iterable",
+//       "esnext",
+//       // Add this! Doing so adds WebWorker and ServiceWorker types to the global.
+//       "webworker"
+//     ]
+//   },
+//   "include": [
+//     "next-env.d.ts",
+//     "**/*.ts",
+//     "**/*.tsx",
+//     ".next/types/**/*.ts",
+//     "sequelize-auto.js",
+//     "app/sw.mts"
+//   ],
+//   "exclude": ["node_modules", "public/sw.js"]
+// }

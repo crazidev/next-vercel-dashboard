@@ -8,7 +8,7 @@ import { MobileSideBarButton } from "./MobileSideBarButton";
 
 export function NavBar({ title, description, className }: any) {
   return (
-      <div className="flex justify-between mb-[30px] py-2 rounded-2xl w-[100%]">
+      <div className="flex justify-between mb-[30px] mt-[30px] py-2 rounded-2xl w-[100%]">
         <div className="flex flex-col py-1">
           <Text size={"5"} weight={"bold"}>
             {title}
@@ -20,7 +20,7 @@ export function NavBar({ title, description, className }: any) {
         </div>
         <div className="flex flex-row gap-3">
           <Flex gap={"4"} align={"center"}>
-            <MobileSideBarButton />
+            {/* <MobileSideBarButton /> */}
           </Flex>
           <UserContainer />
         </div>

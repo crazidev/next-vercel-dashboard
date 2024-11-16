@@ -1,10 +1,12 @@
 "use server";
-import { yupValidator } from "server/extra/yup";
-import { RegisterScheme } from "server/scheme/register_scheme";
-import { Users } from "server/database/models/init-models";
-import getSequelizeInstance from "server/database/db";
+import { Users } from "@/database/models/init-models";
+import getSequelizeInstance from "@/database/db";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
+import { RegistrationMail } from "@/server/emails/RegistrationMail";
+import { yupValidator } from "@/server/extra/yup";
+import { RegisterScheme } from "@/server/scheme/register_scheme";
+import { sendMail } from "@/server/extra/nodemailer";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
@@ -42,6 +44,7 @@ export async function register_action(formData: any) {
       gender: validatedFields.data?.gender,
       password: validatedFields.data!.password,
       phone: validatedFields.data!.phone,
+      accountLevel: 'tier1'
     });
 
     if (result != null) {
@@ -61,6 +64,14 @@ export async function register_action(formData: any) {
       cookies().set("user_id", newUser!.id.toString(), {
         maxAge: 60 * 60 * 24 * 7,
       });
+
+      try {
+        sendMail({
+          to: newUser.email,
+          subject: "Registration Successful",
+          template: RegistrationMail(newUser),
+        });
+      } catch (error) {}
 
       return {
         success: true,

@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, CreationOptional } from 'sequelize';
+import  { Alert } from './alert';
 import  { Livechats } from './livechats';
 import  { Transactions } from './transactions';
 import  { VerificationTokens } from './verification_tokens';
@@ -241,6 +242,19 @@ export class Users extends Model<
       ]
    });
    }
+
+   // Users hasMany Alert via userId
+   declare alerts: Sequelize.NonAttribute<Alert[]>;
+   declare getAlerts: Sequelize.HasManyGetAssociationsMixin<Alert>;
+   declare setAlerts: Sequelize.HasManySetAssociationsMixin<Alert, number>;
+   declare addAlert: Sequelize.HasManyAddAssociationMixin<Alert, number>;
+   declare addAlerts: Sequelize.HasManyAddAssociationsMixin<Alert, number>;
+   declare createAlert: Sequelize.HasManyCreateAssociationMixin<Alert>;
+   declare removeAlert: Sequelize.HasManyRemoveAssociationMixin<Alert, number>;
+   declare removeAlerts: Sequelize.HasManyRemoveAssociationsMixin<Alert, number>;
+   declare hasAlert: Sequelize.HasManyHasAssociationMixin<Alert, number>;
+   declare hasAlerts: Sequelize.HasManyHasAssociationsMixin<Alert, number>;
+   declare countAlerts: Sequelize.HasManyCountAssociationsMixin;
 
    // Users hasMany Livechats via userId
    declare livechats: Sequelize.NonAttribute<Livechats[]>;

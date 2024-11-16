@@ -16,24 +16,21 @@ import { CountrySelectComponent } from "../components/CountrySelectComponent";
 import { CTextField } from "@/components/CTextField";
 import {
   MdEdit,
-  MdEditDocument,
   MdInfo,
   MdLocationCity,
   MdLocationPin,
 } from "react-icons/md";
-import { useForm } from "react-hook-form";
-import yup from "server/extra/yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import {
   submitAddress,
   submitIdCard,
   submitSSN,
-} from "server/actions/auth/verification";
-import { triggerEsc } from "@/lib/trigger_esc";
+} from "@/actions/auth/verification";
+import { useForm } from "react-hook-form";
+import yup from "@/server/extra/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { triggerEsc } from "@/lib/triggerEsc";
 import { toast } from "sonner";
-import { getUser, revalidateUserTag } from "server/fetch/select_user";
-import { useState } from "react";
-import { TbInfoCircle } from "react-icons/tb";
+import { revalidateUserTag } from "@/fetch/fetch_user";
 
 export async function VerificationComponent({
   props,
@@ -188,7 +185,7 @@ export async function VerificationComponent({
                             onValueChange={(value) =>
                               idValidator.setValue("id_type", value)
                             }
-                            value={d.content.type ?? ""}
+                            defaultValue={d.content.type ?? ""}
                           >
                             <Select.Trigger
                               className="h-[37px]"

@@ -1,7 +1,7 @@
 "use client";
 
 import { MyCard } from "@/components/MyCard";
-import { cFmt } from "@/lib/currency-formatter";
+import { cFmt } from "@/lib/cFmt";
 import {
   DataList,
   Flex,
@@ -11,8 +11,8 @@ import {
 import { Logo } from "app/auth/components/shapes/logo";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { Users } from "server/database/models/users";
-import { WalletBalances } from "server/database/models/wallet_balances";
+import { Users } from "@/database/models/users";
+import { WalletBalances } from "@/database/models/wallet_balances";
 import { MiniChart } from "react-ts-tradingview-widgets";
 import { WalletListDropDown } from "./WalletListDropDown";
 

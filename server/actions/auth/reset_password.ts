@@ -1,12 +1,12 @@
 "use server";
 
 import { ReactElement } from "react";
-import { Users } from "server/database/models/users";
-import { VerificationTokens } from "server/database/models/verification_tokens";
-import { ResetPasswordMail } from "server/emails/reset_password_mail";
-import { sendMail } from "server/extra/nodemailer";
+import { Users } from "@/database/models/users";
+import { VerificationTokens } from "@/database/models/verification_tokens";
+import { ResetPasswordMail } from "@/server/emails/ResetPasswordMail";
+import { sendMail } from "@/server/extra/nodemailer";
 import bcrypt from "bcrypt";
-import getSequelizeInstance from "server/database/db";
+import getSequelizeInstance from "@/database/db";
 import { generateJWToken, login } from "./login";
 
 export async function reset_password_action(data: any) {

@@ -1,33 +1,27 @@
 import {
   Avatar,
-  Button,
-  Card,
-  DropdownMenu,
   Flex,
-  IconButton,
   Text,
 } from "@radix-ui/themes";
 import { DarkModeToggler } from "app/dashboard/components/DarkModeToggler";
-import { unstable_cache } from "next/cache";
 import { cookies } from "next/headers";
-import { Suspense } from "react";
-import { MdDarkMode } from "react-icons/md";
-import getSequelizeInstance from "server/database/db";
-import { Users } from "server/database/models/users";
-import { getUser } from "server/fetch/select_user";
+import { MdSupportAgent } from "react-icons/md";
+import { Users } from "@/database/models/users";
+import { fetchUser } from "@/fetch/fetch_user";
 
 export async function UserContainer() {
-  var user_id = cookies().get("user_id")?.value;
+  var user_id = (await cookies()).get("user_id")?.value;
   var user: Users | null = null;
   if (user_id != undefined) {
-    var fetchUser = await getUser(user_id);
+    var fetchUser = await fetchUser(user_id);
     user = fetchUser;
   }
 
   return (
     <>
       <Flex align={'center'} gap={'3'}>
-       <DarkModeToggler/>
+        <MdSupportAgent size={20} />
+        <DarkModeToggler />
         <Flex gap="2" align={"center"}>
           <div className="md:block hidden">
             <Flex gap="1" className="text-[12px]">

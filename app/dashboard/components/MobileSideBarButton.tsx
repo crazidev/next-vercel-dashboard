@@ -15,7 +15,7 @@ export function MobileSideBarButton() {
 
   return (
     <>
-      {(isMobile && !isTablet && !expandSidebar )&& (
+      {(isMobile && !isTablet && !expandSidebar) && (
         <Flex
           gap={"2"}
           mt={"1"}

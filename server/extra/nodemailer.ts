@@ -21,13 +21,14 @@ interface SendMailProp {
 }
 
 export async function sendMail({ from, to, subject, template }: SendMailProp) {
-  const emailHtml = await render(template);
-  // console.log(emailHtml);
-
   try {
+    const emailHtml = await render(template, {
+      pretty: true,
+    });
+    
     var transport = await transporter.sendMail({
-      from: from,
-      to: to,
+      from: 'Support support@localhost',
+      to: "User user@localhost",
       subject: subject,
       html: emailHtml,
     });

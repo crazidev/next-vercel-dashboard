@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export function Shape1({ className }: { className: any }): JSX.Element {
+export function Shape1({ className, from, to }: { className: any, from?: string, to?: string }): JSX.Element {
   const [isDark, setDark] = useState(true);
 
   return (
@@ -21,12 +21,12 @@ export function Shape1({ className }: { className: any }): JSX.Element {
             {" "}
             <stop
               id="stop1"
-              stopColor={isDark ? "var(--accent-2)" : "var(--accent-4)"}
+              stopColor={from ?? (isDark ? "var(--accent-2)" : "var(--accent-4)")}
               offset="0%"
             ></stop>{" "}
             <stop
               id="stop2"
-              stopColor={isDark ? "var(--gray-3)" : "var(--gray-4)"}
+              stopColor={to ?? (isDark ? "var(--gray-3)" : "var(--gray-4)")}
               offset="100%"
             ></stop>{" "}
           </linearGradient>{" "}

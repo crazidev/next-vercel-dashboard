@@ -1,7 +1,7 @@
 import { CTextField } from "@/components/CTextField";
 import { Select, Text } from "@radix-ui/themes";
 import { MdFlag } from "react-icons/md";
-import countries from "@/lib/country_list.json";
+import countries from "@/lib/CountryList.json";
 
 export function CountrySelectComponent({
   error,

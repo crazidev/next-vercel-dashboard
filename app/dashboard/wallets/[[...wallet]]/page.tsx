@@ -2,9 +2,9 @@ import { Box, Card, DropdownMenu, Flex, Link, Text } from "@radix-ui/themes";
 import { NavBar } from "../../components/NavBar";
 import { MyCard } from "@/components/MyCard";
 import { TbCoinBitcoin, TbHandClick, TbSwitch } from "react-icons/tb";
-import { authUser } from "server/actions/authUser";
-import { getUserWallets } from "server/fetch/fetch_wallets";
-import { getUser } from "server/fetch/select_user";
+import { authUser } from "@/actions/authUser";
+import { fetchUserWallets } from "@/fetch/fetch_wallets";
+import { fetchUser } from "@/fetch/fetch_user";
 import Image from "next/image";
 import { MdExpand, MdExpandMore } from "react-icons/md";
 import { Logo } from "app/auth/components/shapes/logo";
@@ -21,8 +21,8 @@ const WalletPage = async ({
   params: Promise<{ wallet: string }>
 }) => {
   var user_id = authUser().user_id;
-  var user = await getUser(user_id ?? -1);
-  var walletList = await getUserWallets(user_id ?? -1);
+  var user = await fetchUser(user_id ?? -1);
+  var walletList = await fetchUserWallets(user_id ?? -1);
 
   const { wallet = undefined } = await params;
   return (

@@ -2,7 +2,7 @@ import { Manifest } from "next/dist/lib/metadata/types/manifest-types";
 import images from "../../../public/pwa/icons.json";
 
 export async function GET() {
-  const manifest: Manifest = {
+  const manifest = {
     name: process.env.NEXT_PUBLIC_APP_NAME,
     short_name: process.env.NEXT_PUBLIC_APP_SHORT_NAME,
     description: process.env.NEXT_PUBLIC_APP_DESCRIPTION,

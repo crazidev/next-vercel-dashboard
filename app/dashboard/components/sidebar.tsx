@@ -99,9 +99,9 @@ export function SideBarComponent({
                       justify={"center"}
                     >
                       <Text weight={"bold"}>SYNC BANK</Text>
-                      <Text color={"gray"} size={"1"}>
+                      {/* <Text color={"gray"} size={"1"}>
                         #1 Soft Banking
-                      </Text>
+                      </Text> */}
                     </Flex>
                   </Flex>
                   {isMobile && (
@@ -219,11 +219,11 @@ export function SideBarComponent({
         </div>
       )}
       <div
-        className="flex pt-3 w-[100%] overflow-hidden container"
+        className="flex pt-3 overflow-hidden w-full"
         style={{
-          margin:
+          padding:
             isMobile || !isReady ? "10px" : expand ? "10px" : "10px",
-          marginTop: isMobile ? "50px" : "0px",
+          paddingTop: isMobile ? "50px" : "0px",
         }}
       >
         {children}

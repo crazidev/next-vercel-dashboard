@@ -2,9 +2,9 @@ import { Box, DropdownMenu, Flex, Select, Spinner, Text } from "@radix-ui/themes
 import { NavBar } from "../../components/NavBar";
 import { CTextField } from "@/components/CTextField";
 import { Search } from "lucide-react";
-import { authUser } from "server/actions/authUser";
-import { getUserWallets } from "server/fetch/fetch_wallets";
-import { getUser } from "server/fetch/select_user";
+import { authUser } from "@/actions/authUser";
+import { fetchUserWallets } from "@/fetch/fetch_wallets";
+import { fetchUser } from "@/fetch/fetch_user";
 import { TransactionList } from "../../components/TransactionList";
 import { Logo } from "app/auth/components/shapes/logo";
 import { TbSwitchVertical } from "react-icons/tb";
@@ -24,8 +24,8 @@ export default async function TransactionPage({
 
 }) {
   var user_id = authUser().user_id;
-  var user = await getUser(user_id);
-  var walletList = await getUserWallets(user_id);
+  var user = await fetchUser(user_id);
+  var walletList = await fetchUserWallets(user_id);
 
   const { wallet } = await params;
   const { q } = await searchParams;

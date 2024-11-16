@@ -1,4 +1,4 @@
-import { loginActionScheme } from "server/scheme/login_scheme";
+import { loginActionScheme } from "@/scheme/login_scheme";
 import * as yup from "yup";
 
 // Export the yup instance

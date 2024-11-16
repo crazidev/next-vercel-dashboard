@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 
 export function Shape2({ className }: { className: any }): JSX.Element {

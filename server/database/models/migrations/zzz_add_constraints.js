@@ -6,6 +6,17 @@ module.exports = {
    up(queryInterface, Sequelize) {
       return queryInterface.sequelize.transaction(t => {
          return Promise.all([
+         queryInterface.addConstraint("alert", {
+            fields: ["user_id"],
+            name: "alert(user_id)-users(id)_fk",
+            type: "foreign key",
+            references: {
+               table: "users",
+               field: "id"
+            },
+            transaction: t
+         }),
+
          queryInterface.addConstraint("livechats", {
             fields: ["user_id"],
             name: "livechats(user_id)-users(id)_fk",
@@ -134,6 +145,7 @@ module.exports = {
    down(queryInterface, Sequelize) {
       return queryInterface.sequelize.transaction(t => {
          return Promise.all([
+         queryInterface.removeConstraint("alert", "alert(user_id)-users(id)_fk", { transaction: t }),
          queryInterface.removeConstraint("livechats", "livechats(user_id)-users(id)_fk", { transaction: t }),
          queryInterface.removeConstraint("livechats", "livechats(users_id)-users(id)_fk", { transaction: t }),
          queryInterface.removeConstraint("transactions", "transactions(user_id)-users(id)_fk", { transaction: t }),
