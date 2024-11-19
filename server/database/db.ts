@@ -7,7 +7,7 @@ let sequelizeInstance: Sequelize | null = null;
 
 const getSequelizeInstance = async () => {
   if (!sequelizeInstance) {
-    const sequelize = new Sequelize(process.env.DATABASE_URL ?? "", {
+    var credentials = {
       host: process.env.DATABASE_HOST,
       port: parseInt(process.env.DATABASE_PORT ?? "3306"),
       username: process.env.DATABASE_USER ?? "root",
@@ -15,15 +15,22 @@ const getSequelizeInstance = async () => {
       password: process.env.DATABASE_PASS ?? "",
       dialect: process.env.DATABASE_DIALECT ?? ("mysql" as any),
       dialectModule: process.env.DATABASE_DIALECT == "mysql" ? mysql : pg,
-      logging: false,
-    });
+      logging: process.env.LOG_DATABASE_QUERIES,
+    };
+
+    const sequelize = new Sequelize(
+      process.env.DATABASE_URL ?? "",
+      credentials
+    );
+
+    console.info("DATABASE", credentials)
 
     initModels(sequelize);
 
     await sequelize
       .authenticate()
       .then(() => {
-        // console.log("Connection has been established successfully.");
+        console.log("Connection has been established successfully.");
       })
       .catch((error) => {
         console.error("Unable to connect to the database");
