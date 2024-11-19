@@ -6,7 +6,9 @@
     "start": "next start",
     "lint": "next lint",
     "email:build": "email build -d ./server/emails",
-    "email:dev": "email dev -d ./server/emails -p 3005"
+    "email:dev": "email dev -d ./server/emails -p 3005",
+    "generate-pwa": "node ./lib/pwa-asset-generator.js",
+    "db:pull": "node sequelize-auto.js"
   },
   "dependencies": {
     "@arsams/color-shades": "^0.1.2",
