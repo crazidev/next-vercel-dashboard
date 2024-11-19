@@ -11,7 +11,7 @@ export const AlertComponent = async () => {
     var generalAlerts: Alert[] = [];
     var userAlerts: Alert[] = [];
 
-    var user_id = authUser()?.user_id;
+    var user_id =(await authUser())?.user_id;
     const now = new Date();
 
     var where = {

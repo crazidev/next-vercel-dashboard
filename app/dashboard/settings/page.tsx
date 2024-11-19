@@ -5,7 +5,7 @@ import { Users } from "@/database/models/users";
 import { fetchUser } from "@/fetch/fetch_user";
 
 export default async function ProfilePage() {
-    var user_id = authUser().user_id;
+    var user_id = (await authUser()).user_id;
     var user = await fetchUser(user_id);
 
     return <div className="flex flex-col gap-5">
@@ -38,7 +38,7 @@ export default async function ProfilePage() {
                                 {user?.email}
                             </Text>
                         </Link>
-                        <Flex gap={'2'}>
+                        <Flex gap={'2'} className="mt-[7px]">
                             <Text color='gray' size='1'>
                                 SSN:
                             </Text>

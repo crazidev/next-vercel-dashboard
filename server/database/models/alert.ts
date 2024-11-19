@@ -7,7 +7,7 @@ export class Alert extends Model<
  Sequelize.InferCreationAttributes<Alert>
 > {
    declare id: CreationOptional<number>;
-   declare userId?: number | null;
+   declare userId?: number;
    declare type: 'warning' | 'error' | 'info';
    declare title: string;
    declare message: string;

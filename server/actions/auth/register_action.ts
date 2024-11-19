@@ -7,6 +7,7 @@ import { RegistrationMail } from "@/server/emails/RegistrationMail";
 import { yupValidator } from "@/server/extra/yup";
 import { RegisterScheme } from "@/server/scheme/register_scheme";
 import { sendMail } from "@/server/extra/nodemailer";
+import { generateJWToken } from "./login";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
@@ -50,20 +51,7 @@ export async function register_action(formData: any) {
     if (result != null) {
       var newUser = result.toJSON();
 
-      const token = jwt.sign(
-        { userId: newUser?.id, email: newUser?.email },
-        JWT_SECRET,
-        {
-          expiresIn: JWT_EXPIRES_IN,
-        }
-      );
-
-      cookies().set("token", token, {
-        maxAge: 60 * 60 * 24 * 7,
-      });
-      cookies().set("user_id", newUser!.id.toString(), {
-        maxAge: 60 * 60 * 24 * 7,
-      });
+      const token = await generateJWToken(newUser);
 
       try {
         sendMail({
@@ -75,7 +63,7 @@ export async function register_action(formData: any) {
 
       return {
         success: true,
-        message: "Login Successful",
+        message: "Registration Successful",
         errors: {},
         user: newUser,
         token: token,

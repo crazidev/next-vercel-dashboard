@@ -5,12 +5,13 @@ import { AuthContainerLogo } from "@/components/AuthContainerLogo";
 import { MdLock, MdOutlineMailLock, MdRemoveRedEye } from "react-icons/md";
 import { CTextField } from "@/components/CTextField";
 import { useForm } from "react-hook-form";
-import { TbEye, TbEyeCancel, TbInfoCircle } from "react-icons/tb";
+import { TbEye, TbEyeCancel, TbFaceId, TbFingerprint, TbInfoCircle, TbLockAccess } from "react-icons/tb";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PasswordToggler } from "../components/PasswordToggler";
-import { login } from "@/actions/auth/login";
+import { checkPasskey, generateRandomChallenge, login } from "@/actions/auth/login";
+import { client, server } from "@passwordless-id/webauthn";
 
 export default function LoginPage() {
   const {
@@ -22,6 +23,8 @@ export default function LoginPage() {
     // resolver: zodResolver(loginActionScheme),
   });
   var router = useRouter();
+  const [showPass, setShowPass] = useState(false);
+
 
   const submit = async (data: any) => {
     var res = await login(data);
@@ -31,7 +34,9 @@ export default function LoginPage() {
       localStorage.setItem("user_id", JSON.stringify(res.user.id));
       localStorage.setItem("token", JSON.stringify(res.token));
 
-      if (res.user.idDocStatus === null || res.user.ssnStatus === null) {
+      if (!res.hasPasskey) {
+        router.push("/auth/create-passkey");
+      } else if (res.user.idDocStatus === null || res.user.ssnStatus === null) {
         router.push("/auth/verification");
       } else {
         router.push("/dashboard");
@@ -44,7 +49,33 @@ export default function LoginPage() {
     }
   };
 
-  const [showPass, setShowPass] = useState(false);
+
+
+  const loginWithPasskey = async () => {
+    const challenge = await generateRandomChallenge();
+
+    const authentication = await client.authenticate({
+      challenge: challenge,
+      userVerification: 'preferred',
+      // allowCredentials: ['crazibeat-01'],
+    });
+
+    const res = await checkPasskey({ authentication: authentication, challenge: challenge });
+
+    if (res !== undefined && res.success) {
+      toast.success(res.message);
+      localStorage.setItem("user_id", JSON.stringify(res.user.id));
+      localStorage.setItem("token", JSON.stringify(res.token));
+
+      if (res.user.idDocStatus === null || res.user.ssnStatus === null) {
+        router.push("/auth/verification");
+      } else {
+        router.push("/dashboard");
+      }
+    } else {
+      toast.error(res.errors.root);
+    }
+  }
 
   return (
     <Box
@@ -75,7 +106,7 @@ export default function LoginPage() {
             <CTextField
               label="Email"
               placeholder="Enter your email"
-              autoComplete="email"
+              autoComplete="Crazibeat webauthn"
               leftIcon={<MdOutlineMailLock />}
               error={errors?.email?.message}
               register={register("email")}
@@ -110,6 +141,32 @@ export default function LoginPage() {
             >
               Sign in
             </Button>
+            {/* <Box height={"20px"} /> */}
+            {/* <Button
+              type={"button"}
+              loading={isSubmitting}
+              size="3"
+              variant="surface"
+              onClick={saveWithPasskey}
+            >
+              Save password
+            </Button>
+            <Box height={"20px"} />
+            <Button
+              type={"button"}
+              loading={isSubmitting}
+              size="3"
+              variant="surface"
+              onClick={loginWithPasskey}
+            >
+              Login with Passkey
+            </Button> */}
+          </Flex>
+          <Box height={"20px"} />
+          <Flex align={'center'} direction={'column'}>
+            <Flex>
+            </Flex>
+            <Link onClick={loginWithPasskey}>Sign in with passkey</Link>
           </Flex>
         </form>
       </Card>

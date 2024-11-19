@@ -17,6 +17,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.0(react-hook-form@7.53.1(react@19.0.0-rc.0))
+      '@passwordless-id/webauthn':
+        specifier: ^2.1.2
+        version: 2.1.2
       '@radix-ui/react-dialog':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -1052,6 +1055,9 @@ packages:
 
   '@one-ini/wasm@0.1.1':
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
+
+  '@passwordless-id/webauthn@2.1.2':
+    resolution: {integrity: sha512-Ahj+A3O0gP3EsLV4FRXjfhbzzP895d8CnHKmhT1hkAz1zLSBCRE/iXJsasL1kwGoriDFLJ+YtO6x1rok4SZH2g==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -5456,6 +5462,8 @@ snapshots:
       fastq: 1.17.1
 
   '@one-ini/wasm@0.1.1': {}
+
+  '@passwordless-id/webauthn@2.1.2': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true

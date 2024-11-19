@@ -20,7 +20,7 @@ const WalletPage = async ({
 }: {
   params: Promise<{ wallet: string }>
 }) => {
-  var user_id = authUser().user_id;
+  var user_id = (await authUser()).user_id;
   var user = await fetchUser(user_id ?? -1);
   var walletList = await fetchUserWallets(user_id ?? -1);
 

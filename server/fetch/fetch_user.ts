@@ -5,7 +5,7 @@ import { InferAttributes } from "sequelize";
 import getSequelizeInstance from "@/database/db";
 import { Users } from "@/database/models/users";
 
-export const fetchUser = async (id: number | string): Promise<InferAttributes<Users> | null> => {
+export const fetchUser = async (id: number | string): Promise<Users> => {
   var user = unstable_cache(
     async (id) => {
       await getSequelizeInstance();

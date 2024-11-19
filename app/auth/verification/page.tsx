@@ -20,7 +20,7 @@ import { triggerEsc } from "@/lib/triggerEsc";
 import { TbInfoCircle } from "react-icons/tb";
 
 export default async function VerificationPage() {
-  var user_id = authUser().user_id;
+  var user_id = (await authUser()).user_id;
   var user = await fetchUser(user_id);
 
   return (
@@ -36,7 +36,7 @@ export default async function VerificationPage() {
           {/* </Text> */}
         </Flex>
 
-        <Callout.Root variant="surface" color="yellow" mt={"5"} size={"1"}>
+        {(user.ssnStatus === 'uploaded' || user.idDocStatus === 'uploaded') && <Callout.Root variant="surface" color="yellow" mt={"5"} size={"1"}>
           <Callout.Icon>
             <TbInfoCircle />
           </Callout.Icon>
@@ -44,7 +44,7 @@ export default async function VerificationPage() {
             Please wait a little longer while our Team is verifying your KYC
             information. You'll receive an email soon.
           </Callout.Text>
-        </Callout.Root>
+        </Callout.Root>}
 
         <VerificationComponent
           props={{

@@ -55,7 +55,7 @@ export default function RegisterPage() {
       toast.success(res.message);
       localStorage.setItem('user', JSON.stringify(res.user));
       localStorage.setItem('token', JSON.stringify(res.token));
-      router.push('verification', {
+      router.push('create-passkey', {
         
       });
     } else {

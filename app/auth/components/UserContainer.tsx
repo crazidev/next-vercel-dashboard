@@ -13,8 +13,8 @@ export async function UserContainer() {
   var user_id = (await cookies()).get("user_id")?.value;
   var user: Users | null = null;
   if (user_id != undefined) {
-    var fetchUser = await fetchUser(user_id);
-    user = fetchUser;
+    var getUser = await fetchUser(user_id);
+    user = getUser;
   }
 
   return (

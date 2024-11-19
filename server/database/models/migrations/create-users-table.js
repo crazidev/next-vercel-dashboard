@@ -170,14 +170,14 @@ module.exports = {
       canTransfer: {
          type: DataTypes.BOOLEAN,
          allowNull: true,
-         defaultValue: 0,
+         defaultValue: false,
          field: 'can_transfer'
       },
 
       isAdmin: {
          type: DataTypes.BOOLEAN,
          allowNull: true,
-         defaultValue: 0,
+         defaultValue: false,
          field: 'is_admin'
       },
 

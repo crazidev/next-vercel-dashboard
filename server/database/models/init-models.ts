@@ -3,6 +3,7 @@ import { Alert } from "./alert";
 import { Banks } from "./banks";
 import { Configs } from "./configs";
 import { Livechats } from "./livechats";
+import { Passkey } from "./passkey";
 import { Transactions } from "./transactions";
 import { Users } from "./users";
 import { VerificationTokens } from "./verification_tokens";
@@ -15,6 +16,7 @@ export {
    Banks,
    Configs,
    Livechats,
+   Passkey,
    Transactions,
    Users,
    VerificationTokens,
@@ -27,6 +29,7 @@ export function initModels(sequelize: Sequelize) {
    Banks.initModel(sequelize);
    Configs.initModel(sequelize);
    Livechats.initModel(sequelize);
+   Passkey.initModel(sequelize);
    Transactions.initModel(sequelize);
    Users.initModel(sequelize);
    VerificationTokens.initModel(sequelize);
@@ -64,6 +67,7 @@ export function initModels(sequelize: Sequelize) {
       Banks: Banks,
       Configs: Configs,
       Livechats: Livechats,
+      Passkey: Passkey,
       Transactions: Transactions,
       Users: Users,
       VerificationTokens: VerificationTokens,

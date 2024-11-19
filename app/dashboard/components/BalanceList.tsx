@@ -9,7 +9,7 @@ import React from "react";
 import Link from "next/link";
 
 export const BalanceList = async () => {
-  var user_id = authUser().user_id;
+  var user_id = (await authUser()).user_id;
   var user = await fetchUser(user_id ?? -1);
   var walletList = await fetchUserWallets(user_id ?? -1);
 

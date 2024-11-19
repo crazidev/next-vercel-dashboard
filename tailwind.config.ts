@@ -52,6 +52,15 @@ export default {
         "spin-slow": "spin 5s linear infinite",
         "bounce-slow": "bounce 2s linear infinite",
       },
+      screens: {
+        'mobile': {
+          max: '425px',
+        },
+        tablet: {
+          min: '425px',
+          max: '768px',
+        }
+      }
     },
   },
 
@@ -59,4 +68,6 @@ export default {
   plugins: [require("postcss-import"), require("tailwindcss-animate")],
 } satisfies Config;
 
-console.log;
+// let isTablet =
+// document.body.clientWidth <= 768 && document.body.clientWidth > 425;
+// let isMobile = document.body.clientWidth <= 425;

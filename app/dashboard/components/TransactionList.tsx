@@ -46,7 +46,7 @@ export const TransactionList = async ({
   useTableLayout?: boolean
 
 }) => {
-  var user = authUser();
+  var user = (await authUser());
   await getSequelizeInstance();
 
   var where: WhereOptions<InferAttributes<Transactions, { omit: never; }>> = {};

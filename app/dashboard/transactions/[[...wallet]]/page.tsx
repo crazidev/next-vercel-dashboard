@@ -23,7 +23,7 @@ export default async function TransactionPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 
 }) {
-  var user_id = authUser().user_id;
+  var user_id = (await authUser()).user_id;
   var user = await fetchUser(user_id);
   var walletList = await fetchUserWallets(user_id);
 

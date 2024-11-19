@@ -10,7 +10,7 @@ import { uploadFileToCloudinary } from "../../extra/upload_cloudinary";
 export async function submitAddress(formData: any) {
   try {
     await getSequelizeInstance();
-    var user_id = authUser().user_id;
+    var user_id = (await authUser()).user_id;
 
     if (user_id) {
       await Users.update(
@@ -46,7 +46,7 @@ export async function submitAddress(formData: any) {
 export async function submitIdCard(formData: any) {
   try {
     await getSequelizeInstance();
-    var user_id = authUser().user_id;
+    var user_id = (await authUser()).user_id;
     var file = formData.id_front[0];
 
     console.log(user_id);
@@ -93,7 +93,7 @@ export async function submitIdCard(formData: any) {
 export async function submitSSN(formData: any) {
   try {
     await getSequelizeInstance();
-    var user_id = authUser().user_id;
+    var user_id = (await authUser()).user_id;
 
     if (user_id) {
       await Users.update(

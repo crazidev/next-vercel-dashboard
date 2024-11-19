@@ -6,7 +6,7 @@ module.exports = {
    up(queryInterface, Sequelize) {
       return queryInterface.sequelize.transaction(t => {
          return Promise.all([
-            queryInterface.createTable("alert", {
+            queryInterface.createTable("passkey", {
       id: {
          autoIncrement: true,
          type: DataTypes.INTEGER,
@@ -16,34 +16,17 @@ module.exports = {
 
       userId: {
          type: DataTypes.INTEGER,
-         allowNull: true,
+         allowNull: false,
          field: 'user_id'
       },
 
-      type: {
-         type: DataTypes.ENUM('warning','error','info'),
-         allowNull: false,
-         defaultValue: "info"
-      },
-
-      title: {
-         type: DataTypes.STRING(100),
-         allowNull: false
-      },
-
-      message: {
+      credential: {
          type: DataTypes.TEXT,
          allowNull: false
       },
 
-      startAt: {
-         type: DataTypes.DATE,
-         allowNull: true,
-         defaultValue: Sequelize.fn('current_timestamp')
-      },
-
-      endAt: {
-         type: DataTypes.DATE,
+      device: {
+         type: DataTypes.TEXT,
          allowNull: true
       },
 
@@ -54,7 +37,7 @@ module.exports = {
    down(queryInterface, Sequelize) {
       return queryInterface.sequelize.transaction(t => {
          return Promise.all([
-            queryInterface.dropTable("alert", { transaction: t }),
+            queryInterface.dropTable("passkey", { transaction: t }),
          ]);
       }
    )},

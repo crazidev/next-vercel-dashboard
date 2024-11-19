@@ -1,6 +1,6 @@
 import OneSignal, { IInitObject } from "react-onesignal";
 
-export const InitOneSignal = async (options: IInitObject) => {
+export const InitOneSignal = async (options?: IInitObject) => {
   return await OneSignal.init({
     ...options,
     appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID ?? "",

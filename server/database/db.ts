@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import { initModels } from "./models/init-models";
-// import pg from "pg";
+import pg from "pg";
 import mysql from "mysql2";
 
 let sequelizeInstance: Sequelize | null = null;
@@ -14,7 +14,7 @@ const getSequelizeInstance = async () => {
       database: process.env.DATABASE_NAME,
       password: process.env.DATABASE_PASS ?? "",
       dialect: process.env.DATABASE_DIALECT ?? ("mysql" as any),
-      dialectModule: mysql,
+      dialectModule: process.env.DATABASE_DIALECT == "mysql" ? mysql : pg,
       logging: false,
     });
 
