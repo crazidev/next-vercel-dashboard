@@ -1,20 +1,19 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, CreationOptional } from 'sequelize';
-import  { Users } from './users';
+import  { LivechatSession } from './livechat_session';
 
 export class Livechats extends Model<
  Sequelize.InferAttributes<Livechats>,
  Sequelize.InferCreationAttributes<Livechats>
 > {
    declare id: CreationOptional<number>;
-   declare userId?: number;
    declare fromAdmin?: number;
    declare message: string;
    declare type?: 'text' | 'image' | 'file';
    declare fileUrl?: string;
    declare createdAt?: Date;
    declare updatedAt?: Date;
-   declare usersId?: number;
+   declare sessionId?: number;
 
    static initModel(sequelize: Sequelize.Sequelize): typeof Livechats {
       return Livechats.init({
@@ -23,16 +22,6 @@ export class Livechats extends Model<
          type: DataTypes.INTEGER.UNSIGNED,
          allowNull: false,
          primaryKey: true
-      },
-
-      userId: {
-         type: DataTypes.INTEGER,
-         allowNull: true,
-         references: {
-            model: 'users',
-            key: 'id'
-         },
-         field: 'user_id'
       },
 
       fromAdmin: {
@@ -69,14 +58,14 @@ export class Livechats extends Model<
          field: 'updated_at'
       },
 
-      usersId: {
+      sessionId: {
          type: DataTypes.INTEGER,
          allowNull: true,
          references: {
-            model: 'users',
+            model: 'livechat_session',
             key: 'id'
          },
-         field: 'users_id'
+         field: 'session_id'
       },
    }, {
       sequelize,
@@ -94,33 +83,20 @@ export class Livechats extends Model<
             ]
          },
          {
-            name: "user_id",
+            name: "session_id",
             using: "BTREE",
             fields: [
-               { name: "user_id" },
-            ]
-         },
-         {
-            name: "users_id",
-            using: "BTREE",
-            fields: [
-               { name: "users_id" },
+               { name: "session_id" },
             ]
          },
       ]
    });
    }
 
-   // Livechats belongsTo Users via userId
-   declare user?: Users;
-   declare getUser: Sequelize.BelongsToGetAssociationMixin<Users>;
-   declare setUser: Sequelize.BelongsToSetAssociationMixin<Users, number>;
-   declare createUser: Sequelize.BelongsToCreateAssociationMixin<Users>;
-
-   // Livechats belongsTo Users via usersId
-   declare usersUser?: Users;
-   declare getUsersUser: Sequelize.BelongsToGetAssociationMixin<Users>;
-   declare setUsersUser: Sequelize.BelongsToSetAssociationMixin<Users, number>;
-   declare createUsersUser: Sequelize.BelongsToCreateAssociationMixin<Users>;
+   // Livechats belongsTo LivechatSession via sessionId
+   declare session?: LivechatSession;
+   declare getSession: Sequelize.BelongsToGetAssociationMixin<LivechatSession>;
+   declare setSession: Sequelize.BelongsToSetAssociationMixin<LivechatSession, number>;
+   declare createSession: Sequelize.BelongsToCreateAssociationMixin<LivechatSession>;
 
 }

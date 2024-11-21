@@ -170,15 +170,21 @@ module.exports = {
       canTransfer: {
          type: DataTypes.BOOLEAN,
          allowNull: true,
-         defaultValue: false,
+         defaultValue: 0,
          field: 'can_transfer'
       },
 
       isAdmin: {
          type: DataTypes.BOOLEAN,
          allowNull: true,
-         defaultValue: false,
+         defaultValue: 0,
          field: 'is_admin'
+      },
+
+      googleAuthId: {
+         type: DataTypes.TEXT,
+         allowNull: true,
+         field: 'google_auth_id'
       },
 
             }, { transaction: t }),

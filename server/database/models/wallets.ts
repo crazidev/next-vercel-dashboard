@@ -14,8 +14,6 @@ export class Wallets extends Model<
    declare network?: string;
    declare createdAt?: Date;
    declare updatedAt?: Date;
-   declare walletBalanceId?: number;
-   declare transactionsId?: number;
    declare type: 'crypto' | 'stock' | 'share';
    declare icon?: string;
 
@@ -63,26 +61,6 @@ export class Wallets extends Model<
          field: 'updated_at'
       },
 
-      walletBalanceId: {
-         type: DataTypes.INTEGER.UNSIGNED,
-         allowNull: true,
-         references: {
-            model: 'wallet_balances',
-            key: 'id'
-         },
-         field: 'wallet_balance_id'
-      },
-
-      transactionsId: {
-         type: DataTypes.INTEGER,
-         allowNull: true,
-         references: {
-            model: 'transactions',
-            key: 'id'
-         },
-         field: 'transactions_id'
-      },
-
       type: {
          type: DataTypes.ENUM('crypto','stock','share'),
          allowNull: false
@@ -115,37 +93,9 @@ export class Wallets extends Model<
                { name: "id" },
             ]
          },
-         {
-            name: "wallets_wallet_balance_id_transactions_id_unique",
-            unique: true,
-            using: "BTREE",
-            fields: [
-               { name: "wallet_balance_id" },
-               { name: "transactions_id" },
-            ]
-         },
-         {
-            name: "transactions_id",
-            using: "BTREE",
-            fields: [
-               { name: "transactions_id" },
-            ]
-         },
       ]
    });
    }
-
-   // Wallets belongsTo Transactions via transactionsId
-   declare transactionsTransaction?: Transactions;
-   declare getTransactionsTransaction: Sequelize.BelongsToGetAssociationMixin<Transactions>;
-   declare setTransactionsTransaction: Sequelize.BelongsToSetAssociationMixin<Transactions, number>;
-   declare createTransactionsTransaction: Sequelize.BelongsToCreateAssociationMixin<Transactions>;
-
-   // Wallets belongsTo WalletBalances via walletBalanceId
-   declare walletBalanceWalletBalance?: WalletBalances;
-   declare getWalletBalanceWalletBalance: Sequelize.BelongsToGetAssociationMixin<WalletBalances>;
-   declare setWalletBalanceWalletBalance: Sequelize.BelongsToSetAssociationMixin<WalletBalances, number>;
-   declare createWalletBalanceWalletBalance: Sequelize.BelongsToCreateAssociationMixin<WalletBalances>;
 
    // Wallets hasMany Transactions via walletId
    declare transactions: Sequelize.NonAttribute<Transactions[]>;

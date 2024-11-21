@@ -1,7 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, CreationOptional } from 'sequelize';
 import  { Alert } from './alert';
-import  { Livechats } from './livechats';
 import  { Transactions } from './transactions';
 import  { VerificationTokens } from './verification_tokens';
 import  { WalletBalances } from './wallet_balances';
@@ -40,6 +39,7 @@ export class Users extends Model<
    declare status?: 'blocked' | 'active' | 'suspended';
    declare canTransfer?: number;
    declare isAdmin?: number;
+   declare googleAuthId?: string;
 
    static initModel(sequelize: Sequelize.Sequelize): typeof Users {
       return Users.init({
@@ -216,6 +216,12 @@ export class Users extends Model<
          defaultValue: 0,
          field: 'is_admin'
       },
+
+      googleAuthId: {
+         type: DataTypes.TEXT,
+         allowNull: true,
+         field: 'google_auth_id'
+      },
    }, {
       sequelize,
       tableName: 'users',
@@ -255,32 +261,6 @@ export class Users extends Model<
    declare hasAlert: Sequelize.HasManyHasAssociationMixin<Alert, number>;
    declare hasAlerts: Sequelize.HasManyHasAssociationsMixin<Alert, number>;
    declare countAlerts: Sequelize.HasManyCountAssociationsMixin;
-
-   // Users hasMany Livechats via userId
-   declare livechats: Sequelize.NonAttribute<Livechats[]>;
-   declare getLivechats: Sequelize.HasManyGetAssociationsMixin<Livechats>;
-   declare setLivechats: Sequelize.HasManySetAssociationsMixin<Livechats, number>;
-   declare addLivechat: Sequelize.HasManyAddAssociationMixin<Livechats, number>;
-   declare addLivechats: Sequelize.HasManyAddAssociationsMixin<Livechats, number>;
-   declare createLivechat: Sequelize.HasManyCreateAssociationMixin<Livechats>;
-   declare removeLivechat: Sequelize.HasManyRemoveAssociationMixin<Livechats, number>;
-   declare removeLivechats: Sequelize.HasManyRemoveAssociationsMixin<Livechats, number>;
-   declare hasLivechat: Sequelize.HasManyHasAssociationMixin<Livechats, number>;
-   declare hasLivechats: Sequelize.HasManyHasAssociationsMixin<Livechats, number>;
-   declare countLivechats: Sequelize.HasManyCountAssociationsMixin;
-
-   // Users hasMany Livechats via usersId
-   declare usersLivechats: Sequelize.NonAttribute<Livechats[]>;
-   declare getUsersLivechats: Sequelize.HasManyGetAssociationsMixin<Livechats>;
-   declare setUsersLivechats: Sequelize.HasManySetAssociationsMixin<Livechats, number>;
-   declare addUsersLivechat: Sequelize.HasManyAddAssociationMixin<Livechats, number>;
-   declare addUsersLivechats: Sequelize.HasManyAddAssociationsMixin<Livechats, number>;
-   declare createUsersLivechat: Sequelize.HasManyCreateAssociationMixin<Livechats>;
-   declare removeUsersLivechat: Sequelize.HasManyRemoveAssociationMixin<Livechats, number>;
-   declare removeUsersLivechats: Sequelize.HasManyRemoveAssociationsMixin<Livechats, number>;
-   declare hasUsersLivechat: Sequelize.HasManyHasAssociationMixin<Livechats, number>;
-   declare hasUsersLivechats: Sequelize.HasManyHasAssociationsMixin<Livechats, number>;
-   declare countUsersLivechats: Sequelize.HasManyCountAssociationsMixin;
 
    // Users hasMany Transactions via userId
    declare transactions: Sequelize.NonAttribute<Transactions[]>;

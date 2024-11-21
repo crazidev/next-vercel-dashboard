@@ -14,12 +14,6 @@ module.exports = {
          primaryKey: true
       },
 
-      userId: {
-         type: DataTypes.INTEGER,
-         allowNull: true,
-         field: 'user_id'
-      },
-
       fromAdmin: {
          type: DataTypes.BOOLEAN,
          allowNull: true,
@@ -54,10 +48,10 @@ module.exports = {
          field: 'updated_at'
       },
 
-      usersId: {
+      sessionId: {
          type: DataTypes.INTEGER,
          allowNull: true,
-         field: 'users_id'
+         field: 'session_id'
       },
 
             }, { transaction: t }),

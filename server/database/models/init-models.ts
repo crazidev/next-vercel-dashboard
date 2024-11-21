@@ -1,7 +1,7 @@
 import type { Sequelize } from "sequelize";
 import { Alert } from "./alert";
 import { Banks } from "./banks";
-import { Configs } from "./configs";
+import { LivechatSession } from "./livechat_session";
 import { Livechats } from "./livechats";
 import { Passkey } from "./passkey";
 import { Transactions } from "./transactions";
@@ -14,7 +14,7 @@ import { Wallets } from "./wallets";
 export {
    Alert,
    Banks,
-   Configs,
+   LivechatSession,
    Livechats,
    Passkey,
    Transactions,
@@ -27,7 +27,7 @@ export {
 export function initModels(sequelize: Sequelize) {
    Alert.initModel(sequelize);
    Banks.initModel(sequelize);
-   Configs.initModel(sequelize);
+   LivechatSession.initModel(sequelize);
    Livechats.initModel(sequelize);
    Passkey.initModel(sequelize);
    Transactions.initModel(sequelize);
@@ -39,14 +39,10 @@ export function initModels(sequelize: Sequelize) {
 
    Transactions.belongsTo(Banks, { as: "bank", foreignKey: "bankId"});
    Banks.hasMany(Transactions, { as: "transactions", foreignKey: "bankId"});
-   Wallets.belongsTo(Transactions, { as: "transactionsTransaction", foreignKey: "transactionsId"});
-   Transactions.hasMany(Wallets, { as: "transactionsWallets", foreignKey: "transactionsId"});
+   Livechats.belongsTo(LivechatSession, { as: "session", foreignKey: "sessionId"});
+   LivechatSession.hasMany(Livechats, { as: "livechats", foreignKey: "sessionId"});
    Alert.belongsTo(Users, { as: "user", foreignKey: "userId"});
    Users.hasMany(Alert, { as: "alerts", foreignKey: "userId"});
-   Livechats.belongsTo(Users, { as: "user", foreignKey: "userId"});
-   Users.hasMany(Livechats, { as: "livechats", foreignKey: "userId"});
-   Livechats.belongsTo(Users, { as: "usersUser", foreignKey: "usersId"});
-   Users.hasMany(Livechats, { as: "usersLivechats", foreignKey: "usersId"});
    Transactions.belongsTo(Users, { as: "user", foreignKey: "userId"});
    Users.hasMany(Transactions, { as: "transactions", foreignKey: "userId"});
    Transactions.belongsTo(Users, { as: "beneficiary", foreignKey: "beneficiaryId"});
@@ -55,8 +51,6 @@ export function initModels(sequelize: Sequelize) {
    Users.hasMany(VerificationTokens, { as: "verificationTokens", foreignKey: "userId"});
    WalletBalances.belongsTo(Users, { as: "user", foreignKey: "userId"});
    Users.hasMany(WalletBalances, { as: "walletBalances", foreignKey: "userId"});
-   Wallets.belongsTo(WalletBalances, { as: "walletBalanceWalletBalance", foreignKey: "walletBalanceId"});
-   WalletBalances.hasMany(Wallets, { as: "walletBalanceWallets", foreignKey: "walletBalanceId"});
    Transactions.belongsTo(Wallets, { as: "wallet", foreignKey: "walletId"});
    Wallets.hasMany(Transactions, { as: "transactions", foreignKey: "walletId"});
    WalletBalances.belongsTo(Wallets, { as: "wallet", foreignKey: "walletId"});
@@ -65,7 +59,7 @@ export function initModels(sequelize: Sequelize) {
    return {
       Alert: Alert,
       Banks: Banks,
-      Configs: Configs,
+      LivechatSession: LivechatSession,
       Livechats: Livechats,
       Passkey: Passkey,
       Transactions: Transactions,

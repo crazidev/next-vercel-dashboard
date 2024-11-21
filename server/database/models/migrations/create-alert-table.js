@@ -39,7 +39,7 @@ module.exports = {
       startAt: {
          type: DataTypes.DATE,
          allowNull: true,
-         defaultValue: Sequelize.fn('current_timestamp')
+         defaultValue: Sequelize.Sequelize.fn('current_timestamp')
       },
 
       endAt: {

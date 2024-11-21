@@ -51,16 +51,24 @@ export default {
       animation: {
         "spin-slow": "spin 5s linear infinite",
         "bounce-slow": "bounce 2s linear infinite",
+        shimmer: "shimmer 1.5s infinite",
       },
       screens: {
-        'mobile': {
-          max: '425px',
+        mobile: {
+          max: "425px",
         },
         tablet: {
-          min: '425px',
-          max: '768px',
-        }
-      }
+          min: "425px",
+          max: "768px",
+        },
+      },
+
+      keyframes: {
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+      },
     },
   },
 

@@ -3,6 +3,15 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next({ request });
+  const hostname = request.headers.get("host");
+  const subdomain = hostname?.split(".")[0];
+
+  // console.log(request.nextUrl.pathname, "======>");
+  // if (subdomain === "admin") {
+  //   return NextResponse.rewrite(
+  //     new URL(`/admin${request.nextUrl.pathname}`, request.url)
+  //   );
+  // }
 
   if (request.nextUrl.pathname == "/auth") {
     return NextResponse.rewrite(new URL("/auth/login", request.url));
@@ -11,7 +20,7 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
     var cookie = request.cookies.get("token");
     if (cookie === undefined) {
-      return NextResponse.rewrite(new URL('/auth/login', request.url));
+      return NextResponse.rewrite(new URL("/auth/login", request.url));
     }
   }
 
@@ -27,3 +36,7 @@ export function middleware(request: NextRequest) {
 
   return response;
 }
+
+export const config = {
+  matcher: "/:path*",
+};

@@ -18,22 +18,11 @@ module.exports = {
          }),
 
          queryInterface.addConstraint("livechats", {
-            fields: ["user_id"],
-            name: "livechats(user_id)-users(id)_fk",
+            fields: ["session_id"],
+            name: "livechats(session_id)-livechat_session(id)_fk",
             type: "foreign key",
             references: {
-               table: "users",
-               field: "id"
-            },
-            transaction: t
-         }),
-
-         queryInterface.addConstraint("livechats", {
-            fields: ["users_id"],
-            name: "livechats(users_id)-users(id)_fk",
-            type: "foreign key",
-            references: {
-               table: "users",
+               table: "livechat_session",
                field: "id"
             },
             transaction: t
@@ -116,28 +105,6 @@ module.exports = {
             transaction: t
          }),
 
-         queryInterface.addConstraint("wallets", {
-            fields: ["wallet_balance_id"],
-            name: "wallets(wallet_balance_id)-wallet_balances(id)_fk",
-            type: "foreign key",
-            references: {
-               table: "wallet_balances",
-               field: "id"
-            },
-            transaction: t
-         }),
-
-         queryInterface.addConstraint("wallets", {
-            fields: ["transactions_id"],
-            name: "wallets(transactions_id)-transactions(id)_fk",
-            type: "foreign key",
-            references: {
-               table: "transactions",
-               field: "id"
-            },
-            transaction: t
-         }),
-
          ]);
       });
    },
@@ -146,8 +113,7 @@ module.exports = {
       return queryInterface.sequelize.transaction(t => {
          return Promise.all([
          queryInterface.removeConstraint("alert", "alert(user_id)-users(id)_fk", { transaction: t }),
-         queryInterface.removeConstraint("livechats", "livechats(user_id)-users(id)_fk", { transaction: t }),
-         queryInterface.removeConstraint("livechats", "livechats(users_id)-users(id)_fk", { transaction: t }),
+         queryInterface.removeConstraint("livechats", "livechats(session_id)-livechat_session(id)_fk", { transaction: t }),
          queryInterface.removeConstraint("transactions", "transactions(user_id)-users(id)_fk", { transaction: t }),
          queryInterface.removeConstraint("transactions", "transactions(wallet_id)-wallets(id)_fk", { transaction: t }),
          queryInterface.removeConstraint("transactions", "transactions(beneficiary_id)-users(id)_fk", { transaction: t }),
@@ -155,8 +121,6 @@ module.exports = {
          queryInterface.removeConstraint("verification_tokens", "verification_tokens(user_id)-users(id)_fk", { transaction: t }),
          queryInterface.removeConstraint("wallet_balances", "wallet_balances(user_id)-users(id)_fk", { transaction: t }),
          queryInterface.removeConstraint("wallet_balances", "wallet_balances(wallet_id)-wallets(id)_fk", { transaction: t }),
-         queryInterface.removeConstraint("wallets", "wallets(wallet_balance_id)-wallet_balances(id)_fk", { transaction: t }),
-         queryInterface.removeConstraint("wallets", "wallets(transactions_id)-transactions(id)_fk", { transaction: t }),
          ]);
       });
    }

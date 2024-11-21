@@ -10,8 +10,11 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PasswordToggler } from "../components/PasswordToggler";
-import { checkPasskey, generateRandomChallenge, login } from "@/actions/auth/login";
+import { checkGoogleAuthLogin, checkPasskey, generateRandomChallenge, login } from "@/actions/auth/login";
 import { client, server } from "@passwordless-id/webauthn";
+import { Separator } from "@/components/ui/separator";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { appClient } from "@/server/extra/firebase";
 
 export default function LoginPage() {
   const {
@@ -49,8 +52,6 @@ export default function LoginPage() {
     }
   };
 
-
-
   const loginWithPasskey = async () => {
     const challenge = await generateRandomChallenge();
 
@@ -64,10 +65,10 @@ export default function LoginPage() {
 
     if (res !== undefined && res.success) {
       toast.success(res.message);
-      localStorage.setItem("user_id", JSON.stringify(res.user.id));
+      localStorage.setItem("user_id", JSON.stringify(res.user?.id));
       localStorage.setItem("token", JSON.stringify(res.token));
 
-      if (res.user.idDocStatus === null || res.user.ssnStatus === null) {
+      if (res.user?.idDocStatus === null || res.user?.ssnStatus === null) {
         router.push("/auth/verification");
       } else {
         router.push("/dashboard");
@@ -76,6 +77,36 @@ export default function LoginPage() {
       toast.error(res.errors.root);
     }
   }
+
+  const loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth(appClient);
+
+    try {
+      var result = await signInWithPopup(auth, provider);
+
+      var res = await checkGoogleAuthLogin(result.user.email!);
+
+      if (res !== undefined && res.success) {
+        toast.success(res.message);
+        localStorage.setItem("user_id", JSON.stringify(res.user?.id));
+        localStorage.setItem("token", JSON.stringify(res.token));
+
+        if (res.user?.idDocStatus === null || res.user?.ssnStatus === null) {
+          router.push("/auth/verification");
+        } else {
+          router.push("/dashboard");
+        }
+      } else {
+        toast.error(res.message);
+      }
+
+    } catch (error: any) {
+      // const errorCode = error.code;
+      // const email = error.customData.email;
+      const errorMessage = error?.message;
+    }
+  };
 
   return (
     <Box
@@ -141,32 +172,11 @@ export default function LoginPage() {
             >
               Sign in
             </Button>
-            {/* <Box height={"20px"} /> */}
-            {/* <Button
-              type={"button"}
-              loading={isSubmitting}
-              size="3"
-              variant="surface"
-              onClick={saveWithPasskey}
-            >
-              Save password
-            </Button>
-            <Box height={"20px"} />
-            <Button
-              type={"button"}
-              loading={isSubmitting}
-              size="3"
-              variant="surface"
-              onClick={loginWithPasskey}
-            >
-              Login with Passkey
-            </Button> */}
           </Flex>
-          <Box height={"20px"} />
+          <Box height={"10px"} />
           <Flex align={'center'} direction={'column'}>
-            <Flex>
-            </Flex>
-            <Link onClick={loginWithPasskey}>Sign in with passkey</Link>
+            <Link onClick={loginWithGoogle}>Sign in with Google</Link>
+            {/* <Link onClick={loginWithPasskey}>Sign in with Passkey</Link> */}
           </Flex>
         </form>
       </Card>

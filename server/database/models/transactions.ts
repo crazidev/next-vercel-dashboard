@@ -182,19 +182,6 @@ export class Transactions extends Model<
    declare setBank: Sequelize.BelongsToSetAssociationMixin<Banks, number>;
    declare createBank: Sequelize.BelongsToCreateAssociationMixin<Banks>;
 
-   // Transactions hasMany Wallets via transactionsId
-   declare transactionsWallets: Sequelize.NonAttribute<Wallets[]>;
-   declare getTransactionsWallets: Sequelize.HasManyGetAssociationsMixin<Wallets>;
-   declare setTransactionsWallets: Sequelize.HasManySetAssociationsMixin<Wallets, number>;
-   declare addTransactionsWallet: Sequelize.HasManyAddAssociationMixin<Wallets, number>;
-   declare addTransactionsWallets: Sequelize.HasManyAddAssociationsMixin<Wallets, number>;
-   declare createTransactionsWallet: Sequelize.HasManyCreateAssociationMixin<Wallets>;
-   declare removeTransactionsWallet: Sequelize.HasManyRemoveAssociationMixin<Wallets, number>;
-   declare removeTransactionsWallets: Sequelize.HasManyRemoveAssociationsMixin<Wallets, number>;
-   declare hasTransactionsWallet: Sequelize.HasManyHasAssociationMixin<Wallets, number>;
-   declare hasTransactionsWallets: Sequelize.HasManyHasAssociationsMixin<Wallets, number>;
-   declare countTransactionsWallets: Sequelize.HasManyCountAssociationsMixin;
-
    // Transactions belongsTo Users via userId
    declare user?: Users;
    declare getUser: Sequelize.BelongsToGetAssociationMixin<Users>;

@@ -88,7 +88,7 @@ export function SideBarComponent({
                  pt-[45px]
                  transition-all duration-300 ease-in-out 
                  to-[var(--red-1)] from-transparent
-                 tablet:w-[100%] w-[230px]
+                 tablet:w-[100%] w-[270px]
                  sticky top-0
                 `}
             >
@@ -96,7 +96,15 @@ export function SideBarComponent({
 
               {(expand) && (
                 <Flex
-                  className="tablet:hidden mobile:hidden before:h-[100vh] before:-z-10 before:absolute before:backdrop-blur-sm before:inset-0 before:bg-[var(--gray-a2)]"
+                  className="
+                  tablet:hidden 
+                  mobile:hidden 
+                  before:h-[100vh]
+                   before:-z-10 
+                  before:absolute 
+                  before:backdrop-blur-sm 
+                  before:inset-0 
+                  before:bg-[var(--gray-a2)]"
                   align={"center"}
                   justify={"center"}
                   gap={"3"}

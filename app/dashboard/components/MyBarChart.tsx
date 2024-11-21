@@ -15,21 +15,21 @@ import {
 export const description = "A multiple bar chart";
 
 const chartData = [
-  { month: "Mon", desktop: 186, mobile: 80 },
-  { month: "Tues", desktop: 305, mobile: 200 },
-  { month: "Wed", desktop: 237, mobile: 120 },
-  { month: "Thu", desktop: 73, mobile: 190 },
-  { month: "Fri", desktop: 209, mobile: 130 },
-  { month: "Sat", desktop: 21, mobile: 140 },
-  { month: "Sun", desktop: 21, mobile: 140 },
+  { month: "Mon", earning: 186, spending: 80 },
+  { month: "Tues", earning: 305, spending: 200 },
+  { month: "Wed", earning: 237, spending: 120 },
+  { month: "Thu", earning: 73, spending: 190 },
+  { month: "Fri", earning: 209, spending: 130 },
+  { month: "Sat", earning: 21, spending: 140 },
+  { month: "Sun", earning: 21, spending: 140 },
 ];
 
 const chartConfig = {
-  desktop: {
+  earning: {
     label: "Earning",
     color: "var(--accent-8)",
   },
-  mobile: {
+  spending: {
     label: "Spending",
     color: "var(--red-9)",
   },
@@ -53,8 +53,8 @@ export function MyBarChart() {
         />
 
         <ChartLegend  content={<ChartLegendContent />} />
-        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-        <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+        <Bar dataKey="earning" fill="var(--color-earning)" radius={4} />
+        <Bar dataKey="spending" fill="var(--color-spending)" radius={4} />
       </BarChart>
     </ChartContainer>
   );

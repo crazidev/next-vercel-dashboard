@@ -6,7 +6,7 @@ module.exports = {
    up(queryInterface, Sequelize) {
       return queryInterface.sequelize.transaction(t => {
          return Promise.all([
-            queryInterface.createTable("passkey", {
+            queryInterface.createTable("livechat_session", {
       id: {
          autoIncrement: true,
          type: DataTypes.INTEGER,
@@ -20,14 +20,16 @@ module.exports = {
          field: 'user_id'
       },
 
-      credential: {
+      customerName: {
          type: DataTypes.TEXT,
-         allowNull: false
+         allowNull: true,
+         field: 'customer_name'
       },
 
-      device: {
+      customerEmail: {
          type: DataTypes.TEXT,
-         allowNull: true
+         allowNull: true,
+         field: 'customer_email'
       },
 
       createdAt: {
@@ -43,7 +45,7 @@ module.exports = {
    down(queryInterface, Sequelize) {
       return queryInterface.sequelize.transaction(t => {
          return Promise.all([
-            queryInterface.dropTable("passkey", { transaction: t }),
+            queryInterface.dropTable("livechat_session", { transaction: t }),
          ]);
       }
    )},

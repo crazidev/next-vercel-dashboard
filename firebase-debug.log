@@ -1,0 +1,89 @@
+[debug] [2024-11-19T16:54:59.549Z] ----------------------------------------------------------------------
+[debug] [2024-11-19T16:54:59.554Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\crazi\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-11-19T16:54:59.554Z] CLI Version:   13.20.2
+[debug] [2024-11-19T16:54:59.555Z] Platform:      win32
+[debug] [2024-11-19T16:54:59.555Z] Node Version:  v20.16.0
+[debug] [2024-11-19T16:54:59.555Z] Time:          Tue Nov 19 2024 17:54:59 GMT+0100 (West Africa Standard Time)
+[debug] [2024-11-19T16:54:59.555Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-19T16:54:59.561Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2024-11-19T16:54:59.737Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-19T16:54:59.737Z] > authorizing via signed-in user (privacydomainmanager@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\crazi\Development\node-projects\next-vercel-dashboard
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[debug] [2024-11-19T16:55:05.354Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-11-19T16:55:05.355Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-11-19T16:55:49.304Z] Using project from CLI flag: hybank-new
+[debug] [2024-11-19T16:55:49.306Z] Checked if tokens are valid: false, expires at: 1731696698171
+[debug] [2024-11-19T16:55:49.306Z] Checked if tokens are valid: false, expires at: 1731696698171
+[debug] [2024-11-19T16:55:49.306Z] > refreshing access token with scopes: []
+[debug] [2024-11-19T16:55:49.307Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-11-19T16:55:49.308Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-11-19T16:55:50.243Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-11-19T16:55:50.244Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-11-19T16:55:50.253Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/hybank-new [none]
+[debug] [2024-11-19T16:55:51.564Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/hybank-new 200
+[debug] [2024-11-19T16:55:51.564Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/hybank-new {"projectId":"hybank-new","projectNumber":"395155457856","displayName":"hybank-new","name":"projects/hybank-new","resources":{"hostingSite":"hybank-new"},"state":"ACTIVE","etag":"1_66701fb4-cbbc-42ff-b666-f6b38c3b1160"}
+[info] i  Using project hybank-new (hybank-new) 
+[info] 
+=== Hosting Setup
+[debug] [2024-11-19T16:55:51.572Z] Checked if tokens are valid: true, expires at: 1732038949244
+[debug] [2024-11-19T16:55:51.572Z] Checked if tokens are valid: true, expires at: 1732038949244
+[debug] [2024-11-19T16:55:51.572Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/hybank-new [none]
+[debug] [2024-11-19T16:55:52.033Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/hybank-new 200
+[debug] [2024-11-19T16:55:52.034Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/hybank-new {"projectId":"hybank-new","projectNumber":"395155457856","displayName":"hybank-new","name":"projects/hybank-new","resources":{"hostingSite":"hybank-new"},"state":"ACTIVE","etag":"1_66701fb4-cbbc-42ff-b666-f6b38c3b1160"}
+[debug] [2024-11-19T16:56:05.004Z] SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at findDependency (C:\Users\crazi\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\utils.js:188:23)
+    at getAstroVersion (C:\Users\crazi\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\astro\utils.js:39:45)
+    at discover (C:\Users\crazi\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\astro\index.js:17:49)
+    at discover (C:\Users\crazi\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:47:38)
+    at async doSetup (C:\Users\crazi\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\hosting\index.js:54:11)
+    at async init (C:\Users\crazi\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:40:9)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-11-19T16:56:34.230Z] ----------------------------------------------------------------------
+[debug] [2024-11-19T16:56:34.234Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\crazi\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-11-19T16:56:34.234Z] CLI Version:   13.20.2
+[debug] [2024-11-19T16:56:34.235Z] Platform:      win32
+[debug] [2024-11-19T16:56:34.235Z] Node Version:  v20.16.0
+[debug] [2024-11-19T16:56:34.235Z] Time:          Tue Nov 19 2024 17:56:34 GMT+0100 (West Africa Standard Time)
+[debug] [2024-11-19T16:56:34.235Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-19T16:56:34.359Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-19T16:56:34.360Z] > authorizing via signed-in user (privacydomainmanager@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\crazi\Development\node-projects\next-vercel-dashboard
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+

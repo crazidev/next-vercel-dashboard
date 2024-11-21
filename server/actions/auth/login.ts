@@ -15,6 +15,7 @@ import { Passkey } from "@/database/models/passkey";
 import { server } from "@passwordless-id/webauthn";
 import { userAgent } from "next/server";
 import { AuthenticationResponseJSON } from "@passwordless-id/webauthn/dist/esm/types";
+import { UserCredential } from "firebase/auth";
 
 export async function login(formData: any) {
   try {
@@ -190,6 +191,44 @@ export async function checkPasskey({
       errors: {
         root: "Passkey expired or related user not found.",
       },
+    };
+  }
+}
+
+export async function checkGoogleAuthLogin(email: string) {
+  try {
+    // const credential = GoogleAuthProvider.credentialFromResult(result);
+    // const token = credential?.accessToken;
+    // const user = result.user;
+    
+    await getSequelizeInstance();
+
+    var user = await Users.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    if (user == null) {
+      return {
+        errors: {
+          email: "User with this email does not exists",
+        },
+      };
+    }
+
+    const token = await generateJWToken(user);
+
+    return {
+      success: true,
+      token: token,
+      user: user.toJSON(),
+      message: "Login successful",
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: "Something went wrong.",
     };
   }
 }

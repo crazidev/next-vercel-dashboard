@@ -22,6 +22,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  domains: [
+    "localhost",
+    "admin.localhost",
+  ],
 };
 
 export default nextConfig;

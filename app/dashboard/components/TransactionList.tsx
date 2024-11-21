@@ -27,6 +27,7 @@ import { Transactions } from "@/database/models/transactions";
 import { Users } from "@/database/models/users";
 import { WalletBalances } from "@/database/models/wallet_balances";
 import { Wallets } from "@/database/models/wallets";
+import { groupTransactionsByDate } from "@/lib/groupTransactionByData";
 
 export const TransactionList = async ({
   wallet: wallet_shortname,
@@ -97,6 +98,9 @@ export const TransactionList = async ({
       resolve(data);
     }, 0 * 1000);
   });
+
+  // const groupedData = groupTransactionsByDate(list);
+  // console.log(groupedData);
 
 
   return (

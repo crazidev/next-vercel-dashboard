@@ -9,6 +9,7 @@ export class Passkey extends Model<
    declare userId: number;
    declare credential: string;
    declare device?: string;
+   declare createdAt: Date;
 
    static initModel(sequelize: Sequelize.Sequelize): typeof Passkey {
       return Passkey.init({
@@ -26,13 +27,19 @@ export class Passkey extends Model<
       },
 
       credential: {
-         type: DataTypes.JSON,
+         type: DataTypes.TEXT,
          allowNull: false
       },
 
       device: {
-         type: DataTypes.JSON,
+         type: DataTypes.TEXT,
          allowNull: true
+      },
+
+      createdAt: {
+         type: DataTypes.DATE,
+         allowNull: false,
+         defaultValue: Sequelize.Sequelize.fn('current_timestamp')
       },
    }, {
       sequelize,

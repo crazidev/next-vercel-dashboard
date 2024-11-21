@@ -5,8 +5,10 @@ import { fetchUserWallets } from "@/fetch/fetch_wallets";
 import { fetchUser } from "@/fetch/fetch_user";
 import { authUser } from "@/actions/authUser";
 import { cFmt } from "@/lib/cFmt";
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
+import { fetchExchange } from "@/lib/converter";
+import { WalletBalances } from "@/database/models/wallet_balances";
 
 export const BalanceList = async () => {
   var user_id = (await authUser()).user_id;
@@ -23,44 +25,14 @@ export const BalanceList = async () => {
         <Flex className="flex sm:flex-row flex-col gap-3" gap={"2"}>
           <MainBalanceCard
             user={user}
-            className="relative min-h-[100px] md:flex flex-[6] hidden md:max-w-[350px]"
+            className="relative h-[140px] md:flex flex-[6] hidden md:max-w-[350px]"
           />
           <div className="flex flex-row flex-grow gap-3">
-            
+
             {walletList.map((wallet, index) => (
-              <Link key={wallet.id} href={`/dashboard/wallets?wallet_id=${wallet.wallet?.id}`}>
-                <MyCard
-
-                  radius="10px"
-                  className="relative min-h-[100px] flex flex-col flex-1 justify-between dark:hover:border-[var(--accent-7)] p-[10px] w-[150px] min-w-[130px] transition-all duration-100 ease-in"
-                >
-                  <Flex>
-                    <img
-                      className="mb-3 rounded-full w-[30px]"
-                      src={wallet.wallet?.icon ?? ""}
-
-                      alt={""}
-                    />
-                  </Flex>
-                  <Flex gap={"2"} justify={"between"} align={"center"}>
-                    <Flex direction={"column"} className="">
-                      <Text className="font-mono text-[20px]">
-                        {cFmt({ amount: wallet.balance })}
-                      </Text>
-                      <Text trim={'start'} color="gray" className="font-thin text-[12px]">
-                        {wallet.wallet?.name}
-                      </Text>
-                    </Flex>
-                    {/* <Image
-                  className="sm:hidden rounded-full"
-                  src={wallet.wallet?.icon}
-                  width={25}
-                  height={25}
-                  alt={"logo"}
-                /> */}
-                  </Flex>
-                </MyCard>
-              </Link>
+              // <Suspense fallback="Loading...">
+              <CryptoWalletCard key={wallet.id} wallet={wallet} index={index} />
+              // </Suspense>
             ))}
           </div>
         </Flex>
@@ -68,6 +40,57 @@ export const BalanceList = async () => {
     </>
   );
 };
+
+const CryptoWalletCard = async ({ wallet, index }: { wallet: WalletBalances, index: number }) => {
+  // var shortCode = wallet.wallet?.shortName;
+  // var get = await fetchExchange({
+  //   from: 'usd',
+  //   to: shortCode,
+  //   amount: wallet.balance ?? 0
+  // });
+
+
+  // var data = await get.json();
+  // var converted = data[`${shortCode}`];
+
+  return (
+    <Link href={`/dashboard/wallets/${wallet.wallet?.shortName}`}>
+      <MyCard
+        radius="10px"
+        className="relative h-[140px] flex flex-col flex-1 justify-between dark:hover:border-[var(--accent-7)] p-[10px] min-w-[150px] transition-all duration-100 ease-in"
+      >
+        <Flex>
+          <img
+            className="mb-3 rounded-full w-[30px]"
+            src={wallet.wallet?.icon ?? ""}
+
+            alt={""}
+          />
+        </Flex>
+        <Flex gap={"2"} justify={"between"} align={"center"}>
+          <Flex direction={"column"} className="">
+            <Text className="font-mono text-[18px]">
+              {cFmt({ amount: wallet.balance })}
+            </Text>
+            {/* <Text trim={'start'} className="font-mono text-[14px]">
+              {converted}
+            </Text> */}
+            <Text trim={'start'} color="gray" className="font-thin text-[12px]">
+              {wallet.wallet?.name}
+            </Text>
+          </Flex>
+          {/* <Image
+      className="sm:hidden rounded-full"
+      src={wallet.wallet?.icon}
+      width={25}
+      height={25}
+      alt={"logo"}
+    /> */}
+        </Flex>
+      </MyCard>
+    </Link>
+  )
+}
 
 const MainBalanceCard = React.forwardRef<HTMLElement, any>(
   ({ user, ...props }, ref) => {
@@ -87,9 +110,9 @@ const MainBalanceCard = React.forwardRef<HTMLElement, any>(
                   {user?.status}
                 </Badge>
                 <Badge className="text-[10px]" color="blue" radius="large">
-                 {user?.accountLevel == "tier1" && "Savings Account"}
-                 {user?.accountLevel == "tier2" && "Business Account"}
-                 {user?.accountLevel == "tier3" && "Enterprise Account"}
+                  {user?.accountLevel == "tier1" && "Savings Account"}
+                  {user?.accountLevel == "tier2" && "Business Account"}
+                  {user?.accountLevel == "tier3" && "Enterprise Account"}
                 </Badge>
                 {/* <Badge
               className="text-[10px] capitalize"
