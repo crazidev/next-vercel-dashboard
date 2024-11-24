@@ -15,7 +15,6 @@ export class Transactions extends Model<
    declare reference?: string;
    declare userId?: number;
    declare walletId?: number;
-   declare walletNetwork?: string;
    declare id: CreationOptional<number>;
    declare beneficiaryId?: number;
    declare beneficiaryName?: string;
@@ -69,12 +68,6 @@ export class Transactions extends Model<
             key: 'id'
          },
          field: 'wallet_id'
-      },
-
-      walletNetwork: {
-         type: DataTypes.STRING(255),
-         allowNull: true,
-         field: 'wallet_network'
       },
 
       id: {

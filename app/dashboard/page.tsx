@@ -61,7 +61,7 @@ export default async function HomePage({}: {}) {
               <Text className="font-extrabold" size={"3"}>
                 Transaction History
               </Text>
-              <Flex gap={"2"} className="mt-5 text-primary-400">
+              <Flex gap={"2"} className="my-3 text-primary-400">
                 <TbHandClick />
                 <Text size={"1"}>Scroll right for more</Text>
               </Flex>
@@ -72,13 +72,13 @@ export default async function HomePage({}: {}) {
                 <RotateSpinnerComponent />
               }
             >
-              <TransactionList />
+              <TransactionList type="compact" />
             </Suspense>
 
             <Flex justify={"end"} align={"center"} className="my-3">
-              <Link>
+              <Link href="transactions">
                 <Flex>
-                  View all Transactions <ChevronRight />
+                  View More <ChevronRight />
                 </Flex>
               </Link>
             </Flex>

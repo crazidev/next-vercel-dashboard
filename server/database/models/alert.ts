@@ -52,12 +52,14 @@ export class Alert extends Model<
       startAt: {
          type: DataTypes.DATE,
          allowNull: true,
-         defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+         defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+         field: 'start_at'
       },
 
       endAt: {
          type: DataTypes.DATE,
-         allowNull: true
+         allowNull: true,
+         field: 'end_at'
       },
    }, {
       sequelize,

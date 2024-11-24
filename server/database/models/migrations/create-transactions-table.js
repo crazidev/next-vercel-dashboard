@@ -45,12 +45,6 @@ module.exports = {
          field: 'wallet_id'
       },
 
-      walletNetwork: {
-         type: DataTypes.STRING(255),
-         allowNull: true,
-         field: 'wallet_network'
-      },
-
       id: {
          autoIncrement: true,
          type: DataTypes.INTEGER,

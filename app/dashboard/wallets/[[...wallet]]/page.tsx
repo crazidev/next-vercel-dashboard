@@ -52,13 +52,13 @@ const WalletPage = async ({
             </Flex>
 
             <Suspense fallback={<RotateSpinnerComponent />}>
-              <TransactionList wallet={wallet} useTableLayout/>
+              <TransactionList type="compact" wallet={wallet}/>
             </Suspense>
 
             <Flex justify={"end"} align={"center"} className="my-3">
               <Link>
                 <Flex>
-                  View all Transactions <ChevronRight />
+                  View More <ChevronRight />
                 </Flex>
               </Link>
             </Flex>

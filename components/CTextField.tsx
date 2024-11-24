@@ -15,7 +15,7 @@ export interface InputProps extends TextField.RootProps {
   register?: UseFormRegisterReturn<any>;
 }
 
-export const CTextField = React.forwardRef<HTMLElement, InputProps>(
+export const  CTextField = React.forwardRef<HTMLElement, InputProps>(
   ({ leftIcon, label, rightIcon, error, type, accept, register, ...props }) => {
     // Default styles, will be overridden on iOS
 
@@ -38,6 +38,7 @@ export const CTextField = React.forwardRef<HTMLElement, InputProps>(
             type={type}
             size={"2"}
             {...props}
+            
             className={`h-[37px] ${props.className} ${isIOS ? "text-[16px]" : ""}`}
             {...register}
           >

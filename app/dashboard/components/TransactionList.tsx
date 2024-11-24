@@ -52,8 +52,6 @@ export const TransactionList = async ({
 
   var where: WhereOptions<InferAttributes<Transactions, { omit: never; }>> = {};
 
-  // console.log(wallet_shortname);
-
   if (wallet_shortname == 'main') {
     where.walletId = (null as any);
   } else if (wallet_shortname !== undefined) {
@@ -77,7 +75,7 @@ export const TransactionList = async ({
   var list = await new Promise<Transactions[]>(async (resolve) => {
     var data = await Transactions.findAll({
       where: where,
-      limit: limit,
+      limit: type == 'compact' ? 5 : limit,
       offset: offset,
       order: [['createdAt', 'DESC']],
       include: [

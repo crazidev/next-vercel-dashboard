@@ -1,6 +1,7 @@
 import {
   initializeFirestore,
   connectFirestoreEmulator,
+  getFirestore,
 } from "firebase/firestore";
 
 import { initializeApp, initializeServerApp } from "firebase/app";
@@ -12,10 +13,12 @@ const firebaseConfig = {
   projectId: "hybank-new",
   storageBucket: "hybank-new.firebasestorage.app",
   messagingSenderId: "395155457856",
-  appId: "1:395155457856:web:b5e3b2401c5731de561ca5"
+  appId: "1:395155457856:web:b5e3b2401c5731de561ca5",
 };
 
 export const appClient = initializeApp(firebaseConfig);
 // export const appServer = initializeServerApp(firebaseConfig, {});
 export const firestoreClient = initializeFirestore(appClient, {});
-connectFirestoreEmulator(firestoreClient, "localhost", 8080);
+connectFirestoreEmulator(firestoreClient, "192.168.0.108", 8080);
+
+export const firestoreDb = getFirestore(appClient);

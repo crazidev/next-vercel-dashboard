@@ -57,7 +57,7 @@ export function SideBarComponent({
   const [isReady, setIsReady] = useState(true);
 
   useEffect(() => {
-    if (document.readyState === "complete") {
+  if (document.readyState === "complete") {
       setIsReady(true);
     }
   }, [pathname]);

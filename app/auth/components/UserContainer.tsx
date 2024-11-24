@@ -8,6 +8,7 @@ import { cookies } from "next/headers";
 import { MdSupportAgent } from "react-icons/md";
 import { Users } from "@/database/models/users";
 import { fetchUser } from "@/fetch/fetch_user";
+import { LivechatToggler } from "@app/dashboard/components/LivechatToggler";
 
 export async function UserContainer() {
   var user_id = (await cookies()).get("user_id")?.value;
@@ -20,7 +21,7 @@ export async function UserContainer() {
   return (
     <>
       <Flex align={'center'} gap={'3'}>
-        <MdSupportAgent size={20} />
+        <LivechatToggler />
         <DarkModeToggler />
         <Flex gap="2" align={"center"}>
           <div className="md:block hidden">

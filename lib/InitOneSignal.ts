@@ -5,7 +5,7 @@ export const InitOneSignal = async (options?: IInitObject) => {
     ...options,
     appId: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID ?? "",
     notifyButton: {
-      enable: true,
+      enable: false,
     },
     promptOptions: {
       customlink: {

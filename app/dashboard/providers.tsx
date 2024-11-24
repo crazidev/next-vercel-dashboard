@@ -16,6 +16,8 @@ interface DashboardContextProp {
   isTablet?: boolean;
   expandSidebar?: boolean;
   setTheme?: (theme: "dark" | "light") => void;
+  livechatOpen?: boolean,
+  toggleLivechat?:  (expand: boolean) => void,
   setExpand?: (expand: boolean) => void;
 }
 
@@ -29,53 +31,54 @@ export default function DashboardProvider({
     isMobile: false,
     isTablet: false,
     expandSidebar: false,
+    livechatOpen: false,
   });
 
   if (typeof window !== "undefined") {
     useEffect(() => {
       let value = calculateResponsive();
-      setState({
-        ...state,
+      setState((prevState) => ({
+        ...prevState, // preserve previous state
         isMobile: value.isMobile,
         isTablet: value.isTablet,
         dark: value.isDark,
-      });
-
+      }));
+    
       window.addEventListener("resize", (e) => {
         let value = calculateResponsive();
-        setState({
-          ...state,
+        setState((prevState) => ({
+          ...prevState, // preserve previous state
           isMobile: value.isMobile,
           isTablet: value.isTablet,
           dark: value.isDark,
-        });
+        }));
       });
-
+    
       if (state.isTablet) {
-        setState({ ...state, expandSidebar: false });
+        setState((prevState) => ({ ...prevState, expandSidebar: false }));
       }
       if (state.isMobile && state.setExpand) {
-        setState({ ...state, expandSidebar: true });
+        setState((prevState) => ({ ...prevState, expandSidebar: true }));
       }
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
       mediaQuery.addEventListener("change", (event) => {
-        if (event.matches) {
-          setState({ ...state, dark: true });
-        } else {
-          setState({ ...state, dark: false });
-        }
-
-        Cookies.remove('theme');
+        setState((prevState) => ({
+          ...prevState,
+          dark: event.matches,
+        }));
+    
+        Cookies.remove("theme");
         Cookies.set("theme", event.matches ? "dark" : "light", {
           expires: 30,
         });
       });
-    }, [window]);
+    }, []);  // Only run once when the component mounts
+    
   }
 
   const setTheme = (theme: "dark" | "light") => {
     Cookies.remove('theme');
-    Cookies.set("theme",  theme == "dark" ? "dark" : "light", {
+    Cookies.set("theme", theme == "dark" ? "dark" : "light", {
       expires: 30,
     });
     setState({ ...state, dark: theme == "dark" });
@@ -83,6 +86,11 @@ export default function DashboardProvider({
   const setExpand = (value: boolean) => {
     setState({ ...state, expandSidebar: value });
   };
+
+  const toggleLivechat = (value: boolean) => {
+    setState({ ...state, livechatOpen: value });
+  };
+  
 
   useEffect(() => {
     document.documentElement.classList.remove("light");
@@ -96,6 +104,7 @@ export default function DashboardProvider({
         ...state,
         setTheme: (theme) => setTheme(theme),
         setExpand: (value) => setExpand(value),
+        toggleLivechat: (value) => toggleLivechat(value),
       }}
     >
       {children}

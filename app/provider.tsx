@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import DashboardProvider, { DashboardContext } from "./dashboard/providers";
 import OneSignal from 'react-onesignal';
 import { InitOneSignal } from "@/lib/InitOneSignal";
+import { LiveChat } from "./dashboard/components/livechat/LiveChat";
 
 // import { jellyTriangle } from 'ldrs';
 // import { Inter_Tight } from "next/font/google";
@@ -57,6 +58,7 @@ export default function AppProvider({
             />{" "}
             {/* <ThemePanel /> */}
             {children}
+            <LiveChat />
           </Theme>
         )}
       </DashboardContext.Consumer>
