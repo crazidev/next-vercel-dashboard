@@ -8,10 +8,12 @@ import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
 } from "react-icons/tb";
+import useLayout from "@/components/hooks/useLayout";
 
 export function MobileSideBarButton() {
-  const { isMobile, expandSidebar, isTablet, setExpand } =
-    useContext(DashboardContext);
+  const { isMobile, isTablet } = useLayout();
+  
+  const { expandSidebar, setExpand } = useContext(DashboardContext);
 
   return (
     <>

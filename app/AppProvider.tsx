@@ -7,6 +7,9 @@ import DashboardProvider, { DashboardContext } from "./dashboard/providers";
 import OneSignal from 'react-onesignal';
 import { InitOneSignal } from "@/lib/InitOneSignal";
 import { LiveChat } from "./dashboard/components/livechat/LiveChat";
+import Cookies from "js-cookie";
+import useThemeContext, { ThemeContext } from "@/components/hooks/useThemeContext";
+
 
 // import { jellyTriangle } from 'ldrs';
 // import { Inter_Tight } from "next/font/google";
@@ -29,39 +32,34 @@ export default function AppProvider({
   children: React.ReactNode;
   theme?: any;
 }) {
-
   useEffect(() => {
-    // Ensure this code runs only on the client side
     if (typeof window !== 'undefined') {
       InitOneSignal();
     }
   }, []);
 
   return (
-    <DashboardProvider>
-      <DashboardContext.Consumer>
-        {(context) => (
-          <Theme
-            appearance={context.dark ? "dark" : "light"}
-            grayColor={"auto"}
-            accentColor={'plum'}
-            panelBackground="translucent"
-          >
-            <Toaster
-              theme={context.dark ? "dark" : "light"}
-              expand={false}
-              richColors
-              position={"top-left"}
-              toastOptions={{
-                style: {},
-              }}
-            />{" "}
-            {/* <ThemePanel /> */}
-            {children}
-            <LiveChat />
-          </Theme>
-        )}
-      </DashboardContext.Consumer>
-    </DashboardProvider>
+    <ThemeContext.Consumer>
+      {({ dark }) => <>
+        <Theme
+          appearance={dark ? "dark" : "light"}
+          grayColor={"auto"}
+          accentColor={'gold'}
+          panelBackground="translucent"
+        >
+          <Toaster
+            theme={dark ? "dark" : "light"}
+            expand={false}
+            richColors
+            position={"top-left"}
+            toastOptions={{
+              style: {},
+            }} />
+          {/* <ThemePanel /> */}
+          {children}
+          <LiveChat />
+        </Theme>
+      </>}
+    </ThemeContext.Consumer>
   );
 }

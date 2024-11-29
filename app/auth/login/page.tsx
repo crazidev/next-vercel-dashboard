@@ -139,7 +139,7 @@ export default function LoginPage() {
               placeholder="Enter your email"
               autoComplete="Crazibeat webauthn"
               leftIcon={<MdOutlineMailLock />}
-              error={errors?.email?.message}
+              error={errors?.email?.message.toString()}
               register={register("email")}
             />
             <Box height={"10px"} />
@@ -149,7 +149,7 @@ export default function LoginPage() {
               leftIcon={<MdLock />}
               autoComplete="current-password"
               rightIcon={<PasswordToggler visible={showPass} onChange={() => setShowPass(!showPass)} />}
-              error={errors?.password?.message}
+              error={errors?.password?.message.toString()}
               register={register("password")}
             />
             <Box height={"10px"} />

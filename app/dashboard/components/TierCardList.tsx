@@ -5,6 +5,7 @@ import { Box, Heading, Text } from "@radix-ui/themes";
 import { AnimatePresence, motion } from "motion/react";
 import { useContext, useState } from "react";
 import { DashboardContext } from "../providers";
+import useLayout from "@/components/hooks/useLayout";
 
 export function TierCardList() {
     const tiers = [
@@ -75,12 +76,14 @@ export function TierCardList() {
 
     var dashContext = useContext(DashboardContext);
     const [isOpen, setIsOpen] = useState(false);
+    const { isMobile, isTablet } = useLayout();
+
 
     return <motion.div layout transition={{
         duration: 0.5
     }} className="gap-5 items-center justify-center" style={{
         display: 'flex',
-        flexDirection: !(dashContext.isTablet || dashContext.isMobile) ? 'row' : 'column'
+        flexDirection: !(isTablet || isMobile) ? 'row' : 'column'
     }}>
 
         {tiers.map((tier, i) => (

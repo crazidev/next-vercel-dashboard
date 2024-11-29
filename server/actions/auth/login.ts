@@ -31,8 +31,6 @@ export async function login(formData: any) {
       where: {
         email: validatedFields.data!.email,
       },
-    }).catch((error) => {
-      console.error(error);
     });
 
     if (user == null) {

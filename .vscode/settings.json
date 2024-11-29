@@ -16,5 +16,10 @@
     "**/*_action*.ts": "${dirname(0)}/${filename} - Action",
     "**/*_fetch*.ts": "${dirname(0)}/${filename} - Fetch",
     "**/env/**/*.ts": "${filename} - Environment"
-  }
+  },
+  "cSpell.words": [
+    "chatlist",
+    "firestore",
+    "livechat"
+  ]
 }

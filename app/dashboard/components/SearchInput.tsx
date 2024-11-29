@@ -75,7 +75,7 @@ export const SearchInput = ({
                         value: undefined
                     });
             }}><MdCancel /></IconButton>}
-            error={errors?.search?.message}
+            error={errors?.search?.message as any}
             register={register("search")}
         />
     </form>

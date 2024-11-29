@@ -14,6 +14,7 @@ import {
 import { DashboardContext } from "../providers";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import useLayout from "@/components/hooks/useLayout";
 
 export const navlist = [
   {
@@ -50,14 +51,16 @@ export function SideBarComponent({
   children: React.ReactNode;
   sidebar?: React.ReactNode;
 }) {
-  const { isMobile, expandSidebar, isTablet, setExpand, setTheme } =
+  const { isMobile, isTablet } = useLayout();
+
+  const { expandSidebar, setExpand, setTheme } =
     useContext(DashboardContext);
   const expand = !isTablet && !isMobile;
   var pathname = usePathname();
   const [isReady, setIsReady] = useState(true);
 
   useEffect(() => {
-  if (document.readyState === "complete") {
+    if (document.readyState === "complete") {
       setIsReady(true);
     }
   }, [pathname]);

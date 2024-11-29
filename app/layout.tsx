@@ -1,5 +1,5 @@
 import "./globals.css";
-import AppProvider from "./provider";
+import AppProvider from "./AppProvider";
 import { cookies } from "next/headers";
 import { PWARelatedLinks } from "./PWARelatedLinks";
 import type { Metadata, Viewport } from "next";
@@ -66,8 +66,11 @@ export default async function RootLayout({
         <PWARelatedLinks />
       </head>
       <body>
-        {/* <CookiesProvider> */}
-        <AppProvider>{children}</AppProvider>{/* </CookiesProvider> */}
+        <script dangerouslySetInnerHTML={{
+          __html: `<script src="/js/client.js"></script>`,
+        }}>
+        </script>
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

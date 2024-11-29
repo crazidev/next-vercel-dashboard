@@ -51,7 +51,6 @@ export const TransactionList = async ({
   await getSequelizeInstance();
 
   var where: WhereOptions<InferAttributes<Transactions, { omit: never; }>> = {};
-
   if (wallet_shortname == 'main') {
     where.walletId = (null as any);
   } else if (wallet_shortname !== undefined) {
@@ -92,9 +91,9 @@ export const TransactionList = async ({
         }
       ],
     });
-    setTimeout(() => {
-      resolve(data);
-    }, 0 * 1000);
+    // setTimeout(() => {
+    resolve(data);
+    // }, 0 * 1000);
   });
 
   // const groupedData = groupTransactionsByDate(list);

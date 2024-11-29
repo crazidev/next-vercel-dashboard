@@ -19,6 +19,7 @@ import { TransactionList } from "app/dashboard/components/TransactionList";
 import { Suspense } from "react";
 import { RotateSpinnerComponent } from "./components/RotateSpinner";
 import { AlertComponent } from "./components/AlertComponent";
+import { WeeklyStats } from "./components/WeeklyStatsComponent";
 
 
 export default async function HomePage({}: {}) {
@@ -47,14 +48,11 @@ export default async function HomePage({}: {}) {
         </Flex>
         <Flex className="flex md:flex-row flex-col gap-5">
           <Flex direction={"column"} gap={"5"}>
-            <Card variant="ghost" className="">
-              <Text className="font-extrabold text-end" size={"3"}>
-                Weekly Stats
-              </Text>
+            <div className="">
               <div className="mt-[10px] min-w-full">
-                <MyBarChart />
+               <WeeklyStats />
               </div>
-            </Card>
+            </div>
           </Flex>
           <Card className="flex flex-col md:w-[70%]" variant="ghost">
             <Flex justify={"between"} direction={"column"} className="gap-1">

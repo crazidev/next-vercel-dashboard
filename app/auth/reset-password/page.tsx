@@ -42,7 +42,6 @@ export default function LoginPage() {
     "reset" | "verify" | "new_password"
   >((action as any) ?? "reset");
 
-
   const {
     register,
     handleSubmit,
@@ -50,13 +49,35 @@ export default function LoginPage() {
     getValues,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: yupResolver(yup.object(resetProgress === 'reset' ? {
-      email: yup.string().email().required()
-    } : {
-      password: yup.string().min(6).required(),
-      confirm_password: yup.string().min(6).required(),
-
-    })),
+    resolver: yupResolver(
+      yup.object({
+        email: yup
+          .string()
+          .email('Invalid email format')
+          .test(
+            'is-required-for-reset',
+            'Email is required',
+            (value) => resetProgress !== 'reset' || !!value
+          ),
+        password: yup
+          .string()
+          .min(6, 'Password must be at least 6 characters')
+          .test(
+            'is-required-for-non-reset',
+            'Password is required',
+            (value) => resetProgress === 'reset' || !!value
+          ),
+        confirm_password: yup
+          .string()
+          .min(6, 'Password must be at least 6 characters')
+          .oneOf([yup.ref('password')], 'Passwords must match')
+          .test(
+            'is-required-for-non-reset',
+            'Confirm password is required',
+            (value) => resetProgress === 'reset' || !!value
+          ),
+      })
+    )
   });
 
 
