@@ -51,7 +51,7 @@ export class Wallets extends Model<
       createdAt: {
          type: DataTypes.DATE,
          allowNull: true,
-         defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+         defaultValue: Sequelize.NOW,
          field: 'created_at'
       },
 

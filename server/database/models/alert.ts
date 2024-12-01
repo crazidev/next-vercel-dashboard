@@ -52,7 +52,7 @@ export class Alert extends Model<
       startAt: {
          type: DataTypes.DATE,
          allowNull: true,
-         defaultValue: Sequelize.Sequelize.fn('current_timestamp'),
+         defaultValue: Sequelize.NOW,
          field: 'start_at'
       },
 

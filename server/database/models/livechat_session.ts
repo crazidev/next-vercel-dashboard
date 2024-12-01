@@ -42,7 +42,7 @@ export class LivechatSession extends Model<
       createdAt: {
          type: DataTypes.DATE,
          allowNull: false,
-         defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+         defaultValue: Sequelize.NOW
       },
    }, {
       sequelize,

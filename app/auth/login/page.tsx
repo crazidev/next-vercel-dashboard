@@ -9,12 +9,12 @@ import { TbEye, TbEyeCancel, TbFaceId, TbFingerprint, TbInfoCircle, TbLockAccess
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { PasswordToggler } from "../components/PasswordToggler";
 import { checkGoogleAuthLogin, checkPasskey, generateRandomChallenge, login } from "@/actions/auth/login";
 import { client, server } from "@passwordless-id/webauthn";
 import { Separator } from "@/components/ui/separator";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { appClient } from "@/server/extra/firebase";
+import { PasswordToggler } from "@/components/PasswordToggler";
 
 export default function LoginPage() {
   const {

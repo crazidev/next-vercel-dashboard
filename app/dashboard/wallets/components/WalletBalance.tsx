@@ -8,7 +8,7 @@ import {
   Separator,
   Text,
 } from "@radix-ui/themes";
-import { Logo } from "@app/auth/components/shapes/logo";
+import { Logo } from "@/components/shapes/logo";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Users } from "@/database/models/users";

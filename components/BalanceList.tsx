@@ -1,3 +1,4 @@
+
 import { MyCard } from "@/components/MyCard";
 import { Badge, Flex, ScrollArea, Text } from "@radix-ui/themes";
 import { MyLineChart } from "./MyLineChart";
@@ -7,7 +8,7 @@ import { authUser } from "@/actions/authUser";
 import { cFmt } from "@/lib/cFmt";
 import React, { Suspense } from "react";
 import Link from "next/link";
-import { fetchExchange } from "@/lib/converter";
+
 import { WalletBalances } from "@/database/models/wallet_balances";
 
 export const BalanceList = async () => {
@@ -43,7 +44,7 @@ export const BalanceList = async () => {
 
 const CryptoWalletCard = async ({ wallet, index }: { wallet: WalletBalances, index: number }) => {
   // var shortCode = wallet.wallet?.shortName;
-  // var get = await fetchExchange({
+
   //   from: 'usd',
   //   to: shortCode,
   //   amount: wallet.balance ?? 0

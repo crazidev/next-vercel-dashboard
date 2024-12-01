@@ -6,7 +6,7 @@ import { authUser } from "@/actions/authUser";
 import { fetchUserWallets } from "@/fetch/fetch_wallets";
 import { fetchUser } from "@/fetch/fetch_user";
 import { TransactionList } from "../../../../components/TransactionList";
-import { Logo } from "@app/auth/components/shapes/logo";
+import { Logo } from "@/components/shapes/logo";
 import { TbSwitchVertical } from "react-icons/tb";
 import Image from "next/image";
 import { redirect, RedirectType } from "next/navigation";

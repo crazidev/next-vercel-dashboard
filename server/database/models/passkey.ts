@@ -39,7 +39,7 @@ export class Passkey extends Model<
       createdAt: {
          type: DataTypes.DATE,
          allowNull: false,
-         defaultValue: Sequelize.Sequelize.fn('current_timestamp')
+         defaultValue: Sequelize.NOW
       },
    }, {
       sequelize,

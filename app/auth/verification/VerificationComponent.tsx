@@ -12,7 +12,7 @@ import {
   Link,
   Callout,
 } from "@radix-ui/themes";
-import { CountrySelectComponent } from "../components/CountrySelectComponent";
+import { CountrySelectComponent } from "@/components/CountrySelectComponent";
 import { CTextField } from "@/components/CTextField";
 import {
   MdEdit,

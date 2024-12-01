@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { MdSupportAgent } from "react-icons/md";
 import { DashboardContext } from "../app/dashboard/providers";
 import { AnimatePresence, motion } from "motion/react";

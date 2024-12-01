@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { DashboardContext } from "../app/dashboard/providers";
-import { Text, Flex, IconButton } from "@radix-ui/themes";
+import { Text, Flex } from "@radix-ui/themes";
 import {
   TbLayoutSidebar,
   TbLayoutSidebarLeftCollapse,

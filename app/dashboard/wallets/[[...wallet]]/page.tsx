@@ -7,7 +7,7 @@ import { fetchUserWallets } from "@/fetch/fetch_wallets";
 import { fetchUser } from "@/fetch/fetch_user";
 import Image from "next/image";
 import { MdExpand, MdExpandMore } from "react-icons/md";
-import { Logo } from "@app/auth/components/shapes/logo";
+import { Logo } from "@/components/shapes/logo";
 import { TransactionList } from "../../../../components/TransactionList";
 import { ChevronRight } from "lucide-react";
 import { Suspense } from "react";

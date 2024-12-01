@@ -1,4 +1,4 @@
-import { Shape1 } from "@app/auth/components/shapes/shape_1";
+import { Shape1 } from "@/components/shapes/shape_1";
 import { SideBarComponent } from "@/components/SideBar";
 import { Shape2 } from "@/components/shapes/shape_2";
 import { Container } from "@radix-ui/themes";

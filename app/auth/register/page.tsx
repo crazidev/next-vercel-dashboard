@@ -30,7 +30,7 @@ import { register_action } from "@/actions/auth/register_action";
 import { TbCalendar, TbInfoCircle } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { PasswordValidator } from "../components/PasswordValidator";
+import { PasswordValidator } from "@/components/PasswordValidator";
 
 export default function RegisterPage() {
   var router = useRouter();

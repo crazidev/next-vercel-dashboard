@@ -1,13 +1,13 @@
 import Image from "next/image";
 import bg from "../../public/auth-background.png";
 import { Box, Flex, Link, Select, Spinner, Text } from "@radix-ui/themes";
-import { Shape1 } from "./components/shapes/shape_1";
-import { Shape2 } from "./components/shapes/shape_2";
-import { Logo } from "./components/shapes/logo";
-import { UserContainer } from "./components/UserContainer";
-import { HeaderLink } from "./components/HeaderLink";
+import { Shape1 } from "@/components/shapes/shape_1";
+import { Shape2 } from "@/components/shapes/shape_2";
+import { Logo } from "@/components/shapes/logo";
 import { Suspense } from "react";
 import { AuthFooter } from "./AuthFooter";
+import { HeaderLink } from "@/components/HeaderLink";
+import { UserContainer } from "@/components/UserContainer";
 
 export default function AuthLayout({
   children,

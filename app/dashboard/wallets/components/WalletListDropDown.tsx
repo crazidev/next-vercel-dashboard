@@ -1,7 +1,7 @@
 'use client';
 
 import { DropdownMenu, Text } from "@radix-ui/themes";
-import { Logo } from "@app/auth/components/shapes/logo";
+import { Logo } from "@/components/shapes/logo";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";

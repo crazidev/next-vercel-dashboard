@@ -1,4 +1,4 @@
-import { Box, BoxProps, Card } from "@radix-ui/themes";
+import { BoxProps } from "@radix-ui/themes";
 import React from "react";
 
 export const MyCard = React.forwardRef<HTMLElement, any>(({ className, radius, children, ...props }, ref) => {

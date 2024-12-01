@@ -1,8 +1,8 @@
 'use client';
 
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import React, { PureComponent } from 'react';
-import { BarChart, Bar, XAxis, Tooltip, Legend, ResponsiveContainer, LabelList, CartesianGrid, YAxis } from 'recharts';
+
+import { BarChart, Bar, XAxis, YAxis } from 'recharts';
 
 
 export function MyBarChart(props: {

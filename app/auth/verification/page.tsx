@@ -11,7 +11,7 @@ import {
 import { CTextField } from "@/components/CTextField";
 import { register } from "module";
 import { MdLocationCity, MdLocationPin } from "react-icons/md";
-import { CountrySelectComponent } from "../components/CountrySelectComponent";
+import { CountrySelectComponent } from "@/components/CountrySelectComponent";
 import { MyDialog } from "@/components/MyDialog";
 import { VerificationComponent } from "./VerificationComponent";
 import { authUser } from "@/actions/authUser";

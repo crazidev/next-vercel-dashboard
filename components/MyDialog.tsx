@@ -1,9 +1,10 @@
 "use client";
 
-import { Button, Dialog, Flex, IconButton, Text } from "@radix-ui/themes";
-import React, { useEffect, useState } from "react";
+import { Button, Dialog, Flex, IconButton } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
+
 import { MdClose } from "react-icons/md";
-import PropTypes from 'prop-types';
+
 
 interface MyDialogProp {
   title: string;
