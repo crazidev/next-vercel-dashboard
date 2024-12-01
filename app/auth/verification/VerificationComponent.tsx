@@ -51,9 +51,9 @@ export async function VerificationComponent({
 
   var formState2 = idValidator.formState;
 
-  let myFunction = function () {};
-  let myFunction2 = function () {};
-  let myFunction3 = function () {};
+  let myFunction = function () { };
+  let myFunction2 = function () { };
+  let myFunction3 = function () { };
 
   return (
     <>
@@ -65,15 +65,16 @@ export async function VerificationComponent({
                 <Text weight={"bold"} size={"1"}>
                   {d.title}
                 </Text>
-                <Text size={"1"} className="capitalize">
+                <Text size={"1"} className="capitalize mt-1">
                   Status:{" "}
                   <Badge
+                    size={'1'}
                     color={
                       d.status === "verified"
                         ? "green"
                         : d.status == "not_uploaded"
-                        ? "gray"
-                        : "yellow"
+                          ? "gray"
+                          : "yellow"
                     }
                   >
                     {d.status.replace("_", " ")}
@@ -86,7 +87,7 @@ export async function VerificationComponent({
                 description={d.desc ?? ""}
                 trigger={
                   d.status !== "verified" ? (
-                    <IconButton onClick={() => {}} color="gray" size={"1"}>
+                    <IconButton onClick={() => { }} color="gray" size={"1"}>
                       <MdEdit />
                     </IconButton>
                   ) : (

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const SequelizeAuto = require("sequelize-auto");
 const path = require("path");
 const output = path.join(__dirname, "./server/database/models");
@@ -22,23 +23,24 @@ const options = {
 
 /** @type {import('./config').Config} */
 const config = {
-  dbname: "hybank-new",
-  user: "root",
-  pass: "",
+  dbname: process.env.DATABASE_NAME,
+  user: process.env.DATABASE_USER,
+  pass: process.env.DATABASE_PASS,
+  host: process.env.DATABASE_HOST,
   options: {
-    dialect: "mysql",
+    dialect: process.env.DATABASE_DIALECT,
     additional: {
       timestamps: false,
       createdAt: false,
     },
   },
   autoOptions: {
-    dialect: "mysql",
+    dialect: process.env.DATABASE_DIALECT,
     ...options,
     additional: {
       timestamps: false,
       createdAt: false,
-      updatedAt: false
+      updatedAt: false,
     },
   },
 };

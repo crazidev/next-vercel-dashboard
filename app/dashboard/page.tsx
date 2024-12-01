@@ -46,7 +46,7 @@ export default async function HomePage({}: {}) {
             </Button>
           </Flex>
         </Flex>
-        <Flex className="flex md:flex-row flex-col gap-5">
+        <Flex className="flex lg:flex-row flex-col gap-5">
           <Flex direction={"column"} gap={"5"}>
             <div className="">
               <div className="mt-[10px] min-w-full">

@@ -5,21 +5,25 @@ import { InferAttributes } from "sequelize";
 import getSequelizeInstance from "@/database/db";
 import { Users } from "@/database/models/users";
 
-export const fetchUser = async (id: number | string): Promise<Users> => {
+export const fetchUser = async (
+  id: number | string,
+  props?: { force: boolean }
+): Promise<InferAttributes<Users> | null> => {
+  const cacheDependency = props?.force ? Date.now().toString() : id.toString();
+
   var user = unstable_cache(
-    async (id) => {
+    async (id: number | string) => {
       await getSequelizeInstance();
-      var data = await Users.findByPk(id, {
+      const data = await Users.findByPk(id, {
         attributes: {
           exclude: ["password"],
         },
       });
-      // console.log(`USER:`, data?.toJSON());
-      return data?.toJSON();
+      return data?.toJSON() || null;
     },
-    [],
+    [cacheDependency],
     {
-      tags: ["user"],
+      tags: ["user"], // Tags used for cache invalidation
     }
   );
 

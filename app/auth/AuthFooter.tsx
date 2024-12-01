@@ -7,7 +7,7 @@ export const AuthFooter = () => {
 
   return (
     <Flex
-      className="flex-none z-10"
+      className="flex-none pb-[30px] lg:sticky bottom-0"
       justify={"between"}
       direction={"row"}
       align={"start"}
@@ -18,7 +18,7 @@ export const AuthFooter = () => {
         </Text>
       </Flex>
 
-      <Select.Root defaultValue="en">
+      {/* <Select.Root defaultValue="en">
         <Select.Trigger />
         <Select.Content>
           <Select.Group>
@@ -28,7 +28,7 @@ export const AuthFooter = () => {
             <Select.Item value="ea">German</Select.Item>
           </Select.Group>
         </Select.Content>
-      </Select.Root>
+      </Select.Root> */}
     </Flex>
   );
 };

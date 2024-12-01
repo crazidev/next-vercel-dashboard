@@ -18,10 +18,11 @@ import { authUser } from "@/actions/authUser";
 import { fetchUser, revalidateUserTag } from "@/fetch/fetch_user";
 import { triggerEsc } from "@/lib/triggerEsc";
 import { TbInfoCircle } from "react-icons/tb";
+import Link from "next/link";
 
 export default async function VerificationPage() {
   var user_id = (await authUser()).user_id;
-  var user = await fetchUser(user_id);
+  var user = await fetchUser(user_id, { force: true });
 
   return (
     <>
@@ -53,7 +54,7 @@ export default async function VerificationPage() {
               {
                 title: "Address",
                 type: "address",
-                content: `${user?.address}, ${user?.state}, ${user?.country}`,
+                content: user?.address == undefined ? undefined : `${user?.address}, ${user?.state}, ${user?.country}`,
                 status: user?.address != null ? "verified" : "not_uploaded",
               },
               {
@@ -76,6 +77,10 @@ export default async function VerificationPage() {
             ],
           }}
         />
+        <div className="mt-5 flex justify-center">
+          {(user.ssnStatus == 'verified' && user.idDocStatus == 'verified') &&
+            <Link href={'/dashboard'}><Button className="" variant="soft">PROCEED TO DASHBOARD</Button></Link>}
+        </div>
       </Card>
     </>
   );

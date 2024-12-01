@@ -67,7 +67,7 @@ export default function RegisterPage() {
 
   return (
     <form onSubmit={handleSubmit(submit)}>
-      <Box className="m-auto sm:my-auto my-[30px] max-w-[400px] w-full md:w-[350px]">
+      <Box className="m-auto sm:my-auto max-w-[400px] w-full md:w-[350px]">
         <Card variant={"surface"} className="py-4">
           <Flex gap="" direction={"column"} justify={"center"}>
             <Flex direction={"column"} align={"center"} justify={"center"}>
@@ -92,7 +92,7 @@ export default function RegisterPage() {
             <Flex gapX={"3"}>
               <CTextField
                 label="First name"
-                placeholder="Fist name"
+                placeholder="First name"
                 leftIcon={<MdPerson />}
                 register={register("first_name")}
                 error={errors?.first_name?.message}
