@@ -1,6 +1,6 @@
 import { MyCard } from "@/components/MyCard";
 import { Box, Button, Flex, Heading, Separator, Text, ThickDividerHorizontalIcon } from "@radix-ui/themes";
-import { TierCardList } from "app/dashboard/components/TierCardList";
+import { TierCardList } from "@/components/TierCardList";
 import { CheckCircle, CheckCircle2 } from "lucide-react";
 import { motion } from "motion/react";
 

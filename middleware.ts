@@ -24,15 +24,15 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  var theme = request.headers.get("Sec-CH-Prefers-Color-Scheme");
-  var themeCookie = request.cookies.get("theme")?.value;
-  if (themeCookie === undefined) {
-    if (theme != null) {
-      response.cookies.set("theme", theme, {
-        maxAge: 60 * 60 * 24 * 30,
-      });
-    }
-  }
+  // var theme = request.headers.get("Sec-CH-Prefers-Color-Scheme");
+  // var themeCookie = request.cookies.get("theme")?.value;
+  // // if (themeCookie === undefined) {
+  // if (theme != null) {
+  //   response.cookies.set("theme", theme, {
+  //     maxAge: 60 * 60 * 24 * 30,
+  //   });
+  //   // }
+  // }
 
   return response;
 }

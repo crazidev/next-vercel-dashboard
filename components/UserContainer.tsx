@@ -3,12 +3,12 @@ import {
   Flex,
   Text,
 } from "@radix-ui/themes";
-import { DarkModeToggler } from "app/dashboard/components/DarkModeToggler";
+import { DarkModeToggler } from "@/components/DarkModeToggler";
 import { cookies } from "next/headers";
 import { MdSupportAgent } from "react-icons/md";
 import { Users } from "@/database/models/users";
 import { fetchUser } from "@/fetch/fetch_user";
-import { LivechatToggler } from "@app/dashboard/components/LivechatToggler";
+import { LivechatToggler } from "@/components/LivechatToggler";
 
 export async function UserContainer() {
   var user_id = (await cookies()).get("user_id")?.value;

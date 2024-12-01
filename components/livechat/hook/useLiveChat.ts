@@ -296,26 +296,27 @@ export const useLiveChat = () => {
     });
   }, [livechatOpen]);
 
-  useEffect(() => {
-    if (messages.length > 0) {
-      var lastMsg = messages.findLast((e) => e.from === "admin");
-      if (
-        lastMsg != undefined &&
-        conversion?.user?.last_viewed_message != lastMsg.id
-      ) {
-        if (livechatOpen && isPageVisible) {
-          setLastViewedMessage(lastMsg.id);
+  if (typeof window !== 'undefined')
+    useEffect(() => {
+      if (messages.length > 0) {
+        var lastMsg = messages.findLast((e) => e.from === "admin");
+        if (
+          lastMsg != undefined &&
+          conversion?.user?.last_viewed_message != lastMsg.id
+        ) {
+          if (livechatOpen && isPageVisible) {
+            setLastViewedMessage(lastMsg.id);
+          }
         }
       }
-    }
 
-    var adminMsgs = messages.filter((e) => e.from === "admin");
-    var lastViewedIndex = adminMsgs.findIndex(
-      (e) => e.id == conversion?.user?.last_viewed_message
-    );
-    var unreadCount = adminMsgs.slice(lastViewedIndex + 1);
-    updateUnreadMsg!(unreadCount.length);
-  }, [messages, livechatOpen, conversion, isPageVisible]);
+      var adminMsgs = messages.filter((e) => e.from === "admin");
+      var lastViewedIndex = adminMsgs.findIndex(
+        (e) => e.id == conversion?.user?.last_viewed_message
+      );
+      var unreadCount = adminMsgs.slice(lastViewedIndex + 1);
+      updateUnreadMsg!(unreadCount.length);
+    }, [messages, livechatOpen, conversion, isPageVisible]);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -340,18 +341,12 @@ export const useLiveChat = () => {
   };
 
   useEffect(() => {
-    if (document !== undefined) {
-      document.addEventListener("visibilitychange", () => {
-        console.log(document.visibilityState);
-        // Modify behavior…
-      });
-    }
     getConversation();
   }, []);
 
   useEffect(() => {
     if (replyTo != null) {
-      document.getElementById('chat_input')?.focus();
+      document.getElementById("chat_input")?.focus();
     }
   }, [replyTo]);
 

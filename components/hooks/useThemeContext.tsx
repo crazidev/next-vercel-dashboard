@@ -13,17 +13,20 @@ export const ThemeContext = createContext<UseThemeType>({
     setTheme: (i) => { }
 });
 
-const useThemeContext = ({ children }: any) => {
+export const ThemeProvider = ({ children }: any) => {
+    var isDarkFromCookie = false;
+    if (typeof window !== 'undefined') {
+    } else {
+        isDarkFromCookie = Cookies.get('theme') == 'dark';
+    }
+
     var [state, setState] = useState<UseThemeType>({
-        dark: false,
-        theme: 'light',
+        dark: isDarkFromCookie,
+        theme: isDarkFromCookie ? 'dark' : 'light',
         setTheme: (i) => { }
     });
 
-    // if (typeof window !== 'undefined') {
-    // } else {
-    //   isDarkFromCookie = Cookies.get('theme') == 'dark';
-    // }
+
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -44,6 +47,14 @@ const useThemeContext = ({ children }: any) => {
             theme: value
         }));
 
+        if(value == 'dark'){
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+        }
+
         Cookies.remove("theme");
         Cookies.set("theme", value, {
             expires: 30,
@@ -57,5 +68,3 @@ const useThemeContext = ({ children }: any) => {
         {children}
     </ThemeContext.Provider>
 }
-
-export default useThemeContext;

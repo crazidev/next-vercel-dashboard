@@ -6,20 +6,20 @@ import {
   Link,
   Text,
 } from "@radix-ui/themes";
-import { NavBar } from "./components/NavBar";
+import { NavBar } from "../../components/NavBar";
 import {
   TbHandClick,
   TbSend2,
 } from "react-icons/tb";
 import { MdAdd, MdCurrencyExchange } from "react-icons/md";
-import { MyBarChart } from "./components/MyBarChart";
+import { MyBarChart } from "../../components/MyBarChart";
 import { ChevronRight } from "lucide-react";
-import { BalanceList } from "./components/BalanceList";
-import { TransactionList } from "app/dashboard/components/TransactionList";
+import { BalanceList } from "../../components/BalanceList";
+import { TransactionList } from "@/components/TransactionList";
 import { Suspense } from "react";
-import { RotateSpinnerComponent } from "./components/RotateSpinner";
-import { AlertComponent } from "./components/AlertComponent";
-import { WeeklyStats } from "./components/WeeklyStatsComponent";
+import { RotateSpinnerComponent } from "../../components/RotateSpinner";
+import { AlertComponent } from "../../components/AlertComponent";
+import { WeeklyStats } from "../../components/WeeklyStatsComponent";
 
 
 export default async function HomePage({}: {}) {

@@ -1,6 +1,6 @@
 import { Heading, Text } from "@radix-ui/themes";
 import { LuCreditCard } from "react-icons/lu";
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../../../components/NavBar";
 import { TbCreditCard } from "react-icons/tb";
 
 export default function CardPage() {

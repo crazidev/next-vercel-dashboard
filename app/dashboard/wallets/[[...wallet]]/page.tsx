@@ -1,5 +1,5 @@
 import { Box, Card, DropdownMenu, Flex, Link, Text } from "@radix-ui/themes";
-import { NavBar } from "../../components/NavBar";
+import { NavBar } from "../../../../components/NavBar";
 import { MyCard } from "@/components/MyCard";
 import { TbCoinBitcoin, TbHandClick, TbSwitch } from "react-icons/tb";
 import { authUser } from "@/actions/authUser";
@@ -7,11 +7,11 @@ import { fetchUserWallets } from "@/fetch/fetch_wallets";
 import { fetchUser } from "@/fetch/fetch_user";
 import Image from "next/image";
 import { MdExpand, MdExpandMore } from "react-icons/md";
-import { Logo } from "app/auth/components/shapes/logo";
-import { TransactionList } from "../../components/TransactionList";
+import { Logo } from "@app/auth/components/shapes/logo";
+import { TransactionList } from "../../../../components/TransactionList";
 import { ChevronRight } from "lucide-react";
 import { Suspense } from "react";
-import { RotateSpinnerComponent } from "../../components/RotateSpinner";
+import { RotateSpinnerComponent } from "../../../../components/RotateSpinner";
 import { TbSwitchVertical } from "react-icons/tb";
 import { WalletBalance } from "../components/WalletBalance";
 

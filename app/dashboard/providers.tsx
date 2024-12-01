@@ -1,7 +1,7 @@
 "use client";
 
-import { SideBarComponent } from "./components/SideBar";
-import { NavBar } from "./components/NavBar";
+import { SideBarComponent } from "../../components/SideBar";
+import { NavBar } from "../../components/NavBar";
 import { createContext, useEffect, useState } from "react";
 import { calculateResponsive } from "@/lib/calculateResponsive";
 import Cookies from "js-cookie";

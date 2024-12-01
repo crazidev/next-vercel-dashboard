@@ -1,6 +1,6 @@
 import { Box, Button, Flex } from "@radix-ui/themes";
-import { SettingsList } from "app/dashboard/components/SettingsList";
-import { NavBar } from "../components/NavBar";
+import { SettingsList } from "@/components/SettingsList";
+import { NavBar } from "../../../components/NavBar";
 import React from "react";
 import getSequelizeInstance from "@/database/db";
 

@@ -11,11 +11,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { MdLock } from "react-icons/md";
 import { TbInfoCircle } from "react-icons/tb";
-import { PasswordValidator } from "app/auth/components/PasswordValidator";
+import { PasswordValidator } from "@/components/PasswordValidator";
 import { toast } from "sonner";
 import { changePasswordAction } from "./action/change-password";
 import { LucideEyeOff, LucideEye } from "lucide-react";
-import { PasswordToggler } from "app/auth/components/PasswordToggler";
+import { PasswordToggler } from "@/components/PasswordToggler";
 import { motion } from "motion/react";
 import { DashboardContext } from "app/dashboard/providers";
 

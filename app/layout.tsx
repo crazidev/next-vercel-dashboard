@@ -3,6 +3,8 @@ import AppProvider from "./AppProvider";
 import { cookies } from "next/headers";
 import { PWARelatedLinks } from "./PWARelatedLinks";
 import type { Metadata, Viewport } from "next";
+import { Theme } from "@radix-ui/themes";
+import { Toaster } from "sonner";
 
 const APP_NAME = process.env.APP_NAME;
 const APP_DEFAULT_TITLE = process.env.APP_NAME ?? "";
@@ -20,7 +22,6 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "default",
     title: APP_DEFAULT_TITLE,
-    // startUpImage: [],
   },
   formatDetection: {
     telephone: false,
@@ -53,10 +54,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  var theme = (await cookies()).get("theme")?.value;
+  // Retrieve theme from cookies
+  var _cookies = await cookies();
+  const theme = _cookies.get("theme")?.value;
 
   return (
-    <html className={`${theme ?? "dark"} bg-[var(--color-background)]`}>
+    <html suppressHydrationWarning>
       <head>
         <meta
           name="viewport"
@@ -64,13 +67,44 @@ export default async function RootLayout({
         />
         <link rel="manifest" href="/api/manifest" />
         <PWARelatedLinks />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                let theme = "${theme}";
+                if (theme !== "undefined"){
+                  document.cookie = 'theme=' + theme + '; path=/; max-age=31536000;'; // 1 year expiration
+                } else {
+                   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    theme = "dark";
+                  } else {
+                    theme = "light";
+                  }
+                }
+                document.documentElement.classList.add(theme);                  
+              })();
+            `,
+          }}
+        ></script>
       </head>
       <body>
-        <script dangerouslySetInnerHTML={{
-          __html: `<script src="/js/client.js"></script>`,
-        }}>
-        </script>
-        <AppProvider>{children}</AppProvider>
+        <Theme
+          appearance={'inherit'}
+          grayColor={"auto"}
+          accentColor={"gold"}
+          panelBackground="translucent"
+        >
+          <Toaster
+            theme={theme as any}
+            expand={false}
+            richColors
+            position={"top-left"}
+            toastOptions={{
+              style: {},
+            }}
+          />
+          <AppProvider>{children}</AppProvider>
+        </Theme>
       </body>
     </html>
   );

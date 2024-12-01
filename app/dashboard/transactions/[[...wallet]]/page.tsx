@@ -1,19 +1,19 @@
 import { Box, DropdownMenu, Flex, Select, Spinner, Text } from "@radix-ui/themes";
-import { NavBar } from "../../components/NavBar";
+import { NavBar } from "../../../../components/NavBar";
 import { CTextField } from "@/components/CTextField";
 import { Search } from "lucide-react";
 import { authUser } from "@/actions/authUser";
 import { fetchUserWallets } from "@/fetch/fetch_wallets";
 import { fetchUser } from "@/fetch/fetch_user";
-import { TransactionList } from "../../components/TransactionList";
-import { Logo } from "app/auth/components/shapes/logo";
+import { TransactionList } from "../../../../components/TransactionList";
+import { Logo } from "@app/auth/components/shapes/logo";
 import { TbSwitchVertical } from "react-icons/tb";
 import Image from "next/image";
 import { redirect, RedirectType } from "next/navigation";
 import { Suspense } from "react";
 import { MdExpandMore } from "react-icons/md";
 import { WalletListDropDown } from "app/dashboard/wallets/components/WalletListDropDown";
-import { SearchInput } from "app/dashboard/components/SearchInput";
+import { SearchInput } from "@/components/SearchInput";
 
 export default async function TransactionPage({
   searchParams,

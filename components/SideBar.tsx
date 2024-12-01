@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
-import { Logo } from "app/auth/components/shapes/logo";
+import { Logo } from "@app/auth/components/shapes/logo";
 import { useContext, useEffect, useState } from "react";
 import { MdOutlineWallet, MdSettings } from "react-icons/md";
 import {
@@ -11,7 +11,7 @@ import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
 } from "react-icons/tb";
-import { DashboardContext } from "../providers";
+import { DashboardContext } from "../app/dashboard/providers";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import useLayout from "@/components/hooks/useLayout";

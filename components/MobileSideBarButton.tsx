@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { DashboardContext } from "../providers";
+import { DashboardContext } from "../app/dashboard/providers";
 import { Text, Flex, IconButton } from "@radix-ui/themes";
 import {
   TbLayoutSidebar,
