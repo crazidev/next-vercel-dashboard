@@ -15,6 +15,7 @@ const getSequelizeInstance = async () => {
       password: process.env.DATABASE_PASS ?? "",
       dialect: process.env.DATABASE_DIALECT ?? ("mysql" as any),
       dialectModule: process.env.DATABASE_DIALECT == "mysql" ? mysql : pg,
+      ssl: process.env.DATABASE_SSL == "true",
       logging: (sql, timing) => {
         if (process.env.LOG_DATABASE_QUERIES ?? true) {
           // console.info(sql);
