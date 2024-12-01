@@ -9,10 +9,11 @@ import { MdSupportAgent } from "react-icons/md";
 import { Users } from "@/database/models/users";
 import { fetchUser } from "@/fetch/fetch_user";
 import { LivechatToggler } from "@/components/LivechatToggler";
+import { InferAttributes } from "sequelize";
 
 export async function UserContainer() {
   var user_id = (await cookies()).get("user_id")?.value;
-  var user: Users | null = null;
+  var user: InferAttributes<Users> | null = null;
   if (user_id != undefined) {
     var getUser = await fetchUser(user_id);
     user = getUser;

@@ -15,6 +15,7 @@ import { Users } from "@/database/models/users";
 import { WalletBalances } from "@/database/models/wallet_balances";
 import { MiniChart } from "react-ts-tradingview-widgets";
 import { WalletListDropDown } from "./WalletListDropDown";
+import { InferAttributes } from "sequelize";
 
 export function WalletBalance({
   wallet_list,
@@ -22,7 +23,7 @@ export function WalletBalance({
   wallet,
 }: {
   wallet_list?: WalletBalances[];
-  user: Users | null;
+  user: InferAttributes<Users> | null;
   wallet: any
 }) {
 

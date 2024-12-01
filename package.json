@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev --turbo",
     "dev-https": "next dev --turbo --experimental-https",
-    "build": "next build",
+    "build": "npm run db:push && next build",
     "start": "next start",
     "lint": "next lint",
     "email:build": "email build -d ./server/emails",
