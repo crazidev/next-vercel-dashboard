@@ -10,6 +10,9 @@ export const fetchUser = async (
   props?: { force: boolean }
 ): Promise<InferAttributes<Users> | null> => {
   const cacheDependency = props?.force ? Date.now().toString() : id.toString();
+  if (props?.force) {
+    revalidateUserTag();
+  }
 
   var user = unstable_cache(
     async (id: number | string) => {

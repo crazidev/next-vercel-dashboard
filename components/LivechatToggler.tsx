@@ -2,7 +2,7 @@
 
 import { useContext, useState } from "react";
 import { MdSupportAgent } from "react-icons/md";
-import { DashboardContext } from "../app/dashboard/providers";
+import {DashboardContext} from "@context/DashboardContext";
 import { AnimatePresence, motion } from "motion/react";
 
 export function LivechatToggler() {

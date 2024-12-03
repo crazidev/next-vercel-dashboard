@@ -20,16 +20,17 @@ import { Suspense } from "react";
 import { RotateSpinnerComponent } from "../../components/RotateSpinner";
 import { AlertComponent } from "../../components/AlertComponent";
 import { WeeklyStats } from "../../components/WeeklyStatsComponent";
+import ConvertModal from "./@modals/ConvertModal";
 
 
-export default async function HomePage({}: {}) {
+export default async function HomePage({ }: {}) {
   return (
     <div className="flex flex-row flex-grow gap-5">
       <div className="flex flex-col flex-grow flex-[9] w-[100%]">
         <NavBar title="Overall portfolio" description="Your payments Updates" />
-        <AlertComponent/>
+        <AlertComponent />
         <BalanceList />
-        
+
         <Flex gap={`3`} direction={"column"} className="my-10">
           <Text className="font-extrabold text-start" size={"3"}>
             Quick Actions:
@@ -41,16 +42,16 @@ export default async function HomePage({}: {}) {
             <Button size={{ md: "3" }} radius="large" variant="outline">
               <TbSend2 /> Send Money
             </Button>
-            <Button size={{ md: "3" }} radius="large" variant="outline">
-              <MdCurrencyExchange /> Convert Funds
-            </Button>
+            <Suspense>
+              <ConvertModal />
+            </Suspense>
           </Flex>
         </Flex>
         <Flex className="flex lg:flex-row flex-col gap-5">
           <Flex direction={"column"} gap={"5"}>
             <div className="">
               <div className="mt-[10px] min-w-full">
-               <WeeklyStats />
+                <WeeklyStats />
               </div>
             </div>
           </Flex>

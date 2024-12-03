@@ -17,7 +17,7 @@ import { changePasswordAction } from "./action/change-password";
 import { LucideEyeOff, LucideEye } from "lucide-react";
 import { PasswordToggler } from "@/components/PasswordToggler";
 import { motion } from "motion/react";
-import { DashboardContext } from "app/dashboard/providers";
+import {DashboardContext} from "@context/DashboardContext";
 
 export default function ProfilePage() {
 

@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { TbSwitchVertical } from "react-icons/tb";
 import { WalletBalances } from "@/database/models/wallet_balances";
+import { InferAttributes } from "sequelize";
 
 export const WalletListDropDown = (
 
@@ -18,7 +19,7 @@ export const WalletListDropDown = (
         showAll,
     }: {
         wallet: any,
-        wallet_list?: WalletBalances[],
+        wallet_list?: InferAttributes<WalletBalances>[],
         onCheckChange?: (data?: WalletBalances) => void,
         trigger?: React.ReactNode,
         showAll?: boolean | false

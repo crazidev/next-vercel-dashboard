@@ -23,6 +23,7 @@
       "@/lib/*": ["lib/*"],
       "@/components/*": ["components/*"],
       "@public/*": ["public/*"],
+      "@context/*": ["context/*"],
 
       // SERVER
       "@/fetch/*": ["server/fetch/*"],

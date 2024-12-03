@@ -87,7 +87,7 @@ export default async function RootLayout({
           }}
         ></script>
       </head>
-      <body className="bg-[var(--color-background)]">
+      <body>
         <Theme
           appearance={'inherit'}
           grayColor={"auto"}

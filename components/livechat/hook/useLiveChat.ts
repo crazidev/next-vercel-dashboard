@@ -17,7 +17,7 @@ import {
 import { useState, useRef, useEffect, LegacyRef, RefAttributes } from "react";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
-import { DashboardContext } from "@app/dashboard/providers";
+import {DashboardContext} from "@context/DashboardContext";
 import usePageVisibility from "@/components/hooks/usePageVisibility";
 import { yupResolver } from "@hookform/resolvers/yup";
 import yup from "@/server/extra/yup";

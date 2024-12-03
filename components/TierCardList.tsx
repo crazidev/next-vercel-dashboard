@@ -4,7 +4,7 @@ import { Flex, Button } from "@radix-ui/themes";
 import { Box, Heading, Text } from "@radix-ui/themes";
 import { AnimatePresence, motion } from "motion/react";
 import { useContext, useState } from "react";
-import { DashboardContext } from "../app/dashboard/providers";
+import {DashboardContext} from "@context/DashboardContext";
 import useLayout from "@/components/hooks/useLayout";
 
 export function TierCardList() {

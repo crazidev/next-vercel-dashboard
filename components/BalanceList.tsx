@@ -10,6 +10,7 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 
 import { WalletBalances } from "@/database/models/wallet_balances";
+import { InferAttributes } from "sequelize";
 
 export const BalanceList = async () => {
   var user_id = (await authUser()).user_id;
@@ -42,17 +43,7 @@ export const BalanceList = async () => {
   );
 };
 
-const CryptoWalletCard = async ({ wallet, index }: { wallet: WalletBalances, index: number }) => {
-  // var shortCode = wallet.wallet?.shortName;
-
-  //   from: 'usd',
-  //   to: shortCode,
-  //   amount: wallet.balance ?? 0
-  // });
-
-
-  // var data = await get.json();
-  // var converted = data[`${shortCode}`];
+const CryptoWalletCard = async ({ wallet, index }: { wallet: InferAttributes<WalletBalances>, index: number }) => {
 
   return (
     <Link href={`/dashboard/wallets/${wallet.wallet?.shortName}`}>

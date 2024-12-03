@@ -1,4 +1,4 @@
-// import CryptoConvert from "crypto-convert";
+import CryptoConvert from "crypto-convert";
 // export const convert = new CryptoConvert();
 
 export const fetchExchange = async ({
@@ -16,3 +16,4 @@ export const fetchExchange = async ({
       cache: "default",
     }
   );
+

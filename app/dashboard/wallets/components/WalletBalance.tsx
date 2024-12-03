@@ -22,7 +22,7 @@ export function WalletBalance({
   user,
   wallet,
 }: {
-  wallet_list?: WalletBalances[];
+  wallet_list?: InferAttributes<WalletBalances>[];
   user: InferAttributes<Users> | null;
   wallet: any
 }) {

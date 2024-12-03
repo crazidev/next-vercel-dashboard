@@ -28,7 +28,6 @@ export default function LoginPage() {
   var router = useRouter();
   const [showPass, setShowPass] = useState(false);
 
-
   const submit = async (data: any) => {
     var res = await login(data);
 
@@ -137,7 +136,7 @@ export default function LoginPage() {
             <CTextField
               label="Email"
               placeholder="Enter your email"
-              autoComplete="Crazibeat webauthn"
+              autoComplete="username webauthn"
               leftIcon={<MdOutlineMailLock />}
               error={errors?.email?.message.toString()}
               register={register("email")}

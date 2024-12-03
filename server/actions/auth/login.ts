@@ -1,5 +1,4 @@
 "use server";
-import jwt from "jsonwebtoken";
 import { cookies, headers } from "next/headers";
 import getSequelizeInstance from "@/database/db";
 
@@ -8,14 +7,15 @@ import { loginActionScheme } from "@/server/scheme/login_scheme";
 import { Users } from "@/database/models/users";
 import { fetchUser, revalidateUserTag } from "@/fetch/fetch_user";
 
-const JWT_SECRET = process.env.JWT_SECRET || "";
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
+
+
 import { InferAttributes } from "sequelize";
 import { Passkey } from "@/database/models/passkey";
 import { server } from "@passwordless-id/webauthn";
 import { userAgent } from "next/server";
 import { AuthenticationResponseJSON } from "@passwordless-id/webauthn/dist/esm/types";
 import { UserCredential } from "firebase/auth";
+import { generateJWToken } from "@/server/extra/jwt_helper";
 
 export async function login(formData: any) {
   try {
@@ -29,7 +29,7 @@ export async function login(formData: any) {
 
     var user = await Users.findOne({
       where: {
-        email: validatedFields.data!.email,
+        email: validatedFields.data!.email.trim(),
       },
     });
 
@@ -75,23 +75,6 @@ export async function login(formData: any) {
   }
 }
 
-/// This function will generate jwt token and also revalidateUserTag
-export async function generateJWToken(user: InferAttributes<Users> | Users) {
-  const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN,
-  });
-
-  cookies().set("token", token, {
-    maxAge: 60 * 60 * 24 * 7,
-  });
-  cookies().set("user_id", user.id.toString(), {
-    maxAge: 60 * 60 * 24 * 7,
-  });
-
-  revalidateUserTag();
-  await fetchUser(user.id);
-  return token;
-}
 
 export async function generateRandomChallenge() {
   return server.randomChallenge();

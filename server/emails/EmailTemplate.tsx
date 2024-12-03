@@ -1,6 +1,6 @@
 import { AuthContainerLogo } from "@/components/AuthContainerLogo";
-import { MyCard } from "@/components/MyCard";
-import { Box, Card, Flex, Text } from "@radix-ui/themes";
+
+import { Box } from "@radix-ui/themes";
 import { Tailwind } from "@react-email/tailwind";
 // import { Shape1 } from "app/auth/components/shapes/shape_1";
 // import { Shape2 } from "app/auth/components/shapes/shape_2";

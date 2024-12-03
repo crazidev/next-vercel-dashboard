@@ -11,10 +11,11 @@ import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
 } from "react-icons/tb";
-import { DashboardContext } from "../app/dashboard/providers";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import useLayout from "@/components/hooks/useLayout";
+import {DashboardContext} from "@context/DashboardContext";
+
 
 export const navlist = [
   {

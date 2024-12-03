@@ -7,7 +7,9 @@ import { ResetPasswordMail } from "@/server/emails/ResetPasswordMail";
 import { sendMail } from "@/server/extra/nodemailer";
 import bcrypt from "bcrypt";
 import getSequelizeInstance from "@/database/db";
-import { generateJWToken, login } from "./login";
+import { login } from "./login";
+import { generateJWToken } from "@/server/extra/jwt_helper";
+
 
 export async function reset_password_action(data: any) {
   console.log(data);

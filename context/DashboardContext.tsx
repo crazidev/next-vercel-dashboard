@@ -1,28 +1,30 @@
 "use client";
 
-import { SideBarComponent } from "../../components/SideBar";
-import { NavBar } from "../../components/NavBar";
 import { createContext, useEffect, useState } from "react";
-import { calculateResponsive } from "@/lib/calculateResponsive";
 import Cookies from "js-cookie";
 import dynamic from "next/dynamic";
+import { InferAttributes } from "sequelize";
+import { Users } from "@/database/models/users";
+import { WalletBalances } from "@/database/models/wallet_balances";
+import { authUser } from "@/actions/authUser";
+import { fetchUser } from "@/fetch/fetch_user";
 
 export const DashboardContext = createContext<DashboardContextProp>({
-  // dark: true,
   unreadMsg: 0,
 });
 
 interface DashboardContextProp {
-  // dark: boolean;
-  // isMobile?: boolean;
-  // isTablet?: boolean;
   unreadMsg: number,
   expandSidebar?: boolean;
+  user?: InferAttributes<Users>,
+  wallets?: InferAttributes<WalletBalances>[],
   setTheme?: (theme: "dark" | "light") => void;
   livechatOpen?: boolean,
   toggleLivechat?: (expand: boolean) => void,
   setExpand?: (expand: boolean) => void;
   updateUnreadMsg?: (value: number) => void;
+  fetchUser?: () => Promise<InferAttributes<Users>>,
+  fetchUserWallets?: () => Promise<any>,
 }
 
 export default function DashboardProvider({
@@ -31,7 +33,6 @@ export default function DashboardProvider({
   children: React.ReactNode;
 }) {
   var isDarkFromCookie = false;
-
   if (typeof window !== 'undefined') {
   } else {
     isDarkFromCookie = Cookies.get('theme') == 'dark';
@@ -43,21 +44,6 @@ export default function DashboardProvider({
     livechatOpen: false,
   });
 
-  if (typeof window !== "undefined") {
-    useEffect(() => {
-      // if (state.isTablet) {
-      //   setState((prevState) => ({ ...prevState, expandSidebar: false }));
-      // }
-      // if (state.isMobile && state.setExpand) {
-      //   setState((prevState) => ({ ...prevState, expandSidebar: true }));
-      // }
-    }, []);  // Only run once when the component mounts
-
-  }
-
-  const setExpand = (value: boolean) => {
-    setState({ ...state, expandSidebar: value });
-  };
 
   const toggleLivechat = (value: boolean) => {
     setState({ ...state, livechatOpen: value });
@@ -67,14 +53,42 @@ export default function DashboardProvider({
     setState({ ...state, unreadMsg: value });
   };
 
+  const getCurrentUser = async () => {
+    console.log("Fetching current user...");
+    var user_id = (await authUser()).user_id;
+    var data = await fetchUser(user_id, { force: true });
+    setState({ ...state, user: data });
+
+    if (data) {
+      await fetchUserWallets();
+    }
+
+    return data;
+  }
+
+  const fetchUserWallets = async () => {
+    console.log("Fetching user wallets...");
+    var fetchWallet = await fetch('/api/wallet-list');
+    var data = await fetchWallet.json();
+    if (fetchWallet.ok) {
+      setState({ ...state, wallets: data.data });
+      return data;
+    }
+  }
+
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   return (
     <DashboardContext.Provider
       value={{
         ...state,
-        setExpand: (value) => setExpand(value),
         toggleLivechat: (value) => toggleLivechat(value),
-        updateUnreadMsg: (value) => updateUnreadMsg(value)
+        updateUnreadMsg: (value) => updateUnreadMsg(value),
+        fetchUser: () => getCurrentUser(),
+        fetchUserWallets: () => fetchUserWallets(),
       }}
     >
       {children}

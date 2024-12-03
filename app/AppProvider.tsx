@@ -3,11 +3,11 @@
 import { Theme } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
-import DashboardProvider from "./dashboard/providers";
 import OneSignal from "react-onesignal";
 import { InitOneSignal } from "@/lib/InitOneSignal";
 import { LiveChat } from "../components/livechat/LiveChat";
 import { ThemeProvider } from "@/components/hooks/useThemeContext";
+import DashboardProvider from "context/DashboardContext";
 
 export const metadata = {
   title: "Next.js App Router + NextAuth + Tailwind CSS",

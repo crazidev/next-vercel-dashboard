@@ -2,16 +2,17 @@ import { unstable_cache, revalidateTag } from "next/cache";
 import getSequelizeInstance from "@/database/db";
 import { WalletBalances } from "@/database/models/wallet_balances";
 import { Wallets } from "@/database/models/wallets";
+import { InferAttributes } from "sequelize";
 
 export const fetchUserWallets = async (
   id: number | string
-): Promise<WalletBalances[]> => {
+): Promise<InferAttributes<WalletBalances>[]> => {
   var fetch = unstable_cache(
     async (id) => {
       await getSequelizeInstance();
       var _wallets = await WalletBalances.findAll({
         where: {
-          // userId: id,
+          userId: id,
         },
         include: [
           {
@@ -21,7 +22,7 @@ export const fetchUserWallets = async (
         ],
       });
 
-      return _wallets;
+      return _wallets.map((e)=> e.toJSON());
     },
     [],
     {

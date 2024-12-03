@@ -9,7 +9,6 @@ import { LuCopy } from "react-icons/lu";
 import { toast } from "sonner";
 import { MessageType } from "./hook/useLiveChat";
 import { useState, useRef, useContext, useEffect } from "react";
-import { DashboardContext } from "@app/dashboard/providers";
 import useLayout from "@/components/hooks/useLayout";
 
 interface ChatBubbleType { 
@@ -26,7 +25,6 @@ export const ChatBubble = (
     var fromAdmin = data.from === 'admin';
     var date = data.created_at?.toDate();
     const formattedTime = moment(date).format("HH:mm");
-    const context = useContext(DashboardContext);
     const { isMobile, isTablet } = useLayout();
 
     // For drag logic

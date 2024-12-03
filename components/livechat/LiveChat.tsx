@@ -6,9 +6,9 @@ import { ChatBubble, ReplyToBubble } from "./ChatBubble";
 import { ChatInput } from "./ChatInput";
 import { CreateConversationBox } from "./CreateConversationBox";
 import TypingIndicator from "./TypingIndicator";
-import { DashboardContext } from "@app/dashboard/providers";
 import { MessageType, useLiveChat } from "./hook/useLiveChat";
 import { useContext, useState } from "react";
+import {DashboardContext} from "@context/DashboardContext";
 
 export const LiveChat = () => {
     const { toggleLivechat, livechatOpen, unreadMsg, updateUnreadMsg } = useContext(DashboardContext);

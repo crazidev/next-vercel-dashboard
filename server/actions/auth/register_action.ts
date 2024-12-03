@@ -7,7 +7,7 @@ import { RegistrationMail } from "@/server/emails/RegistrationMail";
 import { yupValidator } from "@/server/extra/yup";
 import { RegisterScheme } from "@/server/scheme/register_scheme";
 import { sendMail } from "@/server/extra/nodemailer";
-import { generateJWToken } from "./login";
+import { generateJWToken } from "@/server/extra/jwt_helper";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
