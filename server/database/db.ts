@@ -16,7 +16,7 @@ const getSequelizeInstance = async () => {
       password: config.password,
       dialect: config.dialect,
       dialectModule: config.dialect == "mysql" ? mysql : pg,
-      // dialectOptions: config.dialectOptions,
+      dialectOptions: config.dialectOptions,
       logging: (sql, timing) => {
         if (process.env.LOG_DATABASE_QUERIES == "true") {
           console.info(sql);
