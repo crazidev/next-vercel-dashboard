@@ -48,5 +48,6 @@ public/sw*
 public/swe-worker*
 
 .log*
+Flashpost-tests/*
 
 certificates
