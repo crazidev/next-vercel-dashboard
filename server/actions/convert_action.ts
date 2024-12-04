@@ -27,7 +27,7 @@ export async function convert_action(data: {
   var t = await (await getSequelizeInstance()).transaction();
   var errors = {};
 
-  console.log(data);
+  // console.log(data);
 
   try {
     var user = await Users.findByPk(data.user_id);

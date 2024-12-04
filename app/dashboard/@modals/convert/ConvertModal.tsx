@@ -273,9 +273,12 @@ export default function ConvertModal({
         </Dialog.Trigger>
 
         {<Dialog.Content className="mobile:w-fit tablet:min-w-[500px] tablet:w-[500px] lg:min-w-[800px]">
-            <Dialog.Title>
-                How much do you want to convert
+            <Dialog.Title trim={'end'} className="">
+                How much do you want to convert?
             </Dialog.Title>
+            <Text size={'1'} trim={'start'} color="gray" style={{
+                lineHeight: '5px'
+            }} className=" mb-5">Convert funds between wallets. Select the source wallet, target wallet, and amount for a seamless transfer.</Text>
 
             {state.rootError && (
                 <Callout.Root variant="surface" color="red" mt={"5"} size={"1"}>
@@ -386,7 +389,7 @@ export default function ConvertModal({
                                     </div>}
                             </div>
                         </div>
-                        <Button loading={state.isSubmitting} disabled={!(state.from && state.to && state.inputFiat > 0 && state.convertFiat > 0) || state.isSubmitting} size={'3'} onClick={() => submit()} className="mt-5 w-full">Continue</Button>
+                        <Button loading={state.isSubmitting} disabled={!(state.from && state.to && state.inputFiat > 0 && state.convertFiat > 0) || state.isSubmitting} size={'3'} onClick={() => submit()} className="mt-5 w-full">Submit</Button>
                     </div>
 
                     {/* Wallet Chart */}
