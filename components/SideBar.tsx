@@ -216,11 +216,9 @@ export function SideBarComponent({
       </div>
 
       <div
-        className="flex pt-3 overflow-hidden w-full"
+        className="flex p-[10px] mobile:pt-[45px] overflow-hidden w-full"
         style={{
-          padding:
-            isMobile || !isReady ? "10px" : expand ? "10px" : "10px",
-          paddingTop: isMobile ? "50px" : "0px",
+          
         }}
       >
         {children}
