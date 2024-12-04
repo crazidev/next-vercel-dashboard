@@ -1,4 +1,4 @@
-import { DropdownMenu, Text } from "@radix-ui/themes";
+import { Card, DropdownMenu, Text } from "@radix-ui/themes";
 import { InputHTMLAttributes } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { MyCard } from "./MyCard";
@@ -22,16 +22,16 @@ export const ConvertInputCard = (props: {
         onSelect?: (value?: WalletType) => void
     }
 }) => {
-    return <MyCard className={`mt-5 pb-2 pt-2 ${props.className}`}>
-        <div className="flex flex-row items-center" >
+    return <Card className={`mt-5 pb-2 pt-2 ${props.className}`}>
+        <div className="flex flex-row items-start" >
             <div className="flex flex-col flex-grow">
                 <div >
                     <Text size={'1'} color="gray">
                         {props.title}
                     </Text>
                 </div>
-                <input id="" onClick={props.onTapInput} onKeyUp={() => { }} type="text" className="mt-1 h-[20px] select-none text-[20px] text-wrap items-end bg-transparent shadow-none w-full outline-0" placeholder={props.placeholder} {...props.inputProps} />
-                {props.subtitle && <Text className="text-[10px] text-primary-700">≈ {cFmt({amount: props.subtitle})}</Text>}
+                <input onClick={props.onTapInput} type="text" className="mt-1 h-[20px] select-none text-[20px] text-wrap items-end bg-transparent shadow-none w-full outline-0" placeholder={props.placeholder} {...props.inputProps} />
+                {<Text className="text-[10px] text-primary-700">≈ {cFmt({ amount: props.subtitle ?? 0 })}</Text>}
             </div>
             <DropdownMenu.Root>
                 <DropdownMenu.Trigger className="cursor-pointer">
@@ -73,5 +73,5 @@ export const ConvertInputCard = (props: {
                 </DropdownMenu.Content>
             </DropdownMenu.Root>
         </div>
-    </MyCard>
+    </Card>
 }

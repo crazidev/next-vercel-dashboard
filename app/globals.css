@@ -25,6 +25,7 @@ input[type="search"]::-moz-search-cancel-button {
   display: none;
 }
 
+
 /* Microsoft Edge */
 input[type="search"]::-ms-clear {
   display: none;

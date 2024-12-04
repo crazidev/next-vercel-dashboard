@@ -14,23 +14,23 @@ export const fetchUser = async (
     revalidateUserTag();
   }
 
-  var user = unstable_cache(
-    async (id: number | string) => {
-      await getSequelizeInstance();
-      const data = await Users.findByPk(id, {
-        attributes: {
-          exclude: ["password"],
-        },
-      });
-      return data?.toJSON() || null;
+  // var user = unstable_cache(
+  // async (id: number | string) => {
+  await getSequelizeInstance();
+  const data = await Users.findByPk(id, {
+    attributes: {
+      exclude: ["password"],
     },
-    [cacheDependency],
-    {
-      tags: ["user"], // Tags used for cache invalidation
-    }
-  );
+  });
+  return data?.toJSON() || null;
+  // },
+  //   [cacheDependency],
+  //   {
+  //     tags: ["user"], // Tags used for cache invalidation
+  //   }
+  // );
 
-  return await user(id);
+  // return await user(id);
 };
 
 export async function revalidateUserTag() {

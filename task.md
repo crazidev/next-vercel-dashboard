@@ -8,12 +8,17 @@
    - Sounds ✅
    - Seen ✅
 
-## Convert Currency [Tonight]
+## Convert Currency ✅
+   - Enable setting amount from to input
+
 ## Migrate to custom jwt
+
 ## Send money
    - Inter transfer
    - Bank transfer
    - Send crypto
+
+## Loan
 
 ## Homepage
    - Earning Spending Chart ✅
