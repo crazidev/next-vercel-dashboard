@@ -53,33 +53,6 @@ export default function DashboardProvider({
     setState({ ...state, unreadMsg: value });
   };
 
-  const getCurrentUser = async () => {
-    console.log("Fetching current user...");
-    var user_id = (await authUser()).user_id;
-    var data = await fetchUser(user_id, { force: true });
-    setState({ ...state, user: data });
-
-    if (data) {
-      await fetchUserWallets();
-    }
-
-    return data;
-  }
-
-  const fetchUserWallets = async () => {
-    console.log("Fetching user wallets...");
-    var fetchWallet = await fetch('/api/wallet-list');
-    var data = await fetchWallet.json();
-    if (fetchWallet.ok) {
-      setState({ ...state, wallets: data.data });
-      return data;
-    }
-  }
-
-
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
 
   return (
     <DashboardContext.Provider
@@ -87,8 +60,6 @@ export default function DashboardProvider({
         ...state,
         toggleLivechat: (value) => toggleLivechat(value),
         updateUnreadMsg: (value) => updateUnreadMsg(value),
-        fetchUser: () => getCurrentUser(),
-        fetchUserWallets: () => fetchUserWallets(),
       }}
     >
       {children}

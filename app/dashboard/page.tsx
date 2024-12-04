@@ -20,7 +20,7 @@ import { Suspense } from "react";
 import { RotateSpinnerComponent } from "../../components/RotateSpinner";
 import { AlertComponent } from "../../components/AlertComponent";
 import { WeeklyStats } from "../../components/WeeklyStatsComponent";
-import ConvertModal from "./@modals/ConvertModal";
+import { ConvertProvider } from "./@modals/convert/ConvertProvider";
 
 
 export default async function HomePage({ }: {}) {
@@ -42,9 +42,9 @@ export default async function HomePage({ }: {}) {
             <Button size={{ md: "3" }} radius="large" variant="outline">
               <TbSend2 /> Send Money
             </Button>
-            <Suspense>
-              <ConvertModal />
-            </Suspense>
+            {/* <Suspense> */}
+            <ConvertProvider />
+            {/* </Suspense> */}
           </Flex>
         </Flex>
         <Flex className="flex lg:flex-row flex-col gap-5">
