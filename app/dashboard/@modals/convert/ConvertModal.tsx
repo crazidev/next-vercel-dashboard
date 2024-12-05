@@ -7,7 +7,7 @@ import { WalletBalances } from "@/database/models/wallet_balances";
 import { CryptoConvertContext } from "@context/CryptoConvertContext";
 import { DashboardContext } from "@context/DashboardContext";
 import { Button, Callout, Dialog, IconButton, Spinner, Text } from "@radix-ui/themes";
-import { useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { MdCurrencyExchange, MdSwapVert } from "react-icons/md";
 import { TbArrowDown, TbInfoCircle } from "react-icons/tb";
 import { MiniChart } from "react-ts-tradingview-widgets";
@@ -54,6 +54,7 @@ export default function ConvertModal({
     user: InferAttributes<Users>
 }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [activeInput, setActiveInput] = useState<'input_1' | 'input_2'>(null);
     const [fee, setFee] = useState(0);
     const convert = useContext(CryptoConvertContext);
     const dashboardContext = useContext(DashboardContext);
@@ -108,30 +109,68 @@ export default function ConvertModal({
     };
 
     function convertAmount() {
+        var _convertedAmount = 0;
+        var _convertFiat = 0;
+        var _inputFiat = 0;
         if (convert?.convert?.isReady == true) {
             if (state.from?.type == 'fiat' || state.from?.type == 'crypto') {
-                var data1 = convert.convert[state.from?.shortName]['USD'](state.input.toFixed(2));
+                if (activeInput == 'input_1') {
+                    _inputFiat = convert.convert[state.from?.shortName]['USD'](state.input.toFixed(2));
+                } else {
+                    _inputFiat = convert.convert[state.to?.shortName]['USD'](state.input.toFixed(2));
+
+                }
                 setState(prev => ({
                     ...prev,
-                    inputFiat: data1,
+                    inputFiat: _inputFiat,
                     error: null
                 }));
             }
 
-            if (convert?.convert?.isReady == true) {
-                if (state.to?.type == 'fiat' || state.to?.type == 'crypto') {
-                    var data = convert.convert[state.from?.shortName][state.to?.shortName](state.input - fee);
-                    var data2 = convert.convert[state.to?.shortName]['USD'](data);
+            if (state.to?.type == 'fiat' || state.to?.type == 'crypto') {
+                if (activeInput == 'input_1') {
+                    _convertedAmount = convert.convert[state.from?.shortName][state.to?.shortName](state.input - fee);
+                    _convertFiat = convert.convert[state.to?.shortName]['USD'](_convertedAmount);
+                } else {
+                    _convertedAmount = convert.convert[state.to?.shortName][state.from?.shortName](state.input - fee);
+                    _convertFiat = convert.convert[state.from?.shortName]['USD'](_convertedAmount);
+                }
 
-                    setState(prev => ({
-                        ...prev,
-                        convertedAmount: data ? data : 0,
-                        convertFiat: data2,
-                        error: null
-                    }));
+                setState(prev => ({
+                    ...prev,
+                    convertFiat: _convertFiat,
+                    error: null
+                }));
+            }
+
+            if (activeInput == 'input_1') {
+                var input = document.getElementById('converted_input') as HTMLInputElement;
+                if (input?.value !== undefined) {
+                    input.value = (_convertedAmount ? _convertedAmount : 0).toString()
+                }
+            } else {
+                var input = document.getElementById('amount_input') as HTMLInputElement;
+                if (input?.value !== undefined) {
+                    input.value = (_convertedAmount ? _convertedAmount : 0).toString()
                 }
             }
         }
+    }
+
+    function handleOnInput(e: FormEvent<HTMLInputElement>) {
+        var value = parseFloat(e.currentTarget?.value ?? "0");
+        if (value.toString() == "NaN" || value == 0) {
+            setState(prev => ({
+                ...prev,
+                input: 0,
+            }));
+        } else {
+            setState(prev => ({
+                ...prev,
+                input: value,
+            }));
+        }
+
     }
 
     function canConvert() {
@@ -298,28 +337,18 @@ export default function ConvertModal({
                                 type: "number",
                                 defaultValue: 0,
                                 autoFocus: false,
+                                onFocus: (e) => setActiveInput('input_1'),
                                 onInput: (e) => {
-                                    var value = parseFloat(e.currentTarget?.value ?? "0");
-                                    if (value.toString() == "NaN" || value == 0) {
-                                        setState(prev => ({
-                                            ...prev,
-                                            input: 0,
-                                            convertedAmount: 0
-                                        }));
-                                    } else {
-                                        setState(prev => ({
-                                            ...prev,
-                                            input: value,
-                                        }));
+                                    if (activeInput == 'input_1') {
+                                        handleOnInput(e)
                                     }
-                                },
-
+                                }
                             }}
                             active={state.from}
                             subtitle={state.inputFiat}
                             className={'mt-5 mb-3'}
                             title="Convert"
-                            placeholder="0.00"
+                            placeholder="0"
                             currency={
                                 {
                                     name: state.from?.name,
@@ -342,14 +371,19 @@ export default function ConvertModal({
 
                         <div className="relative mt-10">
                             <ConvertInputCard inputProps={{
-                                readOnly: true,
-                                value: state.convertedAmount,
                                 autoFocus: false,
+                                id: 'converted_input',
+                                onFocus: (e) => setActiveInput('input_2'),
+                                onInput: (e) => {
+                                    if (activeInput == 'input_2') {
+                                        handleOnInput(e)
+                                    }
+                                }
                             }}
                                 active={state.to}
                                 className={'mt-10'}
                                 title="To"
-                                placeholder={`0.00`}
+                                placeholder={`0`}
                                 subtitle={state.convertFiat}
                                 currency={
                                     {
@@ -400,7 +434,7 @@ export default function ConvertModal({
                                     symbol={getFormattedSymbol(state?.from?.shortName, state?.to?.shortName)}
                                     colorTheme="dark"
                                     isTransparent
-                                    height={layout.isMobile ? 200 : layout.isTablet ? 300 : 400}
+                                    height={layout.isMobile ? 200 : layout.isTablet ? 250 : 350}
                                     width="100%"
                                 ></MiniChart>
                             </div></>

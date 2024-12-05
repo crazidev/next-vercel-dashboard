@@ -4,7 +4,7 @@ import { Flex, Button } from "@radix-ui/themes";
 import { Box, Heading, Text } from "@radix-ui/themes";
 import { AnimatePresence, motion } from "motion/react";
 import { useContext, useState } from "react";
-import {DashboardContext} from "@context/DashboardContext";
+import { DashboardContext } from "@context/DashboardContext";
 import useLayout from "@/components/hooks/useLayout";
 
 export function TierCardList() {
@@ -131,14 +131,14 @@ export function TierCardList() {
                         </Flex>
 
                         {/* Limits */}
-                        <Text size="1" align="center" className={`my-4 font-bold ${tier.color}`}>
+                        {/* <Text size="1" align="center" className={`my-4 font-bold ${tier.color}`}>
                             Limits
                         </Text>
                         <Flex className="horizontal-list mb-4 gap-2 flex-wrap">
                             {tier.limits.map((requirement, index) => (
                                 <li key={index} className="text-[12px] list-outside text-pretty">{requirement}</li>
                             ))}
-                        </Flex>
+                        </Flex> */}
 
                         {/* Benefits */}
                         <Text size="1" align="center" className={`my-4 font-bold ${tier.color}`}>
