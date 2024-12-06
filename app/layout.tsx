@@ -91,7 +91,7 @@ export default async function RootLayout({
         <Theme
           appearance={'inherit'}
           grayColor={"auto"}
-          accentColor={"gold"}
+          accentColor={"green"}
           panelBackground="translucent"
         >
           <Toaster

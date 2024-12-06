@@ -4,7 +4,7 @@ import { MdArrowDropDown } from "react-icons/md";
 import { MyCard } from "./MyCard";
 import { Logo } from "./shapes/logo";
 import Image from "next/image";
-import { WalletType } from "@app/dashboard/@modals/ConvertModal";
+import { WalletType } from "@app/dashboard/@modals/convert/ConvertModal";
 import { cFmt } from "@/lib/cFmt";
 
 export const ConvertInputCard = (props: {

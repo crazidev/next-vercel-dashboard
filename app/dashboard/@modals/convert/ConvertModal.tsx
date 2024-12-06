@@ -398,7 +398,7 @@ export default function ConvertModal({
 
 
                             <div className="border-[5px] rounded-md w-fit border-[--gray-2] absolute top-[-20px] mx-auto right-0 left-0">
-                                <IconButton color="gray" className="bg-[--gray-4]" onClick={() => swapCurrency()}>
+                                <IconButton className="bg-[--accent-9]" onClick={() => swapCurrency()}>
                                     <MdSwapVert /></IconButton>
                             </div>
 

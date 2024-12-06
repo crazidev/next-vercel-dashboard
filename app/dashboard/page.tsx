@@ -20,10 +20,19 @@ import { Suspense } from "react";
 import { RotateSpinnerComponent } from "../../components/RotateSpinner";
 import { AlertComponent } from "../../components/AlertComponent";
 import { WeeklyStats } from "../../components/WeeklyStatsComponent";
-import { ConvertProvider } from "./@modals/convert/ConvertProvider";
+import { authUser } from "@/actions/authUser";
+import { fetchUser } from "@/fetch/fetch_user";
+import { fetchUserWallets } from "@/fetch/fetch_wallets";
+import ConvertModal from "./@modals/convert/ConvertModal";
+import { AddFundsModal } from "./@modals/add-funds/AddFundsModal";
+import { SendMoneyModal } from "./@modals/send-money/SendMoneyModal";
 
 
 export default async function HomePage({ }: {}) {
+  var user_id = (await authUser()).user_id;
+  var user = await fetchUser(user_id);
+  var walletList = await fetchUserWallets(user_id ?? -1);
+
   return (
     <div className="flex flex-row flex-grow gap-5">
       <div className="flex flex-col flex-grow flex-[9] w-[100%]">
@@ -36,15 +45,9 @@ export default async function HomePage({ }: {}) {
             Quick Actions:
           </Text>
           <Flex gap={"2"} className="flex-wrap">
-            <Button size={{ md: "3" }} radius="large" variant="outline">
-              <MdAdd /> Add Funds
-            </Button>
-            <Button size={{ md: "3" }} radius="large" variant="outline">
-              <TbSend2 /> Send Money
-            </Button>
-            {/* <Suspense> */}
-            <ConvertProvider />
-            {/* </Suspense> */}
+            <AddFundsModal walletList={walletList} user={user} />
+            <SendMoneyModal walletList={walletList} user={user} />
+            <ConvertModal walletList={walletList} user={user} />
           </Flex>
         </Flex>
         <Flex className="flex lg:flex-row flex-col gap-5">
