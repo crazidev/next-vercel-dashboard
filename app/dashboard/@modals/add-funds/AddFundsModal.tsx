@@ -12,6 +12,7 @@ import { Logo } from "@/components/shapes/logo";
 import { MyCard } from "@/components/MyCard";
 import { TbCopy, TbInfoCircle } from "react-icons/tb";
 import { CTextField } from "@/components/CTextField";
+import { toast } from "sonner";
 
 
 
@@ -58,7 +59,18 @@ export function AddFundsModal({
     }, [selected]);
 
     function CopyButton(value: any) {
-        return <IconButton variant="ghost"><TbCopy /></IconButton>;
+        return <IconButton onClick={async () => {
+            try {
+                await navigator.clipboard.writeText(value);
+                // setIsCopied(true);
+                toast.success("Copied to the clipboard!");
+                // setTimeout(() => setIsCopied(false), 2000);
+            } catch (err) {
+                toast.error("Failed to copy text");
+                console.error("Failed to copy text:", err);
+            }
+        }}
+            variant="ghost"><TbCopy /></IconButton>;
     }
     return <>
         <Dialog.Root open={isOpen} onOpenChange={(value) => {
