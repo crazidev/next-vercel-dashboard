@@ -87,6 +87,7 @@ export default async function RootLayout({
           }}
         ></script>
       </head>
+      
       <body>
         <Theme
           appearance={'inherit'}
@@ -99,6 +100,7 @@ export default async function RootLayout({
             expand={false}
             richColors
             position={"top-left"}
+            className="z-50 pointer-events-auto"
             toastOptions={{
               style: {},
             }}
