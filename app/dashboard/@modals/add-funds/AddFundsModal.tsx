@@ -31,11 +31,10 @@ export function AddFundsModal({
         value: -1,
     };
 
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [list, setList] = useState<WalletType[]>([]);
     const [selected, setSelected] = useState<number>(-1);
     const [selectedWallet, setSelectedWallet] = useState<InferAttributes<WalletBalances>>(null);
-
 
     useEffect(() => {
         var list: WalletType[] = walletList.map((e) => {
@@ -49,7 +48,7 @@ export function AddFundsModal({
         });
 
         setList(prev => [main, ...list]);
-        setSelected(list.at(0).value);
+        setSelected(list?.at(0)?.value);
 
     }, [isOpen]);
 
@@ -101,7 +100,7 @@ export function AddFundsModal({
                 <div className="flex mt-7 gap-5">
                     <div className="w-[30%] mobile:w-fit tablet:w-fit flex flex-col gap-2">
                         {list.map((e) =>
-                            <div onClick={(i) => setSelected(e.value)}>
+                            <div key={e.value} onClick={(i) => setSelected(e.value)}>
                                 <MyCard size={'1'} className={`px-2 h-auto py-2 outline-0 flex flex-row items-center gap-2 cursor-pointer font-bold ${(selected == e.value) ? "!bg-[--accent-5] border-2 border-[--accent-5]" : "!bg-transparent"}`}>
                                     <div className="">
                                         {e.icon && <Image
@@ -125,9 +124,9 @@ export function AddFundsModal({
                     </div>
                     {selected == -1 && <div className="flex flex-grow flex-col gap-2">
                         <CTextField value={'Wells Fargo'} label="Bank Name" readOnly />
-                        <CTextField value={`${user.firstName} ${user.lastName}`} label="Account Holder" rightIcon={CopyButton(`${user.firstName} ${user.lastName}`)} readOnly />
-                        <CTextField value={user.id} label="Account Number" rightIcon={CopyButton(`${user.id}`)} readOnly />
-                        <CTextField value={user.id} label="Routing Number" rightIcon={CopyButton(`${user.id}`)} readOnly />
+                        <CTextField value={`${user?.firstName} ${user?.lastName}`} label="Account Holder" rightIcon={CopyButton(`${user?.firstName} ${user?.lastName}`)} readOnly />
+                        <CTextField value={user?.id} label="Account Number" rightIcon={CopyButton(`${user?.id}`)} readOnly />
+                        <CTextField value={user?.id} label="Routing Number" rightIcon={CopyButton(`${user?.id}`)} readOnly />
                     </div>}
 
                     {selected != -1 && <div className="flex flex-grow flex-col gap-2">

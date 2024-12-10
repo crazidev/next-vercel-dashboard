@@ -1,16 +1,11 @@
 "use server";
 import { Users } from "@/database/models/init-models";
 import getSequelizeInstance from "@/database/db";
-import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
 import { RegistrationMail } from "@/server/emails/RegistrationMail";
 import { yupValidator } from "@/server/extra/yup";
 import { RegisterScheme } from "@/server/scheme/register_scheme";
 import { sendMail } from "@/server/extra/nodemailer";
 import { generateJWToken } from "@/server/extra/jwt_helper";
-
-const JWT_SECRET = process.env.JWT_SECRET || "";
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
 
 export async function register_action(formData: any) {
   try {

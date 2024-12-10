@@ -81,9 +81,8 @@ export function TierCardList() {
 
     return <motion.div layout transition={{
         duration: 0.5
-    }} className="gap-5 items-center justify-center" style={{
+    }} className="gap-5 tablet:flex-col mobile:flex-col flex-row items-center justify-center" style={{
         display: 'flex',
-        flexDirection: !(isTablet || isMobile) ? 'row' : 'column'
     }}>
 
         {tiers.map((tier, i) => (

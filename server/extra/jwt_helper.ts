@@ -1,5 +1,6 @@
 import { Users } from "@/database/models/users";
 import { revalidateUserTag, fetchUser } from "@/fetch/fetch_user";
+import { createJwtToken, verifyJwtToken } from "@/lib/jwt";
 import jwt, { JsonWebTokenError, JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { InferAttributes } from "sequelize";
@@ -9,9 +10,14 @@ export const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
 
 /// This function will generate jwt token and also revalidateUserTag
 export async function generateJWToken(user: InferAttributes<Users> | Users) {
-  const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN,
-  });
+  const token = await createJwtToken(
+    {
+      userId: user.id,
+      email: user.email,
+    },
+    JWT_SECRET,
+    JWT_EXPIRES_IN
+  );
 
   cookies().set("token", token, {
     maxAge: 60 * 60 * 24 * 7,
@@ -32,7 +38,7 @@ export function validateJWT(token: string):
     }
   | JwtPayload {
   try {
-    var data = jwt.verify(token, JWT_SECRET);
+    var data = verifyJwtToken(token, JWT_SECRET);
     return data as any;
   } catch (error) {
     var err: JsonWebTokenError = error;

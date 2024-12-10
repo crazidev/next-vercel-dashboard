@@ -20,7 +20,7 @@ export const CryptoConvertProvider: React.FC<{ children: ReactNode }> = ({ child
                 const cryptoConvertInstance = new CryptoConvert();
                 setConvert(cryptoConvertInstance);
             } catch (error) {
-                console.error("Unable to initialize CryptoConvert", error);
+                console.log("Unable to initialize CryptoConvert", error?.message);
             }
         }
     }, [convert]);

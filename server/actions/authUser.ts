@@ -1,6 +1,6 @@
-'use server';
+"use server";
 
-import jwt from "jsonwebtoken";
+import { verifyJwtToken } from "@/lib/jwt";
 import { cookies } from "next/headers";
 const JWT_SECRET = process.env.JWT_SECRET || "";
 
@@ -8,7 +8,7 @@ export async function authUser(re_direct?: boolean) {
   var token = (await cookies()).get("token")?.value;
   try {
     if (token !== undefined && token !== "") {
-      var user = jwt.verify(token!, JWT_SECRET) as any;
+      var user = (await verifyJwtToken(token!, JWT_SECRET)) as any;
       return {
         isAuth: true,
         user_id: user.userId ?? -1,

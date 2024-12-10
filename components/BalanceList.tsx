@@ -67,7 +67,7 @@ const CryptoWalletCard = async ({ wallet, index }: { wallet: InferAttributes<Wal
             {/* <Text trim={'start'} className="font-mono text-[14px]">
               {converted}
             </Text> */}
-            <Text trim={'start'} color="gray" className="font-thin text-[12px]">
+            <Text trim={'start'} color="gray" className="font-normal text-[12px]">
               {wallet.wallet?.name}
             </Text>
           </Flex>

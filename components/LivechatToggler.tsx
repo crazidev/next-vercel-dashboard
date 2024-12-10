@@ -25,7 +25,7 @@ export function LivechatToggler() {
                     context.toggleLivechat?.(!context.livechatOpen ?? true);
                 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className={`fixed z-20 bg-[--accent-5] rounded-full rounded-br-none p-2 bottom-[35px] flex flex-row items-center gap-2 right-[20px] border border-[--gray-7]`}
+                className={`fixed z-20 bg-[--gray-5] rounded-full rounded-br-none p-2 bottom-[35px] flex flex-row items-center gap-2 right-[20px] border border-[--gray-7]`}
             >
                 <motion.span
                     initial={{ opacity: 0 }}

@@ -1,13 +1,11 @@
 "use server";
 
-import { ReactElement } from "react";
 import { Users } from "@/database/models/users";
 import { VerificationTokens } from "@/database/models/verification_tokens";
 import { ResetPasswordMail } from "@/server/emails/ResetPasswordMail";
 import { sendMail } from "@/server/extra/nodemailer";
 import bcrypt from "bcrypt";
 import getSequelizeInstance from "@/database/db";
-import { login } from "./login";
 import { generateJWToken } from "@/server/extra/jwt_helper";
 
 

@@ -1,21 +1,18 @@
 "use server";
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import getSequelizeInstance from "@/database/db";
 
 import { yupValidator } from "@/server/extra/yup";
 import { loginActionScheme } from "@/server/scheme/login_scheme";
 import { Users } from "@/database/models/users";
-import { fetchUser, revalidateUserTag } from "@/fetch/fetch_user";
-
-
 
 import { InferAttributes } from "sequelize";
 import { Passkey } from "@/database/models/passkey";
 import { server } from "@passwordless-id/webauthn";
 import { userAgent } from "next/server";
 import { AuthenticationResponseJSON } from "@passwordless-id/webauthn/dist/esm/types";
-import { UserCredential } from "firebase/auth";
 import { generateJWToken } from "@/server/extra/jwt_helper";
+import { verifyJwtToken } from "@/lib/jwt";
 
 export async function login(formData: any) {
   try {

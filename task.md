@@ -11,7 +11,9 @@
 ## Convert Currency ✅
    - Enable setting amount from to input
 
-## Migrate to custom jwt
+## Migrate to custom jwt ✅
+
+## Fund Account ✅
 
 ## Send money
    - Inter transfer
