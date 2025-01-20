@@ -9,7 +9,7 @@
    - Seen ✅
 
 ## Convert Currency ✅
-   - Enable setting amount from to input
+   - Enable setting amount from to input ✅
 
 ## Migrate to custom jwt ✅
 
@@ -46,6 +46,7 @@
    - Transaction list
        - Edit transaction
        - Delete transaction
+       
    - Emails:
        - Registration
        - Reset password link

@@ -7,7 +7,6 @@ export async function GET(request: Request) {
     var token = parseCookie(request.headers.get("cookie")).get("token");
 
     var user = validateJWT(token);
-    // console.log(user.userId);
     var data = await fetchUserWallets(user.userId);
 
     return new Response(JSON.stringify({ data }), {

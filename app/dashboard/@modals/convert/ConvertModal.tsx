@@ -20,6 +20,7 @@ import useLayout from "@/components/hooks/useLayout";
 import { error } from "console";
 import { toast } from "sonner";
 import { convert_action } from "@/actions/convert_action";
+
 export interface WalletType {
     name: string,
     icon?: string,
@@ -113,11 +114,12 @@ export default function ConvertModal({
         var _convertFiat = 0;
         var _inputFiat = 0;
         if (convert?.convert?.isReady == true) {
+
             if (state.from?.type == 'fiat' || state.from?.type == 'crypto') {
                 if (activeInput == 'input_1') {
-                    _inputFiat = convert.convert[state.from?.shortName]['USD'](state.input.toFixed(2));
+                    _inputFiat = convert.convert[state.from?.shortName]['USD'](state.input);
                 } else {
-                    _inputFiat = convert.convert[state.to?.shortName]['USD'](state.input.toFixed(2));
+                    _inputFiat = convert.convert[state.to?.shortName]['USD'](state.input);
 
                 }
                 setState(prev => ({
@@ -126,6 +128,7 @@ export default function ConvertModal({
                     error: null
                 }));
             }
+
 
             if (state.to?.type == 'fiat' || state.to?.type == 'crypto') {
                 if (activeInput == 'input_1') {
@@ -295,8 +298,14 @@ export default function ConvertModal({
     }, [isOpen]);
 
     useEffect(() => {
-        convertAmount();
-    }, [state.input, state.from, state.to]);
+        if (convert.convert != null && convert.convert?.USD != undefined) {
+            try {
+                convertAmount();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }, [state.input, state.from, state.to, convert.convert]);
 
     useEffect(() => {
         setWalletList()

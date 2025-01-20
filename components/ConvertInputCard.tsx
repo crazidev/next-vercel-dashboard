@@ -44,7 +44,7 @@ export const ConvertInputCard = (props: {
                             alt={"logo"}
                         />}
                         {props.active?.value == -1 && <Logo className={"h-[20px] w-[20px] fill-primary-700"} />}
-                        <Text size={'1'}>{props.currency.name}</Text>
+                        <Text wrap={'nowrap'} size={'1'}>{props.currency.name}</Text>
                         <MdArrowDropDown />
                     </div>
                 </DropdownMenu.Trigger>

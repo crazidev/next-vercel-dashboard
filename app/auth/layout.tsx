@@ -16,8 +16,8 @@ export default function AuthLayout({
 }) {
   return (
     <div className="max-h-[100vh] max-w-[100vw]">
-      <Shape1 className={"fixed bottom-0 right-[-100px] w-[300px]"} />
-      <Shape2 className={"fixed left-[-80px] top-[-50px] h-[100vh] w-[50v]"} />
+      {/* <Shape1 className={"fixed bottom-0 right-[-100px] w-[300px]"} /> */}
+      {/* <Shape2 className={"fixed left-[-80px] top-[-50px] h-[100vh] w-[50v]"} /> */}
       <div className="container mx-auto flex h-screen flex-col px-[20px] pb-[20px] md:px-[30px]">
         <Flex
           className="z-10 flex flex-none lg:sticky top-0 pt-[30px] md:pt-[40px]"
