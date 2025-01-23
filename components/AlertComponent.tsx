@@ -11,7 +11,7 @@ export const AlertComponent = async () => {
     var generalAlerts: Alert[] = [];
     var userAlerts: Alert[] = [];
 
-    var user_id =(await authUser())?.user_id;
+    var user_id = (await authUser())?.user_id;
     const now = new Date();
 
     var where = {
@@ -54,7 +54,7 @@ export const AlertComponent = async () => {
     }
 
     return <Flex className="mb-3" direction={"column"}>
-        {allAlerts.map((alert) => <Callout.Root className="gap-0 gap-x-2 mt-0 mb-3" variant="surface" color={getColor(alert.type)} mt={"5"} size={"1"}>
+        {allAlerts.map((alert) => <Callout.Root key={alert.id} className="gap-0 gap-x-2 mt-0 mb-3" variant="surface" color={getColor(alert.type)} mt={"5"} size={"1"}>
             <Callout.Icon>
                 {alert.type === "info" && <TbInfoCircle />}
                 {alert.type === "error" && <MdErrorOutline />}

@@ -12,7 +12,7 @@ export default function DashboardLayout({
 }) {
   return (
     <div>
-      <Shape1 className={"fixed bottom-0 left-[-100px] -z-10 w-[300px]"} />
+      {/* <Shape1 className={"fixed bottom-0 left-[-100px] -z-10 w-[300px]"} /> */}
 
       <div className="flex flex-row">
         <CryptoConvertProvider>

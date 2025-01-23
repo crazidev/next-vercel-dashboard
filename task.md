@@ -16,8 +16,8 @@
 ## Fund Account ✅
 
 ## Send money
-   - Inter transfer
-   - Bank transfer
+   - Inter transfer 
+   - Bank transfer 
    - Send crypto
 
 ## Loan

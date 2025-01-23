@@ -48,7 +48,7 @@ export function AddFundsModal({
         });
 
         setList(prev => [main, ...list]);
-        setSelected(list?.at(0)?.value);
+        setSelected(-1);
 
     }, [isOpen]);
 

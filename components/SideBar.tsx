@@ -120,7 +120,7 @@ export function SideBarComponent({
                       align={"start"}
                       justify={"center"}
                     >
-                      <Text weight={"bold"}>SYNC BANK</Text>
+                      <Text weight={"bold"}>{process.env.NEXT_PUBLIC_APP_NAME}</Text>
                       {/* <Text color={"gray"} size={"1"}>
                         #1 Soft Banking
                       </Text> */}

@@ -338,7 +338,7 @@ export default function ConvertModal({
             )}
 
             {state.loading ? <Spinner className="m-auto my-[50px]" /> :
-                <div className="flex flex-row mobile:flex-col tablet:flex-col items-start gap-5">
+                <div className="flex flex-row mobile:flex-col-reverse tablet:flex-col items-start gap-5">
                     <div className="tablet:w-full mobile:w-full w-[50%]">
                         <ConvertInputCard
                             inputProps={{
