@@ -12,7 +12,8 @@ interface MyDialogProp {
   children?: any;
   maxWidth?: string;
   trigger: any;
-  closeDialogProp?: (d: () => void) => void; // Add closeDialog as a prop
+  open?: boolean,
+  setIsOpen?: (boolean) => void
 }
 
 export function MyDialog({
@@ -21,22 +22,13 @@ export function MyDialog({
   children,
   maxWidth,
   trigger,
-  closeDialogProp,
+  open,
+  setIsOpen
 }: MyDialogProp) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const closeDialog = () => {
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    if (closeDialogProp) {
-      closeDialogProp(closeDialog);
-    }
-  }, [closeDialogProp]);
+  const [_isOpen, _setIsOpen] = useState(false);
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog.Root open={open ?? _isOpen} onOpenChange={setIsOpen ?? _setIsOpen}>
       <Dialog.Trigger>{trigger}</Dialog.Trigger>
 
       <Dialog.Content maxWidth={maxWidth ?? "350px"}>

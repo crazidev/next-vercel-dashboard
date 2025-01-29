@@ -7,7 +7,7 @@ import { Button, Callout, Card, Dialog, IconButton, Text } from "@radix-ui/theme
 import { FormEvent, useContext, useEffect, useState } from "react"
 import { TbInfoCircle, TbNumber, TbSend2 } from "react-icons/tb"
 import { InferAttributes } from "sequelize"
-import { WalletType } from "../convert/ConvertModal";
+import { main, WalletType } from "../convert/ConvertModal";
 import { CryptoConvertContext } from "@context/CryptoConvertContext";
 import { CheckCheck, CheckCircle, CheckCircle2, CheckCircle2Icon, Circle, ClipboardPaste, RouteIcon, UserRound } from "lucide-react";
 import { CTextField } from "@/components/CTextField";
@@ -59,27 +59,15 @@ export function SendMoneyModal({
         }))
     });
 
-
-    var main: WalletType = {
-        name: "Main Account",
-        shortName: "USD",
-        icon: null,
-        type: "fiat",
-        value: -1,
-        hide: false
-    };
-
     const [isOpen, setIsOpen] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [isSuccessful, setSuccessful] = useState(null);
-    const [sendFrom, setSendFrom] = useState<WalletType>(main);
+    const [sendFrom, setSendFrom] = useState<WalletType>(main(0));
     const [sendFromWallet, setSendWallet] = useState<InferAttributes<WalletBalances>>(null);
     const [fiat, setFiat] = useState<number>(0);
     const [amount, setAmount] = useState<number>(0);
     const [error, setBError] = useState<string>(null);
     const convert = useContext(CryptoConvertContext);
-
-
 
     var dropdownFrom: WalletType[] = walletList.map((e) => {
         return {
@@ -230,7 +218,7 @@ export function SendMoneyModal({
                                             onSelect: (v) => {
                                                 setSendFrom(v);
                                             },
-                                            dropdown: [main, ...dropdownFrom]
+                                            dropdown: [main(0), ...dropdownFrom]
                                         }
                                     }
                                 />

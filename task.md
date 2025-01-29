@@ -16,9 +16,9 @@
 ## Fund Account ✅
 
 ## Send money
-   - Inter transfer 
-   - Bank transfer 
-   - Send crypto
+   - Inter transfer ✅
+   - Bank transfer ✅
+   - Send crypto ✅
 
 ## Loan
 
@@ -29,7 +29,7 @@
    - Not available in region (demo content) ✅
 
 ## Admin Dashboard
-   - Login
+   - Login ✅
    - User list
        - Change KYC Status
        - Send email

@@ -3,7 +3,7 @@
 import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
 import { Logo } from "@/components/shapes/logo";
 import { useContext, useEffect, useState } from "react";
-import { MdOutlineWallet, MdSettings } from "react-icons/md";
+import { MdOutlineWallet, MdSettings, MdSupportAgent } from "react-icons/md";
 import {
   TbChartLine,
   TbCreditCard,
@@ -14,10 +14,32 @@ import {
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import useLayout from "@/components/hooks/useLayout";
-import {DashboardContext} from "@context/DashboardContext";
+import { DashboardContext } from "@context/DashboardContext";
+import { LuUsers, LuWallet2 } from "react-icons/lu";
 
 
-export const navlist = [
+export const navlist = (isAdmin: boolean) => isAdmin ? [
+  {
+    link: "/admin",
+    name: "Dashboard",
+    icon: <TbDashboard />,
+  },
+  {
+    link: "/admin/users",
+    name: "User's Management",
+    icon: <LuUsers />,
+  },
+  {
+    link: "/admin/livechat",
+    name: "Livechat & Support",
+    icon: <MdSupportAgent />,
+  },
+  {
+    link: "/admin/wallets",
+    name: "Wallet's Management",
+    icon: <LuWallet2 />,
+  },
+] : [
   {
     link: "/dashboard",
     name: "Dashboard",
@@ -48,9 +70,11 @@ export const navlist = [
 export function SideBarComponent({
   children,
   sidebar,
+  isAdmin
 }: {
   children: React.ReactNode;
   sidebar?: React.ReactNode;
+  isAdmin: boolean
 }) {
   const { isMobile, isTablet } = useLayout();
 
@@ -148,11 +172,16 @@ export function SideBarComponent({
                 <div className="bg-gray-400/50 mx-auto my-7 rounded-sm w-[20px] h-[2px]"></div>
               )}
 
-              {navlist.map(function (nav) {
+              {navlist(isAdmin).map(function (nav) {
                 var isActive = pathname.startsWith(nav.link) && (nav.link != '/dashboard');
                 if (nav.link == "/dashboard") {
                   isActive = pathname == '/dashboard';
                 }
+                var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
+                if (nav.link == "/admin") {
+                  isActive = pathname == '/admin';
+                }
+
                 return (
                   // <Tooltip key={nav.link} content={nav.name}>
                   <Link
@@ -195,10 +224,14 @@ export function SideBarComponent({
       <div className="top-0 right-0 left-0 z-20 fixed hidden mobile:flex justify-between items-center bg-card-background backdrop-blur-md py-1 pr-2 pl-2">
         <Logo className="w-[30px] h-[30px] fill-primary-500" />
         <div className="flex flex-row gap-1">
-          {navlist.map(function (nav, index) {
+          {navlist(isAdmin).map(function (nav, index) {
             var isActive = pathname.startsWith(nav.link) && (nav.link != '/dashboard');
             if (nav.link == "/dashboard") {
               isActive = pathname == '/dashboard';
+            }
+            var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
+            if (nav.link == "/admin") {
+              isActive = pathname == '/admin';
             }
 
             return (
@@ -218,7 +251,7 @@ export function SideBarComponent({
       <div
         className="flex p-[10px] mobile:pt-[45px] overflow-hidden w-full"
         style={{
-          
+
         }}
       >
         {children}

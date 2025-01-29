@@ -6,6 +6,7 @@ import { yupValidator } from "@/server/extra/yup";
 import { RegisterScheme } from "@/server/scheme/register_scheme";
 import { sendMail } from "@/server/extra/nodemailer";
 import { generateJWToken } from "@/server/extra/jwt_helper";
+import { momentInstance } from "@/lib/momentDateTime";
 
 export async function register_action(formData: any) {
   try {
@@ -40,7 +41,8 @@ export async function register_action(formData: any) {
       gender: validatedFields.data?.gender,
       password: validatedFields.data!.password,
       phone: validatedFields.data!.phone,
-      accountLevel: 'tier1'
+      accountLevel: "tier1",
+      createdAt: momentInstance().toDate(),
     });
 
     if (result != null) {

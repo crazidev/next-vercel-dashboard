@@ -47,6 +47,17 @@ interface ConvertState {
     selectFrom?: InferAttributes<WalletBalances>,
 }
 
+export const main = (value) => {
+    return {
+        name: "USD",
+        shortName: "USD",
+        icon: null,
+        type: "fiat",
+        value: -1,
+        hide: value == -1
+    } as WalletType;
+}
+
 export default function ConvertModal({
     walletList,
     user
@@ -69,15 +80,6 @@ export default function ConvertModal({
         dropDownTo: []
     });
 
-    var main: WalletType = {
-        name: "USD",
-        shortName: "USD",
-        icon: null,
-        type: "fiat",
-        value: -1,
-        hide: state.to?.value == -1
-    };
-
     const loadData = async () => {
         console.log("Running: LoadData");
         try {
@@ -90,7 +92,7 @@ export default function ConvertModal({
 
             setState(prev => ({
                 ...prev,
-                from: main,
+                from: main(state?.to?.value),
                 loading: false,
                 to: {
                     name: firstWallet?.wallet?.name,
@@ -211,8 +213,8 @@ export default function ConvertModal({
 
         setState(prev => ({
             ...prev,
-            dropDownFrom: [main, ...dropdownFrom],
-            dropDownTo: [main, ...dropdownTo].filter((e) => e.value != state.from?.value),
+            dropDownFrom: [main(state?.to?.value), ...dropdownFrom],
+            dropDownTo: [main(state?.to?.value), ...dropdownTo].filter((e) => e.value != state.from?.value),
             selectFrom: walletList.find((e) => e.id == state.from?.value)
         }));
     }

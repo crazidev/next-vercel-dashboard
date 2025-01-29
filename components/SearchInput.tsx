@@ -55,13 +55,13 @@ export const SearchInput = ({
             placeholder={placeholder}
             leftIcon={<Search size={15} className="mx-1" />}
             className="!h-[45px] md:h-[45px]"
-            // onChange={(e) => {
-            //     if (onChanged)
-            //         onChanged({
-            //             path: pathName,
-            //             value: e.target.value
-            //         });
-            // }}
+            onChange={(e) => {
+                if (onChanged)
+                    onChanged({
+                        path: pathName,
+                        value: e.target.value
+                    });
+            }}
             // type={'search'}
             // onKeyUp={(e) => {
             //     setSearch(e.currentTarget.value);

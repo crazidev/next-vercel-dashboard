@@ -16,7 +16,7 @@ export default function DashboardLayout({
 
       <div className="flex flex-row">
         <CryptoConvertProvider>
-          <SideBarComponent>
+          <SideBarComponent isAdmin={false}>
             <div className="flex w-[100%] flex-grow flex-col">{children}</div>
           </SideBarComponent>
         </CryptoConvertProvider>
