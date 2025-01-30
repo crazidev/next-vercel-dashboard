@@ -15,6 +15,9 @@ export const ConvertInputCard = (props: {
     inputProps?: InputHTMLAttributes<HTMLInputElement>,
     active?: WalletType,
     subtitle?: any,
+    subtitleCurrency?: string,
+    subtitleRight?: any,
+    subtitleLeft?: any,
     currency: {
         name: string,
         icon?: string,
@@ -31,7 +34,7 @@ export const ConvertInputCard = (props: {
                     </Text>
                 </div>
                 <input onClick={props.onTapInput} type="text" className="mt-1 h-[20px] select-none text-[20px] text-wrap items-end bg-transparent shadow-none w-full outline-0" placeholder={props.placeholder} {...props.inputProps} />
-                {<Text className="text-[10px] text-primary-700">≈ {cFmt({ amount: props.subtitle ?? 0 })}</Text>}
+                {<Text className="text-[10px] text-primary-700">≈ {props.subtitleLeft}{cFmt({ amount: props.subtitle ?? 0, code: props.subtitleCurrency ?? "USD" })}{props.subtitleRight}</Text>}
             </div>
             <DropdownMenu.Root>
                 <DropdownMenu.Trigger className="cursor-pointer">

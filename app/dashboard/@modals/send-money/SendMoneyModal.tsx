@@ -165,7 +165,7 @@ export function SendMoneyModal({
         }}>
             <Dialog.Trigger>
                 <Button size={{ md: "3" }} radius="large" variant="outline">
-                    <TbSend2 /> Withdraw
+                    <TbSend2 /> Transfer
                 </Button>
             </Dialog.Trigger>
 
@@ -175,12 +175,12 @@ export function SendMoneyModal({
                 {!isSuccessful &&
                     <>
                         <Dialog.Title trim={'end'} className="">
-                            Withdraw Securely
+                        Transfer Securely
                         </Dialog.Title>
                         <Dialog.Description style={{
                             lineHeight: "20px"
                         }}>
-                            <Text size={'1'} trim={'start'} color="gray" className=" mb-5">Effortlessly withdraw funds, whether it's a bank transfer or crypto transaction. Enjoy a seamless and secure experience every time.</Text>
+                            <Text size={'1'} trim={'start'} color="gray" className=" mb-5">Effortlessly Transfer funds, whether it's a bank transfer or crypto transaction. Enjoy a seamless and secure experience every time.</Text>
                         </Dialog.Description>
 
                         {error && (

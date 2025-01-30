@@ -1,5 +1,6 @@
 'use client';
 
+import { admin_update_user_balance_action } from "@/actions/admin/update_user_balance";
 import { ConvertInputCard } from "@/components/ConvertInputCard";
 import { MyCard } from "@/components/MyCard";
 import { MyDialog } from "@/components/MyDialog";
@@ -12,6 +13,7 @@ import { Button, DropdownMenu, Separator, Text } from "@radix-ui/themes";
 import Image from "next/image";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { InferAttributes } from "sequelize";
+import { toast } from "sonner";
 
 export default function UpdateBalanceDialog({ user, isOpen, setIsOpen }: { user: Users, isOpen: boolean, setIsOpen: (boolean) => void }) {
 
@@ -23,6 +25,7 @@ export default function UpdateBalanceDialog({ user, isOpen, setIsOpen }: { user:
     const [isSuccessful, setSuccessful] = useState(null);
     const convert = useContext(CryptoConvertContext);
     const [error, setBError] = useState<string>(null);
+    const [isLoading, setLoading] = useState(false);
 
     var dropdownFrom: WalletType[] = user.walletBalances.map((e) => {
         return {
@@ -51,6 +54,22 @@ export default function UpdateBalanceDialog({ user, isOpen, setIsOpen }: { user:
         } else {
             setFiat(amount);
         }
+    }
+
+    async function submit() {
+        setLoading(true);
+        try {
+            var res = await admin_update_user_balance_action({
+                amount: amount,
+                wallet: sendFrom.value,
+                userId: user.id,
+            });
+
+            toast.success(res.message);
+        } catch (error) {
+            toast.error(res.error);
+        }
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -137,7 +156,7 @@ export default function UpdateBalanceDialog({ user, isOpen, setIsOpen }: { user:
                                 }
                             }}
                             active={sendFrom}
-                            subtitle={fiat}
+                            subtitle={amount}
                             className={'!mt-0 mb-2'}
                             title="Amount"
                             placeholder="0"
@@ -153,7 +172,7 @@ export default function UpdateBalanceDialog({ user, isOpen, setIsOpen }: { user:
                             }
                         />
                         <div className="w-full">
-                            <Button loading={false} size={'3'} onClick={() => { }} className="mt-5 w-full">Submit</Button>
+                            <Button loading={isLoading} size={'3'} onClick={() => submit()} className="mt-5 w-full">Submit</Button>
                         </div>
                     </div>
                 </div>

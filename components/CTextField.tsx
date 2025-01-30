@@ -55,7 +55,7 @@ export const CTextField = React.forwardRef<HTMLElement, InputProps>(
           {error && (
             <Text
               ml={"2"}
-              className="font-normal text-[11px] italic normal-case"
+              className="font-normal text-[11px] italic capitalize"
               color="red"
             >
               {error}

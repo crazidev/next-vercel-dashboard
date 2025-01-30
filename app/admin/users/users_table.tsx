@@ -239,7 +239,6 @@ export default function UsersTable({ users }: { users: Users[] }) {
 }
 
 function ViewImageDialog({ title, url }) {
-    // alert(url);
     return (<
         MyDialog title={title}
         maxWidth="500px"
