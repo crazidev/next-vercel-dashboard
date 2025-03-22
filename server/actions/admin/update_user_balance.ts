@@ -45,7 +45,6 @@ export async function admin_update_user_balance_action({
     }
 
     await t.commit();
-    revalidatePath("/admin/users");
 
     return {
       success: true,

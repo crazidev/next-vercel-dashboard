@@ -59,14 +59,14 @@ export default async function HomePage({ }: {}) {
             </div>
           </Flex>
           <Card className="flex flex-col md:w-[70%]" variant="ghost">
-            <Flex justify={"between"} direction={"column"} className="gap-1">
+            <Flex justify={"between"} direction={"column"} className="gap-1 mb-3">
               <Text className="font-extrabold" size={"3"}>
                 Transaction History
               </Text>
-              <Flex gap={"2"} className="my-3 text-primary-400">
+              {/* <Flex gap={"2"} className="my-3 text-primary-400">
                 <TbHandClick />
-                <Text size={"1"}>Scroll right for more</Text>
-              </Flex>
+                <Text size={"1"}>Scroll right for more</Text> */}
+              {/* </Flex> */}
             </Flex>
 
             <Suspense

@@ -95,7 +95,7 @@ export function SideBarComponent({
       {isReady && (
         <div className="">
           <aside
-            className={`tablet:h-fit mobile:h-0 top-0 ${isMobile && !expand ? "z-0" : "z-40"
+            className={`tablet:h-fit p-[15px] mobile:h-0 top-0 ${isMobile && !expand ? "z-0" : "z-40"
               } w-fit sticky`}
           >
             <Box
@@ -113,7 +113,7 @@ export function SideBarComponent({
                  mobile:hidden
                  px-2
                  tablet:pr-0
-                 pt-[45px]
+                 py-[45px]
                  transition-all duration-300 ease-in-out 
                  to-[var(--red-1)] from-transparent
                  tablet:w-[100%] w-[270px]
@@ -127,18 +127,19 @@ export function SideBarComponent({
                   className="
                   tablet:hidden 
                   mobile:hidden 
-                  before:h-[100vh]
-                   before:-z-10 
+                  
+                  before:-z-10 
                   before:absolute 
                   before:backdrop-blur-sm 
-                  before:inset-0 
+                  before:inset-0
+                  before:rounded-2xl
                   before:bg-[var(--gray-a2)]"
                   align={"center"}
                   justify={"center"}
                   gap={"3"}
                 >
                   <Flex align={"center"} justify={'center'} direction={"column"} gap={"3"}>
-                    <Logo className="w-[30px] h-[30px] fill-primary-500" />
+                    <Logo className="w-[50px] h-[50px] fill-primary-500" />
                     <Flex
                       direction={"column"}
                       align={"start"}
@@ -177,10 +178,10 @@ export function SideBarComponent({
                 if (nav.link == "/dashboard") {
                   isActive = pathname == '/dashboard';
                 }
-                var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
-                if (nav.link == "/admin") {
-                  isActive = pathname == '/admin';
-                }
+                // var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
+                // if (nav.link == "/admin") {
+                //   isActive = pathname == '/admin';
+                // }
 
                 return (
                   // <Tooltip key={nav.link} content={nav.name}>
@@ -189,9 +190,9 @@ export function SideBarComponent({
                     className={`
                       mt-[10px] flex flex-row 
                       align-middle px-3 py-3 
-                      dark:bg-card-background-dark bg-card-background-light
+                      dark:bgg-card-background-dark bgg-card-background-light
                       box-content
-                      border-b-2
+                      border-l-2
                       transition-all duration-100 ease-in
                       ${isActive
                         ? "border-[var(--accent-8)] text-primary-600"

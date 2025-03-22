@@ -1,10 +1,11 @@
 import { NavBar } from "@/components/NavBar";
 import { Users } from "@/database/models/users";
-import { Flex, Text } from "@radix-ui/themes";
+import { DropdownMenu, Flex, Text } from "@radix-ui/themes";
 import UsersTable from "./users_table";
 import getSequelizeInstance from "@/database/db";
 import { Wallets } from "@/database/models/wallets";
 import { WalletBalances } from "@/database/models/wallet_balances";
+import { admin_delete_user_action } from "@/actions/admin/delete_user_action";
 
 export default async function Page() {
     await getSequelizeInstance();
@@ -35,4 +36,12 @@ export default async function Page() {
             </div>
         </div>
     )
+}
+
+
+export function DeleteUserActionButton({ user }) {
+    return <DropdownMenu.Item onClick={async () => {
+        'use server';
+        await admin_delete_user_action({ userId: user.id });
+    }}>Delete User</DropdownMenu.Item>;
 }

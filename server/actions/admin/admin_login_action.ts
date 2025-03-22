@@ -30,6 +30,8 @@ export async function admin_login_action(formData: any) {
         },
       };
     }
+
+    console.log(user.isAdmin);
     if (user.isAdmin !== true) {
       return {
         errors: {

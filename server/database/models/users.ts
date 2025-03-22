@@ -38,7 +38,7 @@ export class Users extends Model<
    declare lastSeen?: Date;
    declare status?: 'blocked' | 'active' | 'suspended';
    declare canTransfer?: number;
-   declare isAdmin?: number;
+   declare isAdmin?: boolean;
    declare googleAuthId?: string;
 
    static initModel(sequelize: Sequelize.Sequelize): typeof Users {

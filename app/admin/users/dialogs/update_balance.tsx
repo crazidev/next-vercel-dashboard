@@ -91,11 +91,12 @@ export default function UpdateBalanceDialog({ user, isOpen, setIsOpen }: { user:
         setSelectedWallet(_wallet);
         if (typeof document === "undefined") return;
         if (document.getElementById('amount_input') != null) {
+            var element = (document.getElementById('amount_input') as any);
             if (_wallet) {
-                document.getElementById('amount_input').value = _wallet?.balance ?? 0;
+                element.value = _wallet?.balance ?? 0;
                 setAmount(_wallet.balance ?? 0);
             } else if (sendFrom.value == -1) {
-                document.getElementById('amount_input').value = user?.accountBalance ?? 0;
+                element.value = user?.accountBalance ?? 0;
                 setAmount(user?.accountBalance ?? 0);
             }
         }

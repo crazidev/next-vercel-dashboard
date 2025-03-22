@@ -19,6 +19,6 @@ const firebaseConfig = {
 export const appClient = initializeApp(firebaseConfig);
 // export const appServer = initializeServerApp(firebaseConfig, {});
 export const firestoreClient = initializeFirestore(appClient, {});
-connectFirestoreEmulator(firestoreClient, "192.168.0.108", 8080);
+connectFirestoreEmulator(firestoreClient, "192.168.43.102", 8081);
 
 export const firestoreDb = getFirestore(appClient);

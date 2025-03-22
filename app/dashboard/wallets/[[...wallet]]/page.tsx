@@ -32,7 +32,7 @@ const WalletPage = async ({
           title="Wallets"
           description="Monitor your specific wallet activities."
         />
-        
+
         <div className="flex lg:flex-row flex-col gap-5">
 
           <Suspense fallback={<RotateSpinnerComponent />}>
@@ -43,8 +43,8 @@ const WalletPage = async ({
             />
           </Suspense>
 
-           
-          <Card className="m-0 w-full" variant="ghost">
+
+          <div className="m-0 w-full">
             <Flex justify={"between"} direction={"column"} className="gap-1 mb-5">
               <Text className="font-extrabold" size={"3"}>
                 Transaction History
@@ -52,18 +52,10 @@ const WalletPage = async ({
             </Flex>
 
             <Suspense fallback={<RotateSpinnerComponent />}>
-              <TransactionList type="compact" wallet={wallet}/>
+              <TransactionList type="compact" wallet={wallet} />
             </Suspense>
+          </div>
 
-            <Flex justify={"end"} align={"center"} className="my-3">
-              <Link>
-                <Flex>
-                  View More <ChevronRight />
-                </Flex>
-              </Link>
-            </Flex>
-          </Card>
-         
         </div>
       </div>
     </div>

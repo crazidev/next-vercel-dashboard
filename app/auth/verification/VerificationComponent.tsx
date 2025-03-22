@@ -94,11 +94,13 @@ export async function VerificationComponent({
                     <></>
                   )
                 }
-                closeDialogProp={(closeDialog) => {
-                  myFunction = closeDialog;
-                  myFunction2 = closeDialog;
-                  myFunction3 = closeDialog;
-                }}
+                // TODO fix this
+                // closeDialogProp={(closeDialog) => {
+                //   myFunction = closeDialog;
+                //   myFunction2 = closeDialog;
+                //   myFunction3 = closeDialog;
+                // }
+                // }
                 children={
                   <>
                     {d.type === "address" && (

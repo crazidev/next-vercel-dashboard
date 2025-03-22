@@ -70,6 +70,7 @@ export const useLiveChat = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [conversion, setConversation] = useState<ConversationType>();
   const [isTyping, setIsTyping] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const incomingMsgSound = useRef<HTMLAudioElement | undefined>();
   const getConversationId = () => localStorage.getItem("livechat_session");
@@ -353,6 +354,7 @@ export const useLiveChat = () => {
   return {
     messages,
     isTyping,
+    isAdmin,
     conversion,
     exist,
     canSendMsg,
