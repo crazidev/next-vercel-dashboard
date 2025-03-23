@@ -14,9 +14,9 @@ export function Logo({ className }: { className: any }) {
         />
       </svg> */}
       <svg width="80" height="80" viewBox="0 0 100 100" fill="none"  className={className} xmlns="http://www.w3.org/2000/svg">
-        <rect x="58.3301" y="-3.76893" width="35.133" height="75.7273" rx="17.5665" transform="rotate(45 58.3301 -3.76893)" fill="white" stroke="black" stroke-width="6.225" />
-        <rect x="60.8633" y="23.1256" width="35.133" height="58.5055" rx="17.5665" transform="rotate(45 60.8633 23.1256)" fill="white" stroke="black" stroke-width="6.225" />
-        <rect x="59.0605" y="54.36" width="35.133" height="35.1412" rx="17.5665" transform="rotate(45 59.0605 54.36)" fill="white" stroke="black" stroke-width="6.225" />
+        <rect x="58.3301" className="stroke-[var(--green-5)] fill-white"  y="-3.76893" width="35.133" height="75.7273" rx="17.5665" transform="rotate(45 58.3301 -3.76893)" fill="white" stroke="black" stroke-width="6.225" />
+        <rect x="60.8633" className="stroke-[var(--green-5)] fill-white"  y="23.1256" width="35.133" height="58.5055" rx="17.5665" transform="rotate(45 60.8633 23.1256)" fill="white" stroke="black" stroke-width="6.225" />
+        <rect x="59.0605" className="stroke-[var(--green-5)] fill-white" y="54.36" width="35.133" height="35.1412" rx="17.5665" transform="rotate(45 59.0605 54.36)" fill="white" stroke="black" stroke-width="6.225" />
       </svg>
     </>
   );

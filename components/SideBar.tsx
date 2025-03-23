@@ -127,7 +127,7 @@ export function SideBarComponent({
                   className="
                   tablet:hidden 
                   mobile:hidden 
-                  
+      
                   before:-z-10 
                   before:absolute 
                   before:backdrop-blur-sm 
@@ -163,7 +163,7 @@ export function SideBarComponent({
                   justify={"between"}
                 >
                   <Flex align={"center"} gap={"3"}>
-                    <Logo className="w-[30px] h-[30px] fill-primary-500" />
+                    <Logo className="w-[50px] h-[50px] fill-primary-500" />
                   </Flex>
                 </Flex>
               )}
