@@ -1,53 +1,57 @@
 "use client";
 
 import createGlobe from "cobe";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
+import { ThemeContext } from "../hooks/useThemeContext";
 
-// https://github.com/shuding/cobe
+export const Globe = ({ className }: { className?: string }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const themeContext = useContext(ThemeContext); // Get theme context
 
-export function Globe() {
-    const canvasRef = useRef();
+  useEffect(() => {
+    let phi = 0;
 
-    useEffect(() => {
-        let phi = 0;
+    if (!canvasRef.current) return;
 
-        const globe = createGlobe(canvasRef.current, {
-            devicePixelRatio: 2,
-            width: 600 * 2,
-            height: 600 * 2,
-            phi: 2,
-            theta: 0,
-            dark: 1,
-            diffuse: 1.6,
-            mapSamples: 16000,
-            mapBrightness: 3,
-            baseColor: [0.3, 0.3, 0.3],
-            markerColor: [0.1, 0.8, 1],
-            glowColor: [0, 0, 0],
-            offset: [0, 0.50],
-            scale: 1,
-            markers: [
-                // longitude latitude
-                // { location: [37.7595, -122.4367], size: 0.03 },
-                // { location: [40.7128, -74.006], size: 0.1 }
-            ],
-            onRender: (state) => {
-                // Called on every animation frame.
-                // `state` will be an empty object, return updated params.
-                state.phi = phi;
-                phi += 0.003;
-            }
-        });
+    // Define colors and brightness based on theme
+    const isDarkMode = themeContext.dark;
+    const baseColor = isDarkMode ? [0.2, 0.2, 0.2] : [1, 1, 1]; // Dark gray vs light gray
+    const glowColor = isDarkMode ? [.3, .3, .3] : [0.8, 0.8, 0.8]; // Bright white vs muted gray
+    const mapBrightness = isDarkMode ? 6 : 4; // Brighter in dark mode, subtler in light
 
-        return () => {
-            globe.destroy();
-        };
-    }, []);
+    const globe = createGlobe(canvasRef.current, {
+      devicePixelRatio: 2,
+      width: 500 * 2,
+      height: 500 * 2,
+      phi: 0,
+      theta: 0.1,
+      dark: isDarkMode ? 1 : 0, // Dark mode: fully dark background, Light mode: no darkness
+      diffuse: 1.5,
+      mapSamples: 16000,
+      mapBrightness, // Dynamic brightness
+      baseColor, // Dynamic base color
+      markerColor: [0.1, 0.8, 1], // Cyan markers, unchanged
+      glowColor, // Dynamic glow color
+      markers: [
+        { location: [37.7595, -122.4367], size: 0.03 }, // San Francisco
+        { location: [40.7128, -74.006], size: 0.1 }, // New York
+      ],
+      onRender: (state) => {
+        state.phi = phi;
+        phi += 0.007;
+      },
+    });
 
-    return (
-        <canvas
-            ref={canvasRef}
-            style={{ width: 600, height: 600, maxWidth: "100%", aspectRatio: 1 }}
-        />
-    );
-}
+    return () => {
+      globe.destroy();
+    };
+  }, [themeContext.dark]); // Re-run effect when theme changes
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{ width: 500, height: 500, maxWidth: '100%', aspectRatio: 1 }}
+      className={className}
+    />
+  );
+};

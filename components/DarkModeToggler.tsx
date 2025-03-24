@@ -8,6 +8,7 @@ import { ThemeContext } from "@/components/hooks/useThemeContext";
 
 export function DarkModeToggler() {
     var context = useContext(ThemeContext);
+    console.log(context);
 
     return <MdDarkMode onClick={() => {
         context.setTheme!(context.dark ? 'light' : 'dark');

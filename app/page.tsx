@@ -9,17 +9,18 @@ import FeaturesSection from "@/components/landing/features";
 import { DarkModeToggler } from "@/components/DarkModeToggler";
 import { Wallets } from "@/database/models/wallets";
 import getSequelizeInstance from "@/database/db";
+import { TerminalComponent } from "@/components/landing/terminal";
 
 export default async function RootPage() {
     var wallets = [];
-    try {
-        await getSequelizeInstance();
-        var data = await Wallets.findAll();
-        wallets = data.map((e) => e.toJSON());
-        // console.log(wallets)
-    } catch (error) {
-        // console.log(error)
-    }
+    // try {
+    //     await getSequelizeInstance();
+    //     var data = await Wallets.findAll();
+    //     wallets = data.map((e) => e.toJSON());
+    //     // console.log(wallets)
+    // } catch (error) {
+    //     // console.log(error)
+    // }
     return <div className="">
         <nav className="flex overflow-hidden justify-between sticky top-0 flex-row items-center p-[20px] mobile:px-[20px] px-[50px]">
             <div className="
@@ -66,8 +67,8 @@ export default async function RootPage() {
                     </div>
                     <div className="mt-[30px]">
                         <div className="dark:bg-white bg-black flex flex-row max-w-[240px] justify-between gap-2 items-center text-[18px] font-bold dark:text-black text-white rounded-[50px] py-[10px] pl-[20px] pr-[10px] hover:pr-[15px] hover:pl-[25px] transition-all">
-                            Get Started 
-                            <div className="dark:bg-black bg-white rounded-full p-3"><ArrowRightCircleIcon className="stroke-black dark:stroke-white"/></div>
+                            Get Started
+                            <div className="dark:bg-black bg-white rounded-full p-3"><ArrowRightCircleIcon className="stroke-black dark:stroke-white" /></div>
                         </div>
                     </div>
                 </div>
@@ -80,7 +81,20 @@ export default async function RootPage() {
                 </div>
             </div>
         </div>
-       
+
         <FeaturesSection wallets={wallets} />
+        <div className="py-10 pr-0 mx-auto justify-center w-full mobile:px-2 px-10 flex items-center flex-row mobile:flex-col">
+            <div className="flex flex-col mobile:items-center items-end text-end mobile:text-center">
+                <div className="sm:text-[35px] md:text-[40px] mobile:text-[30px] font-bold font-mono">
+                    Finance <div>Without Borders</div>
+                </div>
+                <div className="text-gray-500 text-[14px]">
+                    Spin the globe your way—manage, convert, and grow fiat, crypto, and stocks on a platform that’s secure, seamless, and worldwide.
+                </div>
+            </div>
+            <div className="w-full h-[500px] overflow-hidden flex flex-col items-center relative bg-transparent dark:bg-transparent">
+                <Globe className="absolute" />
+            </div>
+        </div>
     </div >
 }
