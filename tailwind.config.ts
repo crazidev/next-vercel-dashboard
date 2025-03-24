@@ -52,6 +52,8 @@ export default {
         "spin-slow": "spin 5s linear infinite",
         "bounce-slow": "bounce 2s linear infinite",
         shimmer: "shimmer 1.5s infinite",
+        marquee: "marquee var(--duration) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
       screens: {
         mobile: {
@@ -67,6 +69,14 @@ export default {
         shimmer: {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
+        },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
         },
       },
     },

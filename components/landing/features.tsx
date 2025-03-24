@@ -19,7 +19,7 @@ export default function FeaturesSection({ wallets }) {
         offset: ['start end', 'end start'],
     });
     var themeContext = useContext(ThemeContext);
-    
+
 
     const scale1 = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]); // Feature 1
     const scale2 = useTransform(scrollYProgress, [0.2, 0.4], [0.8, 1]); // Feature 2
@@ -98,8 +98,7 @@ export default function FeaturesSection({ wallets }) {
                     title={<div>
                         Unbreakable Security
                     </div>}
-                    description={'Sleep tight with elite encryption, fortress-grade crypto protection, and relentless monitoring—your assets are untouchable.</p>'}
-                    image={<div className='flex justify-center items-center'>
+                    description={'Rest easy with AES-256 encryption, cold storage for crypto, and real-time monitoring—your assets are safe and sound.'} image={<div className='flex justify-center items-center'>
                         <TerminalComponent />
                     </div>} style={{ scale: scale3 }} ref={securityRef} />
 
@@ -125,7 +124,7 @@ function FeatureCard({
             </div>
 
             <div className='flex flex-col items-start h-full w-full justify-center mobile:justify-start'>
-                <div className="text-start italic sm:text-[35px] md:text-[40px] mobile:text-[30px] font-bold font-mono">
+                <div className="text-start italic sm:text-[35px] md:text-[40px] mobile:text-[25px] font-bold font-mono">
                     {title}
                 </div>
                 <div className="text-gray-500 italic text-[14px]">

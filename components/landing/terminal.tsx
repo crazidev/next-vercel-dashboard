@@ -36,16 +36,8 @@ export function TerminalComponent() {
             </AnimatedSpan>
 
             <AnimatedSpan delay={6000} className="text-blue-500">
-                <span>ℹ MFA enforced across all systems</span>
+                <span>✔ MFA enforced across all systems</span>
             </AnimatedSpan>
-
-            <TypingAnimation delay={7000} className="text-muted-foreground">
-                System Check: All assets in unbreakable lockdown
-            </TypingAnimation>
-
-            <TypingAnimation delay={8000} className="text-muted-foreground">
-                Your financial world is secure.
-            </TypingAnimation>
         </Terminal>
     );
 }
