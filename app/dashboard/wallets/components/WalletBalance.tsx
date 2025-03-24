@@ -94,26 +94,26 @@ export function WalletBalance({
 
         <div className="h-[30px]" />
 
-        {/* Main Account Details */}
+        {/* Main Account Details TODO */}
         {(wallet == undefined || wallet == 'main') && (
           <DataList.Root orientation="horizontal" size="1">
             <DataList.Item>
               <DataList.Label color="gray">Account Holder</DataList.Label>
-              <DataList.Value>{`${user?.firstName} ${user?.lastName}`}</DataList.Value>
+              {/* <DataList.Value>{`${user?.firstName} ${user?.lastName}`}</DataList.Value> */}
             </DataList.Item>
             <DataList.Item>
               <DataList.Label color="gray">Bank Name</DataList.Label>
-              <DataList.Value>Wells Fargo</DataList.Value>
+              {/* <DataList.Value>Wells Fargo</DataList.Value> */}
             </DataList.Item>
             <DataList.Item>
               <DataList.Label color="gray">Account Number</DataList.Label>
-              <DataList.Value>4063028441123120 </DataList.Value>
+              {/* <DataList.Value>4063028441123120 </DataList.Value> */}
             </DataList.Item>
             <DataList.Item>
               <DataList.Label color="gray">Routing</DataList.Label>
-              <DataList.Value>
+              {/* <DataList.Value>
                 121000921
-              </DataList.Value>
+              </DataList.Value> */}
             </DataList.Item>
           </DataList.Root>
         )}

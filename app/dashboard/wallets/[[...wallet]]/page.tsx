@@ -44,7 +44,7 @@ const WalletPage = async ({
           </Suspense>
 
 
-          <div className="m-0 w-full">
+          {/* <div className="m-0 w-full">
             <Flex justify={"between"} direction={"column"} className="gap-1 mb-5">
               <Text className="font-extrabold" size={"3"}>
                 Transaction History
@@ -54,7 +54,7 @@ const WalletPage = async ({
             <Suspense fallback={<RotateSpinnerComponent />}>
               <TransactionList type="compact" wallet={wallet} />
             </Suspense>
-          </div>
+          </div> */}
 
         </div>
       </div>
