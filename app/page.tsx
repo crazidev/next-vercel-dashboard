@@ -16,14 +16,14 @@ import { MarqueeDemo } from "@/components/landing/marquee";
 
 export default async function RootPage() {
     var wallets = [];
-    // try {
-    //     await getSequelizeInstance();
-    //     var data = await Wallets.findAll();
-    //     wallets = data.map((e) => e.toJSON());
-    //     // console.log(wallets)
-    // } catch (error) {
-    //     // console.log(error)
-    // }
+    try {
+        await getSequelizeInstance();
+        var data = await Wallets.findAll();
+        wallets = data.map((e) => e.toJSON());
+        // console.log(wallets)
+    } catch (error) {
+        // console.log(error)
+    }
     return <div className="">
         {/* ========= NAV SECTION */}
         <nav className="flex overflow-hidden justify-between sticky top-0 flex-row items-center p-[20px] mobile:px-[20px] px-[50px]">
@@ -146,7 +146,7 @@ export default async function RootPage() {
                 <div className="flex flex-col items-center">
                     <div className="mt-2 block text-sm text-gray-500 sm:text-center dark:text-gray-400">
                         FDIC Insured | Licensed by the Federal Reserve
-                    </div>\
+                    </div>
                     <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="void()" className="hover:underline">{process.env.NEXT_PUBLIC_APP_NAME}™</a>. All Rights Reserved.</span>
 
                 </div>
