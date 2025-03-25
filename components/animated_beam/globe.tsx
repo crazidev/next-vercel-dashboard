@@ -29,9 +29,9 @@ export const Globe = ({ className }: { className?: string }) => {
       diffuse: 1.5,
       mapSamples: 16000,
       mapBrightness, // Dynamic brightness
-      baseColor, // Dynamic base color
+      baseColor: baseColor as any, // Dynamic base color
       markerColor: [0.1, 0.8, 1], // Cyan markers, unchanged
-      glowColor, // Dynamic glow color
+      glowColor: glowColor as any, // Dynamic glow color
       markers: [
         { location: [37.7595, -122.4367], size: 0.03 }, // San Francisco
         { location: [40.7128, -74.006], size: 0.1 }, // New York

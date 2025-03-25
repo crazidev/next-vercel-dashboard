@@ -63,7 +63,7 @@ export default function AnimatedBeamMultipleOutputDemo({
                                 <Circle
                                     key={index}
                                     ref={circleRefs.current[index]}
-                                    className={config.size}
+                                    // className={config.size}
                                 >
                                     {config.icon}
                                 </Circle>
@@ -79,7 +79,7 @@ export default function AnimatedBeamMultipleOutputDemo({
                             <Circle
                                 key={index}
                                 ref={circleRefs.current[index]}
-                                className={config.size}
+                                // className={config.size}
                             >
                                 {config.icon}
                             </Circle>
@@ -94,7 +94,7 @@ export default function AnimatedBeamMultipleOutputDemo({
                             <Circle
                                 key={index}
                                 ref={circleRefs.current[index]}
-                                className={config.size}
+                                // className={config.size}
                             >
                                 {config.icon}
                             </Circle>

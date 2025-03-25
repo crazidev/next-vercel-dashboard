@@ -24,7 +24,6 @@ import {
 } from "react-icons/md";
 import { CTextField } from "@/components/CTextField";
 import { useForm } from "react-hook-form";
-import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { register_action } from "@/actions/auth/register_action";
 import { TbCalendar, TbInfoCircle } from "react-icons/tb";
