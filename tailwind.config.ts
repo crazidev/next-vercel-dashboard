@@ -6,7 +6,6 @@ function hexadecimal(color: string) {
     const decimal = `0${Math.round(255 * (percentage / 100)).toString(16)}`
       .slice(-2)
       .toUpperCase();
-    logger(color.substring(2) + decimal);
     return decimal;
   };
 }
