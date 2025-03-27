@@ -20,6 +20,7 @@ import useLayout from "@/components/hooks/useLayout";
 import { error } from "console";
 import { toast } from "sonner";
 import { convert_action } from "@/actions/convert_action";
+import logger from "@/lib/logger";
 
 export interface WalletType {
     name: string,
@@ -81,7 +82,7 @@ export default function ConvertModal({
     });
 
     const loadData = async () => {
-        console.log("Running: LoadData");
+        logger("Running: LoadData");
         try {
             setState(prev => ({ ...prev, loading: true }));
             if (convert?.convert?.isReady != true) {
@@ -188,7 +189,7 @@ export default function ConvertModal({
     }
 
     function setWalletList() {
-        console.log("Running: setWalletList");
+        logger("Running: setWalletList");
         var dropdownFrom: WalletType[] = walletList.map((e) => {
             return {
                 name: e.wallet.name,

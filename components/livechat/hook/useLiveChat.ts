@@ -21,6 +21,7 @@ import {DashboardContext} from "@context/DashboardContext";
 import usePageVisibility from "@/components/hooks/usePageVisibility";
 import { yupResolver } from "@hookform/resolvers/yup";
 import yup from "@/server/extra/yup";
+import logger from "@/lib/logger";
 
 export interface MessageType {
   text?: string;
@@ -212,7 +213,7 @@ export const useLiveChat = () => {
       orderBy("created_at", "asc")
     );
 
-    console.log("Fetching livechat messages");
+    logger("Fetching livechat messages");
 
     onSnapshot(q, (doc) => {
       if (messages.length == 0) {

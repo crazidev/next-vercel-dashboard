@@ -4,6 +4,7 @@ import { change_password_action } from "@/actions/admin/change_password_action";
 import { CTextField } from "@/components/CTextField";
 import { MyDialog } from "@/components/MyDialog";
 import { Users } from "@/database/models/users";
+import logger from "@/lib/logger";
 import yup from "@/server/extra/yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@radix-ui/themes";
@@ -42,7 +43,7 @@ export default function ChangePasswordDialog({ user, isOpen, setIsOpen }: { user
                 throw res;
             }
         } catch (error) {
-            console.log(error);
+            logger(error);
             toast.error(res.error);
         }
     }

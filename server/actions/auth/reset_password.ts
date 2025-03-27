@@ -7,10 +7,11 @@ import { sendMail } from "@/server/extra/nodemailer";
 import bcrypt from "bcrypt";
 import getSequelizeInstance from "@/database/db";
 import { generateJWToken } from "@/server/extra/jwt_helper";
+import logger from "@/lib/logger";
 
 
 export async function reset_password_action(data: any) {
-  console.log(data);
+  logger(data);
   await getSequelizeInstance();
   var errors = {};
 
@@ -42,7 +43,7 @@ export async function reset_password_action(data: any) {
       });
 
       var link = `${process.env.NEXT_PUBLIC_APP_URL}/auth/reset-password?action=new_password&email=${data.email}&token=${resetToken}`;
-      console.log(link);
+      logger(link);
 
       await sendMail({
         to: data.email,
@@ -96,7 +97,7 @@ export async function reset_password_action(data: any) {
       };
     }
   } catch (error) {
-    console.log(error);
+    logger(error);
     return {
       success: false,
       action: data.action,

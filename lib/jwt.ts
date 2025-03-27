@@ -159,13 +159,13 @@ export const decodeAndCheckExpiration = (token: string): { expired: boolean; mes
 
 //   // Create a token with an expiration time of 2 days
 //   const token = await createJwtToken(payload, secret, "1m");
-//   console.log("JWT Token:", token);
+//   logger("JWT Token:", token);
 
 //   // Verify the token
 //   const verifiedPayload = await verifyJwtToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywiZXhwIjoxNzMzNTg1NjUxfQ.gS9e2LoCZjQ1EqJE0lTCaPwbqNtinVAqAfuDBP5XWz0', secret);
 //   if (verifiedPayload) {
-//     console.log("Token is valid:", verifiedPayload);
+//     logger("Token is valid:", verifiedPayload);
 //   } else {
-//     console.log("Token is invalid or expired");
+//     logger("Token is invalid or expired");
 //   }
 // })();

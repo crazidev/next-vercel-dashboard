@@ -97,7 +97,7 @@ export const TransactionList = async ({
   });
 
   // const groupedData = groupTransactionsByDate(list);
-  // console.log(groupedData);
+  // logger(groupedData);
 
 
   return (
@@ -116,7 +116,7 @@ export const TransactionList = async ({
       <table className={`${useTableLayout ? 'lg:table-auto' : 'table-fixed'}  border-separate border-spacing-y-[10px] w-[100%] max-w-[100%] overflow-x-scroll lg:table-auto`}>
         <tbody>
           {list.map((item) => {
-            // console.log(item.toJSON()); 
+            // logger(item.toJSON()); 
             return (
               <tr
                 key={item.id}

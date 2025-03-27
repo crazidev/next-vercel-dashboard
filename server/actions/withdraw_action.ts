@@ -9,6 +9,7 @@ import { randomUUID } from "crypto";
 import moment from "moment";
 import { revalidatePath } from "next/cache";
 import * as Sequelize from "sequelize";
+import logger from "@/lib/logger";
 
 export async function withdraw_action(data: {
   user_id: number;
@@ -33,7 +34,7 @@ export async function withdraw_action(data: {
   var t = await (await getSequelizeInstance()).transaction();
   var errors = {};
 
-  console.log(data);
+  logger(data);
 
   try {
     var user = await Users.findByPk(data.user_id);
@@ -110,7 +111,7 @@ export async function withdraw_action(data: {
     };
   } catch (error) {
     t.rollback();
-    console.log(error);
+    logger(error);
     return {
       success: false,
       errors: (error as any).message ?? error,

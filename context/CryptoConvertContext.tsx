@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import CryptoConvert from "crypto-convert";
+import logger from "@/lib/logger";
 
 // Define the context and types
 interface CryptoConvertContextType {
@@ -20,7 +21,7 @@ export const CryptoConvertProvider: React.FC<{ children: ReactNode }> = ({ child
                 const cryptoConvertInstance = new CryptoConvert();
                 setConvert(cryptoConvertInstance);
             } catch (error) {
-                console.log("Unable to initialize CryptoConvert", error?.message);
+                logger("Unable to initialize CryptoConvert", error?.message);
             }
         }
     }, [convert]);

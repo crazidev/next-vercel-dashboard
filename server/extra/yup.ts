@@ -17,9 +17,9 @@ export default yup;
  * const result = yupValidator(schema, data);
  *
  * if (result.isSuccess) {
- *   console.log("Validation succeeded:", result.data);
+ *   logger("Validation succeeded:", result.data);
  * } else {
- *   console.log("Validation failed:", result.errors);
+ *   logger("Validation failed:", result.errors);
  * }
  * ```
  *

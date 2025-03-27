@@ -23,7 +23,7 @@
 
 //     if (!result.success) {
 
-//         console.log(result.error.flatten().fieldErrors);
+//         logger(result.error.flatten().fieldErrors);
 
 //       // Extract errors
 //       const errorMessages = result.error.errors.reduce((acc, issue) => {

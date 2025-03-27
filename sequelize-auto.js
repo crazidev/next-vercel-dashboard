@@ -54,7 +54,7 @@ var auto = new SequelizeAuto.SequelizeAuto(
 
 auto.run().then((data) => {
   const tableNames = Object.keys(data.tables);
-  console.log(tableNames); // table list
-  // console.log(data.foreignKeys); // foreign key list
-  // console.log(data.text)         // text of generated files
+  logger(tableNames); // table list
+  // logger(data.foreignKeys); // foreign key list
+  // logger(data.text)         // text of generated files
 });

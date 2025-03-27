@@ -92,7 +92,7 @@ export const ChatBubble = (
                         style={{ x: x }} // Track the x position of the drag
                         onDrag={(event, info) => {
                             isDragged.current = true;
-                            // console.log(info.offset.x)
+                            // logger(info.offset.x)
                             setX(info.offset.x); // Update the drag position
                         }}
                         onDragEnd={handleDragEnd}

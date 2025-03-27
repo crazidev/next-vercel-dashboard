@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
 import { SMTPError } from "nodemailer/lib/smtp-connection";
+import logger from "@/lib/logger";
 
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
@@ -32,7 +33,7 @@ export async function sendMail({ from, to, subject, template }: SendMailProp) {
       subject: subject,
       html: emailHtml,
     });
-    console.log(transport.response);
+    logger(transport.response);
   } catch (error) {
     console.error((error as SMTPError).message);
   }

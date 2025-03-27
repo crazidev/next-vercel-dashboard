@@ -12,6 +12,7 @@ import { revalidatePath } from "next/cache";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import logger from "@/lib/logger";
 
 export default function UpdateKYCDialog({ user, isOpen, setIsOpen }: { user: Users, isOpen: boolean, setIsOpen: (boolean) => void }) {
     const {
@@ -47,7 +48,7 @@ export default function UpdateKYCDialog({ user, isOpen, setIsOpen }: { user: Use
                 throw res;
             }
         } catch (error) {
-            console.log(error);
+            logger(error);
             toast.error(res.error);
         }
     }

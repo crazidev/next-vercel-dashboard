@@ -29,7 +29,7 @@ const getSequelizeInstance = async () => {
     await sequelizeInstance
       .authenticate()
       .then(() => {
-        // console.log("Connection has been established successfully.");
+        // logger("Connection has been established successfully.");
       })
       .catch((error) => {
         console.error("Unable to connect to the database");

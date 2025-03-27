@@ -1,11 +1,12 @@
 import type { Config } from "tailwindcss";
+import logger from "./lib/logger";
 
 function hexadecimal(color: string) {
   return (percentage: number): string => {
     const decimal = `0${Math.round(255 * (percentage / 100)).toString(16)}`
       .slice(-2)
       .toUpperCase();
-    console.log(color.substring(2) + decimal);
+    logger(color.substring(2) + decimal);
     return decimal;
   };
 }

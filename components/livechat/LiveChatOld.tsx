@@ -200,7 +200,7 @@
 //             orderBy("created_at", "asc")
 //         );
 
-//         console.log("Fetching livechat messages");
+//         logger("Fetching livechat messages");
 
 //         onSnapshot(q, (doc) => {
 //             if (messages.length == 0) {
@@ -326,7 +326,7 @@
 //     useEffect(() => {
 //         if (document !== undefined) {
 //             document.addEventListener("visibilitychange", () => {
-//                 console.log(document.visibilityState);
+//                 logger(document.visibilityState);
 //                 // Modify behavior…
 //             });
 //         }

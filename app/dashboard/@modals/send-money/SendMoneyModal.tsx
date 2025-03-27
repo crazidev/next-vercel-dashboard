@@ -19,6 +19,7 @@ import yup from "@/server/extra/yup";
 import { toast } from "sonner";
 import { withdraw_action } from "@/actions/withdraw_action";
 import { LuCheckCircle } from "react-icons/lu";
+import logger from "@/lib/logger";
 
 export function SendMoneyModal({
     walletList,
@@ -137,7 +138,7 @@ export function SendMoneyModal({
             }
         } catch (error) {
             setBError("Unknown error occurred");
-            console.log(error);
+            logger(error);
         }
     }
 

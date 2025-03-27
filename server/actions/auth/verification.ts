@@ -5,6 +5,7 @@ import { authUser } from "../authUser";
 import { redirect, RedirectType } from "next/navigation";
 import { Users } from "@/database/models/users";
 import { uploadFileToCloudinary } from "../../extra/upload_cloudinary";
+import logger from "@/lib/logger";
 
 export async function submitAddress(formData: any) {
   try {
@@ -48,7 +49,7 @@ export async function submitIdCard(formData: any) {
     var user_id = (await authUser()).user_id;
     var file = formData.id_front[0];
 
-    console.log(user_id);
+    logger(user_id);
     if (user_id) {
       var upload = await uploadFileToCloudinary({
         file: file,

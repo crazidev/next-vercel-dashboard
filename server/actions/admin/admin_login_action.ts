@@ -6,6 +6,7 @@ import { Users } from "@/database/models/users";
 import { generateJWToken } from "@/server/extra/jwt_helper";
 import { yupValidator } from "@/server/extra/yup";
 import { loginActionScheme } from "@/server/scheme/login_scheme";
+import logger from "@/lib/logger";
 
 export async function admin_login_action(formData: any) {
   try {
@@ -31,7 +32,7 @@ export async function admin_login_action(formData: any) {
       };
     }
 
-    console.log(user.isAdmin);
+    logger(user.isAdmin);
     if (user.isAdmin !== true) {
       return {
         errors: {

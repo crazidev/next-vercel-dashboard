@@ -21,9 +21,9 @@ export default async function RootPage() {
         await getSequelizeInstance();
         var data = await Wallets.findAll();
         wallets = data.map((e) => e.toJSON());
-        // console.log(wallets)
+        // logger(wallets)
     } catch (error) {
-        // console.log(error)
+        // logger(error)
     }
     return <div className="">
         {/* ========= NAV SECTION */}
