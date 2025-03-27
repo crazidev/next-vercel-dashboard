@@ -14,7 +14,7 @@ export const AuthFooter = () => {
     >
       <Flex gap={"1"} align={"baseline"}>
         <Text weight={"medium"} size={"2"} color={"gray"}>
-          2024 Copyright Dashboard
+          2025 Copyright Dashboard
         </Text>
       </Flex>
 
