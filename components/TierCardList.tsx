@@ -7,11 +7,14 @@ import { useContext, useState } from "react";
 import { DashboardContext } from "@context/DashboardContext";
 import useLayout from "@/components/hooks/useLayout";
 import Link from "next/link";
+import { Users } from "@/database/models/users";
+import { InferAttributes } from "sequelize";
 
-export function TierCardList() {
+export function TierCardList({ user }: { user: InferAttributes<Users> }) {
     const tiers = [
         {
             name: "Savings",
+            value: "tier1",
             description: "Ideal for personal use with basic banking features.",
             interest: {
                 percent: 0,
@@ -24,13 +27,14 @@ export function TierCardList() {
                 "Balance Limit: $5,000"
             ],
             benefits: ["Linking bank card", "Option to purchase our debit card"],
-            buttonText: "Open Tier 1 Account",
+            buttonText: "Migrate to Savings Account",
             color: "text-green-600",
             cardStyle: "hover:to-[--gray-a3] hover:from-[--green-a1] from-[--gray-a3] to-[--green-a1]",
         },
 
         {
             name: "Enterprise",
+            value: "tier3",
             description: "Perfect for enterprises and organizations with high transaction needs.",
             interest: {
                 percent: 9.2,
@@ -48,12 +52,13 @@ export function TierCardList() {
                 "Priority customer support",
                 "Customizable account options"
             ],
-            buttonText: "Contact for Tier 3",
+            buttonText: "Migrate to Enterprise Account",
             color: "text-blue-700",
             cardStyle: "hover:to-[--gray-a3] hover:from-[--blue-a1] from-[--gray-a3] to-[--blue-a1]",
         },
         {
             name: "Business",
+            value: "tier2",
             description: "Designed for small businesses with extended limits and features.",
             interest: {
                 percent: 5.2,
@@ -69,7 +74,7 @@ export function TierCardList() {
                 "8% monthly interest on balance",
                 "All Tier 1 features"
             ],
-            buttonText: "Open Tier 2 Account",
+            buttonText: "Migrate to Business Account",
             color: "text-purple-700",
             cardStyle: "hover:to-[--gray-a3] hover:from-[--purple-a1] from-[--gray-a3] to-[--purple-a1]",
         },
@@ -161,7 +166,7 @@ export function TierCardList() {
                     {/* Action Button */}
                     <Link href={generateMailtoLink(tier.name)}>
                         <Button variant="soft" color="gray" radius="full" size="2" className="w-fit mx-auto my-3 self-stretch flex">
-                            {tier.buttonText}
+                            {user?.accountLevel !== tier.value ? tier.buttonText : "Current"}
                         </Button>
                     </Link>
                 </Box>

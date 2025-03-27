@@ -3,8 +3,12 @@ import { Box, Button, Flex, Heading, Separator, Text, ThickDividerHorizontalIcon
 import { TierCardList } from "@/components/TierCardList";
 import { CheckCircle, CheckCircle2 } from "lucide-react";
 import { motion } from "motion/react";
+import { authUser } from "@/actions/authUser";
+import { fetchUser } from "@/fetch/fetch_user";
 
-export default function AccountTiersPage() {
+export default async function AccountTiersPage() {
+    var user_id = (await authUser()).user_id;
+    var user = await fetchUser(user_id);
 
     return (
         <Flex direction="column" align="center" className="pb-10">
@@ -18,7 +22,7 @@ export default function AccountTiersPage() {
                 Select the best account option for your financial needs. Each tier offers unique benefits, limits, and requirements.
             </Text>
 
-            <TierCardList />
+            <TierCardList user={user} />
         </Flex>
     );
 }
