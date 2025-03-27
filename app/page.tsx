@@ -13,6 +13,7 @@ import { TerminalComponent } from "@/components/landing/terminal";
 import { SparklesText } from "@/components/landing/sparkly_text";
 import { BackgroundBeams } from "@/components/landing/background_beam";
 import { MarqueeDemo } from "@/components/landing/marquee";
+import Link from "next/link";
 
 export default async function RootPage() {
     var wallets = [];
@@ -42,19 +43,22 @@ export default async function RootPage() {
                 <Logo className="w-[30px] h-[30px] fill-primary-500" />
                 <Text weight={"bold"}>{process.env.NEXT_PUBLIC_APP_NAME}</Text>
             </div>
-            <div>
-                <div className="
-            p-[15px]
-            items-center
-            w-auto
-            gap-2
-            flex flex-row 
-            backdrop-blur-sm 
-            inset-0
-            rounded-[30px]
-            bg-[var(--gray-a2)]">
+            <div
+                className="
+                p-[15px]
+                items-center
+                w-auto
+                gap-2
+                flex flex-row 
+                backdrop-blur-sm 
+                inset-0
+                rounded-[30px]
+                bg-[var(--gray-a2)]"
+                style={{ cursor: 'pointer' }}
+            >
+                <label style={{ display: 'block', width: '100%', height: '100%' }}>
                     <DarkModeToggler />
-                </div>
+                </label>
             </div>
         </nav>
         {/* ========= HERO SECTION */}
@@ -70,10 +74,12 @@ export default async function RootPage() {
                         Seamlessly manage fiat, crypto, and stocks with cutting-edge tools and live support—banking redefined for the modern age.
                     </div>
                     <div className="mt-[30px]">
-                        <div className="dark:bg-white bg-black flex flex-row max-w-[240px] justify-between gap-2 items-center text-[18px] font-bold dark:text-black text-white rounded-[50px] py-[10px] pl-[20px] pr-[10px] hover:pr-[15px] hover:pl-[25px] transition-all">
-                            Get Started
-                            <div className="dark:bg-black bg-white rounded-full p-3"><ArrowRightCircleIcon className="stroke-black dark:stroke-white" /></div>
-                        </div>
+                        <Link href="/auth/login">
+                            <div className="dark:bg-white bg-black flex flex-row max-w-[240px] justify-between gap-2 items-center text-[18px] font-bold dark:text-black text-white rounded-[50px] py-[10px] pl-[20px] pr-[10px] hover:pr-[15px] hover:pl-[25px] transition-all">
+                                Get Started
+                                <div className="dark:bg-black bg-white rounded-full p-3"><ArrowRightCircleIcon className="stroke-black dark:stroke-white" /></div>
+                            </div>
+                        </Link>
                     </div>
                 </div>
 
