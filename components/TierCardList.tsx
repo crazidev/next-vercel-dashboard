@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useContext, useState } from "react";
 import { DashboardContext } from "@context/DashboardContext";
 import useLayout from "@/components/hooks/useLayout";
+import Link from "next/link";
 
 export function TierCardList() {
     const tiers = [
@@ -78,6 +79,13 @@ export function TierCardList() {
     const [isOpen, setIsOpen] = useState(false);
     const { isMobile, isTablet } = useLayout();
 
+    function generateMailtoLink(tierName: string) {
+        const subject = encodeURIComponent(`Request for ${tierName} account upgrade`);
+        const body = encodeURIComponent(
+            `Dear Support Team,\n\nI would like to request an upgrade to the ${tierName} tier for my account. Please let me know the next steps.\n\nThank you.`
+        );
+        return `mailto:${process.env.NEXT_PUBLIC_SUPPORT_MAIL}?subject=${subject}&body=${body}`;
+    }
 
     return <motion.div layout transition={{
         duration: 0.5
@@ -151,9 +159,11 @@ export function TierCardList() {
                     </div>
 
                     {/* Action Button */}
-                    <Button variant="soft" color="gray" radius="full" size="2" className="w-fit mx-auto my-3 self-stretch flex">
-                        {tier.buttonText}
-                    </Button>
+                    <Link href={generateMailtoLink(tier.name)}>
+                        <Button variant="soft" color="gray" radius="full" size="2" className="w-fit mx-auto my-3 self-stretch flex">
+                            {tier.buttonText}
+                        </Button>
+                    </Link>
                 </Box>
             </motion.div>
         ))}
