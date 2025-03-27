@@ -38,7 +38,6 @@ export default function AppProvider({
     <ThemeProvider>
       <DashboardProvider>
         {children}
-        {/* <LiveChat /> */}
       </DashboardProvider>
     </ThemeProvider>
   );
