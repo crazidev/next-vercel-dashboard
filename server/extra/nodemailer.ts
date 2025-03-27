@@ -26,10 +26,10 @@ export async function sendMail({ from, to, subject, template }: SendMailProp) {
     const emailHtml = await render(template, {
       pretty: true,
     });
-    
+
     var transport = await transporter.sendMail({
-      from: 'Support support@localhost',
-      to: "User user@localhost",
+      from: `${process.env.NEXT_PUBLIC_APP_SHORT_NAME} ${process.env.NEXT_PUBLIC_SUPPORT_MAIL}`,
+      to: to,
       subject: subject,
       html: emailHtml,
     });
