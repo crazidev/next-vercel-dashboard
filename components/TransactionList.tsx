@@ -50,7 +50,13 @@ export const TransactionList = async ({
   var user = (await authUser());
   await getSequelizeInstance();
 
-  var where: WhereOptions<InferAttributes<Transactions, { omit: never; }>> = {};
+  var where: WhereOptions<InferAttributes<Transactions, { omit: never; }>> = {
+    [Op.or]: {
+      userId: user.user_id,
+      beneficiaryId: user.user_id,
+    }
+  };
+  
   if (wallet_shortname == 'main') {
     where.walletId = (null as any);
   } else if (wallet_shortname !== undefined) {
@@ -70,6 +76,8 @@ export const TransactionList = async ({
       }
     }
   }
+
+  console.log(where);
 
   var list = await new Promise<Transactions[]>(async (resolve) => {
     var data = await Transactions.findAll({
