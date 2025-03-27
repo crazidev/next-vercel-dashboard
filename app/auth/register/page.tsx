@@ -30,6 +30,7 @@ import { TbCalendar, TbInfoCircle } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { PasswordValidator } from "@/components/PasswordValidator";
+import { track } from "@vercel/analytics";
 
 export default function RegisterPage() {
   var router = useRouter();
@@ -48,6 +49,7 @@ export default function RegisterPage() {
 
 
   const submit = async (data: any) => {
+    track('Register');
     var res = await register_action(data);
 
     if (res.success) {

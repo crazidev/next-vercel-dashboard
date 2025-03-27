@@ -33,6 +33,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import yup from "@/server/extra/yup";
 import { TbInfoCircle } from "react-icons/tb";
 import logger from "@/lib/logger";
+import { track } from "@vercel/analytics";
 
 export default function LoginPage() {
   var router = useRouter();
@@ -84,6 +85,7 @@ export default function LoginPage() {
 
 
   const submit = async (data: any) => {
+    track('Reset password');
     var res = await reset_password_action({ ...data, action: resetProgress, token: searchParams.get('token'), email2: searchParams.get('email') });
 
     logger(res);

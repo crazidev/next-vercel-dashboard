@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { appClient } from "@/server/extra/firebase";
 import { PasswordToggler } from "@/components/PasswordToggler";
+import { track } from '@vercel/analytics';
 
 export default function LoginPage() {
   const {
@@ -29,6 +30,7 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
 
   const submit = async (data: any) => {
+    track('Login with email');
     var res = await login(data);
 
     if (res.success) {
@@ -52,6 +54,7 @@ export default function LoginPage() {
   };
 
   const loginWithPasskey = async () => {
+    track('Login with passkey');
     const challenge = await generateRandomChallenge();
 
     const authentication = await client.authenticate({
@@ -78,6 +81,7 @@ export default function LoginPage() {
   }
 
   const loginWithGoogle = async () => {
+    track('Login with google');
     const provider = new GoogleAuthProvider();
     const auth = getAuth(appClient);
 

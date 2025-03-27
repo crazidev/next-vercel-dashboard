@@ -5,6 +5,7 @@ import { PWARelatedLinks } from "./PWARelatedLinks";
 import type { Metadata, Viewport } from "next";
 import { Theme } from "@radix-ui/themes";
 import { Toaster } from "sonner";
+import { Analytics } from '@vercel/analytics/next';
 
 const APP_NAME = process.env.APP_NAME;
 const APP_DEFAULT_TITLE = process.env.APP_NAME ?? "";
@@ -106,6 +107,7 @@ export default async function RootLayout({
             }}
           />
           <AppProvider>{children}</AppProvider>
+          <Analytics />
         </Theme>
       </body>
     </html>
