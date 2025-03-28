@@ -56,11 +56,15 @@ export const TransactionList = async ({
       beneficiaryId: user.user_id,
     }
   };
-  
+
   if (wallet_shortname == 'main') {
     where.walletId = (null as any);
   } else if (wallet_shortname !== undefined) {
     where = {
+      [Op.or]: {
+        userId: user.user_id,
+        beneficiaryId: user.user_id,
+      },
       [Op.not]: {
         walletId: (null as any)
       }
