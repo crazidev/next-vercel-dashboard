@@ -107,12 +107,12 @@ export function WalletBalance({
             </DataList.Item>
             <DataList.Item>
               <DataList.Label color="gray">Account Number</DataList.Label>
-              <DataList.Value>{user.id} </DataList.Value>
+              <DataList.Value>{user.accountNumber ?? ""} </DataList.Value>
             </DataList.Item>
             <DataList.Item>
               <DataList.Label color="gray">Routing</DataList.Label>
               <DataList.Value>
-                121000921
+                {user.routingNumber ?? ""}
               </DataList.Value>
             </DataList.Item>
           </DataList.Root>

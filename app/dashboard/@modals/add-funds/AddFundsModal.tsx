@@ -125,8 +125,8 @@ export function AddFundsModal({
                     {selected == -1 && <div className="flex flex-grow flex-col gap-2">
                         <CTextField value={'Wells Fargo'} label="Bank Name" readOnly />
                         <CTextField value={`${user?.firstName} ${user?.lastName}`} label="Account Holder" rightIcon={CopyButton(`${user?.firstName} ${user?.lastName}`)} readOnly />
-                        <CTextField value={user?.id} label="Account Number" rightIcon={CopyButton(`${user?.id}`)} readOnly />
-                        <CTextField value={user?.id} label="Routing Number" rightIcon={CopyButton(`${user?.id}`)} readOnly />
+                        <CTextField value={user?.accountNumber ?? ""} label="Account Number" rightIcon={CopyButton(`${user?.accountNumber ?? ""}`)} readOnly />
+                        <CTextField value={user?.routingNumber ?? ""} label="Routing Number" rightIcon={CopyButton(`${user?.routingNumber ?? ""}`)} readOnly />
                     </div>}
 
                     {selected != -1 && <div className="flex flex-grow flex-col gap-2">
