@@ -90,12 +90,14 @@ export function AddFundsModal({
                 }} className=" mb-5">Easily choose a wallet to fund, including your Main Account or Sub-Wallets, with detailed wallet information displayed for clarity.</Text>
 
 
-                {/* <Callout.Root variant="surface" color="red" mt={"5"} size={"1"}>
+                {user.canTransfer != 1 && <Callout.Root variant="surface" color="red" mt={"5"} size={"1"}>
                     <Callout.Icon>
                         <TbInfoCircle />
                     </Callout.Icon>
-                    <Callout.Text></Callout.Text>
-                </Callout.Root> */}
+                    <Callout.Text>
+                        Inform your account manager before initialing a transfer
+                    </Callout.Text>
+                </Callout.Root>}
 
                 <div className="flex mt-7 gap-5">
                     <div className="w-[30%] mobile:w-fit tablet:w-fit flex flex-col gap-2">
@@ -123,7 +125,7 @@ export function AddFundsModal({
                         <Separator orientation={'vertical'} className="h-full" />
                     </div>
                     {selected == -1 && <div className="flex flex-grow flex-col gap-2">
-                        <CTextField value={'Wells Fargo'} label="Bank Name" readOnly />
+                        <CTextField value={process.env.NEXT_PUBLIC_APP_SHORT_NAME} label="Bank Name" readOnly />
                         <CTextField value={`${user?.firstName} ${user?.lastName}`} label="Account Holder" rightIcon={CopyButton(`${user?.firstName} ${user?.lastName}`)} readOnly />
                         <CTextField value={user?.accountNumber ?? ""} label="Account Number" rightIcon={CopyButton(`${user?.accountNumber ?? ""}`)} readOnly />
                         <CTextField value={user?.routingNumber ?? ""} label="Routing Number" rightIcon={CopyButton(`${user?.routingNumber ?? ""}`)} readOnly />
