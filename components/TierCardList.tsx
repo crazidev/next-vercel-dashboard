@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Users } from "@/database/models/users";
 import { InferAttributes } from "sequelize";
 
-export function TierCardList({ user }: { user?: InferAttributes<Users> }) {
+export function TierCardList({ user, showButton = true }: { user?: InferAttributes<Users>, showButton?: boolean }) {
     const tiers = [
         {
             name: "Savings",
@@ -163,11 +163,11 @@ export function TierCardList({ user }: { user?: InferAttributes<Users> }) {
                     </div>
 
                     {/* Action Button */}
-                    <Link href={generateMailtoLink(tier.name)}>
+                    {showButton && <Link href={generateMailtoLink(tier.name)}>
                         <Button variant="soft" color="gray" radius="full" size="2" className="w-fit mx-auto my-3 self-stretch flex">
                             {user?.accountLevel !== tier.value ? tier.buttonText : "Current"}
                         </Button>
-                    </Link>
+                    </Link>}
                 </Box>
             </motion.div>
         ))}

@@ -121,7 +121,7 @@ export default async function RootPage() {
                 <div className="text-gray-500 text-[14px] mb-10">
                    Discover the perfect account for your needs. Wether you're saving, growing a business, or scaling with advance features, {process.env.NEXT_PUBLIC_APP_SHORT_NAME} have options for you
                 </div>
-                <TierCardList />
+                <TierCardList showButton={false}/>
             </div>
         </div>
 
