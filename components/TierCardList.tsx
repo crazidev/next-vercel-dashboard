@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Users } from "@/database/models/users";
 import { InferAttributes } from "sequelize";
 
-export function TierCardList({ user }: { user: InferAttributes<Users> }) {
+export function TierCardList({ user }: { user?: InferAttributes<Users> }) {
     const tiers = [
         {
             name: "Savings",
@@ -119,11 +119,11 @@ export function TierCardList({ user }: { user: InferAttributes<Users> }) {
                 >
                     <div>
 
-                        <Heading size="5" align="left" className={`font-mono ${tier.color}`}>
+                        <Heading size="5" align="right" className={`font-mono ${tier.color}`}>
                             {tier.name}
                         </Heading>
                         <Text color="gray" size={"1"} as={'div'} className="mb-4">{tier.description}</Text>
-                        <Flex gap={'3'} className="my-4 items-end">
+                        <Flex gap={'3'} className="my-4 items-start">
                             <Flex gap={'0'}>
                                 <Text size={'1'} wrap={"wrap"}>%</Text>
                                 <Heading trim={'both'} size={'9'} className={`${tier.color}`}>{tier.interest.percent}</Heading>

@@ -14,6 +14,7 @@ import { SparklesText } from "@/components/landing/sparkly_text";
 import { BackgroundBeams } from "@/components/landing/background_beam";
 import { MarqueeDemo } from "@/components/landing/marquee";
 import Link from "next/link";
+import { TierCardList } from "@/components/TierCardList";
 
 export default async function RootPage() {
     var wallets = [];
@@ -108,7 +109,20 @@ export default async function RootPage() {
             <div className="w-full h-[500px] overflow-hidden flex flex-col items-center relative bg-transparent dark:bg-transparent">
                 <Globe className="absolute" />
             </div>
-            <BackgroundBeams />
+            {/* <BackgroundBeams /> */}
+        </div>
+
+        {/* ========= TIER SECTION */}
+        <div className="relative py-10 pr-0 mx-auto justify-center w-full mobile:px-2 px-10 flex items-center flex-row mobile:flex-col">
+            <div className="flex flex-col mobile:items-center items-center text-end mobile:text-center">
+                <div className="sm:text-[35px] md:text-[40px] mobile:text-[30px] font-bold font-mono">
+                   {`${process.env.NEXT_PUBLIC_APP_SHORT_NAME} for Everyone `}
+                </div>
+                <div className="text-gray-500 text-[14px] mb-10">
+                   Discover the perfect account for your needs. Wether you're saving, growing a business, or scaling with advance features, {process.env.NEXT_PUBLIC_APP_SHORT_NAME} have options for you
+                </div>
+                <TierCardList />
+            </div>
         </div>
 
         {/* ========= REVIEWS SECTION */}
@@ -124,8 +138,6 @@ export default async function RootPage() {
         </div>
 
         {/* ========= FOOTER SECTION */}
-
-
         <footer className=" rounded-lg shadow-sm p-2">
             <div className="w-full max-w-screen-xl mx-auto p-2 md:py-8">
                 <div className="sm:flex sm:items-center sm:justify-between">

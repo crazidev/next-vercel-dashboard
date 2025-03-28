@@ -23,11 +23,12 @@ export const Globe = ({ className }: { className?: string }) => {
       devicePixelRatio: 2,
       width: 500 * 2,
       height: 500 * 2,
-      phi: 0,
+      phi: 5.52,
       theta: 0.1,
       dark: isDarkMode ? 1 : 0, // Dark mode: fully dark background, Light mode: no darkness
       diffuse: 1.5,
       mapSamples: 16000,
+      opacity: 0.8,
       mapBrightness, // Dynamic brightness
       baseColor: baseColor as any, // Dynamic base color
       markerColor: [0.1, 0.8, 1], // Cyan markers, unchanged
@@ -37,8 +38,8 @@ export const Globe = ({ className }: { className?: string }) => {
         { location: [40.7128, -74.006], size: 0.1 }, // New York
       ],
       onRender: (state) => {
-        state.phi = phi;
-        phi += 0.007;
+        // state.phi = phi;
+        // phi += 0.007;
       },
     });
 
