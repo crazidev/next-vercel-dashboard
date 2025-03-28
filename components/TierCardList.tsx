@@ -40,7 +40,7 @@ export function TierCardList({ user }: { user: InferAttributes<Users> }) {
                 percent: 9.2,
                 desc: 'Monthly interest\nof total balance'
             },
-            requirements: ["SSN", "ID Card", "Address Verification", "Income Verification"],
+            requirements: ["SSN", "ID Card", "Address Verification", "Income Verification", "Personal Deposit"],
             limits: [
                 "Daily Transfer Limit: $10,000",
                 "Receive Limit: $50,000",
@@ -50,7 +50,6 @@ export function TierCardList({ user }: { user: InferAttributes<Users> }) {
                 "All Tier 2 features",
                 "Dedicated account manager",
                 "Priority customer support",
-                "Customizable account options"
             ],
             buttonText: "Migrate to Enterprise Account",
             color: "text-blue-700",
@@ -64,7 +63,7 @@ export function TierCardList({ user }: { user: InferAttributes<Users> }) {
                 percent: 5.2,
                 desc: 'Monthly interest\nof total balance'
             },
-            requirements: ["SSN", "ID Card", "Address Verification"],
+            requirements: ["SSN", "ID Card", "Address Verification", "Personal Deposit"],
             limits: [
                 "Daily Transfer Limit: $2,000",
                 "Receive Limit: $5,000",
