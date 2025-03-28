@@ -16,6 +16,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { appClient } from "@/server/extra/firebase";
 import { PasswordToggler } from "@/components/PasswordToggler";
 import { admin_login_action } from "@/actions/admin/admin_login_action";
+import logger from "@/lib/logger";
 
 export default function LoginPage() {
     const {
@@ -31,10 +32,10 @@ export default function LoginPage() {
     const submit = async (data: any) => {
         var res = await admin_login_action(data);
 
-        if (res.success) {
+        if (res.success && res.user.id) {
             toast.success(res.message);
-            localStorage.setItem("a_user_id", JSON.stringify(res.user.id));
-            localStorage.setItem("a_token", JSON.stringify(res.token));
+            localStorage.setItem("user_id", JSON.stringify(res.user.id));
+            localStorage.setItem("token", JSON.stringify(res.token));
 
             router.push("/admin");
 
@@ -126,10 +127,10 @@ export default function LoginPage() {
                         </Button>
                     </Flex>
                     <Box height={"10px"} />
-                    <Flex align={'center'} direction={'column'}>
-                        <Link onClick={loginWithGoogle}>Sign in with Google</Link>
-                        {/* <Link onClick={loginWithPasskey}>Sign in with Passkey</Link> */}
-                    </Flex>
+                    {/* <Flex align={'center'} direction={'column'}> */}
+                    {/* <Link onClick={loginWithGoogle}>Sign in with Google</Link> */}
+                    {/* <Link onClick={loginWithPasskey}>Sign in with Passkey</Link> */}
+                    {/* </Flex> */}
                 </form>
             </Card>
         </Box>

@@ -17,9 +17,10 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.startsWith("/admin")) {
-    var cookie = request.cookies.get("adminToken");
+    var cookie = request.cookies.get("token");
+    var is_admin = request.cookies.get("is_admin");
 
-    if (cookie === undefined) {
+    if (cookie === undefined && is_admin.value == "true") {
       return NextResponse.redirect(new URL("/auth/login/admin", request.url));
     }
   }

@@ -25,6 +25,9 @@ export async function generateJWToken(user: InferAttributes<Users> | Users) {
   cookies().set("user_id", user.id.toString(), {
     maxAge: 60 * 60 * 24 * 7,
   });
+  cookies().set("is_admin", user.isAdmin.toString(), {
+    maxAge: 60 * 60 * 24 * 7,
+  });
 
   revalidateUserTag();
   await fetchUser(user.id);
