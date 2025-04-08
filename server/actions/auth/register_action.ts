@@ -1,5 +1,5 @@
 "use server";
-import { Users } from "@/database/models/init-models";
+import { Users, WalletBalances, Wallets } from "@/database/models/init-models";
 import getSequelizeInstance from "@/database/db";
 import { RegistrationMail } from "@/server/emails/RegistrationMail";
 import { yupValidator } from "@/server/extra/yup";
@@ -44,6 +44,18 @@ export async function register_action(formData: any) {
       accountLevel: "tier1",
       createdAt: momentInstance().toDate(),
     });
+
+    var wallets = await Wallets.findAll();
+    var walletToCreate = wallets.map((wallet) => {
+      return {
+        userId: result.id,
+        walletId: wallet.id,
+        balance: 0,
+        createdAt: momentInstance().toDate(),
+      };
+    });
+
+    WalletBalances.bulkCreate(walletToCreate);
 
     if (result != null) {
       var newUser = result.toJSON();
