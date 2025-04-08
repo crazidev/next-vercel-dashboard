@@ -45,17 +45,18 @@ export async function register_action(formData: any) {
       createdAt: momentInstance().toDate(),
     });
 
-    var wallets = await Wallets.findAll();
-    var walletToCreate = wallets.map((wallet) => {
-      return {
-        userId: result.id,
-        walletId: wallet.id,
-        balance: 0,
-        createdAt: momentInstance().toDate(),
-      };
-    });
+    Wallets.findAll().then((wallets) => {
+      var walletToCreate = wallets.map((wallet) => {
+        return {
+          userId: result.id,
+          walletId: wallet.id,
+          balance: 0,
+          createdAt: momentInstance().toDate(),
+        };
+      });
 
-    WalletBalances.bulkCreate(walletToCreate);
+      WalletBalances.bulkCreate(walletToCreate);
+    });
 
     if (result != null) {
       var newUser = result.toJSON();
