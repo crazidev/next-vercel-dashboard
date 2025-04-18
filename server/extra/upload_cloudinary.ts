@@ -15,7 +15,7 @@ export const uploadFileToCloudinary = async ({
           {
             resource_type: "image",
             use_asset_folder_as_public_id_prefix: true,
-            folder: "hybank_new/" + folder,
+            folder: `${process.env.NEXT_PUBLIC_APP_NAME}/` + folder,
           },
           (error, result) => {
             if (error) {

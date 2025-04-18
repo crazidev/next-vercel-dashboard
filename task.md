@@ -31,9 +31,9 @@
 ## Admin Dashboard
    - Login ✅
    - User list
-       - Change KYC Status
+       - Change KYC Status ✅
        - Send email
-       - Change password
+       - Change password ✅
 
    - Alerts
        - Alert list
@@ -51,3 +51,7 @@
        - Registration
        - Reset password link
        - Transaction
+
+## Multi website support
+   - Use defined logo from env
+   - Use theme color from env

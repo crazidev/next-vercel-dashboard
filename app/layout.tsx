@@ -10,41 +10,8 @@ import { Analytics } from '@vercel/analytics/next';
 const APP_NAME = process.env.APP_NAME;
 const APP_DEFAULT_TITLE = process.env.APP_NAME ?? "";
 const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = "";
-
-export const metadata: Metadata = {
-  applicationName: APP_NAME,
-  title: {
-    default: APP_DEFAULT_TITLE,
-    template: APP_TITLE_TEMPLATE,
-  },
-  description: APP_DESCRIPTION,
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: APP_DEFAULT_TITLE,
-  },
-  formatDetection: {
-    telephone: false,
-  },
-  openGraph: {
-    type: "website",
-    siteName: APP_NAME,
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
-    },
-    description: APP_DESCRIPTION,
-  },
-  twitter: {
-    card: "summary",
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
-    },
-    description: APP_DESCRIPTION,
-  },
-};
+const APP_DESCRIPTION = process.env.NEXT_PUBLIC_APP_DESCRIPTION;
+const APP_THEME = process.env.NEXT_PUBLIC_APP_THEME ?? "green";
 
 export const viewport: Viewport = {
   themeColor: "#FFFFFF",
@@ -55,7 +22,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Retrieve theme from cookies
   var _cookies = await cookies();
   const theme = _cookies.get("theme")?.value;
 
@@ -66,7 +32,24 @@ export default async function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
+        <title>{process.env.NEXT_PUBLIC_APP_TITLE ?? process.env.NEXT_PUBLIC_APP_NAME}</title>
+        <meta name="description" content={process.env.NEXT_PUBLIC_APP_DESCRIPTION} />
         <link rel="manifest" href="/api/manifest" />
+        <link rel="icon" href={process.env.NEXT_PUBLIC_APP_LOGO ?? 'favicon.png'} sizes="any" />
+
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_APP_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={process.env.NEXT_PUBLIC_APP_TITLE} />
+        <meta property="og:description" content={process.env.NEXT_PUBLIC_APP_DESCRIPTION} />
+        <meta property="og:image" content={'/frame-1-nologo.png'} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content={process.env.NEXT_PUBLIC_APP_URL} />
+        <meta property="twitter:url" content={process.env.NEXT_PUBLIC_APP_URL} />
+        <meta name="twitter:title" content={process.env.NEXT_PUBLIC_APP_TITLE} />
+        <meta name="twitter:description" content={process.env.NEXT_PUBLIC_APP_DESCRIPTION} />
+        <meta name="twitter:image" content={'/frame-1-nologo.png'} />
+
         <PWARelatedLinks />
         <script
           dangerouslySetInnerHTML={{
@@ -88,12 +71,12 @@ export default async function RootLayout({
           }}
         ></script>
       </head>
-      
+
       <body>
         <Theme
           appearance={'inherit'}
           grayColor={"auto"}
-          accentColor={"green"}
+          accentColor={APP_THEME as any}
           panelBackground="translucent"
         >
           <Toaster

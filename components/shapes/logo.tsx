@@ -1,5 +1,7 @@
 export function Logo({ className }: { className: any }) {
-  return (
+  return process.env.NEXT_PUBLIC_APP_LOGO ? (
+    <img src={process.env.NEXT_PUBLIC_APP_LOGO} className={className} />
+  ) : (
     <>
       <svg className={className} width="1000" height="678" viewBox="0 0 1000 678" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M164.21 72.5675C153.028 37.8559 178.915 2.31934 215.384 2.31934H384.691C408.032 2.31934 428.708 17.3805 435.865 39.598L638.91 669.913H419.299C381.952 669.913 348.872 645.815 337.421 610.268L164.21 72.5675Z" fill="url(#paint0_linear_2610_7)" />

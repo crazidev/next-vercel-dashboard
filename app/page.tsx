@@ -85,7 +85,7 @@ export default async function RootPage() {
                 </div>
 
                 <div className="flex flex-1 justify-center flex-row mobile:mt-[10px] mt-[-70px]">
-                    <img src={'frame-1.png'} alt={"Mockup"} height={500} />
+                    <img src={'frame-1-nologo.png'} alt={"Mockup"} height={500} />
                     {/* <div className="absolute -z-10">
                         <Globe />
                     </div> */}

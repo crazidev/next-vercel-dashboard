@@ -7,7 +7,7 @@ export async function GET() {
     short_name: process.env.NEXT_PUBLIC_APP_SHORT_NAME,
     description: process.env.NEXT_PUBLIC_APP_DESCRIPTION,
     start_url: "/dashboard",
-    id: "hybank",
+    id: process.env.NEXT_PUBLIC_APP_NAME,
     display: "standalone",
     display_override: ["window-controls-overlay"],
     // background_color: "white",
