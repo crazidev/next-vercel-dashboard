@@ -1,2 +1,3 @@
 [build]
-  command = "npm run build --force"
+  command = "npm run build"
+  build.install_command = "npm install --force"
