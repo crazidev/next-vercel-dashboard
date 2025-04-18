@@ -53,5 +53,5 @@
        - Transaction
 
 ## Multi website support
-   - Use defined logo from env
-   - Use theme color from env
+   - Use defined logo from env ✅
+   - Use theme color from env ✅
