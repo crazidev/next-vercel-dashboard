@@ -10,7 +10,7 @@ import { Analytics } from '@vercel/analytics/next';
 const APP_NAME = process.env.APP_NAME;
 const APP_DEFAULT_TITLE = process.env.APP_NAME ?? "";
 const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = process.env.NEXT_PUBLIC_APP_DESCRIPTION;
+const APP_DESCRIPTION =  process.env.NEXT_PUBLIC_APP_DESCRIPTION ?? `${APP_NAME} - all-in-one financial platform that seamlessly integrates fiat, crypto, and stock management. Experience fast transactions, multi-asset conversions, and top-tier security—banking redefined for the modern age.`;
 const APP_THEME = process.env.NEXT_PUBLIC_APP_THEME ?? "green";
 
 export const viewport: Viewport = {
