@@ -15,10 +15,12 @@ export const CryptoWalletCard = async ({ wallet, index }: { wallet: InferAttribu
 
     useEffect(() => {
         if (convert?.convert?.isReady == true) {
-            var amount = convert.convert['USD'][wallet.wallet.shortName](wallet.balance);
+            var amount = convert.convert['USD'][wallet.wallet.shortName](wallet?.balance ?? 0);
             setAmount(amount);
         }
+
     }, [convert.convert]);
+
     return (
         <Link href={`/dashboard/wallets/${wallet.wallet?.shortName}`}>
             <MyCard

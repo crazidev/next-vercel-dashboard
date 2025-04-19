@@ -10,6 +10,8 @@ export const cFmt = ({
   code?: string;
   isCrypto?: boolean;
 }) =>
-  isCrypto
+  amount == 0
+    ? "0.00"
+    : isCrypto
     ? formatCurrency(amount ?? 0, code ?? "USD", "en", true)
     : formatter.format(amount ?? 0, { code: code ?? "USD" });
