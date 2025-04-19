@@ -178,9 +178,11 @@ export function SideBarComponent({
                 if (nav.link == "/dashboard") {
                   isActive = pathname == '/dashboard';
                 }
-                var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
-                if (nav.link == "/admin") {
-                  isActive = pathname == '/admin';
+                else {
+                  var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
+                  if (nav.link == "/admin") {
+                    isActive = pathname == '/admin';
+                  }
                 }
 
                 return (
@@ -229,12 +231,14 @@ export function SideBarComponent({
             var isActive = pathname.startsWith(nav.link) && (nav.link != '/dashboard');
             if (nav.link == "/dashboard") {
               isActive = pathname == '/dashboard';
+            } else {
+              var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
+              if (nav.link == "/admin") {
+                isActive = pathname == '/admin';
+              }
             }
 
-            var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
-            if (nav.link == "/admin") {
-              isActive = pathname == '/admin';
-            }
+
 
             return (
               <Link

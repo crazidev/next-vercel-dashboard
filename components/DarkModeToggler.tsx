@@ -11,5 +11,5 @@ export function DarkModeToggler() {
 
     return <MdDarkMode onClick={() => {
         context.setTheme!(context.dark ? 'light' : 'dark');
-    }} size={20} />
+    }} size={25} />
 }

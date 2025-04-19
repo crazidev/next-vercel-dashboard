@@ -1,5 +1,6 @@
 import {
   Avatar,
+  DropdownMenu,
   Flex,
   Text,
 } from "@radix-ui/themes";
@@ -10,6 +11,8 @@ import { Users } from "@/database/models/users";
 import { fetchUser } from "@/fetch/fetch_user";
 import { LivechatToggler } from "@/components/LivechatToggler";
 import { InferAttributes } from "sequelize";
+import { ChevronDownIcon } from "lucide-react";
+import { logout } from "@/actions/auth/logout";
 
 export async function UserContainer() {
   var user_id = (await cookies()).get("user_id")?.value;
@@ -31,9 +34,22 @@ export async function UserContainer() {
               <Text>{user && user?.lastName}</Text>
             </Flex>
           </div>
-          <Avatar fallback="A" size={"2"} radius={"full"} />
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <div className="flex items-center gap-2 px-2 py-1 bg-primary-200 rounded-xl">
+                <Avatar fallback={user.firstName.at(0)} size={"2"} radius={"full"} />
+                <ChevronDownIcon />
+              </div>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Item onClick={async (e) => {
+                'use server';
+                logout();
+              }}>Logout</DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
         </Flex>
-      </Flex>
+      </Flex >
     </>
   );
 }
