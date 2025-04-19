@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import useLayout from "@/components/hooks/useLayout";
 import { DashboardContext } from "@context/DashboardContext";
-import { LuUsers, LuWallet2 } from "react-icons/lu";
+import { LuUsers, LuWallet } from "react-icons/lu";
 
 
 export const navlist = (isAdmin: boolean) => isAdmin ? [
@@ -37,7 +37,7 @@ export const navlist = (isAdmin: boolean) => isAdmin ? [
   {
     link: "/admin/wallets",
     name: "Wallet's Management",
-    icon: <LuWallet2 />,
+    icon: <LuWallet />,
   },
 ] : [
   {
