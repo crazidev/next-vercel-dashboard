@@ -33,7 +33,7 @@ const WalletPage = async ({
           description="Monitor your specific wallet activities."
         />
 
-        <div className="flex lg:flex-row flex-col gap-5">
+        <div className="flex flex-col gap-5">
 
           <Suspense fallback={<RotateSpinnerComponent />}>
             <WalletBalance

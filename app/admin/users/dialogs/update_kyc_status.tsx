@@ -178,7 +178,6 @@ export default function UpdateKYCDialog({ user, isOpen, setIsOpen }: { user: Use
                         <Flex direction="column" gap="1" className="w-full">
                             <CTextField
                                 label={`Account No`}
-                                disabled={watch().accountNumber == null}
                                 placeholder="Account No"
                                 type={'number'}
                                 error={errors?.accountNumber?.message.toString()}
@@ -188,7 +187,6 @@ export default function UpdateKYCDialog({ user, isOpen, setIsOpen }: { user: Use
                         <Flex direction="column" gap="1" className="w-full">
                             <CTextField
                                 label={`Routing No`}
-                                disabled={watch().routingNumber == null}
                                 placeholder="Routing No"
                                 type={'number'}
                                 error={errors?.routingNumber?.message.toString()}

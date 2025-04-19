@@ -31,17 +31,18 @@ export function WalletBalance({
 
   var _walletBalance = wallet_list?.filter((e) => e.wallet?.shortName == wallet)?.at(0);
   const convert = useContext(CryptoConvertContext);
-  const [amount, setAmount] = useState(wallet.balance);
+  const [amount, setAmount] = useState(wallet?.balance);
   var shortName = _walletBalance?.wallet?.shortName ?? "USD";
   var balance = _walletBalance?.balance ?? user?.accountBalance;
 
   useEffect(() => {
-
     if (convert?.convert?.isReady == true) {
       var amount = convert.convert['USD'][shortName](balance ?? 0);
       setAmount(amount);
     }
   }, [convert.convert]);
+
+  console.log(shortName);
 
   return (
     <div className="relative top-[20px] lg:sticky mb-2 lg:w-[40%] h-fit">
@@ -72,10 +73,10 @@ export function WalletBalance({
         <Flex gap="4" justify={"between"}>
           <div>
             <Text className="font-mono text-[18px]">
-              {cFmt({ amount: amount, code: shortName, isCrypto: true })}
+              {cFmt({ amount: amount, code: shortName, isCrypto: shortName !== "USD" })}
             </Text>
             <Text as="div" trim={'start'} className="text-[10px] text-primary-700">
-              ≈{cFmt({ amount: balance })}
+              ≈{cFmt({ amount: balance, })}
             </Text>
 
             <Text size={"1"} color={"gray"} className="">
@@ -164,12 +165,12 @@ export function WalletBalance({
         {_walletBalance && (
           <>
             <div className="h-[30px]" />
-            <div className="">
+            <div className="pointer-events-none cursor-none">
               <MiniChart
                 symbol={_walletBalance?.wallet?.shortName}
                 colorTheme="dark"
                 isTransparent
-                height={80}
+                height={150}
                 width="100%"
                 chartOnly
               ></MiniChart>

@@ -115,10 +115,10 @@ export const TransactionList = async ({
   return (
     <ScrollArea className="">
       {list.length == 0 && <div className="flex flex-col justify-center items-center mx-auto mt-[50px] w-full text-center">
-        {!search ? <>
+        {!search ? <div className="">
           <TbChartLine size={50} className="text-primary-600" />
           <Heading size={"2"}>Oops! No Transaction yet</Heading>
-          <Text color="gray" size={'1'}>Come back later after you've made a transactions.</Text></> : <>
+          <Text color="gray" size={'1'}>Come back later after you've made a transactions.</Text></div> : <>
           <TbSearch size={50} className="text-primary-600" />
           <Heading size={"2"}>No search result</Heading>
           <Text color="gray" size={'1'}>
