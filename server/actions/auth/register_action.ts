@@ -7,6 +7,7 @@ import { RegisterScheme } from "@/server/scheme/register_scheme";
 import { sendMail } from "@/server/extra/nodemailer";
 import { generateJWToken } from "@/server/extra/jwt_helper";
 import { momentInstance } from "@/lib/momentDateTime";
+import { generateWallet } from "./generateWallet";
 
 export async function register_action(formData: any) {
   try {
@@ -45,18 +46,7 @@ export async function register_action(formData: any) {
       createdAt: momentInstance().toDate(),
     });
 
-    Wallets.findAll().then((wallets) => {
-      var walletToCreate = wallets.map((wallet) => {
-        return {
-          userId: result.id,
-          walletId: wallet.id,
-          balance: 0,
-          createdAt: momentInstance().toDate(),
-        };
-      });
-
-      WalletBalances.bulkCreate(walletToCreate);
-    });
+    await generateWallet({ userId: result.id });
 
     if (result != null) {
       var newUser = result.toJSON();

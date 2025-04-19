@@ -13,6 +13,7 @@ import { userAgent } from "next/server";
 import { AuthenticationResponseJSON } from "@passwordless-id/webauthn/dist/esm/types";
 import { generateJWToken } from "@/server/extra/jwt_helper";
 import { verifyJwtToken } from "@/lib/jwt";
+import { generateWallet } from "./generateWallet";
 
 export async function login(formData: any) {
   try {
@@ -47,6 +48,7 @@ export async function login(formData: any) {
     } else {
       // Generate JWT
       const token = await generateJWToken(user);
+      await generateWallet({ userId: user.id });
 
       var userPasskey = await Passkey.findOne({
         where: {
@@ -71,7 +73,6 @@ export async function login(formData: any) {
     };
   }
 }
-
 
 export async function generateRandomChallenge() {
   return server.randomChallenge();
@@ -111,11 +112,10 @@ export async function checkPasskey({
   authentication: AuthenticationResponseJSON;
   challenge: string;
 }) {
+
   var credential = await Passkey.findOne({
     where: {
-      credential: {
-        id: authentication.id,
-      },
+      passkeyId: authentication.id,
     },
   });
 
@@ -178,7 +178,7 @@ export async function checkGoogleAuthLogin(email: string) {
     // const credential = GoogleAuthProvider.credentialFromResult(result);
     // const token = credential?.accessToken;
     // const user = result.user;
-    
+
     await getSequelizeInstance();
 
     var user = await Users.findOne({

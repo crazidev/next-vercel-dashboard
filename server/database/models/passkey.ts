@@ -1,63 +1,69 @@
-import * as Sequelize from 'sequelize';
-import { DataTypes, Model, CreationOptional } from 'sequelize';
+import * as Sequelize from "sequelize";
+import { DataTypes, Model, CreationOptional } from "sequelize";
 
 export class Passkey extends Model<
- Sequelize.InferAttributes<Passkey>,
- Sequelize.InferCreationAttributes<Passkey>
+  Sequelize.InferAttributes<Passkey>,
+  Sequelize.InferCreationAttributes<Passkey>
 > {
-   declare id: CreationOptional<number>;
-   declare userId: number;
-   declare credential: string;
-   declare device?: string;
-   declare createdAt: Date;
+  declare id: CreationOptional<number>;
+  declare userId: number;
+  declare passkeyId: number;
+  declare credential: string;
+  declare device?: string;
+  declare createdAt: Date;
 
-   static initModel(sequelize: Sequelize.Sequelize): typeof Passkey {
-      return Passkey.init({
-      id: {
-         autoIncrement: true,
-         type: DataTypes.INTEGER,
-         allowNull: false,
-         primaryKey: true
-      },
+  static initModel(sequelize: Sequelize.Sequelize): typeof Passkey {
+    return Passkey.init(
+      {
+        id: {
+          autoIncrement: true,
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          primaryKey: true,
+        },
 
-      userId: {
-         type: DataTypes.INTEGER,
-         allowNull: false,
-         field: 'user_id'
-      },
+        userId: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          field: "user_id",
+        },
 
-      credential: {
-         type: DataTypes.TEXT,
-         allowNull: false
-      },
+        passkeyId: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
 
-      device: {
-         type: DataTypes.TEXT,
-         allowNull: true
-      },
+        credential: {
+          type: DataTypes.JSON,
+          allowNull: false,
+        },
 
-      createdAt: {
-         type: DataTypes.DATE,
-         allowNull: false,
-         defaultValue: Sequelize.NOW
+        device: {
+          type: DataTypes.JSON,
+          allowNull: true,
+        },
+
+        createdAt: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: Sequelize.NOW,
+        },
       },
-   }, {
-      sequelize,
-      tableName: 'passkey',
-      timestamps: false,
-      createdAt: false,
-      updatedAt: false,
-      indexes: [
-         {
+      {
+        sequelize,
+        tableName: "passkey",
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false,
+        indexes: [
+          {
             name: "PRIMARY",
             unique: true,
             using: "BTREE",
-            fields: [
-               { name: "id" },
-            ]
-         },
-      ]
-   });
-   }
-
+            fields: [{ name: "id" }],
+          },
+        ],
+      }
+    );
+  }
 }

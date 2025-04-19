@@ -26,7 +26,7 @@ export const CTextField = React.forwardRef<HTMLElement, InputProps>(
     },
     ref
   ) => {
-    const isIOS = false;
+    const isIOS = true;
 
     return (
       <Flex direction={"column"} gap={"1"}>

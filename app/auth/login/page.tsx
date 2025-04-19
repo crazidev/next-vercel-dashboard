@@ -179,7 +179,7 @@ export default function LoginPage() {
           <Box height={"10px"} />
           <Flex align={'center'} direction={'column'}>
             {/* <Link onClick={loginWithGoogle}>Sign in with Google</Link> */}
-            {/* <Link onClick={loginWithPasskey}>Sign in with Passkey</Link> */}
+            <Link onClick={loginWithPasskey} className="cursor-pointer">Sign in with Passkey</Link>
           </Flex>
         </form>
       </Card>
