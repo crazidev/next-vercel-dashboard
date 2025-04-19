@@ -60,7 +60,6 @@ export default function LoginPage() {
     const authentication = await client.authenticate({
       challenge: challenge,
       userVerification: 'preferred',
-      // allowCredentials: ['crazibeat-01'],
     });
 
     const res = await checkPasskey({ authentication: authentication, challenge: challenge });

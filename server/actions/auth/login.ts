@@ -95,6 +95,7 @@ export async function savePasskey(data: any): Promise<boolean | string> {
     await Passkey.create({
       userId: user!.dataValues.id,
       credential: data,
+      passkeyId: data.id,
       device: formatted,
     });
 
@@ -112,7 +113,6 @@ export async function checkPasskey({
   authentication: AuthenticationResponseJSON;
   challenge: string;
 }) {
-
   var credential = await Passkey.findOne({
     where: {
       passkeyId: authentication.id,
