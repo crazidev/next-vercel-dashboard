@@ -22,6 +22,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  reactStrictMode: true,
+  productionBrowserSourceMaps: true,
 };
 
 export default nextConfig;
