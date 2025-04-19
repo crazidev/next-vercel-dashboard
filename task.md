@@ -56,4 +56,4 @@
    - Use defined logo from env ✅
    - Use theme color from env ✅
    - Edit routing/account number from admin user KYC dialog
-   
+   - Show wallet real amount in transaction list
