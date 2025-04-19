@@ -85,7 +85,7 @@ export function WalletBalance({
           </div>
 
           <Flex gap="4" justify={"between"} align={"center"}>
-            <div>
+            {/* <div>
               <Text as={"div"} className="">
                 {cFmt({
                   amount: 0,
@@ -105,7 +105,7 @@ export function WalletBalance({
               <Text size={"1"} color={"gray"} as={"div"} className="">
                 Expenses
               </Text>
-            </div>
+            </div> */}
           </Flex>
         </Flex>
 
