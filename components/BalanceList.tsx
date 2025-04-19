@@ -11,6 +11,7 @@ import Link from "next/link";
 import { WalletBalances } from "@/database/models/wallet_balances";
 import { InferAttributes } from "sequelize";
 import { MainBalanceCard } from "./MainBalanceCard";
+import { CryptoWalletCard } from "./CryptoWalletCard";
 
 export const BalanceList = async () => {
   var user_id = (await authUser()).user_id;
@@ -43,44 +44,4 @@ export const BalanceList = async () => {
   );
 };
 
-const CryptoWalletCard = async ({ wallet, index }: { wallet: InferAttributes<WalletBalances>, index: number }) => {
-
-  return (
-    <Link href={`/dashboard/wallets/${wallet.wallet?.shortName}`}>
-      <MyCard
-        radius="10px"
-        className="relative h-[140px] flex flex-col flex-1 justify-between dark:hover:border-[var(--accent-7)] p-[10px] min-w-[150px] transition-all duration-100 ease-in"
-      >
-        <Flex>
-          <img
-            className="mb-3 rounded-full w-[30px]"
-            src={wallet.wallet?.icon ?? ""}
-
-            alt={""}
-          />
-        </Flex>
-        <Flex gap={"2"} justify={"between"} align={"center"}>
-          <Flex direction={"column"} className="">
-            <Text className="font-mono text-[18px]">
-              {cFmt({ amount: wallet.balance })}
-            </Text>
-            <Text trim={'start'} className="font-mono text-[14px]">
-              {converted}
-            </Text>
-            <Text trim={'start'} color="gray" className="font-normal text-[12px]">
-              {wallet.wallet?.name}
-            </Text>
-          </Flex>
-          {/* <Image
-      className="sm:hidden rounded-full"
-      src={wallet.wallet?.icon}
-      width={25}
-      height={25}
-      alt={"logo"}
-    /> */}
-        </Flex>
-      </MyCard>
-    </Link>
-  )
-}
 
