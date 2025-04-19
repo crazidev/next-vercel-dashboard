@@ -64,9 +64,9 @@ const CryptoWalletCard = async ({ wallet, index }: { wallet: InferAttributes<Wal
             <Text className="font-mono text-[18px]">
               {cFmt({ amount: wallet.balance })}
             </Text>
-            {/* <Text trim={'start'} className="font-mono text-[14px]">
+            <Text trim={'start'} className="font-mono text-[14px]">
               {converted}
-            </Text> */}
+            </Text>
             <Text trim={'start'} color="gray" className="font-normal text-[12px]">
               {wallet.wallet?.name}
             </Text>
