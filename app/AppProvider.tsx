@@ -24,7 +24,7 @@ export default function AppProvider({
   useEffect(() => {
     // Initialize OneSignal
     if (typeof window !== "undefined") {
-      InitOneSignal();
+      // InitOneSignal();
 
       // Get the theme from the HTML element's class
       const htmlTheme = document.documentElement.classList.contains("dark")
