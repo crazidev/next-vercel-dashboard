@@ -178,10 +178,10 @@ export function SideBarComponent({
                 if (nav.link == "/dashboard") {
                   isActive = pathname == '/dashboard';
                 }
-                // var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
-                // if (nav.link == "/admin") {
-                //   isActive = pathname == '/admin';
-                // }
+                var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
+                if (nav.link == "/admin") {
+                  isActive = pathname == '/admin';
+                }
 
                 return (
                   // <Tooltip key={nav.link} content={nav.name}>
@@ -230,6 +230,7 @@ export function SideBarComponent({
             if (nav.link == "/dashboard") {
               isActive = pathname == '/dashboard';
             }
+
             var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
             if (nav.link == "/admin") {
               isActive = pathname == '/admin';
