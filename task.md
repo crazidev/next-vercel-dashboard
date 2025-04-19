@@ -55,6 +55,6 @@
 ## Multi website support
    - Use defined logo from env ✅
    - Use theme color from env ✅
-   - Edit routing/account number from admin user KYC dialog
-   - Show wallet real amount in transaction list
-   - Create wallet user dosen't have on login
+   - Edit routing/account number from admin user KYC dialog ✅
+   - Show wallet real amount in transaction list ✅
+   - Create wallet user dosen't have on login ✅

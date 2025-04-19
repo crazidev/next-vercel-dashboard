@@ -32,6 +32,8 @@ export default function UpdateKYCDialog({ user, isOpen, setIsOpen }: { user: Use
             canTransfer: yup.string().oneOf(['no', 'yes']).default('no').required(),
             ssnStatus: yup.string().oneOf(['uploaded', 'verified', 'none']).default('none'),
             ssn: yup.string(),
+            routingNumber: yup.number(),
+            accountNumber: yup.number(),
             idDocType: yup.string().oneOf(['national_id', 'drivers_license', 'international_passport', 'none']).default('none'),
             idDocStatus: yup.string().oneOf(['uploaded', 'verified', 'none']).default('none'),
         }))
@@ -67,6 +69,9 @@ export default function UpdateKYCDialog({ user, isOpen, setIsOpen }: { user: Use
 
             setValue('accountLevel', user.accountLevel);
             setValue('status', user.status);
+
+            setValue('accountNumber', user.accountNumber);
+            setValue('routingNumber', user.routingNumber);
         }
 
     }, [isOpen]);
@@ -168,6 +173,30 @@ export default function UpdateKYCDialog({ user, isOpen, setIsOpen }: { user: Use
                             />
                         </Flex>
                     </Flex>
+
+                    <Flex gap={'4'}>
+                        <Flex direction="column" gap="1" className="w-full">
+                            <CTextField
+                                label={`Account No`}
+                                disabled={watch().accountNumber == null}
+                                placeholder="Account No"
+                                type={'number'}
+                                error={errors?.accountNumber?.message.toString()}
+                                register={register("accountNumber")}
+                            />
+                        </Flex>
+                        <Flex direction="column" gap="1" className="w-full">
+                            <CTextField
+                                label={`Routing No`}
+                                disabled={watch().routingNumber == null}
+                                placeholder="Routing No"
+                                type={'number'}
+                                error={errors?.routingNumber?.message.toString()}
+                                register={register("routingNumber")}
+                            />
+                        </Flex>
+                    </Flex>
+
                     <Flex gap={'4'}>
                         <Flex direction="column" gap="1" className="w-full">
                             <Text size={'1'} >ID Status</Text>

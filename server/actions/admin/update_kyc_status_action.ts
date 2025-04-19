@@ -16,6 +16,8 @@ export async function update_kyc_status_action(form: any, user_id: number) {
         emailVerified: form.emailVerified == "verified" ? 1 : 0,
         canTransfer: form.canTransfer == "yes" ? 1 : 0,
         ssn: form.ssn == "" ? null : form.ssn,
+        accountNumber: form.accountNumber,
+        routingNumber: form.routingNumber,
         ssnStatus: form.ssnStatus == "none" ? null : form.ssnStatus,
         idDocStatus: form.idDocStatus == "none" ? null : form.idDocStatus,
         idDocType: form.idDocType == "none" ? null : form.idDocType,
