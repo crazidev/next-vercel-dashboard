@@ -31,9 +31,13 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { PasswordValidator } from "@/components/PasswordValidator";
 import { track } from "@vercel/analytics";
+import { PasswordToggler } from "@/components/PasswordToggler";
+import { useState } from "react";
 
 export default function RegisterPage() {
   var router = useRouter();
+  const [showPass, setShowPass] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -155,7 +159,8 @@ export default function RegisterPage() {
               label="Password"
               placeholder="Enter your password"
               leftIcon={<MdLock />}
-              rightIcon={<MdRemoveRedEye />}
+              type={showPass ? "text" : "password"}
+              rightIcon={<PasswordToggler visible={showPass} onChange={() => setShowPass(!showPass)} />}
               register={register("password")}
               error={errors?.password?.message}
             />

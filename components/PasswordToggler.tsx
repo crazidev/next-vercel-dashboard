@@ -8,7 +8,7 @@ export function PasswordToggler({
     onChange: () => void,
     visible: boolean
 }) {
-    return <IconButton type="button" variant="ghost" size={'1'} onClick={onChange}>
-        {visible ? <LucideEyeOff size={15} /> : <LucideEye size={15} />}
+    return <IconButton type="button" className="text-[12px]" variant="ghost" size={'1'} onClick={onChange}>
+        {!visible ? 'Show' : 'Hide'}
     </IconButton>
 }

@@ -139,6 +139,7 @@ export default function LoginPage() {
             <CTextField
               label="Email"
               placeholder="Enter your email"
+              type={'email'}
               autoComplete="username webauthn"
               leftIcon={<MdOutlineMailLock />}
               error={errors?.email?.message.toString()}
@@ -149,6 +150,7 @@ export default function LoginPage() {
               label="Password"
               placeholder="Enter your password"
               leftIcon={<MdLock />}
+              type={showPass ? "text" : "password"}
               autoComplete="current-password"
               rightIcon={<PasswordToggler visible={showPass} onChange={() => setShowPass(!showPass)} />}
               error={errors?.password?.message.toString()}
