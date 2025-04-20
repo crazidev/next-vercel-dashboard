@@ -28,7 +28,9 @@ export default function AuthLayout({
             <HeaderLink />
           </Suspense>
 
-          <UserContainer />
+          <Suspense>
+            <UserContainer />
+          </Suspense>
         </Flex>
 
         <div className="flex grow items-center justify-center">
@@ -37,9 +39,9 @@ export default function AuthLayout({
             width={"300px"}
             className="m-auto my-[30px] sm:my-auto"
           >
-            <Suspense fallback={<Spinner/>}>
+            <Suspense fallback={<Spinner />}>
               {children}
-              </Suspense>
+            </Suspense>
           </Box>
         </div>
 
