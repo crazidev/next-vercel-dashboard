@@ -79,6 +79,7 @@ export async function generateRandomChallenge() {
 }
 
 export async function savePasskey(data: any): Promise<boolean | string> {
+  console.log("Save passkey");
   var user = await Users.findByPk(data.user_id);
   try {
     // Access the headers from the request
@@ -90,11 +91,13 @@ export async function savePasskey(data: any): Promise<boolean | string> {
       headers: headersList,
     });
 
-    var formatted = JSON.parse(JSON.stringify(_userAgent));
+    var formatted = JSON.stringify(_userAgent);
+
+    console.log("Create new passkey in table");
 
     await Passkey.create({
       userId: user!.dataValues.id,
-      credential: data,
+      credential: JSON.stringify(data),
       passkeyId: data.id,
       device: formatted,
     });

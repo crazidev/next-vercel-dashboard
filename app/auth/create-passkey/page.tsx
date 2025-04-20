@@ -65,16 +65,20 @@ export default function CreatePasskeyPage() {
                 user_id: user.id
             }
 
+            console.log(data)
+
             try {
                 var res = await savePasskey(data);
                 setSaved(res as boolean);
                 setIsLoading(false);
             } catch (err: any) {
                 setError(err);
+                console.error("savePasskey error:", err)
                 setIsLoading(false);
             }
 
         } catch (err: any) {
+            console.error(err)
             setIsLoading(false);
         }
     }

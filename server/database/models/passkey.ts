@@ -34,12 +34,12 @@ export class Passkey extends Model<
         },
 
         credential: {
-          type: DataTypes.JSON,
+          type: DataTypes.STRING,
           allowNull: false,
         },
 
         device: {
-          type: DataTypes.JSON,
+          type: DataTypes.STRING,
           allowNull: true,
         },
 
