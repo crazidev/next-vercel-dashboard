@@ -65,8 +65,6 @@ export default function CreatePasskeyPage() {
                 user_id: user.id
             }
 
-            console.log(data)
-
             try {
                 var res = await savePasskey(data);
                 setSaved(res as boolean);
