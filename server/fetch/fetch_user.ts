@@ -23,6 +23,7 @@ export const fetchUser = async (
     },
   });
   return data?.toJSON() || null;
+
   // },
   //   [cacheDependency],
   //   {
