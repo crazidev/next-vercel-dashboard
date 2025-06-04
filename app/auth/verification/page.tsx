@@ -37,24 +37,28 @@ export default async function VerificationPage() {
           {/* </Text> */}
         </Flex>
 
-        {(user.ssnStatus === 'uploaded' || user.idDocStatus === 'uploaded') && <Callout.Root variant="surface" color="yellow" mt={"5"} size={"1"}>
-          <Callout.Icon>
-            <TbInfoCircle />
-          </Callout.Icon>
-          <Callout.Text size={'1'}>
-            Please wait a little longer while our Team is verifying your KYC
-            information. You'll receive an email soon.
-          </Callout.Text>
-        </Callout.Root>}
+        {(user.ssnStatus === "uploaded" || user.idDocStatus === "uploaded") && (
+          <Callout.Root variant="surface" color="yellow" mt={"5"} size={"1"}>
+            <Callout.Icon>
+              <TbInfoCircle />
+            </Callout.Icon>
+            <Callout.Text size={"1"}>
+              Please wait a little longer while our Team is verifying your KYC
+              information. You'll receive an email soon.
+            </Callout.Text>
+          </Callout.Root>
+        )}
 
         <VerificationComponent
           props={{
-
             list: [
               {
                 title: "Address",
                 type: "address",
-                content: user?.address == undefined ? undefined : `${user?.address}, ${user?.state}, ${user?.country}`,
+                content:
+                  user?.address == undefined
+                    ? undefined
+                    : `${user?.address}, ${user?.state}, ${user?.country}`,
                 status: user?.address != null ? "verified" : "not_uploaded",
               },
               {
@@ -78,8 +82,13 @@ export default async function VerificationPage() {
           }}
         />
         <div className="mt-5 flex justify-center">
-          {(user.ssnStatus == 'verified' && user.idDocStatus == 'verified') &&
-            <Link href={'/dashboard'}><Button className="" variant="soft">PROCEED TO DASHBOARD</Button></Link>}
+          {user.ssnStatus == "verified" && user.idDocStatus == "verified" && (
+            <Link href={"/dashboard"}>
+              <Button className="" variant="soft">
+                PROCEED TO DASHBOARD
+              </Button>
+            </Link>
+          )}
         </div>
       </Card>
     </>

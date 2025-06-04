@@ -1,21 +1,42 @@
 "use client";
 
-import { Flex, Button, Text, Card, Box, Link, Callout, IconButton } from "@radix-ui/themes";
+import {
+  Flex,
+  Button,
+  Text,
+  Card,
+  Box,
+  Link,
+  Callout,
+  IconButton,
+} from "@radix-ui/themes";
 import { AuthContainerLogo } from "@/components/AuthContainerLogo";
 import { MdLock, MdOutlineMailLock, MdRemoveRedEye } from "react-icons/md";
 import { CTextField } from "@/components/CTextField";
 import { useForm } from "react-hook-form";
-import { TbEye, TbEyeCancel, TbFaceId, TbFingerprint, TbInfoCircle, TbLockAccess } from "react-icons/tb";
+import {
+  TbEye,
+  TbEyeCancel,
+  TbFaceId,
+  TbFingerprint,
+  TbInfoCircle,
+  TbLockAccess,
+} from "react-icons/tb";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { checkGoogleAuthLogin, checkPasskey, generateRandomChallenge, login } from "@/actions/auth/login";
+import {
+  checkGoogleAuthLogin,
+  checkPasskey,
+  generateRandomChallenge,
+  login,
+} from "@/actions/auth/login";
 import { client, server } from "@passwordless-id/webauthn";
 import { Separator } from "@/components/ui/separator";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { appClient } from "@/server/extra/firebase";
 import { PasswordToggler } from "@/components/PasswordToggler";
-import { track } from '@vercel/analytics';
+import { track } from "@vercel/analytics";
 
 export default function LoginPage() {
   const {
@@ -30,7 +51,7 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
 
   const submit = async (data: any) => {
-    track('Login with email');
+    track("Login with email");
     var res = await login(data);
 
     if (res.success) {
@@ -54,15 +75,18 @@ export default function LoginPage() {
   };
 
   const loginWithPasskey = async () => {
-    track('Login with passkey');
+    track("Login with passkey");
     const challenge = await generateRandomChallenge();
 
     const authentication = await client.authenticate({
       challenge: challenge,
-      userVerification: 'preferred',
+      userVerification: "preferred",
     });
 
-    const res = await checkPasskey({ authentication: authentication, challenge: challenge });
+    const res = await checkPasskey({
+      authentication: authentication,
+      challenge: challenge,
+    });
 
     if (res !== undefined && res.success) {
       toast.success(res.message);
@@ -77,10 +101,10 @@ export default function LoginPage() {
     } else {
       toast.error(res.errors.root);
     }
-  }
+  };
 
   const loginWithGoogle = async () => {
-    track('Login with google');
+    track("Login with google");
     const provider = new GoogleAuthProvider();
     const auth = getAuth(appClient);
 
@@ -102,7 +126,6 @@ export default function LoginPage() {
       } else {
         toast.error(res.message);
       }
-
     } catch (error: any) {
       // const errorCode = error.code;
       // const email = error.customData.email;
@@ -139,7 +162,7 @@ export default function LoginPage() {
             <CTextField
               label="Email"
               placeholder="Enter your email"
-              type={'email'}
+              type={"email"}
               autoComplete="username webauthn"
               leftIcon={<MdOutlineMailLock />}
               error={errors?.email?.message.toString()}
@@ -152,7 +175,12 @@ export default function LoginPage() {
               leftIcon={<MdLock />}
               type={showPass ? "text" : "password"}
               autoComplete="current-password"
-              rightIcon={<PasswordToggler visible={showPass} onChange={() => setShowPass(!showPass)} />}
+              rightIcon={
+                <PasswordToggler
+                  visible={showPass}
+                  onChange={() => setShowPass(!showPass)}
+                />
+              }
               error={errors?.password?.message.toString()}
               register={register("password")}
             />
@@ -178,9 +206,11 @@ export default function LoginPage() {
             </Button>
           </Flex>
           <Box height={"10px"} />
-          <Flex align={'center'} direction={'column'}>
+          <Flex align={"center"} direction={"column"}>
             {/* <Link onClick={loginWithGoogle}>Sign in with Google</Link> */}
-            {/* <Link onClick={loginWithPasskey} className="cursor-pointer">Sign in with Passkey</Link> */}
+            <Link onClick={loginWithPasskey} className="cursor-pointer">
+              Sign in with Passkey
+            </Link>
           </Flex>
         </form>
       </Card>

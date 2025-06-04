@@ -81,7 +81,13 @@
   "pnpm": {
     "overrides": {
       "react-is": "^19.0.0-rc-69d4b800-20241021"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "bcrypt",
+      "esbuild",
+      "protobufjs",
+      "sharp"
+    ]
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

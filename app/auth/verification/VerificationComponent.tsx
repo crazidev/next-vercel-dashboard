@@ -14,12 +14,7 @@ import {
 } from "@radix-ui/themes";
 import { CountrySelectComponent } from "@/components/CountrySelectComponent";
 import { CTextField } from "@/components/CTextField";
-import {
-  MdEdit,
-  MdInfo,
-  MdLocationCity,
-  MdLocationPin,
-} from "react-icons/md";
+import { MdEdit, MdInfo, MdLocationCity, MdLocationPin } from "react-icons/md";
 import {
   submitAddress,
   submitIdCard,
@@ -32,7 +27,7 @@ import { triggerEsc } from "@/lib/triggerEsc";
 import { toast } from "sonner";
 import { revalidateUserTag } from "@/fetch/fetch_user";
 
-export async function VerificationComponent({
+export function VerificationComponent({
   props,
 }: {
   props: VerificationComponentProp;
@@ -51,9 +46,9 @@ export async function VerificationComponent({
 
   var formState2 = idValidator.formState;
 
-  let myFunction = function () { };
-  let myFunction2 = function () { };
-  let myFunction3 = function () { };
+  let myFunction = function () {};
+  let myFunction2 = function () {};
+  let myFunction3 = function () {};
 
   return (
     <>
@@ -68,13 +63,13 @@ export async function VerificationComponent({
                 <Text size={"1"} className="capitalize mt-1">
                   Status:{" "}
                   <Badge
-                    size={'1'}
+                    size={"1"}
                     color={
                       d.status === "verified"
                         ? "green"
                         : d.status == "not_uploaded"
-                          ? "gray"
-                          : "yellow"
+                        ? "gray"
+                        : "yellow"
                     }
                   >
                     {d.status.replace("_", " ")}
@@ -87,7 +82,7 @@ export async function VerificationComponent({
                 description={d.desc ?? ""}
                 trigger={
                   d.status !== "verified" ? (
-                    <IconButton onClick={() => { }} color="gray" size={"1"}>
+                    <IconButton onClick={() => {}} color="gray" size={"1"}>
                       <MdEdit />
                     </IconButton>
                   ) : (
@@ -231,6 +226,7 @@ export async function VerificationComponent({
                             />
                             {d.content.link && (
                               <img
+                                alt="id_front"
                                 className="pt-2 h-[100px]"
                                 src={d.content.link}
                               />
