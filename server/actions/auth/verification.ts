@@ -1,8 +1,6 @@
 "use server";
-import { cookies } from "next/headers";
 import getSequelizeInstance from "@/database/db";
 import { authUser } from "../authUser";
-import { redirect, RedirectType } from "next/navigation";
 import { Users } from "@/database/models/users";
 import { uploadFileToCloudinary } from "../../extra/upload_cloudinary";
 import logger from "@/lib/logger";
@@ -89,7 +87,6 @@ export async function submitIdCard(formData: any) {
   }
 }
 
-
 export async function submitSSN(formData: any) {
   try {
     await getSequelizeInstance();
@@ -123,4 +120,3 @@ export async function submitSSN(formData: any) {
     };
   }
 }
-

@@ -2,12 +2,7 @@
 
 import getSequelizeInstance from "@/database/db";
 import { Transactions } from "@/database/models/transactions";
-import { Users } from "@/database/models/users";
-import { WalletBalances } from "@/database/models/wallet_balances";
-import { yupValidator } from "@/server/extra/yup";
-import { loginActionScheme } from "@/server/scheme/login_scheme";
 import { randomUUID } from "crypto";
-import { revalidatePath } from "next/cache";
 import logger from "@/lib/logger";
 
 export async function admin_add_transaction_action({

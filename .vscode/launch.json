@@ -9,33 +9,26 @@
     },
     {
       "name": "Next.js: debug client-side",
-      "type": "chrome",
+      "type": "msedge",
       "request": "launch",
+      "runtimeExecutable": "/Users/mac/.nvm/versions/node/v18.20.8/bin/node",
       "url": "http://localhost:3000"
     },
     {
       "name": "Next.js: debug full stack",
       "type": "node",
       "request": "launch",
-      "env": {
-        "NODE_OPTIONS": "--inspect"
-      },
-      
-      "command": "npm run dev --turbo",
-      // "program": "${workspaceFolder}/node_modules/.bin/next",
-      // "runtimeArgs": ["--inspect"],
+      "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
+      "runtimeArgs": ["--inspect"],
       "skipFiles": ["<node_internals>/**"],
-      "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "/turbopack/[project]/*": "${webRoot}/*"
+      "runtimeExecutable": "/Users/mac/.nvm/versions/node/v18.20.8/bin/node",
+      "serverReadyAction": {
+        "action": "debugWithEdge",
+        "killOnServerStop": true,
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}"
       }
-      // "serverReadyAction": {
-      //   "action": "debugWithEdge",
-      //   "killOnServerStop": true,
-      //   "pattern": "- Local:.+(https?://.+)",
-      //   "uriFormat": "%s",
-      //   "webRoot": "${workspaceFolder}"
-      // }
     }
   ]
 }

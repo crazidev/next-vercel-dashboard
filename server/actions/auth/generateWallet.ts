@@ -21,6 +21,7 @@ export async function generateWallet({ userId }) {
     );
 
     if (!walletExist) {
+      // @ts-ignore
       walletToCreate.push({
         userId: userId,
         walletId: wallet.id,

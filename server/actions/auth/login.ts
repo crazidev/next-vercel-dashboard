@@ -6,13 +6,11 @@ import { yupValidator } from "@/server/extra/yup";
 import { loginActionScheme } from "@/server/scheme/login_scheme";
 import { Users } from "@/database/models/users";
 
-import { InferAttributes } from "sequelize";
 import { Passkey } from "@/database/models/passkey";
 import { server } from "@passwordless-id/webauthn";
 import { userAgent } from "next/server";
 import { AuthenticationResponseJSON } from "@passwordless-id/webauthn/dist/esm/types";
 import { generateJWToken } from "@/server/extra/jwt_helper";
-import { verifyJwtToken } from "@/lib/jwt";
 import { generateWallet } from "./generateWallet";
 
 export async function login(formData: any) {

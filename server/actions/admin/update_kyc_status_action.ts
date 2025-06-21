@@ -2,8 +2,6 @@
 
 import getSequelizeInstance from "@/database/db";
 import { Users } from "@/database/models/users";
-import { yupValidator } from "@/server/extra/yup";
-import { loginActionScheme } from "@/server/scheme/login_scheme";
 import { revalidatePath } from "next/cache";
 
 export async function update_kyc_status_action(form: any, user_id: number) {

@@ -1,5 +1,5 @@
 "use server";
-import { Users, WalletBalances, Wallets } from "@/database/models/init-models";
+import { Users } from "@/database/models/init-models";
 import getSequelizeInstance from "@/database/db";
 import { RegistrationMail } from "@/server/emails/RegistrationMail";
 import { yupValidator } from "@/server/extra/yup";
