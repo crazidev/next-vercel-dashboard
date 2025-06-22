@@ -9,24 +9,40 @@ let sequelizeInstance: Sequelize | null = null;
 
 const getSequelizeInstance = async () => {
   if (!sequelizeInstance) {
-    var sequelizeConfig: Options = {
-      host: config.host,
-      port: config.port,
-      username: config.username,
-      database: config.database,
-      password: config.password,
-      dialect: config.dialect,
-      dialectModule: pg,
-      dialectOptions: config.dialectOptions,
-      logging: (sql, timing) => {
-        if (process.env.LOG_DATABASE_QUERIES == "true") {
-          console.info(sql);
-        }
-      },
-    };
+    var sequelizeConfig: Options = {};
 
     if (config.dialect == "mysql") {
-      config.dialectModule = mysql;
+      sequelizeConfig = {
+        host: config.host,
+        port: config.port,
+        username: config.username,
+        database: config.database,
+        password: config.password,
+        dialect: config.dialect,
+        dialectModule: mysql,
+        dialectOptions: config.dialectOptions,
+        logging: (sql, timing) => {
+          if (process.env.LOG_DATABASE_QUERIES == "true") {
+            console.info(sql);
+          }
+        },
+      };
+    } else {
+      sequelizeConfig = {
+        host: config.host,
+        port: config.port,
+        username: config.username,
+        database: config.database,
+        password: config.password,
+        dialect: config.dialect,
+        dialectModule: pg,
+        dialectOptions: config.dialectOptions,
+        logging: (sql, timing) => {
+          if (process.env.LOG_DATABASE_QUERIES == "true") {
+            console.info(sql);
+          }
+        },
+      };
     }
 
     sequelizeInstance = new Sequelize(sequelizeConfig);

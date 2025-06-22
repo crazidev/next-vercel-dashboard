@@ -16,70 +16,106 @@ import Link from "next/link";
 import useLayout from "@/components/hooks/useLayout";
 import { DashboardContext } from "@context/DashboardContext";
 import { LuUsers, LuWallet } from "react-icons/lu";
+import { LayoutType } from "type/LayoutType";
 
+export const navlist = (isAdmin: boolean) => {
+  const layout = process.env.NEXT_PUBLIC_APP_LAYOUT as LayoutType;
 
-export const navlist = (isAdmin: boolean) => isAdmin ? [
-  {
-    link: "/admin",
-    name: "Dashboard",
-    icon: <TbDashboard />,
-  },
-  {
-    link: "/admin/users",
-    name: "User's Management",
-    icon: <LuUsers />,
-  },
-  {
-    link: "/admin/livechat",
-    name: "Livechat & Support",
-    icon: <MdSupportAgent />,
-  },
-  {
-    link: "/admin/wallets",
-    name: "Wallet's Management",
-    icon: <LuWallet />,
-  },
-] : [
-  {
-    link: "/dashboard",
-    name: "Dashboard",
-    icon: <TbDashboard />,
-  },
-  {
-    link: "/dashboard/wallets",
-    name: "Wallets",
-    icon: <MdOutlineWallet />,
-  },
-  {
-    link: "/dashboard/cards",
-    name: "Cards",
-    icon: <TbCreditCard />,
-  },
-  {
-    link: "/dashboard/transactions",
-    name: "Transactions",
-    icon: <TbChartLine />,
-  },
-  {
-    link: "/dashboard/settings",
-    name: "Settings",
-    icon: <MdSettings className="" />,
-  },
-];
+  if (isAdmin) {
+    return [
+      {
+        link: "/admin",
+        name: "Dashboard",
+        icon: <TbDashboard />,
+      },
+      {
+        link: "/admin/users",
+        name: "User's Management",
+        icon: <LuUsers />,
+      },
+      {
+        link: "/admin/livechat",
+        name: "Livechat & Support",
+        icon: <MdSupportAgent />,
+      },
+      {
+        link: "/admin/wallets",
+        name: "Wallet's Management",
+        icon: <LuWallet />,
+      },
+    ];
+  } else if (layout == "investment") {
+    return [
+      {
+        link: "/dashboard",
+        name: "Dashboard",
+        icon: <TbDashboard />,
+      },
+
+      // {
+      //   link: "/dashboard/wallets",
+      //   name: "Wallets",
+      //   icon: <MdOutlineWallet />,
+      // },
+      // {
+      //   link: "/dashboard/cards",
+      //   name: "Cards",
+      //   icon: <TbCreditCard />,
+      // },
+      {
+        link: "/dashboard/transactions",
+        name: "Transactions",
+        icon: <TbChartLine />,
+      },
+      {
+        link: "/dashboard/settings",
+        name: "Settings",
+        icon: <MdSettings className="" />,
+      },
+    ];
+  } else {
+    return [
+      {
+        link: "/dashboard",
+        name: "Dashboard",
+        icon: <TbDashboard />,
+      },
+      {
+        link: "/dashboard/wallets",
+        name: "Wallets",
+        icon: <MdOutlineWallet />,
+      },
+      {
+        link: "/dashboard/cards",
+        name: "Cards",
+        icon: <TbCreditCard />,
+      },
+      {
+        link: "/dashboard/transactions",
+        name: "Transactions",
+        icon: <TbChartLine />,
+      },
+      {
+        link: "/dashboard/settings",
+        name: "Settings",
+        icon: <MdSettings className="" />,
+      },
+    ];
+  }
+};
 
 export function SideBarComponent({
   children,
   sidebar,
-  isAdmin
+  isAdmin,
 }: {
   children: React.ReactNode;
   sidebar?: React.ReactNode;
-  isAdmin: boolean
+  isAdmin: boolean;
 }) {
   const { isMobile, isTablet } = useLayout();
 
-  const { expandSidebar, setExpand, setTheme } =
-    useContext(DashboardContext);
+  const { expandSidebar, setExpand, setTheme } = useContext(DashboardContext);
   const expand = !isTablet && !isMobile;
   var pathname = usePathname();
   const [isReady, setIsReady] = useState(true);
@@ -95,8 +131,9 @@ export function SideBarComponent({
       {isReady && (
         <div className="">
           <aside
-            className={`tablet:h-fit p-[15px] mobile:h-0 top-0 ${isMobile && !expand ? "z-0" : "z-40"
-              } w-fit sticky`}
+            className={`tablet:h-fit p-[15px] mobile:h-0 top-0 ${
+              isMobile && !expand ? "z-0" : "z-40"
+            } w-fit sticky`}
           >
             <Box
               //   className={`${isMobile || expand
@@ -120,9 +157,7 @@ export function SideBarComponent({
                  sticky top-0
                 `}
             >
-
-
-              {(expand) && (
+              {expand && (
                 <Flex
                   className="
                   tablet:hidden 
@@ -138,14 +173,21 @@ export function SideBarComponent({
                   justify={"center"}
                   gap={"3"}
                 >
-                  <Flex align={"center"} justify={'center'} direction={"column"} gap={"3"}>
+                  <Flex
+                    align={"center"}
+                    justify={"center"}
+                    direction={"column"}
+                    gap={"3"}
+                  >
                     <Logo className="w-[50px] h-[50px] fill-primary-500" />
                     <Flex
                       direction={"column"}
                       align={"start"}
                       justify={"center"}
                     >
-                      <Text weight={"bold"}>{process.env.NEXT_PUBLIC_APP_NAME}</Text>
+                      <Text weight={"bold"}>
+                        {process.env.NEXT_PUBLIC_APP_NAME}
+                      </Text>
                       {/* <Text color={"gray"} size={"1"}>
                         #1 Soft Banking
                       </Text> */}
@@ -153,7 +195,6 @@ export function SideBarComponent({
                   </Flex>
                 </Flex>
               )}
-
 
               {!expand && (
                 <Flex
@@ -174,14 +215,15 @@ export function SideBarComponent({
               )}
 
               {navlist(isAdmin).map(function (nav) {
-                var isActive = pathname.startsWith(nav.link) && (nav.link != '/dashboard');
+                var isActive =
+                  pathname.startsWith(nav.link) && nav.link != "/dashboard";
                 if (nav.link == "/dashboard") {
-                  isActive = pathname == '/dashboard';
-                }
-                else {
-                  var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
+                  isActive = pathname == "/dashboard";
+                } else {
+                  var isActive =
+                    pathname.startsWith(nav.link) && nav.link != "/admin";
                   if (nav.link == "/admin") {
-                    isActive = pathname == '/admin';
+                    isActive = pathname == "/admin";
                   }
                 }
 
@@ -196,9 +238,10 @@ export function SideBarComponent({
                       box-content
                       border-l-2
                       transition-all duration-100 ease-in
-                      ${isActive
-                        ? "border-[var(--accent-8)] text-primary-600"
-                        : "border-transparent"
+                      ${
+                        isActive
+                          ? "border-[var(--accent-8)] text-primary-600"
+                          : "border-transparent"
                       } 
                     hover:border-[var(--accent-7)] 
                     `}
@@ -208,14 +251,11 @@ export function SideBarComponent({
                       <span className="rounded-full text-primary-600">
                         {nav.icon}
                       </span>{" "}
-
                       <Text className="tablet:hidden" size={"2"}>
                         {nav.name}
                       </Text>
-
                     </Flex>
                   </Link>
-
                 );
               })}
             </Box>
@@ -228,23 +268,26 @@ export function SideBarComponent({
         <Logo className="w-[30px] h-[30px] fill-primary-500" />
         <div className="flex flex-row gap-1">
           {navlist(isAdmin).map(function (nav, index) {
-            var isActive = pathname.startsWith(nav.link) && (nav.link != '/dashboard');
+            var isActive =
+              pathname.startsWith(nav.link) && nav.link != "/dashboard";
             if (nav.link == "/dashboard") {
-              isActive = pathname == '/dashboard';
+              isActive = pathname == "/dashboard";
             } else {
-              var isActive = pathname.startsWith(nav.link) && (nav.link != '/admin');
+              var isActive =
+                pathname.startsWith(nav.link) && nav.link != "/admin";
               if (nav.link == "/admin") {
-                isActive = pathname == '/admin';
+                isActive = pathname == "/admin";
               }
             }
-
-
 
             return (
               <Link
                 key={nav.link}
                 href={nav.link}
-                className={`h-[50px] flex items-center w-[50px] justify-center hover:bg-[var(--accent-a3)] ${isActive ? "border-b-2 border-primary-600 " : ""}`}              >
+                className={`h-[50px] flex items-center w-[50px] justify-center hover:bg-[var(--accent-a3)] ${
+                  isActive ? "border-b-2 border-primary-600 " : ""
+                }`}
+              >
                 <span className={`rounded-full text-[25px] text-primary-600`}>
                   {nav.icon}
                 </span>
@@ -256,15 +299,10 @@ export function SideBarComponent({
 
       <div
         className="flex p-[10px] mobile:pt-[45px] overflow-hidden w-full"
-        style={{
-
-        }}
+        style={{}}
       >
         {children}
       </div>
     </div>
   );
 }
-
-
-
