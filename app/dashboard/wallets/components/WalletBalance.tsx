@@ -2,12 +2,7 @@
 
 import { MyCard } from "@/components/MyCard";
 import { cFmt } from "@/lib/cFmt";
-import {
-  DataList,
-  Flex,
-  Separator,
-  Text,
-} from "@radix-ui/themes";
+import { DataList, Flex, Separator, Text } from "@radix-ui/themes";
 import { Logo } from "@/components/shapes/logo";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -26,18 +21,19 @@ export function WalletBalance({
 }: {
   wallet_list?: InferAttributes<WalletBalances>[];
   user: InferAttributes<Users> | null;
-  wallet: any
+  wallet: any;
 }) {
-
-  var _walletBalance = wallet_list?.filter((e) => e.wallet?.shortName == wallet)?.at(0);
-  const convert = useContext(CryptoConvertContext);
+  var _walletBalance = wallet_list
+    ?.filter((e) => e.wallet?.shortName == wallet)
+    ?.at(0);
+  const convert = useCryptoConvert();
   const [amount, setAmount] = useState(wallet?.balance);
   var shortName = _walletBalance?.wallet?.shortName ?? "USD";
   var balance = _walletBalance?.balance ?? user?.accountBalance;
 
   useEffect(() => {
     if (convert?.convert?.isReady == true) {
-      var amount = convert.convert['USD'][shortName](balance ?? 0);
+      var amount = convert.convert["USD"][shortName](balance ?? 0);
       setAmount(amount);
     }
   }, [convert.convert]);
@@ -63,8 +59,7 @@ export function WalletBalance({
             )}
             {_walletBalance?.wallet?.name ?? "Main Account"}
           </Flex>
-          <WalletListDropDown wallet={wallet} wallet_list={wallet_list}
-          />
+          <WalletListDropDown wallet={wallet} wallet_list={wallet_list} />
         </div>
 
         <div className="h-[30px]" />
@@ -73,10 +68,18 @@ export function WalletBalance({
         <Flex gap="4" justify={"between"}>
           <div>
             <Text className="font-mono text-[18px]">
-              {cFmt({ amount: amount, code: shortName, isCrypto: shortName !== "USD" })}
+              {cFmt({
+                amount: amount,
+                code: shortName,
+                isCrypto: shortName !== "USD",
+              })}
             </Text>
-            <Text as="div" trim={'start'} className="text-[10px] text-primary-700">
-              ≈{cFmt({ amount: balance, })}
+            <Text
+              as="div"
+              trim={"start"}
+              className="text-[10px] text-primary-700"
+            >
+              ≈{cFmt({ amount: balance })}
             </Text>
 
             <Text size={"1"} color={"gray"} className="">
@@ -112,7 +115,7 @@ export function WalletBalance({
         <div className="h-[30px]" />
 
         {/* Main Account Details TODO */}
-        {(wallet == undefined || wallet == 'main') && (
+        {(wallet == undefined || wallet == "main") && (
           <DataList.Root orientation="horizontal" size="1">
             <DataList.Item>
               <DataList.Label color="gray">Account Holder</DataList.Label>
@@ -120,7 +123,9 @@ export function WalletBalance({
             </DataList.Item>
             <DataList.Item>
               <DataList.Label color="gray">Bank Name</DataList.Label>
-              <DataList.Value>{process.env.NEXT_PUBLIC_APP_SHORT_NAME}</DataList.Value>
+              <DataList.Value>
+                {process.env.NEXT_PUBLIC_APP_SHORT_NAME}
+              </DataList.Value>
             </DataList.Item>
             <DataList.Item>
               <DataList.Label color="gray">Account Number</DataList.Label>
@@ -128,9 +133,7 @@ export function WalletBalance({
             </DataList.Item>
             <DataList.Item>
               <DataList.Label color="gray">Routing</DataList.Label>
-              <DataList.Value>
-                {user.routingNumber ?? ""}
-              </DataList.Value>
+              <DataList.Value>{user.routingNumber ?? ""}</DataList.Value>
             </DataList.Item>
           </DataList.Root>
         )}
@@ -174,7 +177,8 @@ export function WalletBalance({
                 width="100%"
                 chartOnly
               ></MiniChart>
-            </div></>
+            </div>
+          </>
         )}
         <Text />
       </MyCard>

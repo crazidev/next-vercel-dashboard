@@ -11,8 +11,10 @@
       "name": "Next.js: debug client-side",
       "type": "msedge",
       "request": "launch",
-      "runtimeExecutable": "/Users/mac/.nvm/versions/node/v18.20.8/bin/node",
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMaps": true,
+      "preLaunchTask": "npm: dev"
     },
     {
       "name": "Next.js: debug full stack",

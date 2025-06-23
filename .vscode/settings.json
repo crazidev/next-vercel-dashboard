@@ -26,5 +26,6 @@
     "serwist",
     "sonner",
     "webauthn"
-  ]
+  ],
+  "postman.settings.dotenv-detection-notification-visibility": false
 }

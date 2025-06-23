@@ -5,12 +5,17 @@ import { PWARelatedLinks } from "./PWARelatedLinks";
 import type { Metadata, Viewport } from "next";
 import { Theme } from "@radix-ui/themes";
 import { Toaster } from "sonner";
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from "@vercel/analytics/next";
+import { ReduxProvider } from "@/components/providers/ReduxProvider";
+import { useAppDispatch } from "@/lib/store/store";
+import { isServer } from "@/lib/isServer";
 
 const APP_NAME = process.env.APP_NAME;
 const APP_DEFAULT_TITLE = process.env.APP_NAME ?? "";
 const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION =  process.env.NEXT_PUBLIC_APP_DESCRIPTION ?? `${APP_NAME} - all-in-one financial platform that seamlessly integrates fiat, crypto, and stock management. Experience fast transactions, multi-asset conversions, and top-tier security—banking redefined for the modern age.`;
+const APP_DESCRIPTION =
+  process.env.NEXT_PUBLIC_APP_DESCRIPTION ??
+  `${APP_NAME} - all-in-one financial platform that seamlessly integrates fiat, crypto, and stock management. Experience fast transactions, multi-asset conversions, and top-tier security—banking redefined for the modern age.`;
 const APP_THEME = process.env.NEXT_PUBLIC_APP_THEME ?? "green";
 
 export const viewport: Viewport = {
@@ -32,23 +37,48 @@ export default async function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
-        <title>{process.env.NEXT_PUBLIC_APP_TITLE ?? process.env.NEXT_PUBLIC_APP_NAME}</title>
-        <meta name="description" content={process.env.NEXT_PUBLIC_APP_DESCRIPTION} />
+        <title>
+          {process.env.NEXT_PUBLIC_APP_TITLE ??
+            process.env.NEXT_PUBLIC_APP_NAME}
+        </title>
+        <meta
+          name="description"
+          content={process.env.NEXT_PUBLIC_APP_DESCRIPTION}
+        />
         <link rel="manifest" href="/api/manifest" />
-        <link rel="icon" href={process.env.NEXT_PUBLIC_APP_LOGO ?? 'favicon.png'} sizes="any" />
+        <link
+          rel="icon"
+          href={process.env.NEXT_PUBLIC_APP_LOGO ?? "favicon.png"}
+          sizes="any"
+        />
 
         <meta property="og:url" content={process.env.NEXT_PUBLIC_APP_URL} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={process.env.NEXT_PUBLIC_APP_TITLE} />
-        <meta property="og:description" content={process.env.NEXT_PUBLIC_APP_DESCRIPTION} />
-        <meta property="og:image" content={'/frame-1-nologo.png'} />
+        <meta
+          property="og:description"
+          content={process.env.NEXT_PUBLIC_APP_DESCRIPTION}
+        />
+        <meta property="og:image" content={"/frame-1-nologo.png"} />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content={process.env.NEXT_PUBLIC_APP_URL} />
-        <meta property="twitter:url" content={process.env.NEXT_PUBLIC_APP_URL} />
-        <meta name="twitter:title" content={process.env.NEXT_PUBLIC_APP_TITLE} />
-        <meta name="twitter:description" content={process.env.NEXT_PUBLIC_APP_DESCRIPTION} />
-        <meta name="twitter:image" content={'/frame-1-nologo.png'} />
+        <meta
+          property="twitter:domain"
+          content={process.env.NEXT_PUBLIC_APP_URL}
+        />
+        <meta
+          property="twitter:url"
+          content={process.env.NEXT_PUBLIC_APP_URL}
+        />
+        <meta
+          name="twitter:title"
+          content={process.env.NEXT_PUBLIC_APP_TITLE}
+        />
+        <meta
+          name="twitter:description"
+          content={process.env.NEXT_PUBLIC_APP_DESCRIPTION}
+        />
+        <meta name="twitter:image" content={"/frame-1-nologo.png"} />
 
         <PWARelatedLinks />
         <script
@@ -74,7 +104,7 @@ export default async function RootLayout({
 
       <body>
         <Theme
-          appearance={'inherit'}
+          appearance={"inherit"}
           grayColor={"auto"}
           accentColor={APP_THEME as any}
           panelBackground="translucent"
@@ -89,7 +119,7 @@ export default async function RootLayout({
               style: {},
             }}
           />
-          <AppProvider>{children}</AppProvider>
+          <ReduxProvider>{children}</ReduxProvider>
           <Analytics />
         </Theme>
       </body>
