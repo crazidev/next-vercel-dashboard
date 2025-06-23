@@ -7,7 +7,7 @@ import { StarIcon } from "lucide-react";
 import { Text } from "@radix-ui/themes";
 import { getFeatureContent } from "content/getFeatureContent";
 
-export default function FeaturesSection({ wallets }) {
+export function FeaturesSection({ wallets }) {
   const sectionRef = useRef(null);
   const securityRef = useRef(null);
   var themeContext = useContext(ThemeContext);
