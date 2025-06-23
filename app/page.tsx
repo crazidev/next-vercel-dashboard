@@ -2,7 +2,6 @@ import { Logo } from "@/components/shapes/logo";
 import { Text } from "@radix-ui/themes";
 
 import { Globe } from "@/components/animated_beam/globe";
-import FeaturesSection from "@/components/landing/Features";
 import { DarkModeToggler } from "@/components/DarkModeToggler";
 import { Wallets } from "@/database/models/wallets";
 import getSequelizeInstance from "@/database/db";
@@ -10,6 +9,7 @@ import { SparklesText } from "@/components/landing/sparkly_text";
 import { TierCardList } from "@/components/TierCardList";
 import { Hero } from "@/components/landing/Hero";
 import { ReviewView } from "@/components/landing/ReviewView";
+import FeaturesSection from "@/components/landing/Features";
 
 export default async function RootPage() {
   var wallets = [];

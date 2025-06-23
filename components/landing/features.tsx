@@ -2,13 +2,9 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
-import AnimatedBeamMultipleOutputDemo from "../animated_beam/animted_beam_multi_output";
-import multiWalletImg from "@public/multi-wallet.png";
-import Image from "next/image";
 import { ThemeContext } from "../hooks/useThemeContext";
 import { StarIcon } from "lucide-react";
 import { Text } from "@radix-ui/themes";
-import { TerminalComponent } from "./terminal";
 import { getFeatureContent } from "content/getFeatureContent";
 
 export default function FeaturesSection({ wallets }) {
