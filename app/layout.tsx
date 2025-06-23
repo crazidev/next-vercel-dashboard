@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { ReduxProvider } from "@/components/providers/ReduxProvider";
 import { useAppDispatch } from "@/lib/store/store";
 import { isServer } from "@/lib/isServer";
+import TawkToWidget from "@/components/TawkToWidget";
 
 const APP_NAME = process.env.APP_NAME;
 const APP_DEFAULT_TITLE = process.env.APP_NAME ?? "";
@@ -100,21 +101,6 @@ export default async function RootLayout({
             `,
           }}
         ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-              (function(){
-              var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-              s1.async=true;
-              s1.src='/tawk.to/script/embed.js';
-              s1.charset='UTF-8';
-              s1.setAttribute('crossorigin','*');
-              s0.parentNode.insertBefore(s1,s0);
-              })();
-            `,
-          }}
-        ></script>
       </head>
 
       <body>
@@ -134,7 +120,13 @@ export default async function RootLayout({
               style: {},
             }}
           />
-          <ReduxProvider>{children}</ReduxProvider>
+
+          <ReduxProvider>
+            <AppProvider>
+              <TawkToWidget />
+              {children}
+            </AppProvider>
+          </ReduxProvider>
           <Analytics />
         </Theme>
       </body>

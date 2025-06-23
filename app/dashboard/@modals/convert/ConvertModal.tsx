@@ -4,10 +4,7 @@ import { ConvertInputCard } from "@/components/ConvertInputCard";
 import { Users } from "@/database/models/users";
 import { WalletBalances } from "@/database/models/wallet_balances";
 // import { fetchUser } from "@/fetch/fetch_user";
-import {
-  CryptoConvertContext,
-  useCryptoConvert,
-} from "@context/CryptoConvertContext";
+import { useCryptoConvert } from "@context/CryptoConvertContext";
 import { DashboardContext } from "@context/DashboardContext";
 import {
   Button,
@@ -204,7 +201,7 @@ export default function ConvertModal({
   }
 
   function setWalletList() {
-    logger("Running: setWalletList");
+    // logger("Running: setWalletList");
     var dropdownFrom: WalletType[] = walletList.map((e) => {
       return {
         name: e.wallet.name,

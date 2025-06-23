@@ -1,5 +1,4 @@
-'use client';
-
+"use client";
 
 import { useContext } from "react";
 import { MdDarkMode } from "react-icons/md";
@@ -7,9 +6,15 @@ import logger from "@/lib/logger";
 import { ThemeContext } from "@/components/hooks/useThemeContext";
 
 export function DarkModeToggler() {
-    var context = useContext(ThemeContext);
+  var context = useContext(ThemeContext);
 
-    return <MdDarkMode onClick={() => {
-        context.setTheme!(context.dark ? 'light' : 'dark');
-    }} size={25} />
+  return (
+    <MdDarkMode
+      className="cursor-pointer "
+      onClick={() => {
+        context.setTheme!(context.dark ? "light" : "dark");
+      }}
+      size={25}
+    />
+  );
 }

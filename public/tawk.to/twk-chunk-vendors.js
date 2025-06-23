@@ -14125,107 +14125,107 @@
                     },
                   },
                 },
-                function () {
-                  var e = this,
-                    t = e._self._c;
-                  return Object.keys(e.whitelabel).length
-                    ? t(
-                        "div",
-                        {
-                          style: e.wrapperStyle,
-                        },
-                        [
-                          e.whitelabel.label
-                            ? t(
-                                e.whitelabel.url ? "a" : "span",
-                                e._b(
-                                  {
-                                    ref: "brand",
-                                    tag: "component",
-                                    style: e.anchorStyle,
-                                    attrs: {
-                                      href:
-                                        !!e.whitelabel.url &&
-                                        this.whitelabel.url,
-                                      target: !!e.whitelabel.url && "_blank",
-                                    },
-                                    domProps: {
-                                      innerHTML: e._s(e.whitelabel.label),
-                                    },
-                                  },
-                                  "component",
-                                  e.$attrs,
-                                  !1
-                                )
-                              )
-                            : e._e(),
-                        ],
-                        1
-                      )
-                    : t(
-                        "div",
-                        {
-                          style: e.wrapperStyle,
-                          attrs: {
-                            id: e.getUUID(),
-                          },
-                        },
-                        [
-                          e._l(e.getRandomInt(), function (n) {
-                            return t("a", {
-                              key: "1".concat(n),
-                              attrs: {
-                                id: e.getUUID(),
-                                tabindex: "-1",
-                              },
-                            });
-                          }),
-                          t(
-                            "a",
-                            e._b(
-                              {
-                                ref: "brand",
-                                style: e.anchorStyle,
-                                attrs: {
-                                  id: e.getUUID(),
-                                  href: e.tawkToUrl,
-                                },
-                                on: {
-                                  click: function (t) {
-                                    return (
-                                      t.preventDefault(),
-                                      e.onClick.apply(null, arguments)
-                                    );
-                                  },
-                                },
-                              },
-                              "a",
-                              e.$attrs,
-                              !1
-                            ),
-                            [
-                              t("img", {
-                                style: e.iconStyle,
-                                attrs: {
-                                  src: e.imageUrl,
-                                },
-                              }),
-                              e._v(" Powered by tawk.to "),
-                            ]
-                          ),
-                          e._l(e.getRandomInt(), function (n) {
-                            return t("a", {
-                              key: "2".concat(n),
-                              attrs: {
-                                id: e.getUUID(),
-                                tabindex: "-1",
-                              },
-                            });
-                          }),
-                        ],
-                        2
-                      );
-                },
+                // function () {
+                //   var e = this,
+                //     t = e._self._c;
+                //   return Object.keys(e.whitelabel).length
+                //     ? t(
+                //         "div",
+                //         {
+                //           style: e.wrapperStyle,
+                //         },
+                //         [
+                //           e.whitelabel.label
+                //             ? t(
+                //                 e.whitelabel.url ? "a" : "span",
+                //                 e._b(
+                //                   {
+                //                     ref: "brand",
+                //                     tag: "component",
+                //                     style: e.anchorStyle,
+                //                     attrs: {
+                //                       href:
+                //                         !!e.whitelabel.url &&
+                //                         this.whitelabel.url,
+                //                       target: !!e.whitelabel.url && "_blank",
+                //                     },
+                //                     domProps: {
+                //                       innerHTML: e._s(e.whitelabel.label),
+                //                     },
+                //                   },
+                //                   "component",
+                //                   e.$attrs,
+                //                   !1
+                //                 )
+                //               )
+                //             : e._e(),
+                //         ],
+                //         1
+                //       )
+                //     : t(
+                //         "div",
+                //         {
+                //           style: e.wrapperStyle,
+                //           attrs: {
+                //             id: e.getUUID(),
+                //           },
+                //         },
+                //         [
+                //           e._l(e.getRandomInt(), function (n) {
+                //             return t("a", {
+                //               key: "1".concat(n),
+                //               attrs: {
+                //                 id: e.getUUID(),
+                //                 tabindex: "-1",
+                //               },
+                //             });
+                //           }),
+                //           t(
+                //             "a",
+                //             e._b(
+                //               {
+                //                 ref: "brand",
+                //                 style: e.anchorStyle,
+                //                 attrs: {
+                //                   id: e.getUUID(),
+                //                   href: e.tawkToUrl,
+                //                 },
+                //                 on: {
+                //                   click: function (t) {
+                //                     return (
+                //                       t.preventDefault(),
+                //                       e.onClick.apply(null, arguments)
+                //                     );
+                //                   },
+                //                 },
+                //               },
+                //               "a",
+                //               e.$attrs,
+                //               !1
+                //             ),
+                //             [
+                //               t("img", {
+                //                 style: e.iconStyle,
+                //                 attrs: {
+                //                   src: e.imageUrl,
+                //                 },
+                //               }),
+                //               e._v(" Powered by tawk.to "),
+                //             ]
+                //           ),
+                //           e._l(e.getRandomInt(), function (n) {
+                //             return t("a", {
+                //               key: "2".concat(n),
+                //               attrs: {
+                //                 id: e.getUUID(),
+                //                 tabindex: "-1",
+                //               },
+                //             });
+                //           }),
+                //         ],
+                //         2
+                //       );
+                // },
                 [],
                 !1,
                 null,

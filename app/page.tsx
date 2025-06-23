@@ -51,6 +51,7 @@ export default async function RootPage() {
                 flex flex-row 
                 backdrop-blur-sm 
                 inset-0
+                z-50
                 rounded-[30px]
                 bg-[var(--gray-a2)]"
           style={{ cursor: "pointer" }}
