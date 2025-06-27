@@ -56,8 +56,8 @@ export default function UpdateKYCDialog({
           .oneOf(["uploaded", "verified", "none"])
           .default("none"),
         ssn: yup.string(),
-        routingNumber: yup.number().default(null),
-        accountNumber: yup.number().default(null),
+        routingNumber: yup.number().nullable(),
+        accountNumber: yup.number().nullable(),
         idDocType: yup
           .string()
           .oneOf([
