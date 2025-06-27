@@ -6,7 +6,7 @@ import logger from "@/lib/logger";
 interface CryptoConvertState {
   convert: CryptoConvert | null;
   isInitialized: boolean;
-  loading: boolean;
+  isReady: boolean;
   error: string | null;
   lastInitialized: string | null;
 }
@@ -15,7 +15,7 @@ interface CryptoConvertState {
 const initialState: CryptoConvertState = {
   convert: null,
   isInitialized: false,
-  loading: false,
+  isReady: false,
   error: null,
   lastInitialized: null,
 };

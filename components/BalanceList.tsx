@@ -53,13 +53,13 @@ export const BalanceList = async () => {
     <>
       <MainBalanceCard
         user={userWithTotalBalance}
-        className="relative flex flex-[6] md:hidden mb-3"
+        className="relative flex flex-[6] md:hidden mb-3 !p-0"
       />
-      <ScrollArea>
+      <ScrollArea className="no-scrollbar">
         <Flex className="flex sm:flex-row flex-col gap-3" gap={"2"}>
           <MainBalanceCard
             user={userWithTotalBalance}
-            className="relative h-[140px] md:flex flex-[6] hidden md:max-w-[350px]"
+            className="relative h-[140px]  md:min-w-[300px]  md:flex flex-[6] hidden md:max-w-[350px]"
           />
           <div className="flex flex-row flex-grow gap-3">
             {allWallets.map((walletBalance, index) => (

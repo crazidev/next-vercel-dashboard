@@ -2,15 +2,13 @@
 
 import { WalletBalances } from "@/database/models/wallet_balances";
 import { cFmt } from "@/lib/cFmt";
-import {
-  CryptoConvertContext,
-  useCryptoConvert,
-} from "@context/CryptoConvertContext";
+import { useCryptoConvert } from "@context/CryptoConvertContext";
 import { Flex, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { InferAttributes } from "sequelize";
 import { MyCard } from "./MyCard";
+import { useAppSelector } from "@/lib/store/store";
 
 export const MiniWalletCard = ({
   wallet,
@@ -21,17 +19,29 @@ export const MiniWalletCard = ({
   index: number;
   isMainAccount?: boolean;
 }) => {
-  const convert = useCryptoConvert();
+  const convert = useAppSelector((state) => state.cryptoConvert);
   const [amount, setAmount] = useState(wallet.balance);
 
-  useEffect(() => {
+  const convertCurrency = () => {
+    var balance = wallet?.balance ?? 0;
     if (convert?.convert?.isReady == true) {
-      var amount = convert.convert["USD"][wallet.wallet.shortName](
-        wallet?.balance ?? 0
-      );
-      setAmount(amount);
+      var amount =
+        convert.convert?.["USD"]?.[wallet?.wallet?.shortName ?? "USD"]?.(
+          balance
+        );
+      if (amount) {
+        setAmount(amount);
+      }
     }
-  }, [convert.convert]);
+  };
+
+  useEffect(() => {
+    if (convert.isInitialized) {
+      convert?.convert?.ready().then((value) => {
+        convertCurrency();
+      });
+    }
+  }, [convert, wallet]);
 
   return (
     <Link href={`/dashboard/wallets/${wallet.wallet?.shortName}`}>
@@ -52,12 +62,16 @@ export const MiniWalletCard = ({
               {cFmt({
                 amount: amount,
                 code: wallet.wallet.shortName,
-                isCrypto: true,
+                isCrypto: !isMainAccount,
               })}
             </Text>
+
             <Text trim={"start"} className="text-[10px] text-primary-700">
-              ≈{cFmt({ amount: wallet.balance })}
+              {isMainAccount
+                ? "Main Account"
+                : `≈${cFmt({ amount: wallet.balance })}`}
             </Text>
+
             <Text
               trim={"start"}
               color="gray"

@@ -12,8 +12,8 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore CryptoConvert instance in serialization check
-        ignoredActions: ["cryptoConvert/initializeCryptoConvert/fulfilled"],
-        ignoredPaths: ["cryptoConvert.convert"],
+        ignoredActions: ["cryptoConvert/setCryptoConvert"],
+        ignoredPaths: ["cryptoConvert/setCryptoConvert"],
       },
     }),
   devTools: process.env.NODE_ENV !== "production",

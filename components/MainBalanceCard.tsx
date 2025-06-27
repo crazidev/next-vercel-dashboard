@@ -9,21 +9,14 @@ export const MainBalanceCard = React.forwardRef<HTMLElement, any>(
   ({ user, ...props }, ref) => {
     return (
       <MyCard radius="10px" {...props}>
-        <Flex className="flex flex-row justify-start items-end h-full">
+        <Flex className="flex flex-row px-0 min-w-full justify-start items-end h-full overflow-hidden">
           <MyLineChart />
-          <Flex className="flex flex-col justify-between h-full">
+          <Flex className="flex p-[15px] flex-col justify-between h-full">
             <Flex justify={"start"} align={"center"} gap={"2"}>
-              <Text className="text-[12px]">
-                <FeatureWrapper features={["banking"]}>
-                  Main Balance
-                </FeatureWrapper>
-                <FeatureWrapper features={["wallet", "investment"]}>
-                  Total Balance
-                </FeatureWrapper>
-              </Text>
+              <Text className="text-[12px]">Total Balance</Text>
               <Flex justify={"end"} gap={"3"}>
                 <Badge
-                  className="text-[10px] capitalize"
+                  className="text-[10px] capitalize "
                   color="green"
                   radius="large"
                 >

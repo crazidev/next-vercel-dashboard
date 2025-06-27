@@ -11,8 +11,8 @@ import { WalletBalances } from "@/database/models/wallet_balances";
 import { MiniChart } from "react-ts-tradingview-widgets";
 import { WalletListDropDown } from "./WalletListDropDown";
 import { InferAttributes } from "sequelize";
-import { CryptoConvertContext } from "@context/CryptoConvertContext";
 import { useContext, useState, useEffect } from "react";
+import { useCryptoConvert } from "@context/CryptoConvertContext";
 
 export function WalletBalance({
   wallet_list,

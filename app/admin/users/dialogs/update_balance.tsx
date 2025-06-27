@@ -8,10 +8,7 @@ import { Logo } from "@/components/shapes/logo";
 import { Users } from "@/database/models/users";
 import { WalletBalances } from "@/database/models/wallet_balances";
 import { main, WalletType } from "@app/dashboard/@modals/convert/ConvertModal";
-import {
-  CryptoConvertContext,
-  useCryptoConvert,
-} from "@context/CryptoConvertContext";
+import { useCryptoConvert } from "@context/CryptoConvertContext";
 import { Button, DropdownMenu, Separator, Text } from "@radix-ui/themes";
 import Image from "next/image";
 import { FormEvent, useContext, useEffect, useState } from "react";

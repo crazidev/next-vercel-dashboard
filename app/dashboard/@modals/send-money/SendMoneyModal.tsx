@@ -15,10 +15,7 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import { TbInfoCircle, TbNumber, TbSend2 } from "react-icons/tb";
 import { InferAttributes } from "sequelize";
 import { main, WalletType } from "../convert/ConvertModal";
-import {
-  CryptoConvertContext,
-  useCryptoConvert,
-} from "@context/CryptoConvertContext";
+import { useCryptoConvert } from "@context/CryptoConvertContext";
 import {
   CheckCheck,
   CheckCircle,
@@ -38,6 +35,7 @@ import yup from "@/server/extra/yup";
 import { toast } from "sonner";
 import { withdraw_action } from "@/actions/withdraw_action";
 import logger from "@/lib/logger";
+import { useAppLayout } from "hooks/useAppLayout";
 
 export function SendMoneyModal({
   walletList,
@@ -49,6 +47,7 @@ export function SendMoneyModal({
   const [bankTransferMethod, setBankTransferMethod] = useState<
     "wire" | "ACH" | "internal"
   >("wire");
+  const appLayout = useAppLayout();
 
   const {
     register: register2,
