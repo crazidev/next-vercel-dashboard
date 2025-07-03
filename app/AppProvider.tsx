@@ -6,8 +6,12 @@ import { Toaster } from "sonner";
 import OneSignal from "react-onesignal";
 import { InitOneSignal } from "@/lib/InitOneSignal";
 import { LiveChat } from "../components/livechat/LiveChat";
-import { ThemeProvider } from "@/components/hooks/useThemeContext";
+import {
+  ThemeContext,
+  ThemeProvider,
+} from "@/components/hooks/useThemeContext";
 import DashboardProvider from "context/DashboardContext";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export const metadata = {
   title: "Next.js App Router + NextAuth + Tailwind CSS",
@@ -36,9 +40,16 @@ export default function AppProvider({
 
   return (
     <ThemeProvider>
-      <DashboardProvider>
-        {children}
-      </DashboardProvider>
+      <ThemeContext.Consumer>
+        {(theme) => (
+          <NextThemesProvider
+            forcedTheme={theme.dark ? "dark" : "light"}
+            defaultTheme="system"
+          >
+            <DashboardProvider>{children}</DashboardProvider>
+          </NextThemesProvider>
+        )}
+      </ThemeContext.Consumer>
     </ThemeProvider>
   );
 }

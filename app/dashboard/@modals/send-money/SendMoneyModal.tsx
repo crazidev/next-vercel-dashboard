@@ -370,11 +370,11 @@ export function SendMoneyModal({
                               </IconButton>
                             </div>
                             {sendFromWallet?.wallet?.network && (
-                              <Text className="text-[10px] text-yellow-500">
+                              <div className="text-[8px] mt-2 text-yellow-500 !leading-normal">
                                 Ensure you're transferring to a wallet with{" "}
                                 {sendFromWallet?.wallet?.network} network to
                                 avoid assets lost.
-                              </Text>
+                              </div>
                             )}
                           </Card>
                           {crypto_errors?.wallet_address && (
@@ -548,7 +548,7 @@ export function SendMoneyModal({
             <div className="flex flex-col items-center">
               <CheckCheck size={100} className="text-primary-500 mb-3" />
               <Text size={"5"} weight={"bold"}>
-                Withdrawal Successful
+                Transfer Successful
               </Text>
               <Text align={"center"} size={"1"} color="gray">
                 {isSuccessful}

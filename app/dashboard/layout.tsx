@@ -1,12 +1,9 @@
-import { Shape1 } from "@/components/shapes/shape_1";
 import { SideBarComponent } from "@/components/SideBar";
-import { Shape2 } from "@/components/shapes/shape_2";
-import { Container } from "@radix-ui/themes";
-import { headers } from "next/headers";
-// import { CryptoConvertProvider } from "context/CryptoConvertContext";
 import { authUser } from "@/actions/authUser";
 import { fetchUser } from "@/fetch/fetch_user";
 import { redirect } from "next/navigation";
+import { store } from "@/lib/store/store";
+import { authSlice } from "@/lib/store/slices/authSlice";
 
 export default async function DashboardLayout({
   children,
@@ -15,6 +12,8 @@ export default async function DashboardLayout({
 }) {
   var user_id = (await authUser()).user_id;
   var user = await fetchUser(user_id, { force: true });
+
+  store.dispatch(authSlice.actions.setUser(user));
 
   if (!user) {
     redirect("/auth/login");

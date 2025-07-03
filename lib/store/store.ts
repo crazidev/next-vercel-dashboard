@@ -1,12 +1,16 @@
-"use client";
-
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import cryptoConvertReducer from "./slices/cryptoConvertSlice";
+import { authSlice } from "./slices/authSlice";
+
+export const makeStore = () => {
+  return store;
+};
 
 export const store = configureStore({
   reducer: {
     cryptoConvert: cryptoConvertReducer,
+    auth: authSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -19,6 +23,8 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
 });
 
+// Infer the type of makeStore
+export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

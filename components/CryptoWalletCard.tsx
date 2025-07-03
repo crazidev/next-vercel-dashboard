@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { InferAttributes } from "sequelize";
 import { MyCard } from "./MyCard";
 import { useAppSelector } from "@/lib/store/store";
+import { ConverterText } from "./ConverterText";
 
 export const MiniWalletCard = ({
   wallet,
@@ -19,30 +20,6 @@ export const MiniWalletCard = ({
   index: number;
   isMainAccount?: boolean;
 }) => {
-  const convert = useAppSelector((state) => state.cryptoConvert);
-  const [amount, setAmount] = useState(wallet.balance);
-
-  const convertCurrency = () => {
-    var balance = wallet?.balance ?? 0;
-    if (convert?.convert?.isReady == true) {
-      var amount =
-        convert.convert?.["USD"]?.[wallet?.wallet?.shortName ?? "USD"]?.(
-          balance
-        );
-      if (amount) {
-        setAmount(amount);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (convert.isInitialized) {
-      convert?.convert?.ready().then((value) => {
-        convertCurrency();
-      });
-    }
-  }, [convert, wallet]);
-
   return (
     <Link href={`/dashboard/wallets/${wallet.wallet?.shortName}`}>
       <MyCard
@@ -59,11 +36,11 @@ export const MiniWalletCard = ({
         <Flex gap={"2"} justify={"between"} align={"center"}>
           <Flex direction={"column"} className="">
             <Text className="font-mono text-[18px]">
-              {cFmt({
-                amount: amount,
-                code: wallet.wallet.shortName,
-                isCrypto: !isMainAccount,
-              })}
+              <ConverterText
+                amount={wallet.balance}
+                code={wallet.wallet.shortName}
+                isCrypto={wallet.wallet.type !== "fiat"}
+              />
             </Text>
 
             <Text trim={"start"} className="text-[10px] text-primary-700">

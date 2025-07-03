@@ -17,6 +17,7 @@ import useLayout from "@/components/hooks/useLayout";
 import { DashboardContext } from "@context/DashboardContext";
 import { LuUsers, LuWallet } from "react-icons/lu";
 import { LayoutType } from "type/LayoutType";
+import { TransactionSheet } from "./TransactionSheet";
 
 export const navlist = (isAdmin: boolean) => {
   const layout = process.env.NEXT_PUBLIC_APP_LAYOUT as LayoutType;
@@ -297,11 +298,9 @@ export function SideBarComponent({
         </div>
       </div>
 
-      <div
-        className="flex p-[10px] mobile:pt-[45px] overflow-hidden w-full"
-        style={{}}
-      >
+      <div className="flex p-[10px] mobile:pt-[45px] overflow-hidden w-full">
         {children}
+        <TransactionSheet />
       </div>
     </div>
   );

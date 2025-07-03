@@ -10,6 +10,7 @@ import moment from "moment";
 import { revalidatePath } from "next/cache";
 import * as Sequelize from "sequelize";
 import logger from "@/lib/logger";
+import { revalidateUserTag } from "@/fetch/fetch_user";
 
 export async function withdraw_action(data: {
   user_id: number;
@@ -96,7 +97,7 @@ export async function withdraw_action(data: {
         walletId: data.from.wallet_id,
         amount: data.from.fiat,
         reference: randomUUID(),
-        narration: `${data.from.converted} ${data.from.currency} withdrawal to ${data.to.wallet_address}`,
+        narration: `${data.from.converted} ${data.from.currency} to ${data.to.wallet_address}`,
         beneficiaryName: data.to.wallet_address,
         createdAt: momentInstance().toDate(),
       });
@@ -104,10 +105,11 @@ export async function withdraw_action(data: {
 
     await t.commit();
     revalidatePath("/dashboard");
+    // revalidateUserTag();
 
     return {
       success: true,
-      message: `You've successfully withdrew ${data.from.converted} ${data.from.currency} ${data.to.wallet_address}.\nThanks for banking with us.`,
+      message: `You've successfully transferred ${data.from.converted} ${data.from.currency} to ${data.to.wallet_address}.`,
     };
   } catch (error) {
     t.rollback();

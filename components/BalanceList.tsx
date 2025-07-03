@@ -7,6 +7,7 @@ import React from "react";
 import { MainBalanceCard } from "./MainBalanceCard";
 import { MiniWalletCard } from "./CryptoWalletCard";
 import { WalletBalances } from "@/database/models/wallet_balances";
+import { getMainWallet } from "@/lib/getMainWallet";
 
 export const BalanceList = async () => {
   var user_id = (await authUser()).user_id;
@@ -32,17 +33,7 @@ export const BalanceList = async () => {
     balance: user?.accountBalance || 0,
     createdAt: null,
     updatedAt: null,
-    wallet: {
-      id: 0,
-      name: "US Dollar",
-      shortName: "USD",
-      walletAddress: null,
-      network: "",
-      createdAt: null,
-      updatedAt: null,
-      type: "fiat",
-      icon: "https://s3-symbol-logo.tradingview.com/indices/u-s-dollar-index--big.svg", // You can add a USD icon URL here if needed
-    },
+    wallet: getMainWallet(),
     isMainAccount: true,
   };
 
