@@ -42,7 +42,6 @@ export function TransactionDetails({
   transaction,
   open,
   onOpenChange,
-  isMobile = false,
   currentUserId,
 }: TransactionDetailsProps & { currentUserId?: number }) {
   const [copiedField, setCopiedField] = useState<string | null>(null);
