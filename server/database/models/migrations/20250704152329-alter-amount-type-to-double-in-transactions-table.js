@@ -3,13 +3,16 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("transactions", "amount_converted", {
+    await queryInterface.update("transactions", "amount", {
       type: Sequelize.DOUBLE,
-      allowNull: true,
+      allowNull: false,
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn("transactions", "amount_converted");
+    await queryInterface.update("transactions", "amount", {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    });
   },
 };

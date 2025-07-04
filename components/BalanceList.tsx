@@ -44,7 +44,7 @@ export const BalanceList = async () => {
     <>
       <MainBalanceCard
         user={userWithTotalBalance}
-        className="relative flex flex-[6] md:hidden mb-3 !p-0"
+        className="relative flex flex-[6] md:hidden mb-3 px-[0px]"
       />
       <ScrollArea className="no-scrollbar">
         <Flex className="flex sm:flex-row flex-col gap-3" gap={"2"}>

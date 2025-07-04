@@ -18,7 +18,7 @@ import { WalletBalance } from "../components/WalletBalance";
 const WalletPage = async ({
   params,
 }: {
-  params: Promise<{ wallet: string }>
+  params: Promise<{ wallet: string }>;
 }) => {
   var user_id = (await authUser()).user_id;
   var user = await fetchUser(user_id ?? -1);
@@ -34,7 +34,6 @@ const WalletPage = async ({
         />
 
         <div className="flex flex-col gap-5">
-
           <Suspense fallback={<RotateSpinnerComponent />}>
             <WalletBalance
               user={user}
@@ -43,9 +42,12 @@ const WalletPage = async ({
             />
           </Suspense>
 
-
           <div className="m-0 w-full">
-            <Flex justify={"between"} direction={"column"} className="gap-1 mb-5">
+            <Flex
+              justify={"between"}
+              direction={"column"}
+              className="gap-1 mb-5"
+            >
               <Text className="font-extrabold" size={"3"}>
                 Transaction History
               </Text>
@@ -55,7 +57,6 @@ const WalletPage = async ({
               <TransactionList type="compact" wallet={wallet} />
             </Suspense>
           </div>
-
         </div>
       </div>
     </div>
